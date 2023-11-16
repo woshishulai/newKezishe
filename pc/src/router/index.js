@@ -15,7 +15,7 @@ const addRoutes = [
         meta: {
             name: '首页'
         },
-        component: () => import('@/components/layout/index.vue'),
+        component: () => import('@/components/Layout/index.vue'),
         children: [
             {
                 path: "",
@@ -40,9 +40,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     // 获取用户信息的逻辑，可能是从全局状态管理或者其他地方获取
     const user = useUserInfo();
-    const userInfo = user.userInfo;
+    const userInfo = user.userInfo ? user.userInfo : {}
+    console.log('我是router路由 用户的信息为', user.userInfo.value, 'userInfo对象为', userInfo);
     // 如果用户未登录且要访问的页面不是登录页面，则重定向到登录页面
-    if (Object.keys(userInfo).length === 0 && to.path !== '/login') {
+    if (Object.keys(!userInfo) && to.path !== '/login' && to.path !== '/register' && to.path !== '/reset-password') {
         next('/login');
     } else {
         next(); // 继续正常跳转
