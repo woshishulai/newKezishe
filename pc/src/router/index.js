@@ -43,10 +43,12 @@ router.beforeEach((to, from, next) => {
     const userInfo = user.userInfo ? user.userInfo : {}
     console.log('我是router路由 用户的信息为', user.userInfo.value, 'userInfo对象为', userInfo);
     // 如果用户未登录且要访问的页面不是登录页面，则重定向到登录页面
-    if (Object.keys(!userInfo) && to.path !== '/login' && to.path !== '/register' && to.path !== '/reset-password') {
+    if (Object.keys(userInfo).length === 0 && to.path !== '/login' && to.path !== '/register' && to.path !== '/reset-password') {
         next('/login');
+        console.log('被触发了');
     } else {
         next(); // 继续正常跳转
+        console.log(userInfo, '有值');
     }
 });
 

@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { message } from "ant-design-vue";
 import {
@@ -13,7 +13,7 @@ const user = useUserInfo();
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
-onMounted(() => {});
+onMounted(() => { });
 const formState = reactive({
   username: "",
   password: "",
@@ -25,6 +25,8 @@ const handleUsernameInput = () => {
   formState.password = formState.password.replace(/\s/g, "");
   formState.code = formState.code.replace(/\s/g, "");
 };
+const iptPsdRef = ref();
+const iptSeeRef = ref();
 const handleFinish = (values) => {
   info("success", "登陆成功");
 };
@@ -32,33 +34,31 @@ const handleFinishFailed = (err) => {
   err.errorFields.forEach((field) => info("error", field.errors[0]));
 };
 const info = (status, msg) => message[status](msg);
+console.log(iptPsdRef, iptSeeRef);
+const handPsw = () => {
+  iptPsdRef.value.focus();
+};
+const handSee = () => {
+  iptSeeRef.value.focus();
+};
+const showDetails = () => {
+  console.log(22);
+}
 </script>
 
 <template>
-  <a-form
-    :model="formState"
-    @finish="handleFinish"
-    @finishFailed="handleFinishFailed"
-    :rules="accountRules"
-  >
+  <a-form :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed" :rules="accountRules">
     <a-form-item name="username">
-      <a-input
-        @input="handleUsernameInput"
-        v-model:value="formState.username"
-        placeholder="用户名"
-      >
+      <a-input @input="handleUsernameInput" v-model:value="formState.username" placeholder="用户名">
         <template #prefix>
           <UserOutlined style="color: rgba(5, 5, 4, 1.25)" />
         </template>
       </a-input>
     </a-form-item>
-    <a-form-item v-if="!formState.password" name="password">
-      <a-input
-        @input="handleUsernameInput"
-        v-model:value="formState.password"
-        type="password"
-        placeholder="密码"
-      >
+    <a-form-item name="password" class="label">
+      <a-input :class="!formState.password ? 'active' : ''" class="remove-password" @input="handleUsernameInput"
+        v-model:value="formState.password" type="password" placeholder="密码" ref="iptPsdRef" id="nihao"
+        @change="showDetails">
         <template #prefix>
           <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
         </template>
@@ -66,26 +66,15 @@ const info = (status, msg) => message[status](msg);
           <a-button @click="router.push('/reset-password')">忘记密码?</a-button>
         </template>
       </a-input>
-    </a-form-item>
-    <a-form-item v-else name="password">
-      <a-input-password
-        @input="handleUsernameInput"
-        v-model:value="formState.password"
-        type="password"
-        placeholder="密码"
-      >
+      <a-input-password :class="formState.password ? 'active' : ''" class="see-password" @input="handleUsernameInput"
+        v-model:value="formState.password" type="password" placeholder="密码" ref="iptSeeRef" id="wohao">
         <template #prefix>
           <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
         </template>
       </a-input-password>
     </a-form-item>
     <a-form-item name="code">
-      <a-input
-        @input="handleUsernameInput"
-        v-model:value="formState.code"
-        placeholder="验证码"
-        type="number"
-      >
+      <a-input @input="handleUsernameInput" v-model:value="formState.code" placeholder="验证码" type="number">
         <template #prefix>
           <CheckCircleOutlined style="color: rgba(0, 0, 0, 1.25)" />
         </template>
@@ -103,10 +92,29 @@ const info = (status, msg) => message[status](msg);
     <a-form-item>
       <a-button html-type="submit">登陆</a-button>
       <!-- <a-button @click="changeUserInfo('001')">测试修改默认user用户账号
-              </a-button> -->
+                                      </a-button> -->
+      <a-button @click="handPsw">切换焦点</a-button>
+      <a-button @click="handSee">切换焦点</a-button>
     </a-form-item>
   </a-form>
 </template>
 
 <style scoped lang="less">
+.label {
+  margin-bottom: -22px;
+
+  .remove-password {
+    position: relative;
+    z-index: 1;
+  }
+
+  .see-password {
+    position: relative;
+    top: -46px;
+  }
+
+  .active {
+    z-index: 3;
+  }
+}
 </style>
