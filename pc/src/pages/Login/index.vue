@@ -9,7 +9,7 @@ import { getImageUrl } from "@/utils";
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
-onMounted(() => {});
+onMounted(() => { });
 let actives = ref(0);
 const title = [
   {
@@ -32,12 +32,8 @@ const showLogin = (index) => {
         <span></span>
         <div class="login-from">
           <div class="title">
-            <h5
-              @click="showLogin(index)"
-              v-for="(item, index) in title"
-              :key="index"
-              :class="actives == index ? 'active' : ''"
-            >
+            <h5 @click="showLogin(index)" v-for="(item, index) in title" :key="index"
+              :class="actives == index ? 'active' : ''">
               {{ item.text }}
             </h5>
           </div>
@@ -60,19 +56,24 @@ const showLogin = (index) => {
 .wrap {
   .flex-col;
   height: 100vh;
+
   .cen-wrap {
     width: 100%;
-    padding: 42px 0 30px;
+    padding: 42px 0;
     background: url("@/assets/img/login/login-bg.png");
     background-size: 100% 100%;
+
     .con-main-wrap {
       .flex-row;
       justify-content: space-between;
       width: 1300px;
+
       .login-from {
+        height: 500px;
         padding: 20px 0;
         width: 420px;
         background: #fff;
+
         .title {
           .flex-row;
           padding: 0 10px;
@@ -92,12 +93,14 @@ const showLogin = (index) => {
             }
           }
         }
+
         .cen-form {
           padding: 30px 30px 0 30px;
 
           .register {
             text-align: center;
             font-weight: 700;
+            cursor: pointer;
           }
         }
       }

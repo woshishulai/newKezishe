@@ -54,5 +54,58 @@ const accountRules = {
         },
     ],
 };
+const codeRules = {
+    phone: [
+        {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'change',
+        },
+        {
+            pattern: /^1[3456789]\d{9}$/,
+            message: '请输入正确的手机号格式',
+            trigger: 'change',
+        },
+    ],
+    phoneCode: [
+        {
+            required: true,
+            message: '请输入短信验证码',
+            trigger: 'change',
+        },
+        {
+            min: 4,
+            max: 6,
+            message: '请输入长度为4-6位数的验证码',
+            trigger: 'change',
+        },
+        {
+            pattern: /^[0-9]+$/,
+            message: '只能输入数字',
+            trigger: 'change',
+        },
+    ],
+    code: [
+        {
+            required: true,
+            message: '请输入验证码',
+            trigger: 'change',
+        },
+        {
+            min: 4,
+            max: 4,
+            message: '请输入长度为4位数的验证码',
+            trigger: 'change',
+        },
+        {
+            pattern: /^[0-9]+$/,
+            message: '只能输入数字',
+            trigger: 'change',
+        },
+    ]
+}
 
-export { accountRules };
+
+
+
+export { accountRules, codeRules };

@@ -1,5 +1,6 @@
 //哈希路由
 import { useUserInfo } from '@/store/module/user';
+import { message } from "ant-design-vue";
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
 //在这里没有备初始化 userinfo是异步的
 // const user = useUserInfo()
@@ -7,7 +8,15 @@ const baseRoutes = [
     {
         path: '/login',
         component: () => import('@/pages/Login/index.vue')
-    }
+    },
+    {
+        path: '/register',
+        component: () => import('@/pages/Register/index.vue')
+    },
+    {
+        path: '/reset-password',
+        component: () => import('@/pages/Reset/index.vue')
+    },
 ];
 const addRoutes = [
     {
@@ -40,15 +49,17 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     // 获取用户信息的逻辑，可能是从全局状态管理或者其他地方获取
     const user = useUserInfo();
-    const userInfo = user.userInfo ? user.userInfo : {}
-    console.log('我是router路由 用户的信息为', user.userInfo.value, 'userInfo对象为', userInfo);
+    // const userInfo = user.userInfo ? user.userInfo : {}
+    //消息提示
+    const info = (status, msg) => message[status](msg);
+    // console.log('我是router路由 用户的信息为', user.userInfo, 'userInfo对象为', userInfo);
+    // console.log('我是router路由 用户的信息为', user.userInfo, 'userInfo对象为');
     // 如果用户未登录且要访问的页面不是登录页面，则重定向到登录页面
-    if (Object.keys(userInfo).length === 0 && to.path !== '/login' && to.path !== '/register' && to.path !== '/reset-password') {
+    if (Object.keys(user.userInfo).length === 0 && to.path !== '/login' && to.path !== '/register' && to.path !== '/reset-password') {
         next('/login');
-        console.log('被触发了');
+        info("error", "请先登录");
     } else {
         next(); // 继续正常跳转
-        console.log(userInfo, '有值');
     }
 });
 

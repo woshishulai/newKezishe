@@ -1,5 +1,4 @@
 <script setup>
-console.log("我是默认的layou路由");
 </script>
 
 <template>

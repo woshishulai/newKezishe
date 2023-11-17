@@ -1,49 +1,88 @@
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { UserOutlined, LockOutlined, CheckCircleOutlined } from '@ant-design/icons-vue';
+import { codeRules } from './rules';
+import { message } from "ant-design-vue";
+import { UserOutlined, LockOutlined, CheckCircleOutlined, CloseOutlined } from '@ant-design/icons-vue';
+import { useUserInfo } from "@/store/store";
+const user = useUserInfo();
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({})
+const countdown = ref(0)
 onMounted(() => { });
 const formState = reactive({
-    username: '',
-    password: '',
+    phone: '',
+    phoneCode: '',
     code: '',
     remember: true,
 });
-
+const info = (status, msg) => message[status](msg);
+const getPhone = () => {
+    const phoneRegex = /^1[3456789]\d{9}$/;
+    const phoneNumber = formState.phone;
+    const isPhoneValid = phoneRegex.test(phoneNumber);
+    if (!isPhoneValid) {
+        info("error", '请输入正确的手机号');
+    }
+    return isPhoneValid;
+}
+const getCode = () => {
+    const isPhoneValid = getPhone();
+    if (isPhoneValid) {
+        countdown.value = 60
+        // getPhoneCodeApi(formState.phone) //获取验证码的API
+        info("success", '验证码发送成功请输入验证码')
+        const interval = setInterval(() => {
+            countdown.value > 0 ? countdown.value-- : clearInterval(interval)
+        }, 1000)
+    }
+}
 const handleFinish = values => {
-    console.log(values, formState);
+    formState.remember == true ? user.addPhoneList(formState.phone) : ''
+    info("success", "登陆成功");
+    router.push('/')
 };
-const handleFinishFailed = errors => {
-    console.log(errors);
+const handleFinishFailed = err => {
+    err.errorFields.forEach((field) => info("error", field.errors[0]));
 };
 
 </script>
 
 <template>
     <div class="code">
-        <a-form :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed">
-            <a-form-item :rules="[{ required: true, message: '请输入手机号' }]">
-                <a-input v-model:value="formState.user" placeholder="请输入手机号码">
-                    <template #prefix>
-                        <UserOutlined style="color: rgba(5, 5, 4, 1.25)" />
+        <a-form :rules="codeRules" :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed">
+            <a-form-item name="phone">
+                <a-popover placement="bottom">
+                    <template #content>
+                        <div class="show-name-list">
+                            <div class="name-item" v-for="(item, index) in user.userPhoneList" :key="index">
+                                <span>手机号码</span>
+                                <p @click="formState.phone = item">{{ item }}</p>
+                                <CloseOutlined @click="user.removePhoneList(item)" />
+                            </div>
+                        </div>
                     </template>
-                </a-input>
+                    <a-input v-model:value="formState.phone" type="number" placeholder="请输入手机号码">
+                        <template #prefix>
+                            <UserOutlined style="color: rgba(5, 5, 4, 1.25)" />
+                        </template>
+                    </a-input>
+                </a-popover>
             </a-form-item>
-            <a-form-item>
-                <a-input v-model:value="formState.password" type="password" placeholder="验证码">
+            <a-form-item name="phoneCode">
+                <a-input v-model:value="formState.phoneCode" type="number" placeholder="验证码">
                     <template #prefix>
                         <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
                     </template>
                     <template #suffix>
-                        <span class="forget">获取验证码</span>
+                        <a-button @click="getCode" :disabled="countdown > 0"> <span v-if="countdown === 0">获取验证码</span>
+                            <span v-else>{{ countdown }}</span></a-button>
                     </template>
                 </a-input>
             </a-form-item>
-            <a-form-item>
-                <a-input v-model:value="formState.code" placeholder="验证码">
+            <a-form-item name="code">
+                <a-input type="number" v-model:value="formState.code" placeholder="验证码">
                     <template #prefix>
                         <CheckCircleOutlined style="color: rgba(0, 0, 0, 1.25)" />
                     </template>
@@ -59,17 +98,61 @@ const handleFinishFailed = errors => {
                 <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
             </a-form-item>
             <a-form-item>
-                <a-button html-type="submit" @click="router.push('/home')">登陆</a-button>
+                <div class="btn">
+                    <a-button html-type="submit">登陆</a-button>
+                </div>
             </a-form-item>
-
         </a-form>
     </div>
 </template>
 
 <style scoped lang="less">
 .code {
-    .get-password {
+    .ant-input-affix-wrapper {
+        padding-right: 0;
+    }
+
+    .ant-btn {
+        width: 102px;
+        border-radius: 0;
+        height: 46px;
+    }
+
+
+    .btn {
+        cursor: pointer;
+        background-color: #9a0000;
+        padding: 2px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+            width: 100%;
+        }
+    }
+
+}
+
+.show-name-list {
+    .flex-col;
+    align-items: flex-start;
+    font-size: 16px;
+
+    .name-item {
         .flex-row;
+        justify-content: space-between;
+        cursor: pointer;
+        width: 200px;
+        padding: 10px 0;
+
+        span {
+            font-size: 14px;
+        }
+
+        &:hover {
+            color: #9a0000;
+        }
     }
 }
 </style>
