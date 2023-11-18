@@ -40,7 +40,7 @@ const getCode = () => {
 }
 const handleFinish = values => {
     formState.remember == true ? user.addPhoneList(formState.phone) : ''
-    info("success", "登陆成功");
+    info("success", "登录成功");
     router.push('/')
 };
 const handleFinishFailed = err => {
@@ -99,7 +99,7 @@ const handleFinishFailed = err => {
             </a-form-item>
             <a-form-item>
                 <div class="btn">
-                    <a-button html-type="submit">登陆</a-button>
+                    <a-button html-type="submit">登录</a-button>
                 </div>
             </a-form-item>
         </a-form>

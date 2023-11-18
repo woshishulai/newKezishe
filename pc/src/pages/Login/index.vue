@@ -55,7 +55,6 @@ const showLogin = (index) => {
 /* 在这里添加你的 Less 样式 */
 .wrap {
   .flex-col;
-  height: 100vh;
 
   .cen-wrap {
     width: 100%;

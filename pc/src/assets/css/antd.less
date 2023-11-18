@@ -1,9 +1,18 @@
 //input的样式
-:where(.css-dev-only-do-not-override-1qb1s0s).ant-input-affix-wrapper>input.ant-input {
+.ant-input-affix-wrapper>input.ant-input {
     background: transparent;
     color: #000;
     font-weight: 700;
     font-size: 18px;
+}
+
+input {
+    background-color: #f2f2f2;
+}
+
+
+.ant-form-item .ant-form-item-label>label {
+    margin-top: 6px;
 }
 
 // 修改input提示文字的颜色和粗细
@@ -22,12 +31,12 @@ input::-webkit-input-placeholder {
 }
 
 // input鼠标经过颜色
-:where(.css-dev-only-do-not-override-1qb1s0s).ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
     border: 1px solid #9a0000;
 }
 
 //input获取焦点的颜色
-:where(.css-dev-only-do-not-override-1qb1s0s).ant-input-affix-wrapper:focus {
+.ant-input-affix-wrapper:focus {
     border-color: #9a0000;
 }
 
@@ -38,7 +47,7 @@ input::-webkit-input-placeholder {
 //     top: -40px;
 // }
 //input框的右边插槽
-:where(.css-dev-only-do-not-override-1qb1s0s).ant-input-group .ant-input-group-addon {
+.ant-input-group .ant-input-group-addon {
     padding: 0 0 0;
     background-color: #9a0000;
 }
@@ -55,13 +64,13 @@ input::-webkit-input-placeholder {
 }
 
 //按钮经过的颜色
-:where(.css-dev-only-do-not-override-1qb1s0s).ant-btn-default:not(:disabled):hover {
+.ant-btn-default:not(:disabled):hover {
     border-color: #9a0000;
     color: #fff;
 }
 
 //自定义按钮的高度「
-:where(.css-dev-only-do-not-override-1qb1s0s).ant-input-affix-wrapper .ant-input-suffix {
+.ant-input-affix-wrapper .ant-input-suffix {
     height: 28px;
 }
 
@@ -70,13 +79,13 @@ input::-webkit-input-placeholder {
     color: #9a0000;
 }
 
-:where(.css-dev-only-do-not-override-1qb1s0s).ant-spin.ant-spin-show-text .ant-spin-text {
+.ant-spin.ant-spin-show-text .ant-spin-text {
     font-size: 40px;
     margin-top: 10px;
     color: #9a0000;
 }
 
 //登录圆圈透明度
-:where(.css-dev-only-do-not-override-1qb1s0s).ant-spin-spinning {
+.ant-spin-spinning {
     opacity: 0.3;
 }

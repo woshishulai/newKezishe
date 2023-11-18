@@ -32,7 +32,7 @@ const handleFinish = () => {
   // loginApi(params)
   user.changeUserInfo(params)
   formState.remember == true ? user.addNameList(formState.username) : ''
-  info("success", "登陆成功");
+  info("success", "登录成功");
   router.push('/')
 };
 const handleFinishFailed = (err) => {
@@ -61,7 +61,8 @@ const handleFinishFailed = (err) => {
       </a-popover>
     </a-form-item>
     <a-form-item name="password">
-      <a-input-password autocomplete="" @input="handleUsernameInput" v-model:value="formState.password" placeholder="密码">
+      <a-input-password autocomplete="off" @input="handleUsernameInput" v-model:value="formState.password"
+        placeholder="密码">
         <template #prefix>
           <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
         </template>
@@ -88,7 +89,7 @@ const handleFinishFailed = (err) => {
     </a-form-item>
     <a-form-item>
       <div class="btn">
-        <a-button html-type="submit">登陆</a-button>
+        <a-button html-type="submit">登录</a-button>
       </div>
     </a-form-item>
   </a-form>

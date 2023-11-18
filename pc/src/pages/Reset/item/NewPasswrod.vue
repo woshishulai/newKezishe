@@ -45,19 +45,20 @@ const handleFinish = values => {
 };
 
 const handleFinishFailed = errors => {
-    console.log(errors);
+    errors.errorFields.forEach((field) => info("error", field.errors[0]));
+
 };
 </script>
 <template>
     <div class="new-password">
         <a-form :rules="resetRules" :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed">
             <a-form-item name="password">
-                <a-input-password @input="handleUsernameInput" autocomplete="" v-model:value="formState.password"
+                <a-input-password @input="handleUsernameInput" autocomplete="off" v-model:value="formState.password"
                     placeholder="请输入新密码">
                 </a-input-password>
             </a-form-item>
             <a-form-item name="repassword">
-                <a-input-password @input="handleUsernameInput" autocomplete="" v-model:value="formState.repassword"
+                <a-input-password @input="handleUsernameInput" autocomplete="off" v-model:value="formState.repassword"
                     placeholder="请再次确认新密码">
                 </a-input-password>
             </a-form-item>
