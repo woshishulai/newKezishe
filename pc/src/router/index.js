@@ -2,6 +2,7 @@
 import { useUserInfo } from '@/store/module/user';
 import { message } from "ant-design-vue";
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
+import { UserSwitchOutlined, HeartOutlined } from "@ant-design/icons-vue"
 //在这里没有备初始化 userinfo是异步的
 // const user = useUserInfo()
 const baseRoutes = [
@@ -33,7 +34,189 @@ const addRoutes = [
         ]
     }
 ]
-const routes = [...baseRoutes, ...addRoutes]
+const userRoutes = [
+    {
+        path: '/user',
+        meta: {
+            name: '用户'
+        },
+        component: () => import('@/pages/User/index.vue'),
+        children: [
+            {
+                path: ' userinfo',
+                component: () => import('@/pages/User/item/UserInfo.vue'),
+                meta: {
+                    name: '个人中心',
+                },
+            },
+            {
+                path: 'account-management',
+                meta: {
+                    name: '账号管理',
+                    icon: UserSwitchOutlined
+                },
+                children: [
+                    {
+                        path: '',
+                        component: () => import('@/pages/User/item/AccountManagement/PersonalInformation.vue'),
+                        meta: {
+                            name: '个人信息',
+                            icon: 'iconfont-userinfo'
+                        },
+                    },
+                    {
+                        path: 'bank-information',
+                        component: () => import('@/pages/User/item/AccountManagement/BankInformation.vue'),
+                        meta: {
+                            name: '银行信息',
+                            icon: ''
+                        },
+                    },
+                    {
+                        path: 'shipping-information',
+                        component: () => import('@/pages/User/item/AccountManagement/ShippingInformation.vue'),
+                        meta: {
+                            name: '快递信息',
+                            icon: ''
+                        },
+                    },
+                    {
+                        path: 'change-password',
+                        component: () => import('@/pages/User/item/AccountManagement/ChangePassword.vue'),
+                        meta: {
+                            name: '修改密码',
+                            icon: ''
+                        },
+                    }
+                ]
+            },
+            {
+                path: 'my-following',
+                component: () => import('@/pages/User/item/MyFollowing.vue'),
+                meta: {
+                    name: '我的关注',
+                    icon: HeartOutlined
+                },
+            },
+            {
+                path: 'my-bidding',
+                component: () => import('@/pages/User/item/MyBidding.vue'),
+                meta: {
+                    name: '我的竞买',
+                    icon: ''
+                },
+            },
+            {
+                path: 'my-entrustment',
+                meta: {
+                    name: '我的委托',
+                    icon: ''
+                },
+                children: [
+                    {
+                        path: '',
+                        component: () => import('@/pages/User/item/MyEntrustment/index.vue'),
+                        meta: {
+                            name: '我的藏品',
+                            icon: ''
+                        },
+                    },
+                    {
+                        path: 'my-contract',
+                        component: () => import('@/pages/User/item/MyContract/index.vue'),
+                        meta: {
+                            name: '我的合同',
+                            icon: ''
+                        },
+                    },
+                    {
+                        path: 'settlement-details',
+                        component: () => import('@/pages/User/item/SettlementDetails/index.vue'),
+                        meta: {
+                            name: '结算明细',
+                            icon: ''
+                        },
+                    }
+                ]
+            },
+            {
+                path: 'quick-sell',
+                component: () => import('@/pages/User/item/QuickSell.vue'),
+                meta: {
+                    name: '一键转卖',
+                    icon: ''
+                },
+            },
+            {
+                path: 'logistics',
+                meta: {
+                    name: '物流'
+                    ,
+                    icon: ''
+                },
+                children: [
+                    {
+                        path: '',
+                        component: () => import('@/pages/User/item/Logistics/item1.vue'),
+                        meta: {
+                            name: '未发货',
+                            icon: ''
+                        },
+                    },
+                    {
+                        path: 'yifahuo',
+                        component: () => import('@/pages/User/item/Logistics/item2.vue'),
+                        meta: {
+                            name: '已发货',
+                            icon: ''
+                        },
+                    }
+                ]
+            },
+            {
+                path: 'points',
+                component: () => import('@/pages/User/item/Points.vue'),
+                meta: {
+                    name: '积分'
+                    ,
+                    icon: ''
+                },
+            },
+            {
+                path: 'financial-information',
+                // component: () => import('@/pages/User/item/FinancialInformation.vue'),
+                meta: {
+                    name: '财务信息',
+                    icon: ''
+                },
+                children: [
+                    {
+                        path: '',
+                        component: () => import('@/pages/User/item/Financiallnfirmation/Chongzhi.vue'),
+                        meta: {
+                            name: '账户余额'
+                        }
+                    },
+                    {
+                        path: 'youhuiquan',
+                        component: () => import('@/pages/User/item/Financiallnfirmation/Youhuiquan.vue'),
+                        meta: {
+                            name: '优惠券'
+                        }
+                    },
+                    {
+                        path: 'edu',
+                        component: () => import('@/pages/User/item/Financiallnfirmation/Edu.vue'),
+                        meta: {
+                            name: '竞买额度'
+                        }
+                    },
+                ]
+            }
+        ]
+    }
+];
+const routes = [...baseRoutes, ...addRoutes, ...userRoutes]
 const router = createRouter({
     // history: createWebHistory(),
     history: createWebHashHistory(),
@@ -64,5 +247,5 @@ router.beforeEach((to, from, next) => {
 });
 
 
-
+export { userRoutes }
 export default router;

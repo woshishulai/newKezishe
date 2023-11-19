@@ -30,7 +30,7 @@ export default defineConfig({
       },
     },
   },
-  // build: {
-  //   outDir: 'kezishe', // 修改打包生成的文件目录名
-  // },
+  build: {
+    outDir: 'http', // 修改打包生成的文件目录名
+  },
 })

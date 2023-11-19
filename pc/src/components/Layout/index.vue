@@ -4,6 +4,6 @@
 <template>
   <Header></Header>
   <RouterView></RouterView>
-  <!-- <Footer></Footer> -->
+  <Footer></Footer>
 </template>
 <style scoped lang="less"></style>

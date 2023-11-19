@@ -232,7 +232,6 @@ const onFinishFailed = errors => {
     justify-content: flex-start;
     gap: 10px;
     padding: 30px 0;
-    height: 100vh;
 
     .header-logo {
         width: 820px;
