@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <!-- <Header></Header> -->
+  <Header></Header>
   <RouterView></RouterView>
   <!-- <Footer></Footer> -->
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { message } from "ant-design-vue";
 import {
@@ -23,6 +23,11 @@ const handleUsernameInput = () => {
   formState.password = formState.password.replace(/\s/g, "");
   formState.code = formState.code.replace(/\s/g, "");
 };
+const visible = ref(false);
+const hide = () => {
+  visible.value = false;
+};
+
 const info = (status, msg) => message[status](msg);
 const handleFinish = () => {
   let params = {
@@ -43,7 +48,7 @@ const handleFinishFailed = (err) => {
 <template>
   <a-form :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed" :rules="accountRules">
     <a-form-item name="username">
-      <a-popover placement="bottom">
+      <a-popover v-model:open="visible" title="账号" placement="left" trigger="click">
         <template #content>
           <div class="show-name-list">
             <div class="name-item" v-for="(item, index) in user.userNameList" :key="index">

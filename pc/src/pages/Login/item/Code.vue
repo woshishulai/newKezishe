@@ -17,6 +17,10 @@ const formState = reactive({
     code: '',
     remember: true,
 });
+const visible = ref(false);
+const hide = () => {
+    visible.value = false;
+};
 const info = (status, msg) => message[status](msg);
 const getPhone = () => {
     const phoneRegex = /^1[3456789]\d{9}$/;
@@ -53,7 +57,7 @@ const handleFinishFailed = err => {
     <div class="code">
         <a-form :rules="codeRules" :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed">
             <a-form-item name="phone">
-                <a-popover placement="bottom">
+                <a-popover v-model:open="visible" title="手机号" placement="left" trigger="click">
                     <template #content>
                         <div class="show-name-list">
                             <div class="name-item" v-for="(item, index) in user.userPhoneList" :key="index">
