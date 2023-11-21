@@ -1,7 +1,9 @@
+import { getImageUrl } from "@/utils";
+
 function Logo() {
     return (
         <div>
-            我是头部组件
+            <img src={getImageUrl('register/logo.png')} alt="" />
         </div>
     );
 }

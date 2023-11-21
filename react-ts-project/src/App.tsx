@@ -1,15 +1,17 @@
 import { Suspense } from "react";
 import { useRoutes, } from 'react-router-dom';
 import routes from '../src/router';
+import Layout from "@/components/Layout/index";
 function App() {
   return <div className="App">
     <Suspense fallback="Loading...">
-      <div className="main">
-        {useRoutes(routes)}
-      </div>
+      <Layout>
+        <>
+          {useRoutes(routes)}
+        </>
+      </Layout>
     </Suspense>
   </div>;
 }
 
 export default App;
-
