@@ -10,12 +10,21 @@ const wrapperCol = {
 };
 const formState = reactive({
   name: '',
-  gender: 'male',
-  date: undefined,
+  gender: '男',
+  date1: undefined,
   region: undefined,
-  type: [],
-  resource: '',
-  desc: '',
+});
+const formState1 = reactive({
+  phone: '',
+  gender: '男',
+  date1: undefined,
+  region: undefined,
+});
+const formState2 = reactive({
+  phone: '',
+  gender: '男',
+  date1: undefined,
+  region: undefined,
 });
 
 const onSubmit = () => {
@@ -59,12 +68,12 @@ const onFinishFailed = errorInfo => {
           </a-form-item>
           <a-form-item label="性别" name="gender">
             <a-radio-group v-model:value="formState.gender">
-              <a-radio value="male">男</a-radio>
-              <a-radio value="female">女</a-radio>
+              <a-radio value="男">男</a-radio>
+              <a-radio value="女">女</a-radio>
             </a-radio-group>
           </a-form-item>
           <a-form-item label="出生年月" name="date1">
-            <a-date-picker placeholder="" v-model:value="formState.date" show-time type="date" style="width: 100%" />
+            <a-date-picker placeholder="" v-model:value="formState.date1" show-time type="date" style="width: 100%" />
           </a-form-item>
           <a-form-item label="证件类型" name="region" class="card-cate">
             <a-select v-model:value="formState.region" placeholder="">
@@ -100,9 +109,43 @@ const onFinishFailed = errorInfo => {
     </div>
     <div class="card-box">
       <div class="title">联系信息</div>
+      <div class="form-wrap">
+        <a-form labelAlign="left" ref="formRef" @finish="onFinish" @finishFailed="onFinishFailed" :model="formState"
+          :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+          <a-form-item label="手机" name="name">
+            <a-input type="number" v-model:value="formState1.phone" />
+          </a-form-item>
+          <a-form-item label="邮箱" name="name">
+            <a-input type="number" v-model:value="formState1.phone" />
+          </a-form-item>
+          <a-form-item label="电话" name="name">
+            <a-input type="number" v-model:value="formState1.phone" />
+          </a-form-item>
+          <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+            <a-button html-type="submit" type="primary">保存基本信息</a-button>
+          </a-form-item>
+        </a-form>
+      </div>
     </div>
     <div class="card-box">
       <div class="title">收藏信息</div>
+      <div class="cate-list">
+        <div class="cate-info">
+          <span>设置收藏类别:</span>
+          <a-select v-model:value="formState.region" placeholder="">
+            <a-select-option value="cardId">身份证</a-select-option>
+            <a-select-option value="driverLicense">驾驶证</a-select-option>
+          </a-select>
+        </div>
+        <div class="add-like">
+          <a-input v-model:value="value" placeholder="Basic usage" />
+          <a-button>添加</a-button>
+        </div>
+        <div class="like-info">
+          <span>邮票钱币 &nbsp;X</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -121,6 +164,27 @@ const onFinishFailed = errorInfo => {
       gap: 90px;
     }
 
+    .ant-input {
+      height: 46px;
+      width: 280px;
+
+      &:hover {
+        border-color: #9a0000;
+      }
+
+      &:focus {
+        border-color: #9a0000;
+      }
+    }
+
+    :deep(.ant-select-single .ant-select-selector .ant-select-selection-item:after) {
+      padding-top: 6px;
+    }
+
+    :deep(.ant-select:hover .ant-select-selector) {
+      border-color: #9a0000;
+    }
+
     .form-wrap {
       width: 500px;
       padding: 50px 0 30px 50px;
@@ -130,18 +194,9 @@ const onFinishFailed = errorInfo => {
         font-size: 16px;
       }
 
-      .ant-input {
-        height: 46px;
-        width: 280px;
 
-        &:hover {
-          border-color: #9a0000;
-        }
 
-        &:focus {
-          border-color: #9a0000;
-        }
-      }
+
 
       :deep(.ant-form-item .ant-form-item-control-input) {
         height: 46px;
@@ -170,6 +225,8 @@ const onFinishFailed = errorInfo => {
           border-color: #9a0000;
         }
       }
+
+
 
       .ant-picker-focused {
         border-color: #9a0000;
@@ -219,6 +276,63 @@ const onFinishFailed = errorInfo => {
         height: 46px;
         border-radius: 0;
         margin-left: 20px;
+      }
+    }
+
+    .cate-list {
+      padding: 50px;
+      .flex-col;
+      align-items: flex-start;
+      gap: 20px;
+
+      .cate-info {
+        .flex-row;
+
+        span {
+          display: block;
+          width: 150px;
+        }
+
+        :deep(.ant-select-selector) {
+          width: 230px;
+          height: 46px;
+        }
+
+        // :deep(.ant-select-single .ant-select-selector .ant-select-selection-item:after) {
+        //   padding-top: 6px;
+        // }
+
+      }
+
+      .add-like {
+        padding-left: 150px;
+        .flex-row;
+        gap: 20px;
+
+        .ant-input {
+          width: 230px;
+          height: 46px;
+        }
+
+        .ant-btn {
+          width: 100px;
+          border-radius: 2;
+          height: 43px;
+          background-color: #a4b0bb;
+        }
+      }
+
+      .like-info {
+        padding-left: 150px;
+        .flex-row;
+
+        span {
+          background-color: #f1f1f1;
+          height: 46px;
+          .flex-row;
+          width: 130px;
+          cursor: pointer;
+        }
       }
     }
   }

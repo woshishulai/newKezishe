@@ -12,12 +12,14 @@ const dataSource = [
     name: "胡彦斌",
     bank: "中国银行：北京市海淀区中国银行",
     code: "04935830948503",
+    status: true
   },
   {
     key: "2",
     name: "胡彦祖",
     bank: "中国银行：北京市海淀区中国银行",
     code: "04935830948503",
+    status: false
   },
 ];
 
@@ -40,6 +42,12 @@ const columns = [
     key: "code",
     align: 'center'
   },
+  {
+    title: "",
+    dataIndex: "status",
+    key: "status",
+    slots: { customRender: 'status' },
+  }
 ];
 
 function handleEdit(record) {
@@ -136,6 +144,13 @@ const resetForm = () => {
     <div class="card-box">
       <div class="title">银行账号</div>
       <a-table :columns="columns" :data-source="dataSource">
+        <template #status="{ record }">
+          <div class="status">
+            <span>修改</span>
+            <span>删除</span>
+            <span class="active" :class="record.status ? 'active' : ''">{{ record.status ? '默认账号' : '设为默认' }}</span>
+          </div>
+        </template>
       </a-table>
     </div>
     <div class="card-box">
@@ -185,6 +200,20 @@ const resetForm = () => {
 
   .title {
     color: #9a9a9a;
+  }
+
+  .status {
+    .flex-row;
+    justify-content: space-around;
+
+    span {
+      padding: 5px 10px;
+
+      &.active {
+        background-color: #9a0000;
+        color: #fff;
+      }
+    }
   }
 
   .user-info {
