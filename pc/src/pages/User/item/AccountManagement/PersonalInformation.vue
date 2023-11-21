@@ -1,12 +1,40 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { getImageUrl } from "@/utils";
-const router = useRouter();
-const route = useRoute();
-const props = defineProps({});
-onMounted(() => { });
-const radioValue = 'apple'
+import { reactive, ref, toRaw } from 'vue';
+const formRef = ref();
+const labelCol = {
+  span: 5,
+};
+const wrapperCol = {
+  span: 13,
+};
+const formState = reactive({
+  name: '',
+  gender: 'male',
+  date: undefined,
+  region: undefined,
+  type: [],
+  resource: '',
+  desc: '',
+});
+
+const onSubmit = () => {
+  formRef.value
+    .validate()
+    .then(() => {
+      console.log('values', formState, toRaw(formState));
+    })
+    .catch(error => {
+      console.log('error', error);
+    });
+};
+const onFinish = values => {
+  console.log('Success:', values);
+};
+const onFinishFailed = errorInfo => {
+  console.log('Failed:', errorInfo);
+};
+
 </script>
 
 <template>
@@ -19,234 +47,178 @@ const radioValue = 'apple'
         <li>注册: {{ "2006-10-27" }}</li>
       </div>
     </div>
-    <div class="card-box1 card-box">
-      <div class="title">基本信息 <span>(通过)</span></div>
-      <div class="user-info">
-        <div class="info">
-          <div class="left-input">
-            <span>姓名：</span>
-            <input type="text" name="" id="">
-          </div>
-          <div class="right-gredder">
-            <span>性别：</span>
-            <a-radio-group v-model:value="radioValue">
-              <a-radio value="apple">男</a-radio>
-              <a-radio value="pear">女</a-radio>
+    <div class="card-box">
+      <div class="title">
+        基本信息(通过)
+      </div>
+      <div class="form-wrap">
+        <a-form labelAlign="left" ref="formRef" @finish="onFinish" @finishFailed="onFinishFailed" :model="formState"
+          :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+          <a-form-item label="姓名" name="name">
+            <a-input v-model:value="formState.name" />
+          </a-form-item>
+          <a-form-item label="性别" name="gender">
+            <a-radio-group v-model:value="formState.gender">
+              <a-radio value="male">男</a-radio>
+              <a-radio value="female">女</a-radio>
             </a-radio-group>
-          </div>
-        </div>
-        <div class="time">
-          <span>出生年月:</span>
-          <input type="text">
-        </div>
-        <div class="card">
-          <span>证件类型:</span>
-          <input type="select">
-        </div>
-        <div class="upload">
-          <span>证件照片：</span>
-          <div class="upload-info">
-            <i>+</i>
-            <p>上传照片</p>
-          </div>
-        </div>
-      </div>
-      <div class="btn">
-        <span>保存基本信息</span>
+          </a-form-item>
+          <a-form-item label="出生年月" name="date1">
+            <a-date-picker placeholder="" v-model:value="formState.date" show-time type="date" style="width: 100%" />
+          </a-form-item>
+          <a-form-item label="证件类型" name="region" class="card-cate">
+            <a-select v-model:value="formState.region" placeholder="">
+              <a-select-option value="cardId">身份证</a-select-option>
+              <a-select-option value="driverLicense">驾驶证</a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item label="证件照片" class="upload-wrap">
+            <div class="upload">
+              <a-upload v-model:file-list="fileList" name="file" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                :headers="headers" @change="handleChange">
+                <div class="upload-btn">
+                  <upload-outlined></upload-outlined>
+                  <span>+</span>
+                  <h5>正面</h5>
+                </div>
+              </a-upload>
+              <a-upload v-model:file-list="fileList" name="file" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                :headers="headers" @change="handleChange">
+                <div class="upload-btn">
+                  <upload-outlined></upload-outlined>
+                  <span>+</span>
+                  <h5>反面</h5>
+                </div>
+              </a-upload>
+            </div>
+          </a-form-item>
+          <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+            <a-button html-type="submit" type="primary">保存基本信息</a-button>
+          </a-form-item>
+        </a-form>
       </div>
     </div>
-    <div class="card-box1 card-box">
+    <div class="card-box">
       <div class="title">联系信息</div>
-      <div class="user-info">
-        <div class="info">
-          <div class="left-input">
-            <span>手机：</span>
-            <input type="text" name="" id="">
-          </div>
-        </div>
-        <div class="time">
-          <span>邮箱:</span>
-          <input type="text">
-        </div>
-        <div class="phone">
-          <span>电话:</span>
-          <div class="right-input">
-            <input placeholder="区号" type="text">
-            <input placeholder="座机" type="text">
-            <input placeholder="分机" type="text">
-          </div>
-        </div>
-      </div>
-      <div class="btn">
-        <span>保存基本信息</span>
-      </div>
     </div>
-    <div class="card-box1 card-box">
+    <div class="card-box">
       <div class="title">收藏信息</div>
-      <div class="user-info">
-        <div class="cate">
-          <span>设置收藏类别：</span>
-          <input placeholder="选择类别" type="select">
-        </div>
-        <div class="aihao">
-          <span>&nbsp;</span>
-          <div class="right-aihao">
-            <input placeholder="兴趣标签" type="text">
-            <button>添加</button>
-          </div>
-        </div>
-        <div class="youpiao">
-          <span></span>
-          <div class="btn">邮票钱币X</div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="less">
 .personal-information {
-  flex: 1;
   .flex-col;
   align-items: flex-start;
   gap: 30px;
 
-  .user-id {
-    padding: 40px;
-    .flex-row;
-    justify-content: flex-start;
-    gap: 90px;
-  }
-
-  .card-box1 {
-    width: 100%;
-    background: #fff;
-    border-radius: 10px 10px;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-
-    .btn {
-      background-color: #f1f5f8;
-      padding: 16px 140px;
+  .card-box {
+    .user-id {
+      padding: 40px;
       .flex-row;
       justify-content: flex-start;
-      border-radius: 0 0 10px 10px;
-
-      span {
-        background: #a4b0bb;
-        color: #fff;
-        padding: 12px 40px;
-      }
-    }
-  }
-
-  .card-box1 {
-    .title {
-      .flex-row;
-      justify-content: flex-start;
-      gap: 15px;
-      font-size: 18px;
-      color: #9a9a9a;
+      gap: 90px;
     }
 
-    .user-info {
-      padding: 30px 40px 30px;
-      .flex-col;
-      gap: 30px;
-      align-items: flex-start;
+    .form-wrap {
+      width: 500px;
+      padding: 50px 0 30px 50px;
 
-      span {
-        display: inline-block;
-        width: 100px;
-        font-size: 18px;
-        color: #a7a7a7;
+      :deep(.ant-form-item .ant-form-item-label>label) {
+        // margin-top: 0;
+        font-size: 16px;
       }
 
-      input {
-        width: 250px;
-        height: 44px;
-        border: 1px solid #dce2e9;
-        border-radius: 5px;
-        padding-left: 20px;
-      }
+      .ant-input {
+        height: 46px;
+        width: 280px;
 
-      .info {
-        .flex-row;
-        justify-content: flex-start;
-        gap: 40px;
+        &:hover {
+          border-color: #9a0000;
+        }
 
-        .right-gredder {
-          .ant-radio-group {
-            width: 200px;
-          }
+        &:focus {
+          border-color: #9a0000;
         }
       }
 
-      .upload {
-        .flex-row;
-        align-items: flex-start;
+      :deep(.ant-form-item .ant-form-item-control-input) {
+        height: 46px;
+        width: 280px;
 
-        .upload-info {
-          cursor: pointer;
-          .flex-col;
-          padding: 50px;
-          background-color: #f1f5f8;
-          color: #c2c5c7;
-          gap: 5px;
-
-          i {
-            font-size: 36px;
-          }
+        span {
+          font-size: 16px;
         }
       }
 
-      .phone {
-        .flex-row;
+      :deep(.ant-picker) {
+        height: 46px;
+      }
 
-        .right-input {
+      :deep(.ant-select-selector) {
+        height: 46px;
+
+      }
+
+      .ant-picker {
+        &:hover {
+          border-color: #9a0000;
+        }
+
+        &:focus {
+          border-color: #9a0000;
+        }
+      }
+
+      .ant-picker-focused {
+        border-color: #9a0000;
+      }
+
+      .card-cate {
+        margin-top: 40px;
+      }
+
+      .upload-wrap {
+        margin-top: 80px;
+        height: 100px;
+
+        .upload {
           .flex-row;
-          gap: 20px;
+          justify-content: flex-start;
+          gap: 30px;
 
-          input {
-            width: 100px;
+
+          .upload-btn {
+            .flex-col;
+            padding: 20px 80px;
+            background-color: #f1f5f8;
+            color: #6d6d6d;
+            cursor: pointer;
+
+            span {
+              font-size: 30px;
+            }
+
+            h5 {
+              font-size: 20px;
+              width: 40px;
+            }
           }
         }
       }
 
-      .cate {
-        span {
-          width: 150px;
-        }
+      :deep(.ant-radio-wrapper .ant-radio-checked .ant-radio-inner) {
+        background-color: #9a0000;
+        border-color: #9a0000;
       }
 
-      .aihao {
-        .flex-row;
-
-        span {
-          width: 150px;
-        }
-
-        .right-aihao {
-          button {
-            height: 46px;
-            padding: 0 10px;
-            background-color: #a4b0bb;
-            color: #fff;
-            border: none;
-          }
-        }
-      }
-
-      .youpiao {
-        .flex-row;
-
-        span {
-          width: 150px;
-        }
-
-        .btn {
-          // width: 200px;
-          padding: 20px 20px;
-        }
+      .ant-btn {
+        width: 200px;
+        background-color: #9a0000;
+        height: 46px;
+        border-radius: 0;
+        margin-left: 20px;
       }
     }
   }

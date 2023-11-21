@@ -2,7 +2,16 @@
 import { useUserInfo } from '@/store/module/user';
 import { message } from "ant-design-vue";
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
-import { UserSwitchOutlined, HeartOutlined } from "@ant-design/icons-vue"
+import {
+    UserSwitchOutlined,
+    HeartOutlined,
+    PieChartOutlined,
+    MailOutlined,
+    DesktopOutlined,
+    InboxOutlined,
+    AppstoreOutlined,
+    CaretRightOutlined
+} from "@ant-design/icons-vue"
 //在这里没有备初始化 userinfo是异步的
 // const user = useUserInfo()
 const baseRoutes = [
@@ -43,7 +52,7 @@ const userRoutes = [
         component: () => import('@/pages/User/index.vue'),
         children: [
             {
-                path: ' userinfo',
+                path: 'userinfo',
                 component: () => import('@/pages/User/item/UserInfo.vue'),
                 meta: {
                     name: '个人中心',
@@ -61,7 +70,7 @@ const userRoutes = [
                         component: () => import('@/pages/User/item/AccountManagement/PersonalInformation.vue'),
                         meta: {
                             name: '个人信息',
-                            icon: 'iconfont-userinfo'
+                            icon: CaretRightOutlined
                         },
                     },
                     {
@@ -69,23 +78,21 @@ const userRoutes = [
                         component: () => import('@/pages/User/item/AccountManagement/BankInformation.vue'),
                         meta: {
                             name: '银行信息',
-                            icon: ''
+                            icon: CaretRightOutlined
                         },
                     },
                     {
                         path: 'shipping-information',
                         component: () => import('@/pages/User/item/AccountManagement/ShippingInformation.vue'),
                         meta: {
-                            name: '快递信息',
-                            icon: ''
+                            name: '快递信息', icon: CaretRightOutlined
                         },
                     },
                     {
                         path: 'change-password',
                         component: () => import('@/pages/User/item/AccountManagement/ChangePassword.vue'),
                         meta: {
-                            name: '修改密码',
-                            icon: ''
+                            name: '修改密码', icon: CaretRightOutlined
                         },
                     }
                 ]
@@ -103,38 +110,35 @@ const userRoutes = [
                 component: () => import('@/pages/User/item/MyBidding.vue'),
                 meta: {
                     name: '我的竞买',
-                    icon: ''
+                    icon: PieChartOutlined
                 },
             },
             {
                 path: 'my-entrustment',
                 meta: {
                     name: '我的委托',
-                    icon: ''
+                    icon: MailOutlined
                 },
                 children: [
                     {
                         path: '',
                         component: () => import('@/pages/User/item/MyEntrustment/index.vue'),
                         meta: {
-                            name: '我的藏品',
-                            icon: ''
+                            name: '我的藏品', icon: CaretRightOutlined
                         },
                     },
                     {
                         path: 'my-contract',
                         component: () => import('@/pages/User/item/MyContract/index.vue'),
                         meta: {
-                            name: '我的合同',
-                            icon: ''
+                            name: '我的合同', icon: CaretRightOutlined
                         },
                     },
                     {
                         path: 'settlement-details',
                         component: () => import('@/pages/User/item/SettlementDetails/index.vue'),
                         meta: {
-                            name: '结算明细',
-                            icon: ''
+                            name: '结算明细', icon: CaretRightOutlined
                         },
                     }
                 ]
@@ -144,7 +148,7 @@ const userRoutes = [
                 component: () => import('@/pages/User/item/QuickSell.vue'),
                 meta: {
                     name: '一键转卖',
-                    icon: ''
+                    icon: DesktopOutlined
                 },
             },
             {
@@ -152,23 +156,21 @@ const userRoutes = [
                 meta: {
                     name: '物流'
                     ,
-                    icon: ''
+                    icon: InboxOutlined
                 },
                 children: [
                     {
                         path: '',
                         component: () => import('@/pages/User/item/Logistics/item1.vue'),
                         meta: {
-                            name: '未发货',
-                            icon: ''
+                            name: '未发货', icon: CaretRightOutlined
                         },
                     },
                     {
                         path: 'yifahuo',
                         component: () => import('@/pages/User/item/Logistics/item2.vue'),
                         meta: {
-                            name: '已发货',
-                            icon: ''
+                            name: '已发货', icon: CaretRightOutlined
                         },
                     }
                 ]
@@ -179,7 +181,7 @@ const userRoutes = [
                 meta: {
                     name: '积分'
                     ,
-                    icon: ''
+                    icon: AppstoreOutlined
                 },
             },
             {
@@ -187,28 +189,28 @@ const userRoutes = [
                 // component: () => import('@/pages/User/item/FinancialInformation.vue'),
                 meta: {
                     name: '财务信息',
-                    icon: ''
+                    icon: PieChartOutlined,
                 },
                 children: [
                     {
                         path: '',
                         component: () => import('@/pages/User/item/Financiallnfirmation/Chongzhi.vue'),
                         meta: {
-                            name: '账户余额'
+                            name: '账户余额', icon: CaretRightOutlined
                         }
                     },
                     {
                         path: 'youhuiquan',
                         component: () => import('@/pages/User/item/Financiallnfirmation/Youhuiquan.vue'),
                         meta: {
-                            name: '优惠券'
+                            name: '优惠券', icon: CaretRightOutlined
                         }
                     },
                     {
                         path: 'edu',
                         component: () => import('@/pages/User/item/Financiallnfirmation/Edu.vue'),
                         meta: {
-                            name: '竞买额度'
+                            name: '竞买额度', icon: CaretRightOutlined
                         }
                     },
                 ]

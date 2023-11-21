@@ -1,22 +1,27 @@
 <script setup>
-import { ref } from "vue";
+import { ref, h } from "vue";
 import { useRouter } from "vue-router";
 import { userRoutes } from "@/router/index.js"
-import { UserSwitchOutlined } from "@ant-design/icons-vue"
 const router = useRouter();
+const selectRouter = router.currentRoute._rawValue.fullPath
+console.log(selectRouter);
 const openKeys = ref(["/user/account-management"]);
-const selectedKeys = ref(["1"]);
+const selectedKeys = ref([selectRouter]);
 const generateMenuItems = (routes, parentRoutePath = "/user/") => {
   const userRoutes = routes.find(route => route.path === '/user');
   const generateChildren = (children, parentPath) => {
     return children.map((childRoute, index) => {
+      if (childRoute.path === 'userinfo') {
+        // 排除个人中心路由
+        return null;
+      }
+
       const childMenuItem = {
         key: parentPath + childRoute.path,
         label: childRoute.meta.name,
         router: childRoute.path,
-        icon: childRoute.icon
+        icon: () => childRoute.meta.icon ? h(childRoute.meta.icon) : null
       };
-      console.log(childMenuItem);
 
       if (childRoute.children && childRoute.children.length > 0) {
         childMenuItem.children = generateChildren(
@@ -26,7 +31,7 @@ const generateMenuItems = (routes, parentRoutePath = "/user/") => {
       }
 
       return childMenuItem;
-    });
+    }).filter(Boolean); // 过滤掉为null的项
   };
 
   if (userRoutes) {
@@ -35,7 +40,6 @@ const generateMenuItems = (routes, parentRoutePath = "/user/") => {
 
   return [];
 };
-
 
 const menuItems = ref(generateMenuItems(userRoutes));
 
@@ -46,11 +50,9 @@ const handleClick = (e) => {
 
 
 </script>
-
-
 <template>
   <div class="user-nav-list">
-    <div class="nav-title">
+    <div class="nav-title" @click="router.push('/user/userinfo')">
       个人中心
     </div>
     <a-menu v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" style="width: 270px" mode="inline"
@@ -58,21 +60,19 @@ const handleClick = (e) => {
   </div>
 </template>
 
+
 <style scoped lang="less">
 .user-nav-list {
   .nav-title {
     background: url('@/assets/img/user/menu-title-bg.png');
+    background-size: 100% 100%;
     height: 60px;
     line-height: 60px;
     font-size: 18px;
     color: #fff;
     font-weight: 700;
     padding-left: 50px;
-    background-size: 100% 100%;
-  }
 
-  :deep(.ant-menu-light.ant-menu-inline .ant-menu-item) {
-    // background-color: red;
   }
 }
 </style>

@@ -50,7 +50,7 @@ const infoDataSource = [
         name: '6262232',
         num: '17项',
         time: '2023-09-01',
-        status: '执行中',
+        status: '已成交',
         operate: '查看详情'
     },
     {
@@ -88,16 +88,18 @@ const infoDataSource = [
 ]
 const infoColumns = [
     {
-        title: '姓名',
+        title: '合同号',
         dataIndex: 'name',
         key: 'name',
-        align: 'center'
+        align: 'center',
+        width: '136px'
     },
     {
         title: '藏品数量',
         dataIndex: 'num',
         key: 'num',
-        align: 'center'
+        align: 'center',
+        width: '280px'
     },
     {
         title: '登记日期',
@@ -105,17 +107,28 @@ const infoColumns = [
         key: 'time',
         align: 'center'
     },
+    // {
+    //     title: '状态',
+    //     dataIndex: 'status',
+    //     key: 'status',
+    //     align: 'center'
+    // },
     {
         title: '状态',
         dataIndex: 'status',
         key: 'status',
-        align: 'center'
+        align: 'center',
+        width: '300px',
+        //slots中的customRender绑定插槽名称
+        //生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格行/列合并,可参考 demo 表格行/列合并
+        slots: { customRender: 'status' },
     },
     {
         title: '操作',
         dataIndex: 'operate',
         key: 'operate',
-        align: 'center'
+        align: 'center',
+        slots: { customRender: 'operate' },
     },
 
 ]

@@ -2,7 +2,7 @@
 import { ref, computed, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { getImageUrl } from "@/utils";
-
+import UserMenu from "@/components/common/UserMenu.vue"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});

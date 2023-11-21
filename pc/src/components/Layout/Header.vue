@@ -30,8 +30,9 @@ const num = 0;
                 <div class="user-info">
                     <a-select :bordered="false" ref="select" v-model:value="selectValue" style="width: 110px"
                         @change="handleChange">
-                        <a-select-option v-for="item in user.userNameList" @click="router.push('/user')" :value=item>{{ item
-                        }}</a-select-option>
+                        <a-select-option v-for="item in user.userNameList" @click="router.push('/user/userinfo')"
+                            :value=item>{{ item
+                            }}</a-select-option>
                         <a-select-option @click="router.push('/login')" value='退出'>退出</a-select-option>
                     </a-select>
                     <li>|</li>

@@ -1,12 +1,11 @@
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter, } from 'vue-router';
 import { getImageUrl } from '@/utils';
 import { infoList, infoDataSource, infoColumns } from "../data"
-const router = useRouter();
-const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
+import { useUserInfo } from '@/store/store';
+const user = useUserInfo()
+const router = useRouter()
 </script>
 
 <template>
@@ -17,7 +16,7 @@ onMounted(() => { });
                 <div class="element-info">
                     <div class="element-top">
                         <h5>{{ '王世杰' }}</h5>
-                        <p>客户编号: {{ 1018132 }}</p>
+                        <p>客户编号: {{ user.userInfo.password }}</p>
                     </div>
                     <p>{{ '五钻三星' }}</p>
                     <div class="code">
@@ -52,21 +51,33 @@ onMounted(() => { });
             <div class="title"><span>我的订单</span>
                 <span class="move" @click="router.push('/user/quick-sell')">查看更多</span>
             </div>
-            <div class="getGoods">
-                <span>竞买中: <span>{{ 1 }}</span></span>
-                <span>已得标: <span class="active">{{ 3 }}</span></span>
-                <span>未得标: <span class="active">{{ 1 }}</span></span>
-                <span>未支付: <span>{{ 0 }}</span></span>
-                <span>不支付: <span>{{ 0 }}</span></span>
-                <span>未发货: <span>{{ 0 }}</span></span>
-                <span>已发货: <span>{{ 0 }}</span></span>
+            <div class="get-goods">
+                <span>竞买中 ： <span>{{ 1 }}</span></span>
+                <span>已得标 ： <span class="active">{{ 3 }}</span></span>
+                <span>未得标 ： <span class="active">{{ 1 }}</span></span>
+                <span>未支付 ： <span>{{ 0 }}</span></span>
+                <span>不支付 ： <span>{{ 0 }}</span></span>
+                <span>未发货 ： <span>{{ 0 }}</span></span>
+                <span>已发货 ： <span>{{ 0 }}</span></span>
             </div>
         </div>
         <div class="card-box">
             <div class="title"><span>我的委托</span>
                 <span class="move" @click="router.push('/user/my-entrustment/')">查看更多</span>
             </div>
-            <a-table :dataSource="infoDataSource" :columns="infoColumns" />
+            <a-table :pagination="false" :dataSource="infoDataSource" :columns="infoColumns">
+                <template #status="{ record }">
+                    <span>
+                        <span :class="record.status == 0 || record.status == '已成交' ? '' : 'active'"> {{ record.status
+                        }}</span>
+                    </span>
+                </template>
+                <template #operate="{ record }">
+                    <span class="btn-details">
+                        {{ record.operate }}
+                    </span>
+                </template>
+            </a-table>
         </div>
     </div>
 </template>
@@ -205,43 +216,31 @@ onMounted(() => { });
     .card-box {
         padding: 0 30px;
         margin-top: 30px;
+        background-color: #fff;
 
         .title {
             .flex-row;
             justify-content: space-between;
         }
 
-        .getGoods {
+        .get-goods {
             .flex-row;
-            justify-content: flex-start;
-            gap: 30px;
+            justify-content: space-between;
             padding: 50px 40px;
             font-size: 18px;
+        }
 
-            .active {
-                color: #9a0000;
-            }
+        .active {
+            color: #9a0000;
+        }
+
+        .ant-table-wrapper {
+            padding-bottom: 38px;
+        }
+
+        .btn-details {
+            cursor: pointer;
         }
     }
 }
 </style>
-
-
-<!-- 
-<script setup>
-import { ref, computed, reactive, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import { getImageUrl } from '@/utils';
-const router = useRouter();
-const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
-</script>
-
-<template>
-    <div class="wrap">ssss</div>
-</template>
-
-<style scoped lang="less">
-/* 在这里添加你的 Less 样式 */
-</style> -->

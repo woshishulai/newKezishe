@@ -89,3 +89,62 @@ input::-webkit-input-placeholder {
 .ant-spin-spinning {
     opacity: 0.3;
 }
+
+
+//menu下拉菜单
+.ant-menu-light .ant-menu-item-selected {
+    background-color: #fff; //去掉背景颜色
+}
+
+.ant-menu .ant-menu-submenu-title {
+    font-weight: 600; //字体粗细
+}
+
+.ant-menu-title-content {
+    font-weight: 600; //没有子级菜单的字体粗细
+}
+
+.ant-menu-item .ant-menu-item-icon svg {
+    color: #333; //一级和二级菜单的的图标颜色
+}
+
+.ant-menu-submenu-title .ant-menu-item-icon svg {
+    color: #333; //一级和二级菜单的的图标颜色
+}
+
+.ant-menu-light .ant-menu-item-selected {
+    color: #9a0000; //被选中的文字颜色
+}
+
+.ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title {
+    color: #9a0000; //被选中的文字颜色
+}
+
+.ant-menu-light .ant-menu-item-selected svg {
+    color: #9a0000;
+}
+
+//没有子菜单的图标
+.ant-menu-item-selected svg {
+    color: #9a0000;
+}
+
+//被选中的title的图标颜色
+.ant-menu-submenu-selected .ant-menu-submenu-title svg {
+    color: #9a0000;
+}
+
+//当鼠标经过的时候
+.ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
+    background-color: #9a0000;
+    color: #fff;
+}
+
+.ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover svg {
+    color: #fff;
+}
+
+//表格的头部背景颜色
+.ant-table-wrapper .ant-table-thead>tr>th {
+    background-color: #f7f7f7;
+}
