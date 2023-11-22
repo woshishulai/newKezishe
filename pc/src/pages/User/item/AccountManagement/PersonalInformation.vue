@@ -138,7 +138,7 @@ const onFinishFailed = errorInfo => {
           </a-select>
         </div>
         <div class="add-like">
-          <a-input v-model:value="value" placeholder="Basic usage" />
+          <a-input v-model:value="value" placeholder="" />
           <a-button>添加</a-button>
         </div>
         <div class="like-info">

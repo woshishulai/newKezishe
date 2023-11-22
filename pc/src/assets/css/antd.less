@@ -10,6 +10,17 @@ input {
     background-color: #f2f2f2;
 }
 
+.ant-input {
+    height: 46px;
+
+    &:hover {
+        border-color: #9a0000;
+    }
+
+    &:focus {
+        border-color: #9a0000;
+    }
+}
 
 .ant-form-item .ant-form-item-label>label {
     margin-top: 6px;
@@ -147,4 +158,42 @@ input::-webkit-input-placeholder {
 //表格的头部背景颜色
 .ant-table-wrapper .ant-table-thead>tr>th {
     background-color: #f7f7f7;
+}
+
+
+
+//弹出对话框到按钮
+.ant-modal-confirm .ant-modal-confirm-btns {
+    .flex-row;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+//下拉框
+.ant-select.ant-select-in-form-item {
+    &:hover {
+        border-color: #9a0000;
+    }
+
+}
+
+
+
+// .ant-select.ant-select-in-form-item:hover {
+//     border-color: #9a0000;
+// }
+.ant-select-selector {
+    &:hover {
+        border-color: #9a0000 !important;
+    }
+
+    &:focus {
+        border-color: #9a0000;
+    }
+}
+
+
+
+.ant-select-selection-placeholder {
+    padding-top: 6px;
 }
