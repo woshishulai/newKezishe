@@ -2,82 +2,36 @@
 import { ref, computed, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { getImageUrl } from "@/utils";
+import { createVNode } from 'vue';
+import { Modal } from 'ant-design-vue';
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
+import { shippingDataSource, shippingColumns } from "../../data"
+import { statusList } from "../../data";
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
 onMounted(() => { });
-const dataSource = [
-  {
-    key: "1",
-    name: "王子涵",
-    bank: "中国北京，西城区",
-    code: "黄寺大街24号19号明湖大厦",
-    ee: '100120',
-    rr: '13799226494',
-    tt: '设为默认'
-  },
-  {
-    key: "2",
-    name: "王子涵",
-    bank: "中国北京，西城区",
-    code: "黄寺大街24号19号明湖大厦",
-    ee: '100120',
-    rr: '13799226494',
-    tt: '设为默认'
-  },
-];
 
-const columns = [
-  {
-    title: "收货人",
-    dataIndex: "name",
-    key: "name",
-    align: 'center'
-  },
-  {
-    title: "所在地区",
-    dataIndex: "bank",
-    key: "bank",
-    align: 'center'
-  },
-  {
-    title: "详细地址",
-    dataIndex: "code",
-    key: "code",
-    align: 'center'
-  },
-  {
-    title: "邮编电话",
-    dataIndex: "ee",
-    key: "ee",
-    align: 'center'
-  },
-  {
-    title: "电话/手机",
-    dataIndex: "rr",
-    key: "rr",
-    align: 'center'
-  },
-  {
-    title: "操作",
-    dataIndex: "tt",
-    key: "tt",
-    align: 'center'
-  },
-];
-
-function handleEdit(record) {
-  // 处理编辑逻辑
-}
-function handleDelete(record) {
-  // 处理删除逻辑
-}
-function handleSetDefault(record) {
-  // 处理设为默认逻辑
-}
-function customRender(text) {
-  // 自定义渲染逻辑
-}
+const showConfirm = () => {
+  Modal.confirm({
+    title: '确定删除此地址吗?',
+    icon: createVNode(ExclamationCircleOutlined),
+    // content: createVNode(
+    //   'div',
+    //   {
+    //     style: 'color:red;',
+    //   },
+    //   '点击确定删除，取消返回',
+    // ),
+    onOk() {
+      console.log('确定');
+    },
+    onCancel() {
+      console.log('取消');
+    },
+    class: 'test',
+  });
+};
 
 const formState = reactive({
   name: "",
@@ -88,58 +42,6 @@ const formState = reactive({
   resource: "",
   desc: "",
 });
-const rules = {
-  name: [
-    {
-      required: true,
-      message: "Please input Activity name",
-      trigger: "change",
-    },
-    {
-      min: 3,
-      max: 5,
-      message: "Length should be 3 to 5",
-      trigger: "blur",
-    },
-  ],
-  region: [
-    {
-      required: true,
-      message: "Please select Activity zone",
-      trigger: "change",
-    },
-  ],
-  date1: [
-    {
-      required: true,
-      message: "Please pick a date",
-      trigger: "change",
-      type: "object",
-    },
-  ],
-  type: [
-    {
-      type: "array",
-      required: true,
-      message: "Please select at least one activity type",
-      trigger: "change",
-    },
-  ],
-  resource: [
-    {
-      required: true,
-      message: "Please select activity resource",
-      trigger: "change",
-    },
-  ],
-  desc: [
-    {
-      required: true,
-      message: "Please input activity form",
-      trigger: "blur",
-    },
-  ],
-};
 const onSubmit = () => {
   formRef.value
     .validate()
@@ -159,38 +61,42 @@ const resetForm = () => {
   <div class="bank-information">
     <div class="card-box">
       <div class="title">快递信息</div>
-      <a-table :columns="columns" :data-source="dataSource">
+      <a-table :pagination="false" :columns="shippingColumns" :data-source="shippingDataSource">
+        <template #tt="{ record }">
+          <div class="status">
+            <span>修改</span>
+            <span @click="showConfirm">删除</span>
+            <span class="active" :class="record.status ? 'active' : ''">{{ record.status ? '默认账号' : '设为默认' }}</span>
+          </div>
+        </template>
       </a-table>
     </div>
     <div class="card-box">
-      <div class="title">新增快递信息</div>
-      <div class="user-info">
-        <div class="info">
-          <div class="left-input">
-            <span>姓名：</span>
-            <input type="text" name="" id="">
-          </div>
-        </div>
-        <div class="time">
-          <span>所在地区:</span>
-          <input type="text">
-        </div>
-        <div class="phone">
-          <span>详细地址:</span>
-          <div class="right-input">
-            <input placeholder="选择省" type="text">
-            <input placeholder="选择市" type="text">
-          </div>
-        </div>
-        <div class="bank">
-          <span>邮编电话:</span>
-          <input type="text">
-        </div>
-        <div class="time">
-          <span>电话/手机:</span>
-          <input type="text">
-        </div>
-        <div class="btn">保存</div>
+      <div class="title">新增快递收货地址信息</div>
+      <div class="form-wrap">
+        <a-form labelAlign="left" :model="formState" name="basic" :label-col="{ span: 2 }" :wrapper-col="{ span: 7 }"
+          autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
+          <a-form-item label="姓名" name="username">
+            <a-input v-model:value="formState.username" />
+          </a-form-item>
+          <a-form-item label="所在地区">
+            <a-select>
+              <a-select-option value="demo">Demo</a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item label="详细地址" name="username">
+            <a-cascader v-model:value="value" :options="statusList" />
+          </a-form-item>
+          <a-form-item label="邮编电话" name="bankNmae">
+            <a-input type="number" v-model:value="formState.bankNmae" />
+          </a-form-item>
+          <a-form-item label="电话/手机" name="username">
+            <a-input type="number" v-model:value="formState.username" />
+          </a-form-item>
+          <a-form-item :wrapper-col="{ offset: 2, span: 16 }">
+            <a-button type="primary" html-type="submit">保存</a-button>
+          </a-form-item>
+        </a-form>
       </div>
     </div>
   </div>
@@ -203,117 +109,39 @@ const resetForm = () => {
   .flex-col;
   gap: 30px;
 
-  .title {
-    color: #9a9a9a;
-  }
-
-  .user-info {
-    padding: 30px 40px 30px;
-    .flex-col;
-    gap: 30px;
-    align-items: flex-start;
+  .status {
+    .flex-row;
+    justify-content: space-around;
 
     span {
-      display: inline-block;
-      width: 100px;
-      font-size: 18px;
-      color: #a7a7a7;
-    }
+      padding: 5px 10px;
+      cursor: pointer;
 
-    input {
-      width: 400px;
-      height: 44px;
-      border: 1px solid #dce2e9;
-      border-radius: 5px;
-      padding-left: 20px;
-    }
-
-    .info {
-      .flex-row;
-      justify-content: flex-start;
-      gap: 40px;
-
-      .right-gredder {
-        .ant-radio-group {
-          width: 200px;
-        }
-      }
-    }
-
-    .upload {
-      .flex-row;
-      align-items: flex-start;
-
-      .upload-info {
-        cursor: pointer;
-        .flex-col;
-        padding: 50px;
-        background-color: #f1f5f8;
-        color: #c2c5c7;
-        gap: 5px;
-
-        i {
-          font-size: 36px;
-        }
-      }
-    }
-
-    .phone {
-      .flex-row;
-
-      .right-input {
-        .flex-row;
-        gap: 20px;
-
-        input {
-          width: 100px;
-        }
-      }
-    }
-
-    .cate {
-      span {
-        width: 150px;
-      }
-    }
-
-    .aihao {
-      .flex-row;
-
-      span {
-        width: 150px;
-      }
-
-      .right-aihao {
-        button {
-          height: 46px;
-          padding: 0 10px;
-          background-color: #a4b0bb;
-          color: #fff;
-          border: none;
-        }
-      }
-    }
-
-    .youpiao {
-      .flex-row;
-
-      span {
-        width: 150px;
-      }
-
-      .btn {
-        // width: 200px;
-        padding: 20px 20px;
+      &.active {
+        background-color: #9a0000;
+        color: #fff;
       }
     }
   }
-}
 
-.btn {
-  margin-left: 100px;
-  padding: 16px 40px;
-  background-color: #9a0000;
-  color: #fff;
+  .form-wrap {
+    padding: 40px 30px 20px 40px;
+
+    .ant-input {
+      height: 46px;
+    }
+
+    :deep(.ant-select-selector) {
+      height: 46px;
+      padding-top: 6px;
+    }
+
+    .ant-btn {
+      width: 200px;
+      height: 46px;
+      border-radius: 0;
+      background-color: #9a0000;
+    }
+  }
 }
 </style>

@@ -188,8 +188,6 @@ const handClick = (item) => {
             justify-content: flex-start;
             gap: 20px;
 
-            input {}
-
             .btn {
                 border: none;
                 background-color: #85909b;

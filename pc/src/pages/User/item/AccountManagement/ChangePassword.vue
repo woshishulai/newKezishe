@@ -6,56 +6,54 @@ const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
 onMounted(() => { });
-
+const formState = reactive({
+  username: '',
+  bankNmae: '',
+});
 </script>
 
 <template>
   <div class="change-password">
     <div class="card-box">
       <div class="title">修改密码</div>
-      <div class="form-list">
-        <div class="form-item user-info">
-          <div class="passwrod-login">
-            <span>登陆密码:</span>
-          </div>
-          <div class="passwrod-login">
-            <span>原始密码:</span>
-            <input type="text">
-          </div>
-          <div class="passwrod-login">
-            <span>新登陆密码:</span>
-            <input type="text">
-          </div>
-          <div class="passwrod-login">
-            <span>重新新登陆密码:</span>
-            <input type="text">
-          </div>
-          <div class="passwrod-login">
-            <span></span>
-            <div class="btn">确定</div>
-          </div>
+      <div class="form-wrap">
+        <div class="change-login-password">
+          <a-form labelAlign="left" :model="formState" name="basic" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }"
+            autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
+            <h5>登录密码</h5>
+            <a-form-item label="原始密码" name="username">
+              <a-input v-model:value="formState.username" />
+            </a-form-item>
+
+            <a-form-item label="新登陆密码" name="bankNmae">
+              <a-input v-model:value="formState.bankNmae" />
+            </a-form-item>
+            <a-form-item label="再次确认新登录密码" name="username">
+              <a-input v-model:value="formState.username" />
+            </a-form-item>
+            <a-form-item :wrapper-col="{ offset: 7, span: 16 }">
+              <a-button type="primary" html-type="submit">确认</a-button>
+            </a-form-item>
+          </a-form>
         </div>
-        <div class="xian"></div>
-        <div class="form-item user-info">
-          <div class="passwrod-login">
-            <span>支付密码:</span>
-          </div>
-          <div class="passwrod-login">
-            <span>原支付密码:</span>
-            <input type="text">
-          </div>
-          <div class="passwrod-login">
-            <span>新制服密码:</span>
-            <input type="text">
-          </div>
-          <div class="passwrod-login">
-            <span>重新设置支付密码:</span>
-            <input type="text">
-          </div>
-          <div class="passwrod-login">
-            <span></span>
-            <div class="btn">确定</div>
-          </div>
+        <div class="change-shipping-password">
+          <a-form labelAlign="left" :model="formState" name="basic" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }"
+            autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
+            <h5>支付密码</h5>
+            <a-form-item label="原支付密码" name="username">
+              <a-input v-model:value="formState.username" />
+            </a-form-item>
+
+            <a-form-item label="新支付密码" name="bankNmae">
+              <a-input v-model:value="formState.bankNmae" />
+            </a-form-item>
+            <a-form-item label="再次确认新支付密码" name="username">
+              <a-input v-model:value="formState.username" />
+            </a-form-item>
+            <a-form-item :wrapper-col="{ offset: 7, span: 16 }">
+              <a-button type="primary" html-type="submit">确认</a-button>
+            </a-form-item>
+          </a-form>
         </div>
       </div>
     </div>
@@ -64,125 +62,45 @@ onMounted(() => { });
 
 <style scoped lang="less">
 /* 在这里添加你的 Less 样式 */
-.user-info {
-  padding: 30px 40px 30px;
-  .flex-col;
-  gap: 30px;
-  align-items: flex-start;
-
-  span {
-    display: inline-block;
-    width: 200px;
-    font-size: 18px;
-    color: #a7a7a7;
-  }
-
-  input {
-    width: 300px;
-    height: 44px;
-    border: 1px solid #dce2e9;
-    border-radius: 5px;
-    padding-left: 20px;
-  }
-
-  .info {
+.change-password {
+  .form-wrap {
     .flex-row;
-    justify-content: flex-start;
-    gap: 40px;
+    padding: 40px 30px 20px 0px;
 
-    .right-gredder {
-      .ant-radio-group {
-        width: 200px;
-      }
+    h5 {
+      font-size: 18px;
+      margin-bottom: 23px;
+    }
+
+    .change-login-password {
+      flex: 1;
+      padding: 0 0 0 40px;
+      border-right: 1px solid #dbdbdb;
+    }
+
+    .change-shipping-password {
+      padding: 0 0 0 40px;
+      flex: 1;
     }
   }
 
-  .upload {
-    .flex-row;
-    align-items: flex-start;
+  .form-wrap {
 
-    .upload-info {
-      cursor: pointer;
-      .flex-col;
-      padding: 50px;
-      background-color: #f1f5f8;
-      color: #c2c5c7;
-      gap: 5px;
+    .ant-input {
+      height: 46px;
+    }
 
-      i {
-        font-size: 36px;
-      }
+    :deep(.ant-select-selector) {
+      height: 46px;
+      padding-top: 6px;
+    }
+
+    .ant-btn {
+      width: 100px;
+      height: 40px;
+      border-radius: 0;
+      background-color: #9a0000;
     }
   }
-
-  .phone {
-    .flex-row;
-
-    .right-input {
-      .flex-row;
-      gap: 20px;
-
-      input {
-        width: 100px;
-      }
-    }
-  }
-
-  .cate {
-    span {
-      width: 150px;
-    }
-  }
-
-  .aihao {
-    .flex-row;
-
-    span {
-      width: 250px;
-    }
-
-    .right-aihao {
-      button {
-        height: 46px;
-        padding: 0 10px;
-        background-color: #a4b0bb;
-        color: #fff;
-        border: none;
-      }
-    }
-  }
-
-  .youpiao {
-    .flex-row;
-
-    span {
-      width: 150px;
-    }
-
-    .btn {
-      // width: 200px;
-      padding: 20px 20px;
-    }
-  }
-}
-
-.form-list {
-  .flex-row;
-
-  .passwrod-login {
-    .flex-row;
-  }
-}
-
-.xian {
-  height: 250px;
-  width: 2px;
-  background-color: #d6dce1;
-}
-
-.btn {
-  padding: 16px 50px;
-  background-color: #9a0000;
-  color: #fff;
 }
 </style>

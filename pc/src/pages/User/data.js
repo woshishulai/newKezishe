@@ -159,4 +159,64 @@ const statusList = [{
         }]
 },
 ]
-export { infoList, infoDataSource, infoColumns, statusList }
+const shippingDataSource = [
+    {
+        key: "1",
+        name: "王子涵",
+        bank: "中国北京，西城区",
+        code: "黄寺大街24号19号明湖大厦",
+        ee: '100120',
+        rr: '13799226494',
+        tt: '设为默认'
+    },
+    {
+        key: "2",
+        name: "王子涵",
+        bank: "中国北京，西城区",
+        code: "黄寺大街24号19号明湖大厦",
+        ee: '100120',
+        rr: '13799226494',
+        tt: '设为默认'
+    },
+];
+
+const shippingColumns = [
+    {
+        title: "收货人",
+        dataIndex: "name",
+        key: "name",
+        align: 'center'
+    },
+    {
+        title: "所在地区",
+        dataIndex: "bank",
+        key: "bank",
+        align: 'center'
+    },
+    {
+        title: "详细地址",
+        dataIndex: "code",
+        key: "code",
+        align: 'center',
+    },
+    {
+        title: "邮编电话",
+        dataIndex: "ee",
+        key: "ee",
+        align: 'center'
+    },
+    {
+        title: "电话/手机",
+        dataIndex: "rr",
+        key: "rr",
+        align: 'center'
+    },
+    {
+        title: "操作",
+        dataIndex: "tt",
+        key: "tt",
+        align: 'center',
+        slots: { customRender: 'tt' },
+    },
+];
+export { infoList, infoDataSource, infoColumns, statusList, shippingDataSource, shippingColumns }

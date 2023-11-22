@@ -160,9 +160,6 @@ const resetForm = () => {
   .flex-col;
   gap: 30px;
 
-  .title {
-    color: #9a9a9a;
-  }
 
 
   .status {
