@@ -197,3 +197,40 @@ input::-webkit-input-placeholder {
 .ant-select-selection-placeholder {
     padding-top: 6px;
 }
+
+//勾选框
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #9a0000;
+    border-color: #9a0000;
+}
+
+.ant-checkbox-indeterminate .ant-checkbox-inner:after {
+    background-color: #9a0000;
+}
+
+//分页
+.ant-pagination .ant-pagination-item {
+    border: 1px solid #dbdbdb;
+}
+
+.ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {
+    background-color: #9a0000;
+
+    a {
+        color: #fff;
+    }
+}
+
+:deep(.ant-pagination-item-active) {
+    background-color: #9a0000;
+    color: #fff;
+}
+
+.ant-pagination .ant-pagination-item-active {
+    background-color: #9a0000;
+    color: #fff;
+
+    a {
+        color: #fff;
+    }
+}

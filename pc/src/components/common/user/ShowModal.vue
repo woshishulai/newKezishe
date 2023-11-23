@@ -1,32 +1,23 @@
 <script setup>
 import { ref, computed, reactive, onMounted, watch, } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { getImageUrl } from '@/utils';
+import { SearchOutlined } from "@ant-design/icons-vue"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({
     titleList: {
         type: Array,
-        default: []
+        default: null
     },
     statusList: {
         type: Array,
-        default: []
+        default: null
     },
-    columns: {
-        type: Array,
-        default: []
-    },
-    dataSource: {
-        type: Array,
-        default: []
-    }
 })
 const params = reactive({
-    titleCate: ref(props.titleList ? props.titleList[0].cate : null),
-    statusCate: ref(props.statusList ? props.statusList[0].cate : null)
+    titleCate: ref(props.titleList && props.titleList != null > 0 ? props.titleList[0].cate : null),
+    statusCate: ref(props.statusList && props.statusList != null > 0 ? props.statusList[0].cate : null)
 })
-console.log(params);
 const changeTitleCate = (item) => {
     params.titleCate = item.cate
     console.log('头部传送门的参数发生了变化', params.titleCate);
@@ -56,32 +47,35 @@ const changeStatusCate = (item) => {
             </p>
         </div>
         <slot name="active3"></slot>
-        <div class="table-cate">
-            <a-table :columns="columns" :dataSource="dataSource">
+        <slot name="active4"></slot>
 
-            </a-table>
-        </div>
     </div>
 </template>
 
 <style scoped lang="less">
 .show-modal {
     .title-cate {
-        padding: 10px 10px 0;
+        padding: 10px 20px 0;
         .flex-row;
-        justify-content: space-between;
+        justify-content: flex-start;
+        gap: 30px;
         background-color: #eef3f8;
         border: none;
+        border-radius: 4px;
 
         .cate-item {
-            padding: 16px 20px;
+            padding: 16px 0;
+            flex: 1;
+            text-align: center;
+            max-width: 200px;
+
             cursor: pointer;
+            font-weight: 600;
 
             &.active {
                 background-color: #fff;
                 border-radius: 6px 6px 0 0;
                 color: #9a0000;
-                font-weight: 700;
             }
         }
     }
@@ -89,7 +83,7 @@ const changeStatusCate = (item) => {
     .status-cate {
         .flex-row;
         justify-content: flex-start;
-        padding: 30px 20px 20px;
+        padding: 30px 20px 10px;
         gap: 30px;
 
         p {
@@ -110,7 +104,8 @@ const changeStatusCate = (item) => {
 
     :deep(.ant-btn) {
         padding: 23px 20px;
-        background-color: #85909b;
+        color: #fff;
+        background-color: #9a0000;
 
         .anticon svg {
             color: #fff;

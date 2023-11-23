@@ -1,8 +1,9 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from 'vue';
+import { ref, computed, reactive, onMounted, h } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 import CatePage from '@/components/common/CatePage.vue';
+import { SearchOutlined } from "@ant-design/icons-vue"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({})
@@ -15,6 +16,62 @@ const list = [
     {
         cate: '购物',
     }
+]
+const shippingList = [
+    {
+        cate: '在售',
+        num: '1'
+    },
+    {
+        cate: '代售',
+        num: '0'
+    },
+    {
+        cate: '结算',
+        num: '13'
+    },
+]
+const statusList = [
+    {
+        cate: '已成交',
+        num: '5216'
+    },
+    {
+        cate: '待预展',
+        num: '0'
+    },
+    {
+        cate: '预展中',
+        num: '0'
+    },
+    {
+        cate: '竞买中',
+        num: '0'
+    },
+    {
+        cate: '待结算',
+        num: '43'
+    },
+    {
+        cate: '结算中',
+        num: '0'
+    },
+    {
+        cate: '已结算',
+        num: '5697'
+    },
+    {
+        cate: '未成交',
+        num: '7'
+    },
+    {
+        cate: '已下架',
+        num: '193'
+    },
+    {
+        cate: '已退回',
+        num: '335'
+    },
 ]
 const columns = [
     {
@@ -68,7 +125,7 @@ const dataSource = [
         order: "壳子社",
         time: '2023.10.12',
         price: '3,600.00元',
-        sub: '出局'
+        sub: '待结算'
     },
     {
         goodscode: "630527010",
@@ -77,7 +134,7 @@ const dataSource = [
         order: "壳子社",
         time: '2023.10.12',
         price: '3,600.00元',
-        sub: '出局'
+        sub: '结算中'
     },
     {
         goodscode: "630527010",
@@ -87,7 +144,7 @@ const dataSource = [
         order: "壳子社",
         time: '2023.10.12',
         price: '3,600.00元',
-        sub: '出局'
+        sub: '待结算'
     },
 
     {
@@ -98,137 +155,159 @@ const dataSource = [
         order: "壳子社",
         time: '2023.10.12',
         price: '3,600.00元',
-        sub: '出局'
+        sub: '结算中'
+    },
+    {
+        goodscode: "630527010",
+        goodscate: '竞买',
+        goodsname: "好东西很不错",
+        order: "壳子社",
+        time: '2023.10.12',
+        price: '3,600.00元',
+        sub: '结算中'
+    },
+    {
+        goodscode: "630527010",
+        goodscate: '竞买',
+
+        goodsname: "好东西很不错",
+        order: "壳子社",
+        time: '2023.10.12',
+        price: '3,600.00元',
+        sub: '待结算'
     },
 
+    {
+        goodscode: "630527010",
+        goodscate: '竞买',
+
+        goodsname: "好东西很不错",
+        order: "壳子社",
+        time: '2023.10.12',
+        price: '3,600.00元',
+        sub: '待结算'
+    },
 ];
-const query = ref('竞买')
-const handClick = (item) => {
-    query.value = item.cate
+const onSelectChange = selectedRowKeys => {
+
+    state.selectedRowKeys = selectedRowKeys;
+};
+const options1 = ref([
+    {
+        value: 'cate1',
+        label: '所有分类',
+    },
+    {
+        value: 'lucy',
+        label: 'Lucy',
+    },
+    {
+        value: 'yiminghe',
+        label: 'Yiminghe',
+    },
+]);
+const state = reactive({
+    selectedRowKeys: [],
+    // Check here to configure the default column
+    loading: false,
+});
+const hasSelected = computed(() => state.selectedRowKeys.length > 0);
+const start = () => {
+    state.loading = true;
+    // ajax request after empty completing
+    setTimeout(() => {
+        state.loading = false;
+        state.selectedRowKeys = [];
+    }, 1000);
+};
+const loading = ref(false)
+const value = ref('');
+const value1 = ref();
+const handleChange = value => {
+    console.log(`selected ${value}`);
+};
+const getGoodsList = () => {
+    loading.value = true
 }
 </script>
 
 <template>
     <div class="my-entrustment">
-        <div class="card-box" v-if="query == '竞买'">
+        <div class="card-box">
             <div class="title">
                 我的藏品
             </div>
-            <div class="table-wrap">
-                <div class="title">
-                    <p class="cate-item" @click="handClick(item)" :class="item.cate == query ? 'active' : ''"
-                        v-for="item in list" :key="item.cate">
-                        <span>{{ item.cate }}</span>
-                        <span v-if="item.num">({{ item.num }})</span>
-                    </p>
-                </div>
-                <div class="num">
-                    <span>已成交 (5216)</span>
-                    <span>待预展 (0)</span>
-                    <span class="active">预展中 (13)</span>
-                    <span>待结算(43)</span>
-                    <span>结算中(0)</span>
-                    <span>已结算(5697)</span>
-                    <span>未成交(7)</span>
-                    <span>已下架(193)</span>
-                    <span>已退回(315)</span>
-                </div>
-                <div class="select-wrap">
-                    <a-input placeholder="所有分类"></a-input>
-                    <a-input placeholder="全部委托时间"></a-input>
-                    <a-input placeholder="全部结标时间"></a-input>
-                    <a-input placeholder="全部下架"></a-input>
-                    <a-input placeholder="名称/藏品/合同号"></a-input>
-                    <button class="btn">搜索</button>
-                </div>
-                <a-table class="" :columns="columns" :data-source="dataSource"></a-table>
-                <CatePage></CatePage>
-            </div>
+            <show-modal :titleList="list" :statusList="statusList">
+                <template v-slot:active3>
+                    <div class="search-cate">
+                        <a-select ref="select" placeholder="所有时间" v-model:value="value1" style="width: 220px"
+                            :options="options1" @change="handleChange"></a-select>
+                        <a-select ref="select" placeholder="全部状态" v-model:value="value1" style="width: 220px"
+                            :options="options1" @change="handleChange"></a-select>
+                        <a-select ref="select" placeholder="全部平台" v-model:value="value1" style="width: 220px"
+                            :options="options1" @change="handleChange"></a-select>
+                        <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
+                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+                    </div>
+                </template>
+                <template v-slot:active4>
+                    <a-table :columns="columns" :dataSource="dataSource">
+                        <template #bodyCell="{ column, record }">
+                            <template v-if="column.key === 'goodsname'">
+                                <div class="table-item-gooods-info">
+                                    <img :src="getImageUrl('register/logo.png')" alt="">
+                                    <span>{{ record.goodsname }}</span>
+                                </div>
+                            </template>
+                            <template v-if="column.key === 'sub'">
+                                <div class="status" :class="record.sub == '结算中' ? 'active' : ''">
+                                    <span>{{ record.sub }}</span>
+                                    <span class="tiem">({{ '10574279' }})</span>
+                                </div>
+                            </template>
+                        </template>
+                    </a-table>
+                </template>
+            </show-modal>
+            <CatePage></CatePage>
         </div>
-        <div class="card-box" v-else>
-            <div class="title">
-                我的藏品
-            </div>
-            <div class="table-wrap">
-                <div class="title">
-                    <p class="cate-item" @click="handClick(item)" :class="item.cate == query ? 'active' : ''"
-                        v-for="item in list" :key="item.cate">
-                        <span>{{ item.cate }}</span>
-                        <span v-if="item.num">({{ item.num }})</span>
-                    </p>
-                </div>
-                <div class="num">
-                    <span>在售 (1)</span>
-                    <span>待售 (0)</span>
-                    <span class="active">结算 (13)</span>
-                </div>
-                <div class="select-wrap">
-                    <a-input placeholder="全部属性"></a-input>
-                    <a-input placeholder="名称/藏品/合同号"></a-input>
-                    <button class="btn">搜索</button>
-                </div>
-                <a-table class="" :columns="columns" :data-source="dataSource"></a-table>
-                <CatePage></CatePage>
-            </div>
+        <div class="card-box">
+            <div class="title">我的藏品-购物模拟</div>
+            <show-modal :titleList="list" :statusList="shippingList">
+                <template v-slot:active3>
+                    <div class="search-cate">
+                        <a-select ref="select" placeholder="全部属性" v-model:value="value1" style="width: 220px"
+                            :options="options1" @change="handleChange"></a-select>
+                        <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
+                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+                    </div>
+                </template>
+            </show-modal>
         </div>
     </div>
 </template>
 
 <style scoped lang="less">
 .my-entrustment {
-    width: 100%;
+    .search-cate {
+        .flex-row;
+        justify-content: flex-start;
+        gap: 30px;
+        padding: 20px;
+    }
 
-    .table-wrap {
-        padding: 20px 40px 0;
+    .table-item-gooods-info {
+        .flex-row;
+        gap: 10px;
 
-        .select-wrap {
-            padding: 20px 10px;
-
-            .flex-row;
-            justify-content: flex-start;
-            gap: 20px;
-
-            .btn {
-                border: none;
-                background-color: #85909b;
-                color: #fff;
-                padding: 16px 0;
-                width: 100px;
-                min-width: 100px;
-                border-radius: 6px;
-            }
+        img {
+            width: 50px;
         }
+    }
 
-        .title {
-            padding: 10px 10px 0;
-            .flex-row;
-            justify-content: flex-start;
-            background-color: #eef3f8;
-            border: none;
-
-            .cate-item {
-                padding: 16px 40px;
-
-                &.active {
-                    background-color: #fff;
-                    border-radius: 6px 6px 0 0;
-                    color: #9a0000;
-                    font-weight: 700;
-                }
-            }
-        }
-
-        .num {
-            .flex-row;
-            justify-content: flex-start;
-            padding: 30px 20px 0;
-            gap: 30px;
-
-            .active {
-                color: #9a0000;
-                font-weight: 700;
-                border-bottom: 1px solid #9a0000;
-            }
+    .status {
+        &.active {
+            color: #9a0000;
         }
     }
 }

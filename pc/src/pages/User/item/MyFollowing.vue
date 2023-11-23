@@ -1,8 +1,8 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from "vue";
+import { ref, computed, reactive, onMounted, h } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { getImageUrl } from "@/utils";
-import CatePage from "@/components/common/CatePage.vue";
+import { SearchOutlined } from "@ant-design/icons-vue"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
@@ -36,108 +36,146 @@ const query = ref('预展')
 const handClick = (item) => {
   query.value = item.cate
 }
-
 const columns = [
   {
-    title: "商品编号",
-    dataIndex: "goodscode",
-    key: "goodscode",
+    title: '藏品编号',
+    dataIndex: 'code',
+    key: 'code',
     align: 'center'
   },
   {
-    title: "商品名称",
-    dataIndex: "goodsname",
-    key: "goodsname",
+    title: '藏品名称',
+    dataIndex: 'name',
+    key: 'name',
     align: 'center'
   },
   {
-    title: "商家",
-    dataIndex: "order",
-    key: "order",
+    title: '藏品图片',
+    dataIndex: 'zhaopian',
+    key: 'zhaopian',
+    align: 'center',
+  },
+  {
+    title: '商家',
+    dataIndex: 'laoban',
+    key: 'laoban',
     align: 'center'
   },
   {
-    title: "时间",
-    dataIndex: "time",
-    key: "time",
+    title: '时间',
+    dataIndex: 'time',
+    key: 'time',
     align: 'center'
   },
   {
-    title: "价格",
-    dataIndex: "price",
-    key: "price",
-    align: 'center'
+    title: '价格',
+    dataIndex: 'price',
+    align: 'center',
+    key: 'price'
   },
   {
-    title: "操作",
-    dataIndex: "sub",
-    key: "sub",
-    align: 'center'
+    title: '操作',
+    dataIndex: 'caozuo',
+    align: 'center',
+    key: 'caozuo'
   },
 ];
-const dataSource = [
-  {
-    goodscode: "630527010",
-    goodsname: "好东西很不错",
-    order: "壳子社",
-    time: '2023.10.12',
-    price: 1.00,
-    sub: '操作'
-  },
-  {
-    goodscode: "630527010",
-    goodsname: "好东西很不错",
-    order: "壳子社",
-    time: '2023.10.12',
-    price: 1.00,
-    sub: '操作'
-  },
-  {
-    goodscode: "630527010",
-    goodsname: "好东西很不错",
-    order: "壳子社",
-    time: '2023.10.12',
-    price: 1.00,
-    sub: '操作'
-  },
+const data = [];
+for (let i = 0; i < 10; i++) {
+  data.push({
+    key: i,
+    code: '63932729',
+    name: '清朝瓷器',
+    laoban: '壳子社',
+    time: '2023.10.02',
+    price: '1.00',
+    zhaopian: 'register/logo.png',
+    caozuo: i % 2 == 0 ? '取消关注' : '关注'
+  });
+}
+const state = reactive({
+  selectedRowKeys: [],
+  // Check here to configure the default column
+  loading: false,
+});
+const hasSelected = computed(() => state.selectedRowKeys.length > 0);
+const start = () => {
+  state.loading = true;
+  // ajax request after empty completing
+  setTimeout(() => {
+    state.loading = false;
+    state.selectedRowKeys = [];
+  }, 1000);
+};
+const onSelectChange = selectedRowKeys => {
 
+  state.selectedRowKeys = selectedRowKeys;
+};
+const options1 = ref([
   {
-    goodscode: "630527010",
-    goodsname: "好东西很不错",
-    order: "壳子社",
-    time: '2023.10.12',
-    price: 1.00,
-    sub: '操作'
+    value: 'cate1',
+    label: '所有分类',
   },
-
-];
+  {
+    value: 'lucy',
+    label: 'Lucy',
+  },
+  {
+    value: 'yiminghe',
+    label: 'Yiminghe',
+  },
+]);
+const loading = ref(false)
+const value = ref('');
+const value1 = ref('cate1');
+const handleChange = value => {
+  console.log(`selected ${value}`);
+};
+const getGoodsList = () => {
+  loading.value = true
+}
 </script>
 
 <template>
   <div class="my-following">
     <div class="card-box">
-      <div class="title">我的关注</div>
-      <div class="select-wrap">
-        <a-input placeholder="所有分类"></a-input>
-        <a-input placeholder="名称和商品"></a-input>
-        <button class="btn">搜索</button>
+      <div class="title">
+        我的关注
       </div>
-      <div class="table-wrap">
-        <div class="title">
-          <p class="cate-item" @click="handClick(item)" :class="item.cate == query ? 'active' : ''" v-for="item in list"
-            :key="item.cate">
-            <span>{{ item.cate }}</span>
-            <span v-if="item.num">({{ item.num }})</span>
-          </p>
-        </div>
-        <a-table class="" :columns="columns" :data-source="dataSource"></a-table>
-        <div class="get">
-          <a-checkbox v-model:checked="checked">全选</a-checkbox>
-          <p>总计 6 项</p>
-          <p>已选 0 项</p>
-        </div>
-        <CatePage></CatePage>
-      </div>
+      <show-modal :titleList="list">
+        <template v-slot:active1>
+          <div class="search-cate">
+            <a-select ref="select" placeholder="所有分类" v-model:value="value1" style="width: 220px" :options="options1"
+              @change="handleChange"></a-select>
+            <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
+            <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+          </div>
+        </template>
+        <template v-slot:active3>
+          <a-table :pagination="false"
+            :row-selection="{ selectedRowKeys: state.selectedRowKeys, onChange: onSelectChange }" :columns="columns"
+            :data-source="data">
+            <template #bodyCell="{ column, record }">
+              <template v-if="column.key === 'zhaopian'">
+                <div class="table-item-gooods-info">
+                  <img :src="getImageUrl(record.zhaopian)" alt="">
+                </div>
+              </template>
+            </template>
+          </a-table>
+          <div class="add-array">
+            <a-button type="primary" :disabled="!hasSelected" :loading="state.loading" @click="start">
+              选择
+            </a-button>
+            <span style="margin-left: 8px">
+              <template v-if="hasSelected">
+                {{ `总计 ${data.length} 项 已选 ${state.selectedRowKeys.length} 项` }}
+              </template>
+            </span>
+          </div>
+        </template>
+      </show-modal>
+      <CatePage></CatePage>
     </div>
   </div>
 </template>
@@ -145,56 +183,34 @@ const dataSource = [
 <style scoped lang="less">
 /* 在这里添加你的 Less 样式 */
 .my-following {
-  width: 100%;
-  background-color: #fff;
+  padding: 20px;
 
-  .select-wrap {
-    padding: 20px 40px;
-    .flex-row;
-    justify-content: flex-start;
-    gap: 20px;
-
-    input {
-      width: 300px;
-    }
-
-    .btn {
-      border: none;
-      background-color: #85909b;
-      color: #fff;
-      padding: 16px 40px;
-      border-radius: 6px;
-    }
-  }
-
-  .table-wrap {
-    padding: 20px 40px 0;
-
-    .title {
-      padding: 10px 10px 0;
+  .card-box {
+    .search-cate {
       .flex-row;
-      justify-content: space-around;
-      background-color: #eef3f8;
-      border: none;
+      justify-content: flex-start;
+      gap: 30px;
+      padding: 20px 0;
+    }
 
-      .cate-item {
-        padding: 16px 20px;
-
-        &.active {
-          background-color: #fff;
-          border-radius: 6px 6px 0 0;
-          color: #9a0000;
-          font-weight: 700;
-        }
+    .table-item-gooods-info {
+      img {
+        width: 50px;
       }
     }
 
-    .get {
-      .flex-row;
-      justify-content: flex-start;
-      gap: 20px;
+    .add-array {
       padding: 20px 0;
-      color: #85909b;
+      .flex-row;
+      gap: 30px;
+      justify-content: flex-start;
+
+      .ant-btn {
+        font-weight: 600;
+        padding: 0;
+        width: 100px;
+        height: 40px;
+      }
     }
   }
 }

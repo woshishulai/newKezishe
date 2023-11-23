@@ -1,7 +1,8 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from "vue";
+import { ref, computed, reactive, onMounted, h } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { getImageUrl } from "@/utils";
+import { SearchOutlined } from "@ant-design/icons-vue"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
@@ -115,9 +116,47 @@ const dataSource = [
   },
 
 ];
-const query = ref('竞买中')
-const handClick = (item) => {
-  query.value = item.cate
+
+const onSelectChange = selectedRowKeys => {
+
+  state.selectedRowKeys = selectedRowKeys;
+};
+const options1 = ref([
+  {
+    value: 'cate1',
+    label: '所有分类',
+  },
+  {
+    value: 'lucy',
+    label: 'Lucy',
+  },
+  {
+    value: 'yiminghe',
+    label: 'Yiminghe',
+  },
+]);
+const state = reactive({
+  selectedRowKeys: [],
+  // Check here to configure the default column
+  loading: false,
+});
+const hasSelected = computed(() => state.selectedRowKeys.length > 0);
+const start = () => {
+  state.loading = true;
+  // ajax request after empty completing
+  setTimeout(() => {
+    state.loading = false;
+    state.selectedRowKeys = [];
+  }, 1000);
+};
+const loading = ref(false)
+const value = ref('');
+const value1 = ref();
+const handleChange = value => {
+  console.log(`selected ${value}`);
+};
+const getGoodsList = () => {
+  loading.value = true
 }
 </script>
 
@@ -127,86 +166,71 @@ const handClick = (item) => {
       <div class="title">
         我的竞买
       </div>
-      <div class="table-wrap">
-        <div class="title">
-          <p class="cate-item" @click="handClick(item)" :class="item.cate == query ? 'active' : ''" v-for="item in list"
-            :key="item.cate">
-            <span>{{ item.cate }}</span>
-            <span v-if="item.num">({{ item.num }})</span>
-          </p>
-        </div>
-        <div class="select-wrap">
-          <a-input placeholder="所有时间"></a-input>
-          <a-input placeholder="全部状态"></a-input>
-          <a-input placeholder="全部平台"></a-input>
-          <a-input placeholder="名称和藏品"></a-input>
-          <button class="btn">搜索</button>
-        </div>
-        <a-table class="" :columns="columns" :data-source="dataSource"></a-table>
-
+      <show-modal :titleList=list>
+        <template v-slot:active2>
+          <div class="search-cate">
+            <a-select ref="select" placeholder="所有时间" v-model:value="value1" style="width: 220px" :options="options1"
+              @change="handleChange"></a-select>
+            <a-select ref="select" placeholder="全部状态" v-model:value="value1" style="width: 220px" :options="options1"
+              @change="handleChange"></a-select>
+            <a-select ref="select" placeholder="全部平台" v-model:value="value1" style="width: 220px" :options="options1"
+              @change="handleChange"></a-select>
+            <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
+            <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+          </div>
+        </template>
+        <template v-slot:active3>
+          <a-table :pagination="false" :columns="columns" :dataSource="dataSource">
+            <template #bodyCell="{ column, record }">
+              <template v-if="column.key === 'goodsname'">
+                <div class="table-item-gooods-info">
+                  <img :src="getImageUrl('register/logo.png')" alt="">
+                  <span>{{ record.goodsname }}</span>
+                </div>
+              </template>
+            </template>
+          </a-table>
+        </template>
+      </show-modal>
+      <CatePage></CatePage>
+      <div class="btn">
+        <a-button>
+          抢购
+        </a-button>
       </div>
-      <div class="btn" @click="router.push('/jingmai/竞买')">抢购</div>
     </div>
   </div>
 </template>
 
 <style scoped lang="less">
 .my-bidding {
-  width: 100%;
-
-  .select-wrap {
-    padding: 20px 10px;
-
-    .flex-row;
-    justify-content: flex-start;
-    gap: 20px;
-
-    .btn {
-      border: none;
-      background-color: #85909b;
-      color: #fff;
-      padding: 16px 0;
-      width: 100px;
-      min-width: 100px;
-      border-radius: 6px;
-    }
-  }
-
-  .table-wrap {
-    padding: 20px 40px 0;
-
-    .title {
-      padding: 10px 10px 0;
-      .flex-row;
-      justify-content: space-between;
-      background-color: #eef3f8;
-      border: none;
-
-      .cate-item {
-        padding: 16px 20px;
-
-        &.active {
-          background-color: #fff;
-          border-radius: 6px 6px 0 0;
-          color: #9a0000;
-          font-weight: 700;
-        }
-      }
-    }
-  }
+  padding: 20px;
 
   .card-box {
-    padding-bottom: 30px;
-  }
+    .search-cate {
+      .flex-row;
+      justify-content: flex-start;
+      gap: 30px;
+      padding: 20px 0;
+    }
 
-  .btn {
-    cursor: pointer;
-    margin-left: 60px;
-    width: 200px;
-    background-color: #9a0000;
-    padding: 16px 0;
-    color: #fff;
-    .flex-row;
+    .table-item-gooods-info {
+      .flex-row;
+      gap: 10px;
+
+      img {
+        width: 50px;
+      }
+    }
+
+    .btn {
+      padding: 20px 40px;
+
+      .ant-btn {
+        height: 40px;
+        width: 100px;
+      }
+    }
   }
 }
 </style>
