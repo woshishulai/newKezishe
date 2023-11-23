@@ -12,6 +12,14 @@ const props = defineProps({
     statusList: {
         type: Array,
         default: []
+    },
+    columns: {
+        type: Array,
+        default: []
+    },
+    dataSource: {
+        type: Array,
+        default: []
     }
 })
 const params = reactive({
@@ -47,12 +55,12 @@ const changeStatusCate = (item) => {
                 <span>{{ item.num }}</span>
             </p>
         </div>
+        <slot name="active3"></slot>
         <div class="table-cate">
-            <a-table>
+            <a-table :columns="columns" :dataSource="dataSource">
 
             </a-table>
         </div>
-        <slot name="active3"></slot>
     </div>
 </template>
 

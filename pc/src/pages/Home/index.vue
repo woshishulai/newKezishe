@@ -73,8 +73,8 @@ const handleChange = value => {
 
 <template>
   <div class="wrap">
-    <show-modal :titleList="titleList" :statusList="statusList">
-      <template v-slot:operate>
+    <show-modal :titleList="titleList" :statusList="statusList" :columns="infoColumns" :dataSource="infoDataSource">
+      <template v-slot:active3>
         <div class="search-cate">
           <a-select ref="select" placeholder="所有分类" v-model:value="value1" style="width: 220px" :options="options1"
             @change="handleChange"></a-select>
@@ -91,5 +91,6 @@ const handleChange = value => {
   .flex-row;
   justify-content: flex-start;
   gap: 30px;
+  padding: 20px;
 }
 </style>

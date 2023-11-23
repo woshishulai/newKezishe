@@ -88,6 +88,10 @@ const infoDataSource = [
 ]
 const infoColumns = [
     {
+        title: '',
+        dataIndex: 'check'
+    },
+    {
         title: '合同号',
         dataIndex: 'name',
         key: 'name',
