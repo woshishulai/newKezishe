@@ -86,11 +86,4 @@ const handleChange = value => {
   </div>
 </template>
 
-<style scoped lang="less">
-.search-cate {
-  .flex-row;
-  justify-content: flex-start;
-  gap: 30px;
-  padding: 20px;
-}
-</style>
+<style scoped lang="less"></style>

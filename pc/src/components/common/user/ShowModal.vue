@@ -1,7 +1,6 @@
 <script setup>
-import { ref, computed, reactive, onMounted, watch, } from 'vue';
+import { ref, computed, reactive, onMounted, watch, defineExpose, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { SearchOutlined } from "@ant-design/icons-vue"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({
@@ -15,17 +14,21 @@ const props = defineProps({
     },
 })
 const params = reactive({
-    titleCate: ref(props.titleList && props.titleList != null > 0 ? props.titleList[0].cate : null),
-    statusCate: ref(props.statusList && props.statusList != null > 0 ? props.statusList[0].cate : null)
+    titleCate: ref(props.titleList && props.titleList.length > 0 ? props.titleList[0].cate : null),
+    statusCate: ref(props.statusList && props.statusList.length > 0 ? props.statusList[0].cate : null)
 })
+watchEffect(() => {
+    params.statusCate = props.statusList ? props.statusList[0].cate : null
+});
 const changeTitleCate = (item) => {
     params.titleCate = item.cate
-    console.log('头部传送门的参数发生了变化', params.titleCate);
 }
 const changeStatusCate = (item) => {
     params.statusCate = item.cate
-    console.log('头部传送门的参数发生了变化', params.statusCate);
 }
+defineExpose({
+    params
+})
 </script>
 
 <template>
@@ -88,12 +91,28 @@ const changeStatusCate = (item) => {
 
         p {
             cursor: pointer;
+            height: 17px;
 
             &.active {
                 color: #9a0000;
                 font-weight: 700;
                 border-bottom: 1px solid #9a0000;
             }
+        }
+    }
+
+    :deep(.search-cate) {
+        .flex-row;
+        justify-content: flex-start;
+        gap: 30px;
+        padding: 20px;
+
+        .item {
+            flex: 1;
+        }
+
+        .item-input {
+            flex: 1.2;
         }
     }
 

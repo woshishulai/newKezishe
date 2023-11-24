@@ -80,7 +80,7 @@ const columns = [
     key: 'caozuo'
   },
 ];
-const data = [];
+const data = reactive([])
 for (let i = 0; i < 10; i++) {
   data.push({
     key: i,
@@ -134,6 +134,18 @@ const handleChange = value => {
 const getGoodsList = () => {
   loading.value = true
 }
+const changeGuanZhu = (item) => {
+  console.log(item.key);
+  data[item.key].caozuo = data[item.key].caozuo == '取消关注' ? '关注' : '取消关注'
+  console.log(data[item.key], data);
+}
+// const changeGuanZhu = (item) => {
+//   const index = data.findIndex(d => d.key === item.key);
+//   if (index !== -1) {
+//     data[index].caozuo = data[index].caozuo === '取消关注' ? '关注' : '取消关注';
+//     console.log(data[index].key, data);
+//   }
+// }
 </script>
 
 <template>
@@ -161,6 +173,11 @@ const getGoodsList = () => {
                   <img :src="getImageUrl(record.zhaopian)" alt="">
                 </div>
               </template>
+              <template v-if="column.key === 'caozuo'">
+                <div class="btns" @click="changeGuanZhu(record)">
+                  {{ record.caozuo == '取消关注' ? '取消关注' : '关注' }}
+                </div>
+              </template>
             </template>
           </a-table>
           <div class="add-array">
@@ -186,17 +203,23 @@ const getGoodsList = () => {
   padding: 20px;
 
   .card-box {
-    .search-cate {
-      .flex-row;
-      justify-content: flex-start;
-      gap: 30px;
-      padding: 20px 0;
-    }
 
     .table-item-gooods-info {
       img {
         width: 50px;
       }
+    }
+
+    :deep(.ant-table-wrapper .ant-table-thead>tr>th) {
+      background-color: #fff;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .btns {
+      cursor: pointer;
+      padding: 5px 0;
+      background-color: #eef3f8;
     }
 
     .add-array {

@@ -213,6 +213,7 @@ input::-webkit-input-placeholder {
     border: 1px solid #dbdbdb;
 }
 
+//分页其他页数鼠标经过
 .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {
     background-color: #9a0000;
 
@@ -221,10 +222,10 @@ input::-webkit-input-placeholder {
     }
 }
 
-:deep(.ant-pagination-item-active) {
-    background-color: #9a0000;
-    color: #fff;
-}
+// :deep(.ant-pagination-item-active) {
+//     background-color: #9a0000;
+//     color: #fff;
+// }
 
 .ant-pagination .ant-pagination-item-active {
     background-color: #9a0000;
@@ -233,4 +234,9 @@ input::-webkit-input-placeholder {
     a {
         color: #fff;
     }
+}
+
+// 已选中的分页 鼠标经过里面的A
+.ant-pagination .ant-pagination-item-active:hover a {
+    color: #fff;
 }

@@ -50,13 +50,13 @@ const columns = [
     align: 'center'
   },
   {
-    title: "商家",
+    title: "平台",
     dataIndex: "order",
     key: "order",
     align: 'center'
   },
   {
-    title: "价格",
+    title: "当前价",
     dataIndex: "price",
     key: "price",
     align: 'center'
@@ -169,13 +169,13 @@ const getGoodsList = () => {
       <show-modal :titleList=list>
         <template v-slot:active2>
           <div class="search-cate">
-            <a-select ref="select" placeholder="所有时间" v-model:value="value1" style="width: 220px" :options="options1"
+            <a-select ref="select" placeholder="所有时间" class="item" v-model:value="value1" :options="options1"
               @change="handleChange"></a-select>
-            <a-select ref="select" placeholder="全部状态" v-model:value="value1" style="width: 220px" :options="options1"
+            <a-select ref="select" placeholder="全部状态" class="item" v-model:value="value1" :options="options1"
               @change="handleChange"></a-select>
-            <a-select ref="select" placeholder="全部平台" v-model:value="value1" style="width: 220px" :options="options1"
+            <a-select ref="select" placeholder="全部平台" class="item" v-model:value="value1" :options="options1"
               @change="handleChange"></a-select>
-            <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
+            <a-input v-model:value="value" class="item-input" placeholder="名称和藏品" />
             <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
           </div>
         </template>
@@ -207,12 +207,7 @@ const getGoodsList = () => {
   padding: 20px;
 
   .card-box {
-    .search-cate {
-      .flex-row;
-      justify-content: flex-start;
-      gap: 30px;
-      padding: 20px 0;
-    }
+
 
     .table-item-gooods-info {
       .flex-row;
@@ -221,6 +216,12 @@ const getGoodsList = () => {
       img {
         width: 50px;
       }
+    }
+
+    :deep(.ant-table-wrapper .ant-table-thead>tr>th) {
+      background-color: #fff;
+      font-size: 16px;
+      font-weight: 400;
     }
 
     .btn {

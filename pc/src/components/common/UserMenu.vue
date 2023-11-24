@@ -4,8 +4,15 @@ import { useRouter } from "vue-router";
 import { userRoutes } from "@/router/index.js"
 const router = useRouter();
 const selectRouter = router.currentRoute._rawValue.fullPath
-console.log(selectRouter);
-const openKeys = ref(["/user/account-management"]);
+const segments = selectRouter.split('/');
+let desiredPath = '';
+
+if (segments.length >= 3) {
+  desiredPath = `/${segments[1]}/${segments[2]}`;
+}
+
+const openKeys = ref([desiredPath]);
+
 const selectedKeys = ref([selectRouter]);
 const generateMenuItems = (routes, parentRoutePath = "/user/") => {
   const userRoutes = routes.find(route => route.path === '/user');
