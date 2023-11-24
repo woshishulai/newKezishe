@@ -5,12 +5,15 @@ import react from '@vitejs/plugin-react-swc'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(),
-],
+  ],
   css: {
     preprocessorOptions: {
       less: {
         additionalData: '@import "./src/assets/css/mixin.less";',
         javascriptEnabled: true,
+        modifyVars: {
+          '@primary-color': '#9a0000',//设置antd主题色
+        },
       },
     },
   },

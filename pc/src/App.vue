@@ -3,8 +3,14 @@
 
 <template>
   <div class="app">
-    <show-toast></show-toast>
-    <RouterView></RouterView>
+    <a-config-provider :theme="{
+      token: {
+        colorPrimary: '#9a0000',
+      },
+    }">
+      <show-toast></show-toast>
+      <RouterView></RouterView>
+    </a-config-provider>
   </div>
 </template>
 
