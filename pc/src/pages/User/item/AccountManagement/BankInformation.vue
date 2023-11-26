@@ -104,7 +104,7 @@ const resetForm = () => {
   <div class="bank-information">
     <div class="card-box">
       <div class="title">银行账号</div>
-      <a-table :columns="columns" :data-source="dataSource">
+      <a-table :pagination="false" :columns="columns" :data-source="dataSource">
         <template #status="{ record }">
           <div class="status">
             <span>修改</span>

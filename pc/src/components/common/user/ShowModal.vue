@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, reactive, onMounted, watch, defineExpose, watchEffect } from 'vue';
+import { ref, computed, reactive, onMounted, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
 const route = useRoute();
