@@ -5,7 +5,7 @@ import { useState } from "react";
 function CenInput() {
     const { Search } = Input;
     const [loading, setLoading] = useState(false)
-    const handleClick = (value: Object) => {
+    const handleClick = (value) => {
         setLoading(true)
         console.log(value.target.value);
     }

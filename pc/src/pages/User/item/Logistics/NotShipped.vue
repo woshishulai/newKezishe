@@ -159,9 +159,6 @@ const changeGuanZhu = (item) => {
                     </a-table>
                     <div class="add-array">
                         <div>
-                            <!-- <a-button type="primary" :disabled="!hasSelected" :loading="state.loading" @click="start">
-                                                                                                            全选
-                                                                                                        </a-button> -->
                             <span>
                                 <template v-if="hasSelected">
                                     {{ `总计 ${data.length} 项 已选 ${state.selectedRowKeys.length} 项` }}

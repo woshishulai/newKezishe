@@ -161,14 +161,14 @@ const userRoutes = [
                 children: [
                     {
                         path: '',
-                        component: () => import('@/pages/User/item/Logistics/item1.vue'),
+                        component: () => import('@/pages/User/item/Logistics/NotShipped.vue'),
                         meta: {
                             name: '未发货', icon: CaretRightOutlined
                         },
                     },
                     {
                         path: 'yifahuo',
-                        component: () => import('@/pages/User/item/Logistics/item2.vue'),
+                        component: () => import('@/pages/User/item/Logistics/Shipped.vue'),
                         meta: {
                             name: '已发货', icon: CaretRightOutlined
                         },

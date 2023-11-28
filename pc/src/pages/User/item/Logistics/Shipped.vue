@@ -1,13 +1,20 @@
 <script setup>
-import { ref, computed, reactive, onMounted, h } from "vue";
+import { ref, computed, reactive, onMounted, h, watchEffect } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { SearchOutlined } from "@ant-design/icons-vue"
 import { getImageUrl } from "@/utils";
 import CatePage from "@/components/common/CatePage.vue";
+import { dataSource } from "../SettlementDetails/data";
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
 onMounted(() => { });
+const showModals = ref()
+const params = ref()
+watchEffect(() => {
+    params.value = showModals.value?.params
+    console.log(params.value?.titleCate);
+})
 const list = [
     {
         cate: '已发货',
@@ -44,7 +51,8 @@ const columns = [
     {
         title: '数量',
         key: 'num',
-        dataIndex: 'num'
+        dataIndex: 'num',
+        align: 'center'
     },
     {
         title: '商家',
@@ -100,6 +108,75 @@ for (let i = 0; i < 10; i++) {
         caozuo: '查看详情'
     });
 }
+const cangChuColumns = [
+    {
+        title: '藏品编号',
+        key: 'goodsCode',
+        dataIndex: 'goodsCode',
+        align: 'center'
+    },
+    {
+        title: '藏品图片',
+        dataIndex: 'zhaopian',
+        key: 'zhaopian',
+        align: 'center',
+    },
+    {
+        title: '名称',
+        key: 'name',
+        dataIndex: 'name',
+        align: 'center'
+    },
+    {
+        title: '结标时间',
+        key: 'time',
+        dataIndex: 'time',
+        align: 'center'
+    },
+    {
+        title: '收费仓储期',
+        key: 'details',
+        dataIndex: 'details',
+        align: 'center'
+    },
+    {
+        title: '仓储费率',
+        key: 'feilv',
+        dataIndex: 'feilv',
+        align: 'center'
+    },
+    {
+        title: '已收仓储费',
+        key: 'yishou',
+        dataIndex: 'yishou',
+        align: 'center'
+    },
+    {
+        title: '待收仓储费',
+        key: 'daishou',
+        dataIndex: 'daishou',
+        align: 'center'
+    },
+    {
+        title: '仓储费总额',
+        key: 'zonge',
+        dataIndex: 'zonge',
+        align: 'center'
+    },
+]
+const cangChuDataSource = [
+    {
+        goodsCode: '4873883',
+        name: '文2公报带直角边新',
+        time: '2023-09-23 20:30:40',
+        details: '5天',
+        feilv: '0.2元/天',
+        yishou: '1.00',
+        daishou: '0.00',
+        zonge: '1.00',
+        zhaopian: 'register/logo.png',
+    }
+]
 const liucheng = [
     {
         img: 'user/logistics/list1.png',
@@ -175,9 +252,9 @@ const changeGuanZhu = (item) => {
             <div class="title">
                 已发货
             </div>
-            <show-modal :titleList="list">
+            <show-modal ref="showModals" :titleList="list">
                 <template v-slot:active2>
-                    <div class="search-cate">
+                    <div class="search-cate" v-if="params?.titleCate == list[0].cate">
                         <a-select ref="select" placeholder="所有分类" v-model:value="value1" class="item" :options="options1"
                             @change="handleChange"></a-select>
                         <a-select ref="select" placeholder="所有时间" v-model:value="value1" class="item" :options="options1"
@@ -187,9 +264,14 @@ const changeGuanZhu = (item) => {
                         <a-input v-model:value="value" class="item-input" placeholder="名称和藏品" />
                         <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
                     </div>
+                    <div class="search-cate" v-else>
+                        <a-input v-model:value="value" style="width: 330px;" placeholder="名称和藏品" />
+                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+                    </div>
                 </template>
                 <template v-slot:active3>
-                    <a-table :pagination="false" :columns="columns" :data-source="data">
+                    <a-table :pagination="false" :columns="params?.titleCate == list[0].cate ? columns : cangChuColumns"
+                        :data-source="params?.titleCate == list[0].cate ? data : cangChuDataSource">
                         <template #bodyCell="{ column, record }">
                             <template v-if="column.key === 'zhaopian'">
                                 <div class="table-item-gooods-info">
@@ -203,113 +285,34 @@ const changeGuanZhu = (item) => {
                             </template>
                         </template>
                     </a-table>
+                    <div class="leng-details">
+                        <span></span>
+                        <span>总计： {{ 256 }}项</span>
+                    </div>
                 </template>
             </show-modal>
+            <CatePage></CatePage>
         </div>
+
     </div>
 </template>
 
 <style scoped lang="less">
 .my-bidding {
-    width: 100%;
+    .table-item-gooods-info {
+        img {
+            width: 50px;
+        }
+    }
 
-    .select-wrap {
-        padding: 20px 10px;
+    .btns {
+        color: #7dadef;
+    }
 
+    .leng-details {
         .flex-row;
-        justify-content: flex-start;
-        gap: 20px;
-
-        input {}
-
-        .btn {
-            border: none;
-            background-color: #85909b;
-            color: #fff;
-            padding: 16px 0;
-            width: 100px;
-            min-width: 100px;
-            border-radius: 6px;
-        }
-    }
-
-    .table-wrap {
-        padding: 20px 40px 0;
-
-        .title {
-            padding: 10px 10px 0;
-            .flex-row;
-            justify-content: flex-start;
-            background-color: #eef3f8;
-            border: none;
-
-            .cate-item {
-                padding: 16px 20px;
-
-                &.active {
-                    background-color: #fff;
-                    border-radius: 6px 6px 0 0;
-                    color: #9a0000;
-                    font-weight: 700;
-                }
-            }
-        }
-    }
-
-    .card-box {
-        padding-bottom: 30px;
-    }
-
-    .btn {
-        cursor: pointer;
-        margin-left: 60px;
-        width: 200px;
-        background-color: #9a0000;
-        padding: 16px 0;
-        color: #fff;
-        .flex-row;
-    }
-}
-
-.card-list {
-    .flex-row;
-    gap: 20px;
-    padding: 20px;
-
-    .card-item {
-        flex: 1;
-        background-color: #eef3f8;
-        .flex-row;
-        padding: 30px;
-        gap: 20px;
-
-        .bg {
-            .flex-row;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: url('@/assets/img/user/logistics/card-bg.jpg');
-        }
-
-        h5 {
-            margin-top: 10px;
-            font-size: 18px;
-        }
-    }
-}
-
-.details {
-    .flex-col;
-    gap: 30px;
-
-    .title {
-        width: 98%;
-        margin: 20px auto;
-        background-color: #eef3f8;
-    }
-
-    p {
-        padding: 10px 40px;
+        justify-content: space-between;
+        padding: 20px;
     }
 }
 </style>
