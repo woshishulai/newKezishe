@@ -8,6 +8,7 @@ import { options1, list, tableList, setColumns, dataSource } from "./data"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({})
+
 onMounted(() => { });
 const loading = ref(false)
 const value = ref('');

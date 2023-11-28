@@ -20,11 +20,13 @@ function Layout({ children }: { children: ReactNode }) {
                         borderRadius: 2,
 
                         // 组件背景色
-                        colorBgContainer: '#ffff',
+                        colorBgContainer: '#fff',
                         //边框色
                         colorBorder: '#9a0000',
                         colorBgBase: '#fff',
-                        colorPrimaryActive: '#fff'
+                        colorPrimaryActive: '#fff',
+                        ///分割线
+                        colorSplit: '#333'
                     },
                 }}
             >
