@@ -1,6 +1,7 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from "vue";
+import { ref, computed, reactive, onMounted, h } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { SearchOutlined } from "@ant-design/icons-vue"
 import { getImageUrl } from "@/utils";
 import CatePage from "@/components/common/CatePage.vue";
 const router = useRouter();
@@ -17,90 +18,88 @@ const list = [
 ]
 const columns = [
     {
-        title: "商品编号",
-        dataIndex: "goodscode",
-        key: "goodscode",
+        title: '藏品编号',
+        dataIndex: 'code',
+        key: 'code',
         align: 'center'
     },
     {
-        title: "类型",
-        dataIndex: "goodscate",
-        key: "goodscate",
+        title: '类型',
+        key: 'cate',
+        dataIndex: 'cate',
         align: 'center'
     },
     {
-        title: "商品名称",
-        dataIndex: "goodsname",
-        key: "goodsname",
+        title: '藏品图片',
+        dataIndex: 'zhaopian',
+        key: 'zhaopian',
+        align: 'center',
+    },
+    {
+        title: '藏品名称',
+        dataIndex: 'name',
+        key: 'name',
         align: 'center'
     },
     {
-        title: "商家",
-        dataIndex: "order",
-        key: "order",
+        title: '数量',
+        key: 'num',
+        dataIndex: 'num'
+    },
+    {
+        title: '商家',
+        dataIndex: 'laoban',
+        key: 'laoban',
         align: 'center'
     },
     {
-        title: "价格",
-        dataIndex: "price",
-        key: "price",
+        title: '成交价',
+        dataIndex: 'chengjiao',
+        key: 'chengjiao',
         align: 'center'
     },
     {
-        title: "状态",
-        dataIndex: "sub",
-        key: "sub",
+        title: '结标时间',
+        dataIndex: 'time',
+        key: 'time',
         align: 'center'
     },
     {
-        title: "结标时间",
-        dataIndex: "time",
-        key: "time",
+        title: '发货期限',
+        dataIndex: 'qixian',
+        key: 'qixian',
         align: 'center'
+    },
+    {
+        title: '包含收藏证书',
+        dataIndex: 'zhengshu',
+        key: 'zhengshu',
+        align: 'center'
+    },
+    {
+        title: '操作',
+        dataIndex: 'caozuo',
+        align: 'center',
+        key: 'caozuo',
     },
 ];
-const dataSource = [
-    {
-        goodscode: "630527010",
-        goodscate: '竞买',
-        goodsname: "好东西很不错",
-        order: "壳子社",
-        time: '2023.10.12',
-        price: '3,600.00元',
-        sub: '出局'
-    },
-    {
-        goodscode: "630527010",
-        goodscate: '竞买',
-        goodsname: "好东西很不错",
-        order: "壳子社",
-        time: '2023.10.12',
-        price: '3,600.00元',
-        sub: '出局'
-    },
-    {
-        goodscode: "630527010",
-        goodscate: '竞买',
-
-        goodsname: "好东西很不错",
-        order: "壳子社",
-        time: '2023.10.12',
-        price: '3,600.00元',
-        sub: '出局'
-    },
-
-    {
-        goodscode: "630527010",
-        goodscate: '竞买',
-
-        goodsname: "好东西很不错",
-        order: "壳子社",
-        time: '2023.10.12',
-        price: '3,600.00元',
-        sub: '出局'
-    },
-
-];
+const data = reactive([])
+for (let i = 0; i < 10; i++) {
+    data.push({
+        key: i,
+        code: '63932729',
+        cate: '竞买',
+        num: '1',
+        name: '清朝瓷器',
+        chengjiao: '112.00元',
+        laoban: '壳子社',
+        time: '2023.10.02',
+        zhaopian: 'register/logo.png',
+        qixian: '',
+        zhengshu: '否',
+        caozuo: '查看详情'
+    });
+}
 const liucheng = [
     {
         img: 'user/logistics/list1.png',
@@ -123,96 +122,89 @@ const liucheng = [
         time: '2023-10-07'
     },
 ]
-const query = ref('已发货')
-const showDetails = ref(true)
-const handClick = (item) => {
-    query.value = item.cate
+const state = reactive({
+    selectedRowKeys: [],
+    // Check here to configure the default column
+    loading: false,
+});
+const hasSelected = computed(() => state.selectedRowKeys.length > 0);
+const start = () => {
+    state.loading = true;
+    // ajax request after empty completing
+    setTimeout(() => {
+        state.loading = false;
+        state.selectedRowKeys = [];
+    }, 1000);
+};
+const onSelectChange = selectedRowKeys => {
+
+    state.selectedRowKeys = selectedRowKeys;
+};
+const options1 = ref([
+    {
+        value: 'cate1',
+        label: '所有分类',
+    },
+    {
+        value: 'lucy',
+        label: 'Lucy',
+    },
+    {
+        value: 'yiminghe',
+        label: 'Yiminghe',
+    },
+]);
+const loading = ref(false)
+const value = ref('');
+const value1 = ref();
+const handleChange = value => {
+    console.log(`selected ${value}`);
+};
+const getGoodsList = () => {
+    loading.value = true
 }
-const details = () => {
-    showDetails.value = false
+const changeGuanZhu = (item) => {
+    console.log(item.key);
+    data[item.key].caozuo = data[item.key].caozuo == '取消关注' ? '关注' : '取消关注'
+    console.log(data[item.key], data);
 }
 </script>
-
 <template>
     <div class="my-bidding">
-        <div class="card-box" v-if="showDetails">
+        <div class="card-box">
             <div class="title">
-                我的竞买
+                已发货
             </div>
-            <div class="table-wrap">
-                <div class="title">
-                    <p class="cate-item" @click="handClick(item)" :class="item.cate == query ? 'active' : ''"
-                        v-for="item in list" :key="item.cate">
-                        <span>{{ item.cate }}</span>
-                        <span v-if="item.num">({{ item.num }})</span>
-                    </p>
-                </div>
-                <div class="item1" v-if="query == '已发货'">
-                    <div class="select-wrap">
-                        <a-input placeholder="所有时间"></a-input>
-                        <a-input placeholder="全部状态"></a-input>
-                        <a-input placeholder="全部平台"></a-input>
-                        <a-input placeholder="名称和藏品"></a-input>
+            <show-modal :titleList="list">
+                <template v-slot:active2>
+                    <div class="search-cate">
+                        <a-select ref="select" placeholder="所有分类" v-model:value="value1" class="item" :options="options1"
+                            @change="handleChange"></a-select>
+                        <a-select ref="select" placeholder="所有时间" v-model:value="value1" class="item" :options="options1"
+                            @change="handleChange"></a-select>
+                        <a-select ref="select" placeholder="所有类别" v-model:value="value1" class="item" :options="options1"
+                            @change="handleChange"></a-select>
+                        <a-input v-model:value="value" class="item-input" placeholder="名称和藏品" />
+                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
                     </div>
-                    <a-table class="" :columns="columns" :data-source="dataSource"></a-table>
-                    <div class="btn" @click="details">查看详情测试</div>
-                </div>
-                <div class="item2" v-else>
-                    <div class="select-wrap">
-                        <a-input placeholder="名称藏品"></a-input>
-                        <button class="btn">搜索</button>
-                    </div>
-                    <a-table class="" :columns="columns" :data-source="dataSource"></a-table>
-                </div>
-            </div>
-            <CatePage></CatePage>
-        </div>
-        <div class="details" v-else>
-            <div class="card-box">
-                <div class="title">发货申请单 #2108258 申请日期：2023-09-17</div>
-                <div class="card-list">
-                    <div class="card-item" v-for="item in liucheng" :key="item.img">
-                        <div class="bg">
-                            <img :src="getImageUrl(item.img)" alt="">
-                        </div>
-                        <div>
-                            <h5>{{ item.title }}</h5>
-                            <h5>{{ item.time }}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-box">
-                <div class="title ">发货信息</div>
-                <p>发货项数：8项</p>
-                <p>发货价值：17.377.20元</p>
-                <p>申请方式：新建发货单 #2108258</p>
-                <p>申请时间：2023-09-17（星期日） 下午13:00</p>
-                <p>备注</p>
-            </div>
-            <div class="card-box">
-                <div class="title">物流信息</div>
-                <p>物流形式：物流发货</p>
-                <p>收货地址：北京市西城区黄寺大街些</p>
-                <p>承运方：顺丰标快（到付）</p>
-                <p>报价价值：无报价</p>
-                <p>承运单号：SF1659120534004</p>
-            </div>
-            <div class="card-box">
-                <div class="title">
-                    藏品清单
-                </div>
-                <a-table class="" :columns="columns" :data-source="dataSource"></a-table>
-            </div>
-            <div class="card-box">
-                <div class="title">
-                    补收费用
-                </div>
-                <p>物流费：0元</p>
-                <p>包装费：0元</p>
-                <p>仓储费：0元</p>
-                <p>自淘费用：0元</p>
-            </div>
+                </template>
+                <template v-slot:active3>
+                    <a-table :pagination="false" :columns="columns" :data-source="data">
+                        <template #bodyCell="{ column, record }">
+                            <template v-if="column.key === 'zhaopian'">
+                                <div class="table-item-gooods-info">
+                                    <img :src="getImageUrl(record.zhaopian)" alt="">
+                                </div>
+                            </template>
+                            <template v-if="column.key === 'caozuo'">
+                                <div class="btns">
+                                    查看详情
+                                </div>
+                            </template>
+                        </template>
+                    </a-table>
+                </template>
+            </show-modal>
         </div>
     </div>
 </template>

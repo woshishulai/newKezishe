@@ -204,11 +204,8 @@ const getGoodsList = () => {
 
 <style scoped lang="less">
 .my-bidding {
-  padding: 20px;
 
   .card-box {
-
-
     .table-item-gooods-info {
       .flex-row;
       gap: 10px;

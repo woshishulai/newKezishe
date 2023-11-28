@@ -200,7 +200,6 @@ const changeGuanZhu = (item) => {
 <style scoped lang="less">
 /* 在这里添加你的 Less 样式 */
 .my-following {
-  padding: 20px;
 
   .card-box {
 

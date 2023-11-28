@@ -60,7 +60,7 @@ const getGoodsList = () => {
                     </div>
                 </template>
                 <template v-slot:active3>
-                    <a-table :columns="HeTongColumns" :dataSource="HeTongDataSource">
+                    <a-table :pagination="false" :columns="HeTongColumns" :dataSource="HeTongDataSource">
                         <template #bodyCell="{ column, record }">
                             <template v-if="column.key === `status`">
                                 <div v-if="record.status == '已执行'">{{ record.status }}</div>
@@ -70,6 +70,7 @@ const getGoodsList = () => {
                     </a-table>
                 </template>
             </show-modal>
+            <CatePage></CatePage>
         </div>
     </div>
 </template>

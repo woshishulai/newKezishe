@@ -115,4 +115,66 @@ const dataSource = [
         details: '查看详情'
     },
 ]
-export { options1, list, tableList, setColumns, dataSource }
+const gouWuTitleColumns = [
+    {
+        title: '结算单号',
+        key: 'goodsCode',
+        dataIndex: 'goodsCode',
+        align: 'center'
+    },
+    {
+        title: '成交数量',
+        key: 'chengJiaoNum',
+        dataIndex: 'chengJiaoNum',
+        align: 'center'
+    },
+    {
+        title: '成交总额',
+        key: 'chengJiaoQian',
+        dataIndex: 'chengJiaoQian',
+        align: 'center'
+    },
+    {
+        title: '结算总额',
+        key: 'jieSuanZongE',
+        dataIndex: 'jieSuanZongE',
+        align: 'center'
+    },
+    {
+        title: '结算时间',
+        key: 'jieSuanShiJian',
+        dataIndex: 'jieSuanShiJian',
+        align: 'center'
+    },
+]
+const gouWuDataSource = [
+    {
+        goodsCode: '4803',
+        chengJiaoNum: 1,
+        chengJiaoQian: 444.00,
+        jieSuanZongE: 5453.00,
+        jieSuanShiJian: '2023-10-9 23:33:11'
+    },
+    {
+        goodsCode: '4803',
+        chengJiaoNum: 1,
+        chengJiaoQian: 444.00,
+        jieSuanZongE: 5453.00,
+        jieSuanShiJian: '2023-10-9 23:33:11'
+    },
+    {
+        goodsCode: '4803',
+        chengJiaoNum: 1,
+        chengJiaoQian: 444.00,
+        jieSuanZongE: 5453.00,
+        jieSuanShiJian: '2023-10-9 23:33:11'
+    },
+    {
+        goodsCode: '4803',
+        chengJiaoNum: 1,
+        chengJiaoQian: 444.00,
+        jieSuanZongE: 5453.00,
+        jieSuanShiJian: '2023-10-9 23:33:11'
+    },
+]
+export { options1, list, tableList, setColumns, dataSource, gouWuTitleColumns, gouWuDataSource }
