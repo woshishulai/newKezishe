@@ -5,6 +5,7 @@ import { SearchOutlined } from "@ant-design/icons-vue"
 import { getImageUrl } from "@/utils";
 import CatePage from "@/components/common/CatePage.vue";
 import { dataSource } from "../SettlementDetails/data";
+import ShippedDetails from "./ShippedDetails.vue";
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
@@ -177,28 +178,6 @@ const cangChuDataSource = [
         zhaopian: 'register/logo.png',
     }
 ]
-const liucheng = [
-    {
-        img: 'user/logistics/list1.png',
-        title: '已受理',
-        time: '2023-09-17'
-    },
-    {
-        img: 'user/logistics/list2.png',
-        title: '已出库',
-        time: '2023-09-18'
-    },
-    {
-        img: 'user/logistics/list3.png',
-        title: '已发货',
-        time: '2023-09-18'
-    },
-    {
-        img: 'user/logistics/list4.png',
-        title: '已收获',
-        time: '2023-10-07'
-    },
-]
 const state = reactive({
     selectedRowKeys: [],
     // Check here to configure the default column
@@ -234,6 +213,10 @@ const options1 = ref([
 const loading = ref(false)
 const value = ref('');
 const value1 = ref();
+const showDetails = ref(true)
+const changeShowDeatails = () => {
+    showDetails.value = false
+}
 const handleChange = value => {
     console.log(`selected ${value}`);
 };
@@ -248,7 +231,7 @@ const changeGuanZhu = (item) => {
 </script>
 <template>
     <div class="my-bidding">
-        <div class="card-box">
+        <div class="card-box" v-if="showDetails">
             <div class="title">
                 已发货
             </div>
@@ -279,7 +262,7 @@ const changeGuanZhu = (item) => {
                                 </div>
                             </template>
                             <template v-if="column.key === 'caozuo'">
-                                <div class="btns">
+                                <div class="btns" @click="changeShowDeatails">
                                     查看详情
                                 </div>
                             </template>
@@ -293,7 +276,7 @@ const changeGuanZhu = (item) => {
             </show-modal>
             <CatePage></CatePage>
         </div>
-
+        <ShippedDetails v-else></ShippedDetails>
     </div>
 </template>
 

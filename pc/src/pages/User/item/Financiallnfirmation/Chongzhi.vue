@@ -1,11 +1,36 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from 'vue';
+import { ref, computed, reactive, onMounted, toRaw, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({})
-onMounted(() => { });
+const showModals = ref(null)
+const params = ref()
+onMounted(() => {
+    params.value = showModals.value?.params
+    console.log(params.value?.titleCate);
+});
+watchEffect(() => {
+})
+const formState = reactive({
+    name: '',
+    delivery: false,
+    type: [],
+    resource: '1',
+    desc: '',
+});
+const onSubmit = () => {
+    console.log('submit!', toRaw(formState));
+};
+const labelCol = {
+    style: {
+        width: '150px',
+    },
+};
+const wrapperCol = {
+    span: 14,
+};
 const list = [
     {
         cate: '网上充值',
@@ -28,28 +53,6 @@ const list2 = [
         text: '汇款告知记录'
     },
 ]
-const query = ref('网上充值')
-const query1 = ref('线下汇款')
-const opens = ref([
-    {
-        open: false
-    },
-    {
-        open: false
-    },
-    {
-        open: false
-    },
-]);
-const showModal = (index) => {
-    console.log(index);
-    opens.value[index].open = true
-};
-const handleOk = e => {
-    console.log(e);
-    opens.value[index].open = false
-};
-
 </script>
 
 <template>
@@ -68,45 +71,39 @@ const handleOk = e => {
             </div>
         </div>
         <div class="right-info">
-            <div class="item1">
-                <div class="title">
-                    <p class="cate-item" :class="item.cate == query ? 'active' : ''" v-for="item in list" :key="item.cate">
-                        <span>{{ item.cate }}</span>
-                    </p>
-                </div>
-                <div class="element">
-                    <input type="text" placeholder="金额（RMB）">
-                    <textarea placeholder="备注" name="" id="" cols="30" rows="10"></textarea>
-                    <h5>选择支付方式</h5>
-                    <div class="check">
-                        <a-checkbox v-model:checked="checked">微信</a-checkbox>
-                        <a-checkbox v-model:checked="checked">支付宝</a-checkbox>
+            <showModal ref="showModals" :titleList="list">
+                <template v-slot:active2 v-if="params?.titleCate == list[0].cate">
+                    <a-form :model="formState" :label-col="labelCol">
+                        <a-form-item>
+                            <a-input style="width: 300px;" v-model:value="formState.name" placeholder="金额 (RMB)" />
+                        </a-form-item>
+                        <a-form-item>
+                            <a-textarea style="height: 100px;width: 400px;" v-model:value="formState.desc"
+                                placeholder="备注" />
+                        </a-form-item>
+                        <p style="margin-bottom: 10px;">选择支付方式</p>
+                        <a-form-item>
+                            <a-radio-group v-model:value="formState.resource">
+                                <a-radio value="1">微信</a-radio>
+                                <a-radio value="2">支付宝</a-radio>
+                            </a-radio-group>
+                        </a-form-item>
+                        <a-form-item>
+                            <a-button @click="onSubmit">去支付</a-button>
+                        </a-form-item>
+                    </a-form>
+                </template>
+                <template v-slot:active2 v-else>
+                    <div class="img-list">
+                        <div class="img-item" v-for="(item,index) in list2" :key="index">
+                            <img :src="getImageUrl(item.img)" alt="icon">
+                            <p>{{ item.text }}</p>
+                        </div>
                     </div>
-                    <div class="btn">去支付</div>
-                </div>
-            </div>
-            <div class="item1">
-                <div class="title">
-                    <p class="cate-item" :class="item.cate == query1 ? 'active' : ''" v-for=" item in list"
-                        :key="item.cate">
-                        <span>{{ item.cate }}</span>
-                    </p>
-                </div>
-                <div class="card-list">
-                    <div class="card-item" @click="showModal(index)" v-for="(item, index) in list2" :key="index">
-                        <img :src="getImageUrl(item.img)" alt="">
-                        <p>{{ item.text }}</p>
-                    </div>
-                </div>
-            </div>
+                </template>
+            </showModal>
         </div>
     </div>
-    <a-modal v-model:open="opens[0].open" title="汇款告知记录">
-    </a-modal>
-    <a-modal v-model:open="opens[1].open" title="填写汇款告知单">
-    </a-modal>
-    <a-modal v-model:open="opens[2].open" title="汇款告知记录">
-    </a-modal>
 </template>
 
 <style scoped lang="less">
@@ -121,10 +118,10 @@ const handleOk = e => {
     background-color: #fff;
 
     .left-user-info {
+        width: 334px;
         border-radius: 12px;
         background-color: #f7f7f7;
-        padding: 40px;
-        width: 434px;
+        padding: 40px 10px 40px 40px;
         .flex-col;
         gap: 10px;
         align-items: flex-start;
@@ -161,76 +158,38 @@ const handleOk = e => {
     }
 
     .right-info {
-        width: 100%;
+        flex: 1;
 
-        .title {
-            padding: 10px 10px 0;
-            .flex-row;
+        .ant-form {
+            padding: 30px 20px;
 
-            justify-content: flex-start;
-            background-color: #eef3f8;
-            border: none;
+            .ant-form-item-control {
+                margin-left: 0;
 
-            .cate-item {
-                padding: 16px 20px;
-
-                &.active {
-                    background-color: #fff;
-                    border-radius: 6px 6px 0 0;
-                    color: #9a0000;
-                    font-weight: 700;
+                .ant-btn {
+                    padding: 21px 50px;
+                    border-radius: 4;
                 }
             }
         }
 
-        .element {
-            .flex-col;
-            align-items: flex-start;
-            padding: 40px;
-            gap: 20px;
-
-            input {
-                width: 300px;
-                height: 40px;
-                border-radius: 12px;
-                border: 1px solid #dae1e8;
-            }
-
-            textarea {
-                width: 400px;
-                padding: 20px;
-                height: 100px;
-                border-radius: 12px;
-                border: 1px solid #dae1e8;
-            }
-
-            .btn {
-                padding: 20px 50px;
-                background-color: #9a0000;
-                color: #fff;
-            }
-        }
-
-        .card-list {
-            margin-top: 30px;
+        .img-list {
+            padding: 30px 0 0;
             .flex-row;
-            gap: 20px;
+            justify-content: space-between;
 
-            .card-item {
-                border-radius: 6px;
-                flex: 1;
+            .img-item {
                 .flex-col;
                 gap: 10px;
-                padding: 20px;
-                background-color: #fdf1dd;
+                width: 235px;
+                height: 110px;
+                border-radius: 6px;
+                background: linear-gradient(to bottom, #fdf3e1, #fee6c0);
 
                 img {
-                    width: 40px;
-                    height: 40px;
+                    width: 37px;
+                    height: 37px;
                 }
-
-                color: #ebba87;
-                font-weight: 700;
             }
         }
     }

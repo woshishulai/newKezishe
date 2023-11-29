@@ -33,188 +33,117 @@ const list = [
         title: '操作',
     },
 ]
-const talbe1List = {
-    title: '网页端免费直通车券',
-    quantity: '2',
-    ids: [
-        {
-            id: 1354564,
+const sharedOnCell = (_, index) => {
+    if (index === 4) {
+        return {
+            colSpan: 0,
+        };
+    }
+};
+const data = [
+    {
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        tel: '0575-22098909',
+        phone: 18889898989,
+        address: 'New York No. 1 Lake Park',
+    },
+    {
+        key: '2',
+        name: 'Jim Green',
+        tel: '0571-22098333',
+        phone: 18889898888,
+        age: 42,
+        address: 'London No. 1 Lake Park',
+    },
+    {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        tel: '0575-22098909',
+        phone: 18900010002,
+        address: 'Sidney No. 1 Lake Park',
+    },
+    {
+        key: '4',
+        name: 'Jim Red',
+        age: 18,
+        tel: '0575-22098909',
+        phone: 18900010002,
+        address: 'London No. 2 Lake Park',
+    },
+    {
+        key: '5',
+        name: 'Jake White',
+        age: 18,
+        tel: '0575-22098909',
+        phone: 18900010002,
+        address: 'Dublin No. 2 Lake Park',
+    },
+];
+const columns = [
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        customCell: (_, index) => ({
+            colSpan: index < 4 ? 1 : 5,
+        }),
+    },
+    {
+        title: 'Age',
+        dataIndex: 'age',
+        customCell: sharedOnCell,
+    },
+    {
+        title: 'Home phone',
+        colSpan: 2,
+        dataIndex: 'tel',
+        customCell: (_, index) => {
+            if (index === 2) {
+                return {
+                    rowSpan: 2,
+                };
+            }
+            // These two are merged into above cell
+            if (index === 3) {
+                return {
+                    rowSpan: 0,
+                };
+            }
+            if (index === 4) {
+                return {
+                    colSpan: 0,
+                };
+            }
         },
-        {
-            id: 1354564,
-        },
-    ],
-    fanweis: [
-        {
-            fanwei: '查看使用范围',
-        },
-        {
-            fanwei: '查看使用范围',
-        },
-    ],
-    tiaojians: [
-        {
-            tiaojian: '无门槛'
-        },
-        {
-            tiaojian: '无门槛'
-        },
-    ],
-    times: [
-        {
-            from: '2023-02-21 00:00:00',
-            to: '2023-10-31 23:59:59',
-        },
-        {
-            from: '2023-02-21 00:00:00',
-            to: '2023-10-31 23:59:59',
-        },
-    ],
-
-    status: [
-        {
-            statu: '待使用',
-        },
-        {
-            statu: '待使用',
-        },
-    ],
-    adds: [
-        {
-            add: '立即使用'
-        },
-        {
-            add: '立即使用'
-        },
-    ]
-}
+    },
+    {
+        title: 'Phone',
+        colSpan: 0,
+        dataIndex: 'phone',
+        customCell: sharedOnCell,
+    },
+    {
+        title: 'Address',
+        dataIndex: 'address',
+        customCell: sharedOnCell,
+    },
+];
 </script>
 
 <template>
     <div class="youhuiquan">
-        <div class="title">
-            <span v-for="item in list" :class="item.title === '使用有效期/使用日期' ? 'active' : ''" :key="item.title">{{ item.title
-            }}</span>
-        </div>
-        <div class="table-wrap">
-            <div class="left-wrap">
-                <div class="bg">
-                    <span class="name">{{ talbe1List.title }}</span>
-                </div>
-                <div class="bg">
-                    <span class="quantity">{{ talbe1List.quantity }}</span>
-                </div>
-            </div>
-            <div class="right-wrap">
-                <div class="ids col">
-                    <span v-for="item in talbe1List.ids">{{ item.id }}</span>
-                </div>
-                <div class="fanweis col">
-                    <span v-for="item in talbe1List.fanweis">{{ item.fanwei }}</span>
-                </div>
-                <div class="tiaojians col">
-                    <span v-for="item in talbe1List.tiaojians">{{ item.tiaojian }}</span>
-                </div>
-                <div class="times col">
-                    <span v-for="item in talbe1List.times">{{ item.from }}-{{ item.to }}</span>
-                </div>
-                <div class="status col">
-                    <span v-for="item in talbe1List.status">{{ item.statu }}</span>
-                </div>
-                <div class="adds col" @click="router.push('/')">
-                    <span v-for="item in talbe1List.adds">{{ item.add }}</span>
-                </div>
-            </div>
-        </div>
-        <div class="table-wrap">
-            <div class="left-wrap">
-                <div class="bg">
-                    <span class="name">{{ talbe1List.title }}</span>
-                </div>
-                <div class="bg">
-                    <span class="quantity">{{ talbe1List.quantity }}</span>
-                </div>
-            </div>
-            <div class="right-wrap">
-                <div class="ids col">
-                    <span v-for="item in talbe1List.ids">{{ item.id }}</span>
-                </div>
-                <div class="fanweis col">
-                    <span v-for="item in talbe1List.fanweis">{{ item.fanwei }}</span>
-                </div>
-                <div class="tiaojians col">
-                    <span v-for="item in talbe1List.tiaojians">{{ item.tiaojian }}</span>
-                </div>
-                <div class="times col">
-                    <span v-for="item in talbe1List.times">{{ item.from }}-{{ item.to }}</span>
-                </div>
-                <div class="status col">
-                    <span v-for="item in talbe1List.status">{{ item.statu }}</span>
-                </div>
-                <div class="adds col" @click="router.push('/')">
-                    <span v-for="item in talbe1List.adds">{{ item.add }}</span>
-                </div>
-            </div>
-        </div>
-        <CatePage></CatePage>
+        <a-table :columns="columns" :data-source="data" bordered>
+            <template #bodyCell="{ column, text }">
+                <template v-if="column.dataIndex === 'name'">
+                    <a href="javascript:;">{{ text }}</a>
+                </template>
+            </template>
+        </a-table>
     </div>
 </template>
 
 <style scoped lang="less">
-.youhuiquan {
-    width: 100%;
-    padding: 20px;
-    background-color: #fff;
-
-    .title {
-        padding: 20px;
-        border-radius: 6px;
-        background-color: #e7edf4;
-        .flex-row;
-
-        span {
-            flex: 1;
-            text-align: center;
-
-            &.active {
-                flex: 6;
-            }
-        }
-
-    }
-
-    .table-wrap {
-        .flex-row;
-        gap: 3px;
-
-        .bg {
-            height: 100%;
-            .flex-row;
-            background-color: #f7f7f7;
-        }
-
-        span {
-            padding: 30px 0;
-            flex: 1;
-        }
-
-        .left-wrap {
-            .flex-row;
-        }
-
-        .right-wrap {
-            .flex-row;
-            flex: 1;
-
-            .col {
-                flex: 1;
-                .flex-col;
-            }
-
-            .times {
-                flex: 4;
-            }
-        }
-    }
-}
+.youhuanquan {}
 </style>

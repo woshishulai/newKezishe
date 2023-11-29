@@ -62,7 +62,7 @@ const handleClick = (e) => {
     <div class="nav-title" @click="router.push('/user/userinfo')">
       个人中心
     </div>
-    <a-menu v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" style="width: 270px" mode="inline"
+    <a-menu v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" style="width: 260px" mode="inline"
       :items="menuItems" @click="handleClick"></a-menu>
   </div>
 </template>

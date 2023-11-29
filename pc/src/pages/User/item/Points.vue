@@ -1,7 +1,9 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from "vue";
+import { ref, computed, reactive, onMounted, h } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { SearchOutlined } from "@ant-design/icons-vue"
 import { getImageUrl } from "@/utils";
+import CatePage from "@/components/common/CatePage.vue";
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
@@ -17,94 +19,65 @@ const list = [
 ]
 const columns = [
   {
-    title: "商品编号",
+    title: "全部类型",
     dataIndex: "goodscode",
     key: "goodscode",
     align: 'center'
   },
   {
-    title: "类型",
+    title: "全部事件",
     dataIndex: "goodscate",
     key: "goodscate",
     align: 'center'
   },
   {
-    title: "商品名称",
+    title: "积分",
     dataIndex: "goodsname",
     key: "goodsname",
     align: 'center'
   },
   {
-    title: "商家",
+    title: "时间",
     dataIndex: "order",
     key: "order",
     align: 'center'
   },
   {
-    title: "价格",
+    title: "说明",
     dataIndex: "price",
     key: "price",
-    align: 'center'
-  },
-  {
-    title: "状态",
-    dataIndex: "sub",
-    key: "sub",
-    align: 'center'
-  },
-  {
-    title: "结标时间",
-    dataIndex: "time",
-    key: "time",
     align: 'center'
   },
 ];
 const dataSource = [
   {
-    goodscode: "630527010",
-    goodscate: '竞买',
-    goodsname: "好东西很不错",
-    order: "壳子社",
-    time: '2023.10.12',
-    price: '3,600.00元',
-    sub: '出局'
+    goodscode: "获取",
+    goodscate: '委托结算',
+    goodsname: "55",
+    order: "2023-10.10",
   },
   {
-    goodscode: "630527010",
-    goodscate: '竞买',
-    goodsname: "好东西很不错",
-    order: "壳子社",
-    time: '2023.10.12',
-    price: '3,600.00元',
-    sub: '出局'
+    goodscode: "获取",
+    goodscate: '委托结算',
+    goodsname: "55",
+    order: "2023-10.10",
   },
   {
-    goodscode: "630527010",
-    goodscate: '竞买',
-
-    goodsname: "好东西很不错",
-    order: "壳子社",
-    time: '2023.10.12',
-    price: '3,600.00元',
-    sub: '出局'
+    goodscode: "获取",
+    goodscate: '委托结算',
+    goodsname: "55",
+    order: "2023-10.10",
   },
-
   {
-    goodscode: "630527010",
-    goodscate: '竞买',
-
-    goodsname: "好东西很不错",
-    order: "壳子社",
-    time: '2023.10.12',
-    price: '3,600.00元',
-    sub: '出局'
+    goodscode: "获取",
+    goodscate: '委托结算',
+    goodsname: "55",
+    order: "2023-10.10",
   },
+
 
 ];
-const query = ref('积分明细')
-const handClick = (item) => {
-  query.value = item.cate
-}
+
 </script>
 
 <template>
@@ -117,25 +90,27 @@ const handClick = (item) => {
         <div class="jifen-wrap">
           <h5>{{ '3, 614' }}</h5>
         </div>
-        <div class="table-wrap">
-          <div class="title">
-            <p class="cate-item" @click="handClick(item)" :class="item.cate == query ? 'active' : ''" v-for="item in list"
-              :key="item.cate">
-              <span>{{ item.cate }}</span>
-              <span v-if="item.num">({{ item.num }})</span>
-            </p>
-          </div>
-          <div class="select-wrap">
-            <a-input placeholder="所有分类"></a-input>
-            <a-input placeholder="全部委托时间"></a-input>
-            <a-input placeholder="全部结标时间"></a-input>
-            <a-input placeholder="全部下架"></a-input>
-            <a-input placeholder="名称/藏品/合同号"></a-input>
-            <button class="btn">搜索</button>
-          </div>
-          <a-table class="" :columns="columns" :data-source="dataSource"></a-table>
-          <CatePage></CatePage>
-        </div>
+        <show-modal :titleList="list">
+          <template v-slot:active2>
+            <div class="search-cate">
+              <a-select ref="select" placeholder="全部类型" v-model:value="value1" style="width: 220px" :options="options1"
+                @change="handleChange"></a-select>
+              <a-select ref="select" placeholder="全部事件" v-model:value="value1" style="width: 220px" :options="options1"
+                @change="handleChange"></a-select>
+              <a-select ref="select" placeholder="近一年" v-model:value="value1" style="width: 220px" :options="options1"
+                @change="handleChange"></a-select>
+              <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
+              <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+            </div>
+          </template>
+          <template v-slot:active3>
+            <a-table :columns="columns" :dataSource="dataSource"></a-table>
+          </template>
+          <template v-slot:active4>
+            <CatePage></CatePage>
+          </template>
+        </show-modal>
+
       </div>
     </div>
   </div>
@@ -149,7 +124,8 @@ const handClick = (item) => {
     padding: 20px 12px;
 
     .jifen-wrap {
-      padding: 55px 0 100px 138px;
+      padding: 55px 0 100px 120px;
+      margin-bottom: 20px;
       background: url('@/assets/img/user/jifen/jifen-bg.png');
       background-size: 100% 100%;
 
@@ -158,63 +134,7 @@ const handClick = (item) => {
         font-size: 40px;
       }
     }
-  }
-}
 
-
-.table-wrap {
-  padding: 20px 0;
-
-  .select-wrap {
-    padding: 20px 10px;
-
-    .flex-row;
-    justify-content: flex-start;
-    gap: 20px;
-
-    input {}
-
-    .btn {
-      border: none;
-      background-color: #85909b;
-      color: #fff;
-      padding: 16px 0;
-      width: 100px;
-      min-width: 100px;
-      border-radius: 6px;
-    }
-  }
-
-  .title {
-    padding: 10px 10px 0;
-    .flex-row;
-    justify-content: flex-start;
-    background-color: #eef3f8;
-    border: none;
-
-    .cate-item {
-      padding: 16px 40px;
-
-      &.active {
-        background-color: #fff;
-        border-radius: 6px 6px 0 0;
-        color: #9a0000;
-        font-weight: 700;
-      }
-    }
-  }
-
-  .num {
-    .flex-row;
-    justify-content: flex-start;
-    padding: 30px 20px 0;
-    gap: 30px;
-
-    .active {
-      color: #9a0000;
-      font-weight: 700;
-      border-bottom: 1px solid #9a0000;
-    }
   }
 }
 </style>
