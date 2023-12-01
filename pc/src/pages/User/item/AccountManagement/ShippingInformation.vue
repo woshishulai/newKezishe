@@ -7,11 +7,25 @@ import { Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { shippingDataSource, shippingColumns } from "../../data"
 import { statusList } from "../../data";
+import { countryList } from "@/utils/user/country"
+console.log(countryList);
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
 onMounted(() => { });
-
+const formState = reactive({
+  username: "",
+  region: '中国',
+  date1: undefined,
+  delivery: false,
+  type: [],
+  resource: "",
+  desc: "",
+});
+const handleChange = value => {
+  formState.region = value
+  console.log(formState);
+};
 const showConfirm = () => {
   Modal.confirm({
     title: '确定删除此地址吗?',
@@ -33,15 +47,6 @@ const showConfirm = () => {
   });
 };
 
-const formState = reactive({
-  name: "",
-  region: undefined,
-  date1: undefined,
-  delivery: false,
-  type: [],
-  resource: "",
-  desc: "",
-});
 const onSubmit = () => {
   formRef.value
     .validate()
@@ -77,12 +82,11 @@ const resetForm = () => {
         <a-form labelAlign="left" :model="formState" name="basic" :label-col="{ span: 2 }" :wrapper-col="{ span: 7 }"
           autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
           <a-form-item label="姓名" name="username">
-            <a-input v-model:value="formState.username" />
+            <a-input v-model:value.trim="formState.username" />
           </a-form-item>
           <a-form-item label="所在地区">
-            <a-select>
-              <a-select-option value="demo">Demo</a-select-option>
-            </a-select>
+            <a-select v-model:value="formState.region" show-search :options="countryList"
+              @change="handleChange"></a-select>
           </a-form-item>
           <a-form-item label="详细地址" name="username">
             <a-cascader v-model:value="value" :options="statusList" />
@@ -131,6 +135,10 @@ const resetForm = () => {
       height: 46px;
     }
 
+    :deep(.ant-select-selector .ant-select-selection-search) {
+      top: 5px;
+    }
+
     :deep(.ant-select-selector) {
       height: 46px;
       padding-top: 6px;
@@ -144,4 +152,4 @@ const resetForm = () => {
     }
   }
 }
-</style>
+</style>@/utils/user/country
