@@ -1,242 +1,254 @@
-//input的样式
-.ant-input-affix-wrapper>input.ant-input {
-    background: transparent;
-    color: #000;
-    font-weight: 700;
-    font-size: 18px;
+//去掉按钮默认的阴影
+.ant-btn-primary {
+    box-shadow: none;
+    width: 100%;
 }
 
-input {
-    background-color: #f2f2f2;
-}
-
-.ant-input {
-    height: 46px;
-
-    &:hover {
-        border-color: #9a0000;
-    }
-
-    &:focus {
-        border-color: #9a0000;
-    }
-}
-
-.ant-form-item .ant-form-item-label>label {
-    margin-top: 6px;
-}
-
-// 修改input提示文字的颜色和粗细
-input::-webkit-input-placeholder {
-    color: #000 !important;
-    // font-weight: 700;
-}
-
-//带图标的input的布局
-.ant-input-affix-wrapper {
-    padding: 8px 4px;
-    .flex-row;
-    gap: 5px;
-    justify-content: flex-start;
-    background: #f4f4f4;
-}
-
-// input鼠标经过颜色
-.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
-    border: 1px solid #9a0000;
-}
-
-//input获取焦点的颜色
-.ant-input-affix-wrapper:focus {
-    border-color: #9a0000;
-}
-
-//input 校验提示文字
-// .ant-form-item-explain:nth-child(2) {
-//     position: relative;
-//     z-index: 10;
-//     top: -40px;
-// }
-//input框的右边插槽
+//去除输入框后面插槽的样式
 .ant-input-group .ant-input-group-addon {
-    padding: 0 0 0;
-    background-color: #9a0000;
-}
-
-//按钮
-.ant-btn-default {
-    .flex-row;
-    font-size: 16px;
-    background: transparent;
+    padding: 0px;
     border: none;
-    font-weight: 700;
-    color: #fff;
-    background-color: #9a0000;
 }
 
-//按钮经过的颜色
-.ant-btn-default:not(:disabled):hover {
-    border-color: #9a0000;
-    color: #fff;
-}
+// //input的样式
+// // .ant-input-affix-wrapper>input.ant-input {
+// //     background: transparent;
+// //     color: #000;
+// //     font-weight: 700;
+// //     font-size: 18px;
+// // }
 
-//自定义按钮的高度「
-.ant-input-affix-wrapper .ant-input-suffix {
-    height: 28px;
-}
+// // input {
+// //     background-color: #f2f2f2;
+// // }
 
-//loading
-.anticon svg {
-    color: #9a0000;
-}
+// // .ant-input {
+// //     height: 46px;
 
-.ant-spin.ant-spin-show-text .ant-spin-text {
-    font-size: 40px;
-    margin-top: 10px;
-    color: #9a0000;
-}
+// //     &:hover {
+// //         border-color: #9a0000;
+// //     }
 
-//登录圆圈透明度
-.ant-spin-spinning {
-    opacity: 0.3;
-}
+// //     &:focus {
+// //         border-color: #9a0000;
+// //     }
+// // }
 
+// // .ant-form-item .ant-form-item-label>label {
+// //     margin-top: 6px;
+// // }
 
-//menu下拉菜单
-.ant-menu-light .ant-menu-item-selected {
-    background-color: #fff; //去掉背景颜色
-}
+// // 修改input提示文字的颜色和粗细
+// // input::-webkit-input-placeholder {
+// //     color: #000 !important;
+// //     // font-weight: 700;
+// // }
 
-.ant-menu .ant-menu-submenu-title {
-    font-weight: 600; //字体粗细
-}
+// //带图标的input的布局
+// // .ant-input-affix-wrapper {
+// //     padding: 8px 4px;
+// //     .flex-row;
+// //     gap: 5px;
+// //     justify-content: flex-start;
+// //     background: #f4f4f4;
+// // }
 
-.ant-menu-title-content {
-    font-weight: 600; //没有子级菜单的字体粗细
-}
+// // input鼠标经过颜色
+// // .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+// //     border: 1px solid #9a0000;
+// // }
 
-.ant-menu-item .ant-menu-item-icon svg {
-    color: #333; //一级和二级菜单的的图标颜色
-}
+// //input获取焦点的颜色
+// // .ant-input-affix-wrapper:focus {
+// //     border-color: #9a0000;
+// // }
 
-.ant-menu-submenu-title .ant-menu-item-icon svg {
-    color: #333; //一级和二级菜单的的图标颜色
-}
+// //input 校验提示文字
+// // .ant-form-item-explain:nth-child(2) {
+// //     position: relative;
+// //     z-index: 10;
+// //     top: -40px;
+// // }
+// //input框的右边插槽
+// // .ant-input-group .ant-input-group-addon {
+// //     padding: 0 0 0;
+// //     background-color: #9a0000;
+// // }
 
-.ant-menu-light .ant-menu-item-selected {
-    color: #9a0000; //被选中的文字颜色
-}
-
-.ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title {
-    color: #9a0000; //被选中的文字颜色
-}
-
-.ant-menu-light .ant-menu-item-selected svg {
-    color: #9a0000;
-}
-
-//没有子菜单的图标
-.ant-menu-item-selected svg {
-    color: #9a0000;
-}
-
-//被选中的title的图标颜色
-.ant-menu-submenu-selected .ant-menu-submenu-title svg {
-    color: #9a0000;
-}
-
-//当鼠标经过的时候
-.ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
-    background-color: #9a0000;
-    color: #fff;
-}
-
-.ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover svg {
-    color: #fff;
-}
-
-//表格的头部背景颜色
-.ant-table-wrapper .ant-table-thead>tr>th {
-    background-color: #f7f7f7;
-}
-
-
-
-//弹出对话框到按钮
-.ant-modal-confirm .ant-modal-confirm-btns {
-    .flex-row;
-    justify-content: flex-end;
-    gap: 30px;
-}
-
-//下拉框
-
-.ant-select.ant-select-in-form-item {
-
-    &:hover {
-        border-color: #9a0000;
-    }
-
-}
-
-// .ant-select.ant-select-in-form-item:hover {
-//     border-color: #9a0000;
+// //按钮
+// .ant-btn-default {
+//     .flex-row;
+//     font-size: 16px;
+//     background: transparent;
+//     border: none;
+//     font-weight: 700;
+//     color: #fff;
+//     background-color: #9a0000;
 // }
-.ant-select-selector {
-    &:hover {
-        border-color: #9a0000 !important;
-    }
 
-    &:focus {
-        border-color: #9a0000;
-    }
-}
+// //按钮经过的颜色
+// .ant-btn-default:not(:disabled):hover {
+//     border-color: #9a0000;
+//     color: #fff;
+// }
+
+// //自定义按钮的高度「
+// .ant-input-affix-wrapper .ant-input-suffix {
+//     height: 28px;
+// }
+
+// //loading
+// .anticon svg {
+//     color: #9a0000;
+// }
+
+// .ant-spin.ant-spin-show-text .ant-spin-text {
+//     font-size: 40px;
+//     margin-top: 10px;
+//     color: #9a0000;
+// }
+
+// //登录圆圈透明度
+// .ant-spin-spinning {
+//     opacity: 0.3;
+// }
 
 
+// //menu下拉菜单
+// .ant-menu-light .ant-menu-item-selected {
+//     background-color: #fff; //去掉背景颜色
+// }
 
-.ant-select-selection-placeholder {
-    padding-top: 6px;
-}
+// .ant-menu .ant-menu-submenu-title {
+//     font-weight: 600; //字体粗细
+// }
 
-//勾选框
-.ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #9a0000;
-    border-color: #9a0000;
-}
+// .ant-menu-title-content {
+//     font-weight: 600; //没有子级菜单的字体粗细
+// }
 
-.ant-checkbox-indeterminate .ant-checkbox-inner:after {
-    background-color: #9a0000;
-}
+// .ant-menu-item .ant-menu-item-icon svg {
+//     color: #333; //一级和二级菜单的的图标颜色
+// }
 
-//分页
-.ant-pagination .ant-pagination-item {
-    border: 1px solid #dbdbdb;
-}
+// .ant-menu-submenu-title .ant-menu-item-icon svg {
+//     color: #333; //一级和二级菜单的的图标颜色
+// }
 
-//分页其他页数鼠标经过
-.ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {
-    background-color: #9a0000;
+// .ant-menu-light .ant-menu-item-selected {
+//     color: #9a0000; //被选中的文字颜色
+// }
 
-    a {
-        color: #fff;
-    }
-}
+// .ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title {
+//     color: #9a0000; //被选中的文字颜色
+// }
 
-// :deep(.ant-pagination-item-active) {
+// .ant-menu-light .ant-menu-item-selected svg {
+//     color: #9a0000;
+// }
+
+// //没有子菜单的图标
+// .ant-menu-item-selected svg {
+//     color: #9a0000;
+// }
+
+// //被选中的title的图标颜色
+// .ant-menu-submenu-selected .ant-menu-submenu-title svg {
+//     color: #9a0000;
+// }
+
+// //当鼠标经过的时候
+// .ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
 //     background-color: #9a0000;
 //     color: #fff;
 // }
 
-.ant-pagination .ant-pagination-item-active {
-    background-color: #9a0000;
-    color: #fff;
+// .ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover svg {
+//     color: #fff;
+// }
 
-    a {
-        color: #fff;
-    }
-}
+// //表格的头部背景颜色
+// .ant-table-wrapper .ant-table-thead>tr>th {
+//     background-color: #f7f7f7;
+// }
 
-// 已选中的分页 鼠标经过里面的A
-.ant-pagination .ant-pagination-item-active:hover a {
-    color: #fff;
-}
+
+
+// //弹出对话框到按钮
+// .ant-modal-confirm .ant-modal-confirm-btns {
+//     .flex-row;
+//     justify-content: flex-end;
+//     gap: 30px;
+// }
+
+// //下拉框
+
+// .ant-select.ant-select-in-form-item {
+
+//     &:hover {
+//         border-color: #9a0000;
+//     }
+
+// }
+
+// // .ant-select.ant-select-in-form-item:hover {
+// //     border-color: #9a0000;
+// // }
+// .ant-select-selector {
+//     &:hover {
+//         border-color: #9a0000 !important;
+//     }
+
+//     &:focus {
+//         border-color: #9a0000;
+//     }
+// }
+
+
+
+// .ant-select-selection-placeholder {
+//     padding-top: 6px;
+// }
+
+// //勾选框
+// .ant-checkbox-checked .ant-checkbox-inner {
+//     background-color: #9a0000;
+//     border-color: #9a0000;
+// }
+
+// .ant-checkbox-indeterminate .ant-checkbox-inner:after {
+//     background-color: #9a0000;
+// }
+
+// //分页
+// .ant-pagination .ant-pagination-item {
+//     border: 1px solid #dbdbdb;
+// }
+
+// //分页其他页数鼠标经过
+// .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {
+//     background-color: #9a0000;
+
+//     a {
+//         color: #fff;
+//     }
+// }
+
+// // :deep(.ant-pagination-item-active) {
+// //     background-color: #9a0000;
+// //     color: #fff;
+// // }
+
+// .ant-pagination .ant-pagination-item-active {
+//     background-color: #9a0000;
+//     color: #fff;
+
+//     a {
+//         color: #fff;
+//     }
+// }
+
+// // 已选中的分页 鼠标经过里面的A
+// .ant-pagination .ant-pagination-item-active:hover a {
+//     color: #fff;
+// }

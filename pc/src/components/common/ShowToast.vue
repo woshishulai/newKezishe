@@ -17,17 +17,17 @@ const showSpinning = (params) => {
 </script>
 
 <template>
-  <div class="show-toast" v-if="loadings.spinning">
+  <div class="show-toast" v-if="spinning">
     <a-spin tip="Loading..." :indicator="indicator" />
   </div>
 </template>
 
 <style scoped lang="less">
-.show-toast {
-  position: fixed;
-  top: 160px;
-  left: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
-}
+// .show-toast {
+//   position: fixed;
+//   top: 160px;
+//   left: 50%;
+//   transform: translateY(-50%);
+//   z-index: 3;
+// }
 </style>

@@ -180,7 +180,7 @@ const router = useRouter()
                     color: #9a0000;
                     font-weight: 700;
                     font-size: 30px;
-                    font-family: "Arial", sans-serif;
+                    // font-family: "Arial", sans-serif;
 
                     span {
                         font-size: 16px;

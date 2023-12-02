@@ -18,11 +18,6 @@ const formState = reactive({
   code: "",
   remember: true,
 })
-const handleUsernameInput = () => {
-  formState.username = formState.username.replace(/\s/g, "");
-  formState.password = formState.password.replace(/\s/g, "");
-  formState.code = formState.code.replace(/\s/g, "");
-};
 const visible = ref(false);
 const hide = () => {
   visible.value = false;
@@ -58,28 +53,27 @@ const handleFinishFailed = (err) => {
             </div>
           </div>
         </template>
-        <a-input @input="handleUsernameInput" v-model:value="formState.username" placeholder="用户名">
+        <a-input v-model:value.trim="formState.username" placeholder="用户名">
           <template #prefix>
-            <UserOutlined style="color: rgba(5, 5, 4, 1.25)" />
+            <UserOutlined style="color: rgba(154, 0, 0, 1)" />
           </template>
         </a-input>
       </a-popover>
     </a-form-item>
     <a-form-item name="password">
-      <a-input-password autocomplete="off" @input="handleUsernameInput" v-model:value="formState.password"
-        placeholder="密码">
+      <a-input-password autocomplete="off" v-model:value.trim="formState.password" placeholder="密码">
         <template #prefix>
-          <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
+          <LockOutlined style="color:rgba(154, 0, 0, 1)" />
         </template>
         <template #addonAfter>
-          <a-button @click="router.push('/reset-password')">忘记密码?</a-button>
+          <a-button type="primary" @click="router.push('/reset-password')">忘记密码?</a-button>
         </template>
       </a-input-password>
     </a-form-item>
     <a-form-item name="code">
-      <a-input @input="handleUsernameInput" v-model:value="formState.code" placeholder="验证码" type="number">
+      <a-input v-model:value.trim="formState.code" placeholder="验证码" type="number">
         <template #prefix>
-          <CheckCircleOutlined style="color: rgba(0, 0, 0, 1.25)" />
+          <CheckCircleOutlined style="color: rgba(154, 0, 0, 1)" />
         </template>
         <template #suffix>
           <!-- 后端返回的验证码 -->
@@ -94,26 +88,13 @@ const handleFinishFailed = (err) => {
     </a-form-item>
     <a-form-item>
       <div class="btn">
-        <a-button html-type="submit">登录</a-button>
+        <a-button type="primary" html-type="submit">登录</a-button>
       </div>
     </a-form-item>
   </a-form>
 </template>
 
 <style scoped lang="less">
-.btn {
-  cursor: pointer;
-  background-color: #9a0000;
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  button {
-    width: 100%;
-  }
-}
-
 .show-name-list {
   .flex-col;
   align-items: flex-start;

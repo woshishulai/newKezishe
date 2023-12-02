@@ -35,7 +35,6 @@ const getCode = () => {
     const isPhoneValid = getPhone();
     if (isPhoneValid) {
         countdown.value = 60
-        // getPhoneCodeApi(formState.phone) //获取验证码的API
         info("success", '验证码发送成功请输入验证码')
         const interval = setInterval(() => {
             countdown.value > 0 ? countdown.value-- : clearInterval(interval)
@@ -75,11 +74,11 @@ const handleFinishFailed = err => {
                 </a-popover>
             </a-form-item>
             <a-form-item name="phoneCode">
-                <a-input v-model:value="formState.phoneCode" type="number" placeholder="验证码">
+                <a-input type="number" v-model:value.trim="formState.phoneCode" placeholder="验证码">
                     <template #prefix>
                         <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
                     </template>
-                    <template #suffix>
+                    <template #addonAfter>
                         <a-button @click="getCode" :disabled="countdown > 0"> <span v-if="countdown === 0">获取验证码</span>
                             <span v-else>{{ countdown }}</span></a-button>
                     </template>
@@ -110,53 +109,4 @@ const handleFinishFailed = err => {
     </div>
 </template>
 
-<style scoped lang="less">
-.code {
-    .ant-input-affix-wrapper {
-        padding-right: 0;
-    }
-
-    .ant-btn {
-        width: 102px;
-        border-radius: 0;
-        height: 46px;
-    }
-
-
-    .btn {
-        cursor: pointer;
-        background-color: #9a0000;
-        padding: 2px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        button {
-            width: 100%;
-        }
-    }
-
-}
-
-.show-name-list {
-    .flex-col;
-    align-items: flex-start;
-    font-size: 16px;
-
-    .name-item {
-        .flex-row;
-        justify-content: space-between;
-        cursor: pointer;
-        width: 200px;
-        padding: 10px 0;
-
-        span {
-            font-size: 14px;
-        }
-
-        &:hover {
-            color: #9a0000;
-        }
-    }
-}
-</style>
+<style scoped lang="less"></style>
