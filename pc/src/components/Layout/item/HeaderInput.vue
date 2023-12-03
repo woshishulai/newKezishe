@@ -94,6 +94,10 @@ const cateInfo = (index) => {
         .ant-btn.ant-btn-lg {
             height: 52px;
             width: 100px;
+
+            .anticon svg {
+                color: #fff;
+            }
         }
     }
 }

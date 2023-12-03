@@ -109,7 +109,7 @@ defineExpose({
         .flex-row;
         justify-content: flex-start;
         gap: 20px;
-        padding: 20px 0;
+        padding: 20px 10px;
 
         .item {
             flex: 1;
