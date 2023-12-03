@@ -129,6 +129,7 @@ const router = useRouter()
                     align-items: center;
                     gap: 10px;
 
+                    //进度条
                     .progress {
                         width: 120px;
 
@@ -232,10 +233,6 @@ const router = useRouter()
 
         .active {
             color: #9a0000;
-        }
-
-        .ant-table-wrapper {
-            padding-bottom: 38px;
         }
 
         .btn-details {

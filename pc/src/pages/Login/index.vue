@@ -3,14 +3,14 @@ import Logo from "@/components/common/Logo.vue";
 import Account from "./item/Account.vue";
 import Code from "./item/Code.vue";
 import FooterLink from "@/components/common/FooterLink.vue";
-import { ref, computed, reactive, onMounted } from "vue";
+import { ref, computed, reactive, onMounted, KeepAlive } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { getImageUrl } from "@/utils";
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
 onMounted(() => { });
 let actives = ref(0);
+
 const title = [
   {
     text: "账号密码",
@@ -38,8 +38,10 @@ const showLogin = (index) => {
             </h5>
           </div>
           <div class="cen-form">
-            <Account v-if="actives == 0"></Account>
-            <Code v-if="actives == 1"></Code>
+            <KeepAlive>
+              <Account v-if="actives == 0"></Account>
+              <Code v-else></Code>
+            </KeepAlive>
             <p class="register" @click="router.push('/register')">
               还没有账号？立即注册 >
             </p>
@@ -55,6 +57,7 @@ const showLogin = (index) => {
 /* 在这里添加你的 Less 样式 */
 .wrap {
   .flex-col;
+  height: 100vh;
 
   .cen-wrap {
     width: 100%;

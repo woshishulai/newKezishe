@@ -142,7 +142,8 @@ const changeGuanZhu = (item) => {
                         <a-select ref="select" placeholder="所有类别" v-model:value="value1" class="item" :options="options1"
                             @change="handleChange"></a-select>
                         <a-input v-model:value="value" class="item-input" placeholder="名称和藏品" />
-                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+                        <a-button type="primary" :loading="loading" @click="getGoodsList"
+                            :icon="h(SearchOutlined)">搜索</a-button>
                     </div>
                 </template>
                 <template v-slot:active3>
@@ -209,12 +210,6 @@ const changeGuanZhu = (item) => {
             .flex-row;
             gap: 30px;
             justify-content: flex-start;
-
-            .ant-btn {
-                font-weight: 600;
-                padding: 0 40px;
-                height: 46px;
-            }
         }
 
         .label {

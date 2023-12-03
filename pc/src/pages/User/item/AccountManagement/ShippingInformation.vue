@@ -93,7 +93,7 @@ const resetForm = () => {
           <a-form-item label="电话/手机" name="username">
             <a-input type="number" v-model:value="formState.username" />
           </a-form-item>
-          <a-form-item :wrapper-col="{ offset: 2, span: 16 }">
+          <a-form-item :wrapper-col="{ offset: 2, span: 7 }">
             <a-button type="primary" html-type="submit">保存</a-button>
           </a-form-item>
         </a-form>
@@ -126,22 +126,6 @@ const resetForm = () => {
 
   .form-wrap {
     padding: 40px 30px 20px 40px;
-
-    .ant-input {
-      height: 46px;
-    }
-
-    :deep(.ant-select-selector) {
-      height: 46px;
-      padding-top: 6px;
-    }
-
-    .ant-btn {
-      width: 200px;
-      height: 46px;
-      border-radius: 0;
-      background-color: #9a0000;
-    }
   }
 }
 </style>

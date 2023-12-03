@@ -31,7 +31,7 @@ const formState = reactive({
             <a-form-item label="再次确认新登录密码" name="username">
               <a-input v-model:value="formState.username" />
             </a-form-item>
-            <a-form-item :wrapper-col="{ offset: 7, span: 16 }">
+            <a-form-item :wrapper-col="{ offset: 7, span: 15 }">
               <a-button type="primary" html-type="submit">确认</a-button>
             </a-form-item>
           </a-form>
@@ -50,7 +50,7 @@ const formState = reactive({
             <a-form-item label="再次确认新支付密码" name="username">
               <a-input v-model:value="formState.username" />
             </a-form-item>
-            <a-form-item :wrapper-col="{ offset: 7, span: 16 }">
+            <a-form-item :wrapper-col="{ offset: 7, span: 15 }">
               <a-button type="primary" html-type="submit">确认</a-button>
             </a-form-item>
           </a-form>
@@ -84,23 +84,6 @@ const formState = reactive({
     }
   }
 
-  .form-wrap {
-
-    .ant-input {
-      height: 46px;
-    }
-
-    :deep(.ant-select-selector) {
-      height: 46px;
-      padding-top: 6px;
-    }
-
-    .ant-btn {
-      width: 100px;
-      height: 40px;
-      border-radius: 0;
-      background-color: #9a0000;
-    }
-  }
+  .form-wrap {}
 }
 </style>

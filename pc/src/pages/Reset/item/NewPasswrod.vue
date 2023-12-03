@@ -64,7 +64,7 @@ const handleFinishFailed = errors => {
             </a-form-item>
             <a-form-item>
                 <div class="btn">
-                    <a-button html-type="submit">提交
+                    <a-button type="primary" html-type="submit">提交
                     </a-button>
                 </div>
             </a-form-item>
@@ -72,21 +72,4 @@ const handleFinishFailed = errors => {
     </div>
 </template>
 
-<style scoped lang="less">
-/* 在这里添加你的 Less 样式 */
-.new-password {
-    .ant-input-affix-wrapper {
-        padding: 8px 12px 8px 4px;
-    }
-
-    .ant-input {
-        background-color: #f2f2f2;
-    }
-
-    .ant-btn {
-        border-radius: 0;
-        height: 46px;
-        width: 300px;
-    }
-}
-</style>
+<style scoped lang="less"></style>

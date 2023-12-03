@@ -118,19 +118,6 @@ const rules = {
         { required: true, validator: remembers, trigger: ['change', 'blur'] },
     ]
 }
-const handleUsernameInput = () => {
-    formState.phone = formState.phone.replace(/\s/g, "");
-    formState.password = formState.password.replace(/\s/g, "");
-    formState.repassword = formState.repassword.replace(/\s/g, "");
-    formState.code = formState.code.replace(/\s/g, "");
-    formState.newCode = formState.newCode.replace(/\s/g, "");
-    formState.code = formState.code.replace(/\s/g, "");
-    formState.phone = formState.phone.replace(/[^a-zA-Z0-9]/g, "");
-    formState.password = formState.password.replace(/[^a-zA-Z0-9]/g, "");
-    formState.repassword = formState.repassword.replace(/[^a-zA-Z0-9]/g, "");
-    formState.code = formState.code.replace(/[^a-zA-Z0-9]/g, "");
-    formState.newCode = formState.newCode.replace(/[^a-zA-Z0-9]/g, "");
-};
 const countdown = ref(0)
 const formState = reactive({
     phone: '',
@@ -179,27 +166,29 @@ const onFinishFailed = errors => {
                 <a-form :rules="rules" :model="formState" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 10 }"
                     autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
                     <a-form-item label="手机号" name="phone">
-                        <a-input @input="handleUsernameInput" v-model:value="formState.phone" />
+                        <a-input v-model:value.trim="formState.phone" />
                     </a-form-item>
 
                     <a-form-item label="密码" name="password">
-                        <a-input-password @input="handleUsernameInput" v-model:value="formState.password" />
+                        <a-input-password v-model:value.trim="formState.password" />
                     </a-form-item>
                     <a-form-item label="确认密码" name="repassword">
-                        <a-input-password @input="handleUsernameInput" v-model:value="formState.repassword" />
+                        <a-input-password v-model:value.trim="formState.repassword" />
                     </a-form-item>
 
                     <a-form-item label="短信校验码" name="code">
-                        <a-input @input="handleUsernameInput" style="padding-right: 0px;" v-model:value="formState.code">
-                            <template #suffix>
-                                <a-button @click="getCode" :disabled="countdown > 0"> <span
-                                        v-if="countdown === 0">获取验证码</span>
-                                    <span v-else>{{ countdown }}</span></a-button>
+                        <a-input style="padding-right: 0px;" v-model:value.trim="formState.code">
+                            <template #addonAfter>
+                                <div class="btn">
+                                    <a-button @click="getCode" :disabled="countdown > 0"> <span
+                                            v-if="countdown === 0">获取验证码</span>
+                                        <span v-else>{{ countdown }}</span></a-button>
+                                </div>
                             </template>
                         </a-input>
                     </a-form-item>
                     <a-form-item label="验证码" name="newCode">
-                        <a-input type="number" @input="handleUsernameInput" v-model:value="formState.newCode">
+                        <a-input type="number" v-model:value.trim="formState.newCode">
                             <template #suffix>
                                 <!-- 后端返回的验证码 -->
                                 <span class="get-password">
@@ -211,11 +200,8 @@ const onFinishFailed = errors => {
                     <a-form-item name="remember" :wrapper-col="{ offset: 8, span: 16 }">
                         <a-checkbox v-model:checked="formState.remember">我已阅读并同意 《用户注册协议》</a-checkbox>
                     </a-form-item>
-
-                    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-                        <div class="btn">
-                            <a-button html-type="submit">注册</a-button>
-                        </div>
+                    <a-form-item :wrapper-col="{ offset: 8, span: 10 }">
+                        <a-button type="primary" html-type="submit">注册</a-button>
                     </a-form-item>
                 </a-form>
             </div>
@@ -229,6 +215,7 @@ const onFinishFailed = errors => {
     background: url('@/assets/img/register/register.png');
     background-size: 100% 100%;
     .flex-col;
+    height: 100vh;
     justify-content: flex-start;
     gap: 10px;
     padding: 30px 0;
@@ -249,28 +236,10 @@ const onFinishFailed = errors => {
             margin-bottom: 30px;
         }
 
-        .form-wrap {
-            .ant-input {
-                background-color: #f2f2f2;
-                height: 46px;
-                font-weight: 700;
-                font-size: 18px;
-            }
-
-
-            .ant-btn {
-                width: 102px;
-                height: 46px;
+        .btn {
+            button {
                 background-color: #afb9c6;
-            }
-
-            .btn {
-                width: 340px;
-
-                .ant-btn {
-                    width: 100%;
-                    background-color: #9a0000;
-                }
+                color: #fff;
             }
         }
 

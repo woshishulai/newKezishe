@@ -45,59 +45,40 @@ const handleFinishFailed = errors => {
 </script>
 
 <template>
-    <div class="get-code">
-        <a-form :rules="codeRules" :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed">
-            <a-form-item name="phone">
-                <a-input :controls="false" v-model:value="formState.phone" type="number" placeholder="请输入手机号码">
-                </a-input>
-            </a-form-item>
-            <a-form-item name="phoneCode">
-                <a-input :controls="false" v-model:value="formState.phoneCode" type="number" placeholder="验证码">
-                    <template #suffix>
-                        <div class="btn-code">
-                            <a-button @click="getCode" :disabled="countdown > 0"> <span v-if="countdown === 0">获取验证码</span>
-                                <span v-else>{{ countdown }}</span></a-button>
-                        </div>
-                    </template>
-                </a-input>
-            </a-form-item>
-            <a-form-item>
-                <div class="btn">
-                    <a-button html-type="submit">下一步</a-button>
-                </div>
-            </a-form-item>
-        </a-form>
-    </div>
+    <a-form :rules="codeRules" :model="formState" @finish="handleFinish" @finishFailed="handleFinishFailed">
+        <a-form-item name="phone">
+            <a-input v-model:value="formState.phone" type="number" placeholder="请输入手机号码">
+            </a-input>
+        </a-form-item>
+        <a-form-item name="phoneCode">
+            <a-input v-model:value="formState.phoneCode" type="number" placeholder="验证码">
+                <template #addonAfter>
+                    <div class="btn-code">
+                        <button @click="getCode" :disabled="countdown > 0"> <span v-if="countdown === 0">获取验证码</span>
+                            <span v-else>{{ countdown }}</span></button>
+                    </div>
+                </template>
+            </a-input>
+        </a-form-item>
+        <a-form-item>
+            <div class="btn">
+                <a-button type="primary" html-type="submit">下一步</a-button>
+            </div>
+        </a-form-item>
+    </a-form>
 </template>
-
 <style scoped lang="less">
-/* 在这里添加你的 Less 样式 */
-.get-code {
-    .ant-input-affix-wrapper {
-        padding-right: 0;
-    }
+.btn-code {
+    width: 120px;
+    height: 52px;
+    background-color: #fee5be;
+    .flex-row;
 
-    .ant-input {
-        height: 46px;
-        font-weight: 700;
-        background-color: #f2f2f2;
-        font-size: 18px;
+    button {
+        background: transparent;
+        border: none;
+        color: #da8d43;
+        cursor: pointer;
     }
-
-    .btn-code {
-        .ant-btn {
-            width: 102px;
-            border-radius: 0 6px 6px 0;
-            background-color: #fee5be;
-            color: #da8d43;
-        }
-    }
-
-    .ant-btn {
-        border-radius: 0;
-        height: 46px;
-        width: 300px;
-    }
-
 }
 </style>

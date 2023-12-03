@@ -77,7 +77,8 @@ const getGoodsList = () => {
                         <a-select ref="select" class="item" placeholder="全部平台" v-model:value="value1" :options="options1"
                             @change="handleChange"></a-select>
                         <a-input v-model:value="value" class="item-input" placeholder="名称和藏品" />
-                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+                        <a-button type="primary" :loading="loading" @click="getGoodsList"
+                            :icon="h(SearchOutlined)">搜索</a-button>
                     </div>
                     <div class="search-cate" v-else>
                         <a-select ref="select" placeholder="全部属性" v-model:value="value1" style="width: 220px"

@@ -176,7 +176,7 @@ const getGoodsList = () => {
             <a-select ref="select" placeholder="全部平台" class="item" v-model:value="value1" :options="options1"
               @change="handleChange"></a-select>
             <a-input v-model:value="value" class="item-input" placeholder="名称和藏品" />
-            <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+            <a-button type="primary" :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
           </div>
         </template>
         <template v-slot:active3>
@@ -192,12 +192,10 @@ const getGoodsList = () => {
           </a-table>
         </template>
       </show-modal>
+      <a-button style="width: 120px; border-radius: 6px; margin-left: 42px;" type="primary">
+        抢购
+      </a-button>
       <CatePage></CatePage>
-      <div class="btn">
-        <a-button>
-          抢购
-        </a-button>
-      </div>
     </div>
   </div>
 </template>
@@ -219,15 +217,6 @@ const getGoodsList = () => {
       background-color: #fff;
       font-size: 16px;
       font-weight: 400;
-    }
-
-    .btn {
-      padding: 20px 40px;
-
-      .ant-btn {
-        height: 40px;
-        width: 100px;
-      }
     }
   }
 }

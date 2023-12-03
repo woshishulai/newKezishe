@@ -2,6 +2,7 @@
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { message } from "ant-design-vue";
+import { handleFinishFailed } from "@/utils/form/rules.js"
 import {
   UserOutlined,
   LockOutlined,
@@ -34,9 +35,6 @@ const handleFinish = () => {
   formState.remember == true ? user.addNameList(formState.username) : ''
   info("success", "登录成功");
   router.push('/')
-};
-const handleFinishFailed = (err) => {
-  err.errorFields.forEach((field) => info("error", field.errors[0]));
 };
 </script>
 

@@ -45,11 +45,13 @@ const changeShowDetails = () => {
                         <a-select ref="select" placeholder="所有时间" class="item" v-model:value="value1" :options="options1"
                             @change="handleChange"></a-select>
                         <a-input v-model:value="value" class="item-input" placeholder="名称和藏品" />
-                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+                        <a-button type="primary" :loading="loading" @click="getGoodsList"
+                            :icon="h(SearchOutlined)">搜索</a-button>
                     </div>
                     <div class="search-cate " v-else>
                         <a-input v-model:value="value" style="width: 330px;" placeholder="结算单号" />
-                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+                        <a-button type="primary" :loading="loading" @click="getGoodsList"
+                            :icon="h(SearchOutlined)">搜索</a-button>
                     </div>
                 </template>
                 <template v-slot:active3>
@@ -91,7 +93,7 @@ const changeShowDetails = () => {
                         </div>
                     </div>
                     <div class="table-wrap" v-else>
-                        <a-table :columns="gouWuTitleColumns" :dataSource="gouWuDataSource"></a-table>
+                        <a-table :pagination="false" :columns="gouWuTitleColumns" :dataSource="gouWuDataSource"></a-table>
                         <CatePage></CatePage>
                     </div>
                 </template>

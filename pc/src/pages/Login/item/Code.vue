@@ -5,6 +5,7 @@ import { codeRules } from './rules';
 import { message } from "ant-design-vue";
 import { UserOutlined, LockOutlined, CheckCircleOutlined, CloseOutlined } from '@ant-design/icons-vue';
 import { useUserInfo } from "@/store/store";
+import { handleFinishFailed } from "@/utils/form/rules.js"
 const user = useUserInfo();
 const router = useRouter();
 const route = useRoute();
@@ -18,9 +19,6 @@ const formState = reactive({
     remember: true,
 });
 const visible = ref(false);
-const hide = () => {
-    visible.value = false;
-};
 const info = (status, msg) => message[status](msg);
 const getPhone = () => {
     const phoneRegex = /^1[3456789]\d{9}$/;
@@ -45,9 +43,6 @@ const handleFinish = values => {
     formState.remember == true ? user.addPhoneList(formState.phone) : ''
     info("success", "登录成功");
     router.push('/')
-};
-const handleFinishFailed = err => {
-    err.errorFields.forEach((field) => info("error", field.errors[0]));
 };
 
 </script>
@@ -79,7 +74,8 @@ const handleFinishFailed = err => {
                         <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
                     </template>
                     <template #addonAfter>
-                        <a-button @click="getCode" :disabled="countdown > 0"> <span v-if="countdown === 0">获取验证码</span>
+                        <a-button type="primary" @click="getCode" :disabled="countdown > 0"> <span
+                                v-if="countdown === 0">获取验证码</span>
                             <span v-else>{{ countdown }}</span></a-button>
                     </template>
                 </a-input>
@@ -102,11 +98,33 @@ const handleFinishFailed = err => {
             </a-form-item>
             <a-form-item>
                 <div class="btn">
-                    <a-button html-type="submit">登录</a-button>
+                    <a-button type="primary" html-type="submit">登录</a-button>
                 </div>
             </a-form-item>
         </a-form>
     </div>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.show-name-list {
+    .flex-col;
+    align-items: flex-start;
+    font-size: 16px;
+
+    .name-item {
+        .flex-row;
+        justify-content: space-between;
+        cursor: pointer;
+        width: 200px;
+        padding: 10px 0;
+
+        span {
+            font-size: 14px;
+        }
+
+        &:hover {
+            color: #9a0000;
+        }
+    }
+}
+</style>

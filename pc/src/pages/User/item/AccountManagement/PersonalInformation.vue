@@ -6,7 +6,7 @@ const labelCol = {
   span: 5,
 };
 const wrapperCol = {
-  span: 13,
+  span: 19,
 };
 const formState = reactive({
   name: '',
@@ -26,7 +26,6 @@ const formState2 = reactive({
   date1: undefined,
   region: undefined,
 });
-
 const onSubmit = () => {
   formRef.value
     .validate()
@@ -43,7 +42,6 @@ const onFinish = values => {
 const onFinishFailed = errorInfo => {
   console.log('Failed:', errorInfo);
 };
-
 </script>
 
 <template>
@@ -73,7 +71,7 @@ const onFinishFailed = errorInfo => {
             </a-radio-group>
           </a-form-item>
           <a-form-item label="出生年月" name="date1">
-            <a-date-picker placeholder="" v-model:value="formState.date1" show-time type="date" style="width: 100%" />
+            <a-date-picker placeholder="" v-model:value="formState.date1" type="date" style="width: 100%" />
           </a-form-item>
           <a-form-item label="证件类型" name="region" class="card-cate">
             <a-select v-model:value="formState.region" placeholder="">
@@ -82,26 +80,16 @@ const onFinishFailed = errorInfo => {
             </a-select>
           </a-form-item>
           <a-form-item label="证件照片" class="upload-wrap">
-            <div class="upload">
-              <a-upload v-model:file-list="fileList" name="file" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                :headers="headers" @change="handleChange">
-                <div class="upload-btn">
-                  <upload-outlined></upload-outlined>
-                  <span>+</span>
-                  <h5>正面</h5>
-                </div>
-              </a-upload>
-              <a-upload v-model:file-list="fileList" name="file" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                :headers="headers" @change="handleChange">
-                <div class="upload-btn">
-                  <upload-outlined></upload-outlined>
-                  <span>+</span>
-                  <h5>反面</h5>
-                </div>
-              </a-upload>
-            </div>
+            <a-upload v-model:file-list="fileList" name="file" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              :headers="headers" @change="handleChange">
+              <div class="upload-btn">
+                <upload-outlined></upload-outlined>
+                <span>+</span>
+                <h5>上传</h5>
+              </div>
+            </a-upload>
           </a-form-item>
-          <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+          <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
             <a-button html-type="submit" type="primary">保存基本信息</a-button>
           </a-form-item>
         </a-form>
@@ -121,7 +109,7 @@ const onFinishFailed = errorInfo => {
           <a-form-item label="电话" name="name">
             <a-input type="number" v-model:value="formState1.phone" />
           </a-form-item>
-          <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+          <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
             <a-button html-type="submit" type="primary">保存基本信息</a-button>
           </a-form-item>
         </a-form>
@@ -132,7 +120,7 @@ const onFinishFailed = errorInfo => {
       <div class="cate-list">
         <div class="cate-info">
           <span>设置收藏类别:</span>
-          <a-select v-model:value="formState.region" placeholder="">
+          <a-select v-model:value="formState.region" style="width: 356px;" placeholder="">
             <a-select-option value="cardId">身份证</a-select-option>
             <a-select-option value="driverLicense">驾驶证</a-select-option>
           </a-select>
@@ -164,118 +152,33 @@ const onFinishFailed = errorInfo => {
       gap: 90px;
     }
 
-    .ant-input {
-      height: 46px;
-      width: 280px;
-
-      &:hover {
-        border-color: #9a0000;
-      }
-
-      &:focus {
-        border-color: #9a0000;
-      }
-    }
-
-    :deep(.ant-select-single .ant-select-selector .ant-select-selection-item:after) {
-      padding-top: 6px;
-    }
-
-    :deep(.ant-select:hover .ant-select-selector) {
-      border-color: #9a0000;
-    }
-
     .form-wrap {
       width: 500px;
       padding: 50px 0 30px 50px;
 
-      :deep(.ant-form-item .ant-form-item-label>label) {
-        // margin-top: 0;
-        font-size: 16px;
-      }
-
-
-
-
-
-      :deep(.ant-form-item .ant-form-item-control-input) {
-        height: 46px;
-        width: 280px;
-
-        span {
-          font-size: 16px;
-        }
-      }
-
-      :deep(.ant-picker) {
-        height: 46px;
-      }
-
-      :deep(.ant-select-selector) {
-        height: 46px;
-
-      }
-
-      .ant-picker {
-        &:hover {
-          border-color: #9a0000;
-        }
-
-        &:focus {
-          border-color: #9a0000;
-        }
-      }
-
-
-
-      .ant-picker-focused {
-        border-color: #9a0000;
-      }
-
-      .card-cate {
-        margin-top: 40px;
+      .ant-radio-group {
+        .flex-row;
+        justify-content: flex-start;
+        height: 52px
       }
 
       .upload-wrap {
-        margin-top: 80px;
-        height: 100px;
+        .upload-btn {
+          .flex-col;
+          padding: 20px 80px;
+          background-color: #f1f5f8;
+          color: #6d6d6d;
+          cursor: pointer;
 
-        .upload {
-          .flex-row;
-          justify-content: flex-start;
-          gap: 30px;
+          span {
+            font-size: 30px;
+          }
 
-
-          .upload-btn {
-            .flex-col;
-            padding: 20px 80px;
-            background-color: #f1f5f8;
-            color: #6d6d6d;
-            cursor: pointer;
-
-            span {
-              font-size: 30px;
-            }
-
-            h5 {
-              font-size: 20px;
-              width: 40px;
-            }
+          h5 {
+            font-size: 20px;
+            width: 40px;
           }
         }
-      }
-
-      :deep(.ant-radio-wrapper .ant-radio-checked .ant-radio-inner) {
-        background-color: #9a0000;
-        border-color: #9a0000;
-      }
-
-      .ant-btn {
-        width: 200px;
-        background-color: #9a0000;
-        height: 46px;
-        border-radius: 0;
-        margin-left: 20px;
       }
     }
 
@@ -293,33 +196,12 @@ const onFinishFailed = errorInfo => {
           width: 150px;
         }
 
-        :deep(.ant-select-selector) {
-          width: 230px;
-          height: 46px;
-        }
-
-        // :deep(.ant-select-single .ant-select-selector .ant-select-selection-item:after) {
-        //   padding-top: 6px;
-        // }
-
       }
 
       .add-like {
         padding-left: 150px;
         .flex-row;
         gap: 20px;
-
-        .ant-input {
-          width: 230px;
-          height: 46px;
-        }
-
-        .ant-btn {
-          width: 100px;
-          border-radius: 2;
-          height: 43px;
-          background-color: #a4b0bb;
-        }
       }
 
       .like-info {
@@ -328,9 +210,9 @@ const onFinishFailed = errorInfo => {
 
         span {
           background-color: #f1f1f1;
-          height: 46px;
           .flex-row;
           width: 130px;
+          padding: 20px;
           cursor: pointer;
         }
       }

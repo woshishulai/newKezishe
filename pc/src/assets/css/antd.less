@@ -1,3 +1,8 @@
+// // //loading
+.anticon svg {
+    color: #9a0000;
+}
+
 //去掉按钮默认的阴影
 .ant-btn-primary {
     box-shadow: none;
@@ -8,6 +13,37 @@
 .ant-input-group .ant-input-group-addon {
     padding: 0px;
     border: none;
+}
+
+//表单左边的label
+.ant-form-item .ant-form-item-label>label {
+    height: 52px;
+}
+
+//顶部搜索框按钮右边的白线
+.ant-input-search>.ant-input-group>.ant-input-group-addon:last-child {
+    inset-inline-start: 0px;
+}
+
+
+// //select颜色
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    color: #fff;
+    background-color: #9a0000;
+}
+
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    color: #fff;
+}
+
+//日期选择鼠标经过时间
+.ant-picker-dropdown .ant-picker-time-panel-column>li.ant-picker-time-panel-cell .ant-picker-time-panel-cell-inner:hover {
+    color: #fff;
+}
+
+//日期选择鼠标经过天
+.ant-picker-content td:hover {
+    color: #fff;
 }
 
 // //input的样式
@@ -97,10 +133,6 @@
 //     height: 28px;
 // }
 
-// //loading
-// .anticon svg {
-//     color: #9a0000;
-// }
 
 // .ant-spin.ant-spin-show-text .ant-spin-text {
 //     font-size: 40px;
@@ -115,9 +147,17 @@
 
 
 // //menu下拉菜单
+.ant-menu-light {
+    background-color: #fff;
+}
+
 // .ant-menu-light .ant-menu-item-selected {
-//     background-color: #fff; //去掉背景颜色
+//     // background-color: #fff; //去掉背景颜色
 // }
+
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+    background-color: #fff;
+}
 
 // .ant-menu .ant-menu-submenu-title {
 //     font-weight: 600; //字体粗细
@@ -127,59 +167,73 @@
 //     font-weight: 600; //没有子级菜单的字体粗细
 // }
 
-// .ant-menu-item .ant-menu-item-icon svg {
-//     color: #333; //一级和二级菜单的的图标颜色
-// }
+.ant-menu-item .ant-menu-item-icon svg {
+    color: #333; //一级和二级菜单的的图标颜色
+}
 
-// .ant-menu-submenu-title .ant-menu-item-icon svg {
-//     color: #333; //一级和二级菜单的的图标颜色
-// }
+.ant-menu-submenu-title .ant-menu-item-icon svg {
+    color: #333; //一级和二级菜单的的图标颜色
+}
 
-// .ant-menu-light .ant-menu-item-selected {
-//     color: #9a0000; //被选中的文字颜色
-// }
+.ant-menu-light .ant-menu-item-selected {
+    color: #9a0000; //被选中的文字颜色
+}
 
-// .ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title {
-//     color: #9a0000; //被选中的文字颜色
-// }
+.ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title {
+    color: #9a0000; //被选中的文字颜色
+}
 
-// .ant-menu-light .ant-menu-item-selected svg {
-//     color: #9a0000;
-// }
+.ant-menu-light .ant-menu-item-selected svg {
+    color: #9a0000;
+}
 
-// //没有子菜单的图标
-// .ant-menu-item-selected svg {
-//     color: #9a0000;
-// }
+//没有子菜单的图标
+.ant-menu-item-selected svg {
+    color: #9a0000;
+}
 
-// //被选中的title的图标颜色
-// .ant-menu-submenu-selected .ant-menu-submenu-title svg {
-//     color: #9a0000;
-// }
+//被选中的title的图标颜色
+.ant-menu-submenu-selected .ant-menu-submenu-title svg {
+    color: #9a0000;
+}
 
 // //当鼠标经过的时候
-// .ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
-//     background-color: #9a0000;
-//     color: #fff;
-// }
 
-// .ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover svg {
-//     color: #fff;
-// }
+.ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
+    background-color: #9a0000;
+    color: #fff;
+}
+
+.ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover svg {
+    color: #fff;
+}
 
 // //表格的头部背景颜色
-// .ant-table-wrapper .ant-table-thead>tr>th {
-//     background-color: #f7f7f7;
-// }
+.ant-table-wrapper .ant-table-thead>tr>th {
+    background-color: #f7f7f7;
+}
 
+//表格身体
+.ant-table-wrapper .ant-table {
+    background-color: #fff;
+}
 
+// 表格底部
+.ant-table-wrapper {
+    padding-bottom: 38px;
+}
 
 // //弹出对话框到按钮
-// .ant-modal-confirm .ant-modal-confirm-btns {
-//     .flex-row;
-//     justify-content: flex-end;
-//     gap: 30px;
-// }
+.ant-modal-confirm .ant-modal-confirm-btns {
+    .flex-row;
+    justify-content: flex-end;
+    padding: 20px;
+    gap: 30px;
+
+    .ant-btn {
+        width: 180px;
+    }
+}
 
 // //下拉框
 
@@ -221,34 +275,38 @@
 // }
 
 // //分页
-// .ant-pagination .ant-pagination-item {
-//     border: 1px solid #dbdbdb;
-// }
+.ant-pagination .ant-pagination-item {
+    border: 1px solid #dbdbdb;
+    width: 52px;
+}
 
-// //分页其他页数鼠标经过
-// .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {
-//     background-color: #9a0000;
+//分页其他页数鼠标经过
+.ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {
+    background-color: #9a0000;
 
-//     a {
-//         color: #fff;
-//     }
-// }
+    a {
+        color: #fff;
+    }
+}
 
-// // :deep(.ant-pagination-item-active) {
-// //     background-color: #9a0000;
-// //     color: #fff;
-// // }
-
-// .ant-pagination .ant-pagination-item-active {
+// :deep(.ant-pagination-item-active) {
 //     background-color: #9a0000;
 //     color: #fff;
-
-//     a {
-//         color: #fff;
-//     }
 // }
+.ant-pagination .ant-pagination-options-quick-jumper input {
+    width: 52px;
+}
+
+.ant-pagination .ant-pagination-item-active {
+    background-color: #9a0000;
+    color: #fff;
+
+    a {
+        color: #fff;
+    }
+}
 
 // // 已选中的分页 鼠标经过里面的A
-// .ant-pagination .ant-pagination-item-active:hover a {
-//     color: #fff;
-// }
+.ant-pagination .ant-pagination-item-active:hover a {
+    color: #fff;
+}

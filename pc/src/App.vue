@@ -1,9 +1,12 @@
 <script setup>
+import { ref, } from "vue"
+import { message } from "ant-design-vue";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 dayjs.locale('zh-cn');
 const locale = zhCN
+const spinning = ref(false);
 </script>
 
 <template>
@@ -27,7 +30,9 @@ const locale = zhCN
         //组件高度 比如输入框 按钮等
         controlHeight: '52',
         //输入框提示文本
-        colorTextPlaceholder: '#000'
+        colorTextPlaceholder: '#000',
+        //被选中的
+        controlItemBgActive: '#fff'
         //边框粗细
         // lineWidth:'2'
         //用于配置动画效果，为 `false` 时则关闭动画
@@ -51,8 +56,9 @@ const locale = zhCN
         // colorTextPlaceholder: '#007306',
       },
     }">
-      <show-toast></show-toast>
-      <RouterView></RouterView>
+      <a-spin :spinning="spinning" tip="Loading...">
+        <RouterView></RouterView>
+      </a-spin>
     </a-config-provider>
   </div>
 </template>
