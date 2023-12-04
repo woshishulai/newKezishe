@@ -6,13 +6,11 @@ import { createVNode } from 'vue';
 import { Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { shippingDataSource, shippingColumns } from "../../data"
-import { statusList } from "../../data";
+// import { statusList } from "../../data";
+// import { statusList } from "@/utils/user/status"
 import { countryList } from "@/utils/user/country"
-console.log(countryList);
-const router = useRouter();
-const route = useRoute();
-const props = defineProps({});
-onMounted(() => { });
+import { data } from "@/utils/user/data"
+import { handleFinishFailed } from "@/utils/form/rules.js"
 const formState = reactive({
   username: "",
   region: '中国',
@@ -22,21 +20,56 @@ const formState = reactive({
   resource: "",
   desc: "",
 });
-const handleChange = value => {
+const statusList = (country) => {
+  const defaultCountry = country || 'CHN';
+
+  const getStatusList = (countryCode) => {
+    const provinces = data[countryCode];
+
+    if (!provinces) {
+      console.error(`Invalid country code: ${countryCode}`);
+      return [];
+    }
+
+    return Object.entries(provinces).map(([provinceCode, provinceName]) => {
+      const cities = data[provinceCode];
+
+      return {
+        value: provinceName,
+        label: provinceName,
+        children: cities
+          ? Object.entries(cities).map(([cityCode, cityName]) => ({
+            value: cityName,
+            label: cityName,
+          }))
+          : [],
+      };
+    });
+  };
+
+  return getStatusList(defaultCountry);
+};
+
+// 示例调用
+const result = statusList(); // 默认国家是 'CHN'
+console.log(result);
+
+console.log(data.COUNTRIES);
+const router = useRouter();
+const route = useRoute();
+const props = defineProps({});
+onMounted(() => { });
+const handleChange = (value, option) => {
+  console.log(value, option.id);
   formState.region = value
+};
+const handleFinish = () => {
   console.log(formState);
 };
 const showConfirm = () => {
   Modal.confirm({
     title: '确定删除此地址吗?',
     icon: createVNode(ExclamationCircleOutlined),
-    // content: createVNode(
-    //   'div',
-    //   {
-    //     style: 'color:red;',
-    //   },
-    //   '点击确定删除，取消返回',
-    // ),
     onOk() {
       console.log('确定');
     },
@@ -47,19 +80,7 @@ const showConfirm = () => {
   });
 };
 
-const onSubmit = () => {
-  formRef.value
-    .validate()
-    .then(() => {
-      console.log("values", formState, toRaw(formState));
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
-};
-const resetForm = () => {
-  formRef.value.resetFields();
-};
+
 </script>
 
 <template>
@@ -80,7 +101,7 @@ const resetForm = () => {
       <div class="title">新增快递收货地址信息</div>
       <div class="form-wrap">
         <a-form labelAlign="left" :model="formState" name="basic" :label-col="{ span: 2 }" :wrapper-col="{ span: 7 }"
-          autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
+          autocomplete="off" @finish="handleFinish" @finishFailed="handleFinishFailed">
           <a-form-item label="姓名" name="username">
             <a-input v-model:value.trim="formState.username" />
           </a-form-item>
@@ -88,8 +109,11 @@ const resetForm = () => {
             <a-select v-model:value="formState.region" show-search :options="countryList"
               @change="handleChange"></a-select>
           </a-form-item>
+          <a-form-item label="省市地址" name="username">
+            <a-cascader expand-trigger="hover" v-model:value="formState.date1" :options="result" />
+          </a-form-item>
           <a-form-item label="详细地址" name="username">
-            <a-cascader v-model:value="value" :options="statusList" />
+            <a-textarea v-model:value="formState.text" :auto-size="{ minRows: 2, maxRows: 5 }" />
           </a-form-item>
           <a-form-item label="邮编电话" name="bankNmae">
             <a-input type="number" v-model:value="formState.bankNmae" />
