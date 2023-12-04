@@ -5,6 +5,7 @@ import { codeRules } from './rules';
 import { message } from "ant-design-vue";
 import { UserOutlined, LockOutlined, CheckCircleOutlined, CloseOutlined } from '@ant-design/icons-vue';
 import { useUserInfo } from "@/store/store";
+import { handleFinishFailed } from "@/utils/form/rules.js"
 const user = useUserInfo();
 const router = useRouter();
 const route = useRoute();
@@ -18,9 +19,6 @@ const formState = reactive({
     remember: true,
 });
 const visible = ref(false);
-const hide = () => {
-    visible.value = false;
-};
 const info = (status, msg) => message[status](msg);
 const getPhone = () => {
     const phoneRegex = /^1[3456789]\d{9}$/;
@@ -35,7 +33,6 @@ const getCode = () => {
     const isPhoneValid = getPhone();
     if (isPhoneValid) {
         countdown.value = 60
-        // getPhoneCodeApi(formState.phone) //获取验证码的API
         info("success", '验证码发送成功请输入验证码')
         const interval = setInterval(() => {
             countdown.value > 0 ? countdown.value-- : clearInterval(interval)
@@ -46,9 +43,6 @@ const handleFinish = values => {
     formState.remember == true ? user.addPhoneList(formState.phone) : ''
     info("success", "登录成功");
     router.push('/')
-};
-const handleFinishFailed = err => {
-    err.errorFields.forEach((field) => info("error", field.errors[0]));
 };
 
 </script>
@@ -75,12 +69,13 @@ const handleFinishFailed = err => {
                 </a-popover>
             </a-form-item>
             <a-form-item name="phoneCode">
-                <a-input v-model:value="formState.phoneCode" type="number" placeholder="验证码">
+                <a-input type="number" v-model:value.trim="formState.phoneCode" placeholder="验证码">
                     <template #prefix>
                         <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
                     </template>
-                    <template #suffix>
-                        <a-button @click="getCode" :disabled="countdown > 0"> <span v-if="countdown === 0">获取验证码</span>
+                    <template #addonAfter>
+                        <a-button type="primary" @click="getCode" :disabled="countdown > 0"> <span
+                                v-if="countdown === 0">获取验证码</span>
                             <span v-else>{{ countdown }}</span></a-button>
                     </template>
                 </a-input>
@@ -103,7 +98,7 @@ const handleFinishFailed = err => {
             </a-form-item>
             <a-form-item>
                 <div class="btn">
-                    <a-button html-type="submit">登录</a-button>
+                    <a-button type="primary" html-type="submit">登录</a-button>
                 </div>
             </a-form-item>
         </a-form>
@@ -111,33 +106,6 @@ const handleFinishFailed = err => {
 </template>
 
 <style scoped lang="less">
-.code {
-    .ant-input-affix-wrapper {
-        padding-right: 0;
-    }
-
-    .ant-btn {
-        width: 102px;
-        border-radius: 0;
-        height: 46px;
-    }
-
-
-    .btn {
-        cursor: pointer;
-        background-color: #9a0000;
-        padding: 2px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        button {
-            width: 100%;
-        }
-    }
-
-}
-
 .show-name-list {
     .flex-col;
     align-items: flex-start;

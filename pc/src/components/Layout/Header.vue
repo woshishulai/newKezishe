@@ -20,9 +20,10 @@ const num = 0;
             <div class="con-main-wrap">
                 <div class="welcome-login">
                     <h5>您好，欢迎来到壳子社</h5>
+                    <a-divider type="vertical" style="background-color: #a2887d;" />
                     <div class="login" v-if="user.userNameList.length <= 0">
                         <span class="active" @click="router.push('/login')">登录</span>
-                        |
+                        <a-divider type="vertical" style="background-color: #a2887d;" />
                         <span @click="router.push('/register')">注册</span>
                     </div>
                     <div v-else class="user-name">{{ user.userNameList[0] }}</div>
@@ -35,11 +36,11 @@ const num = 0;
                             }}</a-select-option>
                         <a-select-option @click="router.push('/login')" value='退出'>退出</a-select-option>
                     </a-select>
-                    <li>|</li>
+                    <a-divider type="vertical" style="background-color: #a2887d;" />
                     <li>
-                        购物车<span class="active">{{ num }}</span> 件
+                        购物车 <span class="active"> {{ num }}</span> 件
                     </li>
-                    <li>|</li>
+                    <a-divider type="vertical" style="background-color: #a2887d;" />
                     <li>免费咨询热线: 4000-888-0888</li>
                 </div>
             </div>
@@ -74,7 +75,7 @@ const num = 0;
             .flex-row;
             justify-content: space-between;
             padding: 12px;
-            font-weight: 600;
+            font-weight: 500;
 
             .welcome-login {
                 .flex-row;

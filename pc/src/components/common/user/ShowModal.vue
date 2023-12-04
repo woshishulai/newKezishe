@@ -101,11 +101,15 @@ defineExpose({
         }
     }
 
+    :deep(.ant-input) {
+        border-radius: 6px;
+    }
+
     :deep(.search-cate) {
         .flex-row;
         justify-content: flex-start;
-        gap: 30px;
-        padding: 20px;
+        gap: 20px;
+        padding: 20px 10px;
 
         .item {
             flex: 1;
@@ -117,14 +121,12 @@ defineExpose({
     }
 
     :deep(.ant-select-selector) {
-        height: 46px;
-        padding-top: 6px;
+        border-radius: 6px;
     }
 
     :deep(.ant-btn) {
-        padding: 23px 20px;
-        color: #fff;
-        background-color: #9a0000;
+        border-radius: 6px;
+        width: 120px;
 
         .anticon svg {
             color: #fff;

@@ -6,6 +6,7 @@ const props = defineProps({})
 onMounted(() => { });
 const inputValue = ref('')
 const active = ref(0)
+const showLoading = ref(false)
 const list = [
     {
         cate: '竞买'
@@ -18,6 +19,7 @@ const list = [
     }
 ]
 const onSearch = searchValue => {
+    showLoading.value = true
     console.log('use value', searchValue);
     console.log('or use this.value', inputValue.value);
 };
@@ -35,12 +37,8 @@ const cateInfo = (index) => {
                 <img :src="getImageUrl('login/red-down.png')" alt="">
             </div>
         </div>
-        <a-input-search v-model:value="inputValue" @pressEnter="onSearch" placeholder="请输入藏品名称和编号" size="large"
-            @search="onSearch">
-            <template #enterButton>
-                <a-button>搜索</a-button>
-            </template>
-        </a-input-search>
+        <a-input-search v-model:value="inputValue" placeholder="请输入藏品名称和编号" :loading="showLoading" enter-button="搜索"
+            size="large" @search="onSearch" />
     </div>
 </template>
 
@@ -49,20 +47,6 @@ const cateInfo = (index) => {
     .flex-col;
     gap: 5px;
     align-items: flex-start;
-
-    :deep(.ant-input-group) {
-        height: 46px;
-
-        .ant-input {
-            height: 46px;
-            border: 2px solid #9a0000;
-        }
-    }
-
-    .ant-input-search>.ant-input-group>.ant-input-group-addon:last-child .ant-input-search-button:not(.ant-btn-primary) {
-        width: 100px;
-        color: #fff;
-    }
 
     .cate-list {
         .flex-row;
@@ -95,6 +79,24 @@ const cateInfo = (index) => {
                 img {
                     display: block;
                 }
+            }
+        }
+    }
+
+    :deep(.ant-input-group-wrapper .ant-input-group) {
+        border: 2px solid #9a0000;
+        border-radius: 6px;
+
+        .ant-input {
+            height: 52px;
+        }
+
+        .ant-btn.ant-btn-lg {
+            height: 52px;
+            width: 100px;
+
+            .anticon svg {
+                color: #fff;
             }
         }
     }

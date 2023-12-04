@@ -56,7 +56,8 @@ const getGoodsList = () => {
                         <a-select ref="select" class="item" placeholder="全部状态" v-model:value="value1" :options="options3"
                             @change="handleChange"></a-select>
                         <a-input v-model:value="value" class="item-input" placeholder="合同号" />
-                        <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+                        <a-button type="primary" :loading="loading" @click="getGoodsList"
+                            :icon="h(SearchOutlined)">搜索</a-button>
                     </div>
                 </template>
                 <template v-slot:active3>

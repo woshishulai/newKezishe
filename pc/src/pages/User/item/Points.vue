@@ -100,7 +100,7 @@ const dataSource = [
               <a-select ref="select" placeholder="近一年" v-model:value="value1" style="width: 220px" :options="options1"
                 @change="handleChange"></a-select>
               <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
-              <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+              <a-button type="primary" :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
             </div>
           </template>
           <template v-slot:active3>

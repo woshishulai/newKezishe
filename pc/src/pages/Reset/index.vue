@@ -31,11 +31,9 @@ provide('nextClick', nextClick);
                     </div>
                 </div>
                 <div class="con-wrap">
-                    <div class="element-wrap">
-                        <GetCode v-if="setups == 0"></GetCode>
-                        <NewPasswrod v-if="setups == 1"></NewPasswrod>
-                        <Success v-if="setups == 2"></Success>
-                    </div>
+                    <GetCode v-if="setups == 0"></GetCode>
+                    <NewPasswrod v-if="setups == 1"></NewPasswrod>
+                    <Success v-if="setups == 2"></Success>
                 </div>
             </div>
         </div>
@@ -99,15 +97,10 @@ provide('nextClick', nextClick);
                 width: 100%;
                 .flex-row;
                 height: 320px;
+                padding-top: 24px;
 
-                .element-wrap {
-
-
-                    .ant-btn {
-                        width: 300px;
-                        height: 46px;
-                        border-radius: 0;
-                    }
+                :deep(.ant-form) {
+                    width: 360px;
                 }
             }
         }

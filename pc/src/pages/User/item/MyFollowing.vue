@@ -160,7 +160,7 @@ const changeGuanZhu = (item) => {
             <a-select ref="select" placeholder="所有分类" v-model:value="value1" style="width: 220px" :options="options1"
               @change="handleChange"></a-select>
             <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
-            <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
+            <a-button type="primary" :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
           </div>
         </template>
         <template v-slot:active3>
@@ -209,30 +209,11 @@ const changeGuanZhu = (item) => {
       }
     }
 
-    :deep(.ant-table-wrapper .ant-table-thead>tr>th) {
-      background-color: #fff;
-      font-size: 16px;
-      font-weight: 400;
-    }
-
     .btns {
       cursor: pointer;
-      padding: 5px 0;
+      padding: 10px 0;
+      border-radius: 6px;
       background-color: #eef3f8;
-    }
-
-    .add-array {
-      padding: 20px 0;
-      .flex-row;
-      gap: 30px;
-      justify-content: flex-start;
-
-      .ant-btn {
-        font-weight: 600;
-        padding: 0;
-        width: 100px;
-        height: 40px;
-      }
     }
   }
 }

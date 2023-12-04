@@ -115,13 +115,7 @@ const onChange = (current) => {
         </div>
         <div class="swiper-wrap">
           <a-carousel autoplay>
-            <img
-              class="swiper-img"
-              v-for="item in swiperList"
-              :key="item.img"
-              :src="getImageUrl(item.img)"
-              alt="img"
-            />
+            <img class="swiper-img" v-for="item in swiperList" :key="item.img" :src="getImageUrl(item.img)" alt="img" />
           </a-carousel>
         </div>
       </div>
@@ -166,20 +160,24 @@ const onChange = (current) => {
     .flex-row;
     align-items: flex-start;
     gap: 26px;
+
     .dynamic-wrap {
       padding: 44px 20px 24px 20px;
       background: #c83327;
+
       .new-wrap {
         h2 {
           text-align: center;
           font-size: 22px;
           color: #fcdca5;
         }
+
         .login-wrap {
           padding: 0 12px;
           margin-top: 22px;
           .flex-row;
           justify-content: space-between;
+
           .ant-btn-default {
             .flex-row;
             background: #fcdca5;
@@ -192,27 +190,33 @@ const onChange = (current) => {
           }
         }
       }
+
       .card-wrap {
         margin-top: 20px;
         background: #fff;
         border-radius: 12px;
         padding-bottom: 20px;
+
         .top-info {
           .flex-row;
           padding: 20px;
           justify-content: space-between;
+
           h5 {
             font-size: 20px;
             font-weight: 600;
           }
+
           span {
             font-size: 16px;
             color: #3f3f3f;
             cursor: pointer;
           }
         }
+
         .text-list {
           .flex-col;
+
           .text-item {
             width: 360px;
             padding: 12px;
@@ -223,31 +227,38 @@ const onChange = (current) => {
         }
       }
     }
+
     .swiper-wrap {
       flex: 1;
       width: 950px;
+
       .swiper-img {
-        height: 424px;
+        height: 457px;
       }
     }
   }
+
   .liucheng-nav {
     padding: 20px;
     .flex-row;
     justify-content: space-between;
     background: #fff;
+
     // box-shadow: 5px 5px 5px 5px #e9ebee;
     .left-wrap {
       .flex-row;
       gap: 10px;
+
       .text-wrap {
         .flex-col;
         gap: 10px;
+
         h5 {
           color: #ae3333;
           font-weight: 600;
           font-size: 20px;
         }
+
         span {
           background: #f6f6f6;
           padding: 5px 10px;
@@ -255,15 +266,19 @@ const onChange = (current) => {
         }
       }
     }
+
     .cen-wrap {
       .flex-row;
       align-items: flex-start;
       gap: 40px;
+
       .text-item {
         .flex-row;
         gap: 40px;
+
         .text-info {
           .flex-col;
+
           .num {
             .flex-col;
             width: 46px;
@@ -275,6 +290,7 @@ const onChange = (current) => {
             background: #f4f0f0;
             margin-bottom: 10px;
           }
+
           p {
             line-height: 20px;
             font-size: 14px;
@@ -282,6 +298,7 @@ const onChange = (current) => {
         }
       }
     }
+
     .submit-wrap {
       height: 100px;
       width: 130px;
@@ -293,6 +310,7 @@ const onChange = (current) => {
       cursor: pointer;
     }
   }
+
   .info-me {
     padding: 40px 0 0 40px;
     .flex-row;
@@ -300,11 +318,11 @@ const onChange = (current) => {
     gap: 10px;
     color: #ae3333;
     font-weight: 600;
+
     p {
       font-weight: 600;
       .flex-row;
       gap: 25px;
     }
   }
-}
-</style>
+}</style>

@@ -1,89 +1,68 @@
 <script setup>
-import { ref, computed, reactive, onMounted, h } from 'vue';
+import Banner from "./item/Banner.vue";
+import Cate from "./item/Cate.vue";
+import Activity from "./item/Activity.vue";
+import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
-import { SearchOutlined } from "@ant-design/icons-vue"
-import { infoDataSource, infoColumns } from "../User/data"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({})
 onMounted(() => { });
-const titleList = [
-  {
-    cate: '竞买中',
-  },
-  {
-    cate: '已得标'
-  },
-  {
-    cate: '未得标',
-  },
-  {
-    cate: '未支付',
-  },
-  {
-    cate: '不支付',
-  },
-  {
-    cate: '未发货',
-  },
-  {
-    cate: '已发货',
-  },
-]
-const statusList = [
-  {
-    cate: '已成交',
-    num: 5216
-  },
-  {
-    cate: '待预展',
-    num: 0
-  },
-  {
-    cate: '未成交',
-    num: 18
-  },
-]
-const options1 = ref([
-  {
-    value: 'cate1',
-    label: '所有分类',
-  },
-  {
-    value: 'lucy',
-    label: 'Lucy',
-  },
-  {
-    value: 'yiminghe',
-    label: 'Yiminghe',
-  },
-]);
-const formState = reactive({
-});
-const value1 = ref('cate1');
-const loading = ref(false)
-const getGoodsList = () => {
-  loading.value = true
-}
-const handleChange = value => {
-  console.log(`selected ${value}`);
-};
 </script>
 
 <template>
   <div class="wrap">
-    <show-modal :titleList="titleList" :statusList="statusList" :columns="infoColumns" :dataSource="infoDataSource">
-      <template v-slot:active3>
-        <div class="search-cate">
-          <a-select ref="select" placeholder="所有分类" v-model:value="value1" style="width: 220px" :options="options1"
-            @change="handleChange"></a-select>
-          <a-input v-model:value="value" style="width: 316px;" placeholder="名称和藏品" />
-          <a-button :loading="loading" @click="getGoodsList" :icon="h(SearchOutlined)">搜索</a-button>
-        </div>
-      </template>
-    </show-modal>
+    <Banner></Banner>
+    <Cate></Cate>
+    <Activity></Activity>
+    <img class="guanggao" :src="getImageUrl('home/guanggaode.jpg')" alt="" />
+    <!-- <div class="guanggao">
+            <img :src="getImageUrl('global/logo1.png')" alt="" />
+            <span></span>
+            <div class="text-wrap">
+                <p class="title">您身边藏品保护专家</p>
+                <p class="details">新人见面礼注册即送288元的大礼包</p>
+            </div>
+        </div> -->
   </div>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+/* 在这里添加你的 Less 样式 */
+.wrap {
+  background: url("@/assets/img/home/bg.png");
+
+  .guanggao {
+    width: 100%;
+  }
+}
+
+// .guanggao {
+//     .flex-row;
+//     padding: 37px;
+//     background: red;
+//     gap: 40px;
+
+//     span {
+//         width: 3px;
+//         height: 100px;
+//         background: #e4cb82;
+//     }
+
+//     .text-wrap {
+//         color: #e4cb82;
+//         gap: 25px;
+
+//         .title {
+//             font-size: 30px;
+//             font-weight: 600;
+//         }
+
+//         .details {
+//             margin-top: 25px;
+//             font-size: 22px;
+//         }
+//     }
+// }
+</style>
