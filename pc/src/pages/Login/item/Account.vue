@@ -9,6 +9,7 @@ import {
   CheckCircleOutlined,
   CloseOutlined
 } from "@ant-design/icons-vue";
+import { loginAccount } from "@/request/api"
 import { accountRules } from "./rules";
 import { useUserInfo } from "@/store/store";
 const user = useUserInfo();
@@ -19,6 +20,12 @@ const formState = reactive({
   code: "",
   remember: true,
 })
+const uuid = ref('123456')
+const imageUrl = ref(`http://apikzs.sc798.com/Member/Logon/GetCaptchaImage?uuid=123456`)
+const changeCodeImg = () => {
+  uuid.value += 1;
+  imageUrl.value = `http://apikzs.sc798.com/Member/Logon/GetCaptchaImage?uuid=${uuid.value}`;
+}
 const visible = ref(false);
 const hide = () => {
   visible.value = false;
@@ -26,10 +33,12 @@ const hide = () => {
 
 const info = (status, msg) => message[status](msg);
 const handleFinish = () => {
+
   let params = {
     username: formState.username,
     password: formState.password
   }
+  loginAccount()
   // loginApi(params)
   user.changeUserInfo(params)
   formState.remember == true ? user.addNameList(formState.username) : ''
@@ -73,11 +82,10 @@ const handleFinish = () => {
         <template #prefix>
           <CheckCircleOutlined style="color: rgba(154, 0, 0, 1)" />
         </template>
-        <template #suffix>
-          <!-- 后端返回的验证码 -->
-          <span class="code">
-            {{ 5432 }}
-          </span>
+        <template #addonAfter>
+          <div class="code-img" @click="changeCodeImg">
+            <img :src="imageUrl" alt="">
+          </div>
         </template>
       </a-input>
     </a-form-item>
@@ -113,5 +121,18 @@ const handleFinish = () => {
       color: #9a0000;
     }
   }
+
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.code-img {
+  height: 52px;
+  cursor: pointer;
+  background-color: #f3f3f3;
+  .flex-row;
 }
 </style>

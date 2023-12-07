@@ -6,14 +6,13 @@ import { createVNode } from 'vue';
 import { Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { shippingDataSource, shippingColumns } from "../../data"
-// import { statusList } from "../../data";
-// import { statusList } from "@/utils/user/status"
 import { countryList } from "@/utils/user/country"
 import { data } from "@/utils/user/data"
 import { handleFinishFailed } from "@/utils/form/rules.js"
 const formState = reactive({
   username: "",
   region: '中国',
+  statusList: [],
   date1: undefined,
   delivery: false,
   type: [],
@@ -22,9 +21,10 @@ const formState = reactive({
 });
 const statusList = (country) => {
   const defaultCountry = country || 'CHN';
-
+  console.log(defaultCountry);
   const getStatusList = (countryCode) => {
     const provinces = data[countryCode];
+    console.log(provinces, '我是获取的国家对应的省的数据');
 
     if (!provinces) {
       console.error(`Invalid country code: ${countryCode}`);
@@ -46,22 +46,21 @@ const statusList = (country) => {
       };
     });
   };
-
+  console.log('我是最终的结果', getStatusList(defaultCountry));
+  formState.statusList = getStatusList(defaultCountry);
+  console.log(formState.statusList);
   return getStatusList(defaultCountry);
 };
-
-// 示例调用
-const result = statusList(); // 默认国家是 'CHN'
-console.log(result);
-
-console.log(data.COUNTRIES);
+const result = statusList();
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
 onMounted(() => { });
 const handleChange = (value, option) => {
   console.log(value, option.id);
+  statusList(option.id)
   formState.region = value
+  formState.date1 = ''
 };
 const handleFinish = () => {
   console.log(formState);
@@ -79,13 +78,14 @@ const showConfirm = () => {
     class: 'test',
   });
 };
-
-
 </script>
 
 <template>
   <div class="bank-information">
     <div class="card-box">
+      <a-button @click="statusList('CHL')">
+        测试
+      </a-button>
       <div class="title">快递信息</div>
       <a-table :pagination="false" :columns="shippingColumns" :data-source="shippingDataSource">
         <template #tt="{ record }">
@@ -110,7 +110,7 @@ const showConfirm = () => {
               @change="handleChange"></a-select>
           </a-form-item>
           <a-form-item label="省市地址" name="username">
-            <a-cascader expand-trigger="hover" v-model:value="formState.date1" :options="result" />
+            <a-cascader expand-trigger="hover" v-model:value="formState.date1" :options="formState.statusList" />
           </a-form-item>
           <a-form-item label="详细地址" name="username">
             <a-textarea v-model:value="formState.text" :auto-size="{ minRows: 2, maxRows: 5 }" />

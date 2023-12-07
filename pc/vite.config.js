@@ -33,4 +33,15 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://apikzs.sc798.com',
+        changeOrigin: true,
+        // secure:true,//是否https接口
+        // ws:true,//是否代理websockets
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })
