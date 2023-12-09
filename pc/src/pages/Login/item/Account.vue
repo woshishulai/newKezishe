@@ -1,49 +1,42 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { message } from "ant-design-vue";
 import { handleFinishFailed } from "@/utils/form/rules.js"
-import {
-  UserOutlined,
-  LockOutlined,
-  CheckCircleOutlined,
-  CloseOutlined
-} from "@ant-design/icons-vue";
-import { loginAccount } from "@/request/api"
+import { UserOutlined, LockOutlined, CheckCircleOutlined, CloseOutlined } from "@/utils/icon/icon";
+import { submitLogin } from "@/request/api"
 import { accountRules } from "./rules";
 import { useUserInfo } from "@/store/store";
 const user = useUserInfo();
 const router = useRouter();
 const formState = reactive({
-  username: "",
-  password: "",
+  username: "xiaoyu",
+  password: "123456",
   code: "",
   remember: true,
 })
-const uuid = ref('123456')
-const imageUrl = ref(`http://apikzs.sc798.com/Member/Logon/GetCaptchaImage?uuid=123456`)
+function getUuid() {
+  return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 10 | 0;
+    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString();
+  });
+}
+getUuid()
+const uuid = ref(getUuid())
+const imageUrl = ref(`http://apikzs.sc798.com/Member/Logon/GetCaptchaImage?uuid=${uuid.value}`)
 const changeCodeImg = () => {
-  uuid.value += 1;
+  uuid.value = getUuid()
   imageUrl.value = `http://apikzs.sc798.com/Member/Logon/GetCaptchaImage?uuid=${uuid.value}`;
 }
 const visible = ref(false);
-const hide = () => {
-  visible.value = false;
-};
-
-const info = (status, msg) => message[status](msg);
-const handleFinish = () => {
-
+const handleFinish = async () => {
   let params = {
-    username: formState.username,
-    password: formState.password
+    UserName: formState.username,
+    Password: formState.password,
+    CaptchaCode: formState.code,
+    Uuid: uuid.value
   }
-  loginAccount()
-  // loginApi(params)
-  user.changeUserInfo(params)
-  formState.remember == true ? user.addNameList(formState.username) : ''
-  info("success", "登录成功");
-  router.push('/')
+  let res = await submitLogin(params)
+  console.log(res);
 };
 </script>
 
@@ -60,7 +53,7 @@ const handleFinish = () => {
             </div>
           </div>
         </template>
-        <a-input v-model:value.trim="formState.username" placeholder="用户名">
+        <a-input v-model:value.trim="formState.username" placeholder="用户名" id="login-account">
           <template #prefix>
             <UserOutlined style="color: rgba(154, 0, 0, 1)" />
           </template>
@@ -68,7 +61,7 @@ const handleFinish = () => {
       </a-popover>
     </a-form-item>
     <a-form-item name="password">
-      <a-input-password autocomplete="off" v-model:value.trim="formState.password" placeholder="密码">
+      <a-input-password autocomplete="off" id="login-password" v-model:value.trim="formState.password" placeholder="密码">
         <template #prefix>
           <LockOutlined style="color:rgba(154, 0, 0, 1)" />
         </template>
@@ -78,7 +71,7 @@ const handleFinish = () => {
       </a-input-password>
     </a-form-item>
     <a-form-item name="code">
-      <a-input v-model:value.trim="formState.code" placeholder="验证码" type="number">
+      <a-input v-model:value.trim="formState.code" placeholder="验证码" type="number" id="login-code">
         <template #prefix>
           <CheckCircleOutlined style="color: rgba(154, 0, 0, 1)" />
         </template>
@@ -90,7 +83,7 @@ const handleFinish = () => {
       </a-input>
     </a-form-item>
     <a-form-item>
-      <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
+      <a-checkbox id="login-check" v-model:checked="formState.remember">记住我</a-checkbox>
     </a-form-item>
     <a-form-item>
       <div class="btn">
@@ -130,9 +123,15 @@ const handleFinish = () => {
 }
 
 .code-img {
+  width: 94.5px;
   height: 52px;
   cursor: pointer;
   background-color: #f3f3f3;
   .flex-row;
+
+  img {
+    width: 100%;
+    height: 52px;
+  }
 }
 </style>

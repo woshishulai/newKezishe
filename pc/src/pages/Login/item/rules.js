@@ -42,8 +42,8 @@ const accountRules = {
             trigger: 'change',
         },
         {
-            min: 4,
-            max: 4,
+            min: 1,
+            max: 3,
             message: '请输入长度为4位数的验证码',
             trigger: 'change',
         },

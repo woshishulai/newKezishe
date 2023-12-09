@@ -5,6 +5,8 @@ import Code from "./item/Code.vue";
 import FooterLink from "@/components/common/FooterLink.vue";
 import { ref, computed, reactive, onMounted, KeepAlive } from "vue";
 import { useRouter, useRoute } from "vue-router";
+// import { useLoading } from '@/store/module/loading';
+// const Loading = useLoading()
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
@@ -22,10 +24,14 @@ const title = [
 const showLogin = (index) => {
   actives.value = index;
 };
+const showLoginApi = () => {
+  Loading.changeSpinning(true)
+}
 </script>
 
 <template>
   <div class="wrap">
+    <!-- <button @click="showLoginApi">测试</button> -->
     <Logo></Logo>
     <div class="cen-wrap">
       <div class="con-main-wrap">

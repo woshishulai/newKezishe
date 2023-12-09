@@ -1,3 +1,3 @@
-import { loading } from "./module/loading";
+import { useLoading } from "./module/loading";
 import { useUserInfo } from "./module/user"
-export { useUserInfo, loading }
+export { useUserInfo, useLoading }

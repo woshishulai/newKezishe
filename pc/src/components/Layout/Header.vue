@@ -29,8 +29,8 @@ const num = 0;
                     <div v-else class="user-name">{{ user.userNameList[0] }}</div>
                 </div>
                 <div class="user-info">
-                    <a-select :bordered="false" ref="select" v-model:value="selectValue" style="width: 110px"
-                        @change="handleChange">
+                    <a-select :virtual="false" :bordered="false" ref="select" v-model:value="selectValue"
+                        style="width: 150px" @change="handleChange">
                         <a-select-option v-for="item in user.userNameList" @click="router.push('/user/userinfo')"
                             :value=item>{{ item
                             }}</a-select-option>

@@ -1,12 +1,11 @@
 <script setup>
-import { ref, } from "vue"
-import { message } from "ant-design-vue";
+import { useLoading } from "@/store/store"
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 dayjs.locale('zh-cn');
 const locale = zhCN
-const spinning = ref(false);
+const Loading = useLoading()
 </script>
 
 <template>
@@ -56,7 +55,7 @@ const spinning = ref(false);
         // colorTextPlaceholder: '#007306',
       },
     }">
-      <a-spin :spinning="spinning" tip="Loading...">
+      <a-spin :spinning="Loading.spinning" tip="Loading...">
         <RouterView></RouterView>
       </a-spin>
     </a-config-provider>

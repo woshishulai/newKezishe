@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-export const loading = defineStore('loadings', () => {
+export const useLoading = defineStore('loadings', () => {
     const spinning = ref(false)
     const changeSpinning = (params) => {
         spinning.value = params
