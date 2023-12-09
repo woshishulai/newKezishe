@@ -5,8 +5,6 @@ import Activity from "./item/Activity.vue";
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
-import axios from "axios";
-import { loginAccount } from "@/request/api"
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({})

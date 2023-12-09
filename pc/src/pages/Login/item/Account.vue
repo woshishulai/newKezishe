@@ -36,7 +36,8 @@ const handleFinish = async () => {
     Uuid: uuid.value
   }
   let res = await submitLogin(params)
-  console.log(res);
+  user.changeUserInfo(res.Data)
+  router.push('/')
 };
 </script>
 
