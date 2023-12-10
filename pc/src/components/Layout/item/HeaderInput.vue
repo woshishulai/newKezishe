@@ -2,11 +2,11 @@
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
-const props = defineProps({})
-onMounted(() => { });
-const inputValue = ref('')
-const active = ref(0)
-const showLoading = ref(false)
+const props = defineProps({});
+onMounted(() => {});
+const inputValue = ref('');
+const active = ref(0);
+const showLoading = ref(false);
 const list = [
     {
         cate: '竞买'
@@ -17,28 +17,39 @@ const list = [
     {
         cate: '成交'
     }
-]
-const onSearch = searchValue => {
-    showLoading.value = true
+];
+const onSearch = (searchValue) => {
+    showLoading.value = true;
     console.log('use value', searchValue);
     console.log('or use this.value', inputValue.value);
 };
 const cateInfo = (index) => {
-    active.value = index
-}
+    active.value = index;
+};
 </script>
 
 <template>
     <div class="header-input">
         <div class="cate-list">
-            <div class="cate-item" @click="cateInfo(index)" :class="index == active ? 'active' : ''"
-                v-for="(item, index) in list" :key="index">
+            <div
+                class="cate-item"
+                @click="cateInfo(index)"
+                :class="index == active ? 'active' : ''"
+                v-for="(item, index) in list"
+                :key="index"
+            >
                 <span>{{ item.cate }}</span>
-                <img :src="getImageUrl('login/red-down.png')" alt="">
+                <img :src="getImageUrl('login/red-down.png')" alt="" />
             </div>
         </div>
-        <a-input-search v-model:value="inputValue" placeholder="请输入藏品名称和编号" :loading="showLoading" enter-button="搜索"
-            size="large" @search="onSearch" />
+        <a-input-search
+            v-model:value="inputValue"
+            placeholder="请输入藏品名称和编号"
+            :loading="showLoading"
+            enter-button="搜索"
+            size="large"
+            @search="onSearch"
+        />
     </div>
 </template>
 

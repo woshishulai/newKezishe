@@ -1,23 +1,23 @@
 <script setup>
-import Banner from "./item/Banner.vue";
-import Cate from "./item/Cate.vue";
-import Activity from "./item/Activity.vue";
+import Banner from './item/Banner.vue';
+import Cate from './item/Cate.vue';
+import Activity from './item/Activity.vue';
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
+const props = defineProps({});
+onMounted(() => {});
 </script>
 
 <template>
-  <div class="wrap">
-    <Banner></Banner>
-    <Cate></Cate>
-    <Activity></Activity>
-    <img class="guanggao" :src="getImageUrl('home/guanggaode.jpg')" alt="" />
-    <!-- <div class="guanggao">
+    <div class="wrap">
+        <Banner></Banner>
+        <Cate></Cate>
+        <Activity></Activity>
+        <img class="guanggao" :src="getImageUrl('home/guanggaode.jpg')" alt="" />
+        <!-- <div class="guanggao">
             <img :src="getImageUrl('global/logo1.png')" alt="" />
             <span></span>
             <div class="text-wrap">
@@ -25,17 +25,17 @@ onMounted(() => { });
                 <p class="details">新人见面礼注册即送288元的大礼包</p>
             </div>
         </div> -->
-  </div>
+    </div>
 </template>
 
 <style scoped lang="less">
 /* 在这里添加你的 Less 样式 */
 .wrap {
-  background: url("@/assets/img/home/bg.png");
+    background: url('@/assets/img/home/bg.png');
 
-  .guanggao {
-    width: 100%;
-  }
+    .guanggao {
+        width: 100%;
+    }
 }
 
 // .guanggao {

@@ -1,13 +1,13 @@
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { navList } from "../data";
-import { useUserInfo } from "@/store/store"
-import HeaderInput from "./item/HeaderInput.vue";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { navList } from '../data';
+import { useUserInfo } from '@/store/store';
+import HeaderInput from './item/HeaderInput.vue';
 const router = useRouter();
-const user = useUserInfo()
-const selectValue = ref("我的账号");
-selectValue.value = user.userInfo ? user.userInfo.RealName : '我的账号'
+const user = useUserInfo();
+const selectValue = ref('我的账号');
+selectValue.value = user.userInfo ? user.userInfo.RealName : '我的账号';
 const handleChange = (value) => {
     console.log(`selected ${value}`);
 };
@@ -20,34 +20,47 @@ const num = 0;
             <div class="con-main-wrap">
                 <div class="welcome-login">
                     <h5>您好，欢迎来到壳子社</h5>
-                    <a-divider type="vertical" style="background-color: #a2887d;" />
+                    <a-divider type="vertical" style="background-color: #a2887d" />
                     <div class="login" v-if="!user.userInfo">
                         <span class="active" @click="router.push('/login')">登录</span>
-                        <a-divider type="vertical" style="background-color: #a2887d;" />
+                        <a-divider type="vertical" style="background-color: #a2887d" />
                         <span @click="router.push('/register')">注册</span>
                     </div>
                     <div v-else class="user-name">{{ user.userInfo.RealName }}</div>
                 </div>
                 <div class="user-info">
-                    <a-select :virtual="false" :bordered="false" ref="select" v-model:value="selectValue"
-                        style="width: 110px" @change="handleChange">
+                    <a-select
+                        :virtual="false"
+                        :bordered="false"
+                        ref="select"
+                        v-model:value="selectValue"
+                        style="width: 110px"
+                        @change="handleChange"
+                    >
                         <a-select-option @click="router.push('/user/userinfo')">{{
                             user.userInfo.RealName
                         }}</a-select-option>
-                        <a-select-option @click="router.push('/login')" value='退出'>退出</a-select-option>
+                        <a-select-option @click="router.push('/login')" value="退出"
+                            >退出</a-select-option
+                        >
                     </a-select>
-                    <a-divider type="vertical" style="background-color: #a2887d;" />
+                    <a-divider type="vertical" style="background-color: #a2887d" />
                     <li>
                         购物车 <span class="active"> {{ num }}</span> 件
                     </li>
-                    <a-divider type="vertical" style="background-color: #a2887d;" />
+                    <a-divider type="vertical" style="background-color: #a2887d" />
                     <li>免费咨询热线: 4000-888-0888</li>
                 </div>
             </div>
         </div>
         <div class="header-search-wrap">
             <div class="con-main-wrap">
-                <img class="logo" @click="router.push('/')" src="@/assets/img/global/logo.png" alt="" />
+                <img
+                    class="logo"
+                    @click="router.push('/')"
+                    src="@/assets/img/global/logo.png"
+                    alt=""
+                />
                 <div class="reserach">
                     <HeaderInput />
                 </div>
@@ -56,7 +69,12 @@ const num = 0;
         </div>
         <div class="header-tabbar-wrap">
             <div class="con-main-wrap">
-                <li class="nav-item" @click="router.push(item.router)" v-for="item in navList" :key="item.title">
+                <li
+                    class="nav-item"
+                    @click="router.push(item.router)"
+                    v-for="item in navList"
+                    :key="item.title"
+                >
                     <span>{{ item.title }}</span>
                     <span class="shu">{{ item.shu }}</span>
                 </li>

@@ -4,93 +4,92 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
+const props = defineProps({});
+onMounted(() => {});
 const columns = [
     {
-        title: "商品编号",
-        dataIndex: "goodscode",
-        key: "goodscode",
+        title: '商品编号',
+        dataIndex: 'goodscode',
+        key: 'goodscode',
         align: 'center'
     },
     {
-        title: "类型",
-        dataIndex: "goodscate",
-        key: "goodscate",
+        title: '类型',
+        dataIndex: 'goodscate',
+        key: 'goodscate',
         align: 'center'
     },
     {
-        title: "商品名称",
-        dataIndex: "goodsname",
-        key: "goodsname",
+        title: '商品名称',
+        dataIndex: 'goodsname',
+        key: 'goodsname',
         align: 'center'
     },
     {
-        title: "商家",
-        dataIndex: "order",
-        key: "order",
+        title: '商家',
+        dataIndex: 'order',
+        key: 'order',
         align: 'center'
     },
     {
-        title: "价格",
-        dataIndex: "price",
-        key: "price",
+        title: '价格',
+        dataIndex: 'price',
+        key: 'price',
         align: 'center'
     },
     {
-        title: "状态",
-        dataIndex: "sub",
-        key: "sub",
+        title: '状态',
+        dataIndex: 'sub',
+        key: 'sub',
         align: 'center'
     },
     {
-        title: "结标时间",
-        dataIndex: "time",
-        key: "time",
+        title: '结标时间',
+        dataIndex: 'time',
+        key: 'time',
         align: 'center'
-    },
+    }
 ];
 const dataSource = [
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '出局'
     },
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '出局'
     },
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
 
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '出局'
     },
 
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
 
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '出局'
-    },
-
+    }
 ];
 </script>
 
@@ -114,8 +113,6 @@ const dataSource = [
 <style scoped lang="less">
 /* 在这里添加你的 Less 样式 */
 .table-wrap {
-
-
     .select-wrap {
         padding: 20px 10px;
 
@@ -123,7 +120,8 @@ const dataSource = [
         justify-content: flex-start;
         gap: 20px;
 
-        input {}
+        input {
+        }
 
         .btn {
             border: none;

@@ -1,39 +1,39 @@
 let navList = [
     {
-        title: "首页",
+        title: '首页',
         shu: '|',
-        router: "/",
+        router: '/'
     },
     {
         shu: '|',
-        title: "竞买",
-        router: "/jingmai/竞买",
+        title: '竞买',
+        router: '/jingmai/竞买'
     },
     {
         shu: '|',
-        title: "委托",
-        router: "/weituo",
+        title: '委托',
+        router: '/weituo'
     },
     {
-        title: "中邮商城",
+        title: '中邮商城',
         shu: '|',
-        router: "/zhongyou",
+        router: '/zhongyou'
     },
     {
-        title: "成交",
+        title: '成交',
         shu: '|',
-        router: "/chengjiao",
+        router: '/chengjiao'
     },
     {
-        title: "收购",
+        title: '收购',
         shu: '|',
-        router: "/shougou",
+        router: '/shougou'
     },
     {
-        title: "中邮评级",
+        title: '中邮评级',
         shu: '',
-        router: "/pingji",
-    },
+        router: '/pingji'
+    }
 ];
 let cateList = [
     {
@@ -55,29 +55,29 @@ let cateList = [
         title: '轻松购物',
         label: '流程简单,欢乐购物',
         text: '乐'
-    },
-]
+    }
+];
 let footerNavList = [
     {
         title: '买家指南',
         list: [
             {
-                text: '商品展示',
+                text: '商品展示'
             },
             {
-                text: '商品规则',
+                text: '商品规则'
             },
             {
-                text: '购买流程',
+                text: '购买流程'
             },
             {
-                text: '支付方式',
+                text: '支付方式'
             },
             {
-                text: '配送方式',
+                text: '配送方式'
             },
             {
-                text: '售后服务',
+                text: '售后服务'
             }
         ]
     },
@@ -85,22 +85,22 @@ let footerNavList = [
         title: '委托指南',
         list: [
             {
-                text: '委托流程',
+                text: '委托流程'
             },
             {
-                text: '收费标准',
+                text: '收费标准'
             },
             {
-                text: '结算周期',
+                text: '结算周期'
             },
             {
-                text: '委托回赠',
+                text: '委托回赠'
             },
             {
-                text: '业务团队',
+                text: '业务团队'
             },
             {
-                text: '更多帮助',
+                text: '更多帮助'
             }
         ]
     },
@@ -108,22 +108,22 @@ let footerNavList = [
         title: '关于我们',
         list: [
             {
-                text: '公司介绍',
+                text: '公司介绍'
             },
             {
-                text: '新闻动态',
+                text: '新闻动态'
             },
             {
-                text: '诚聘英才',
+                text: '诚聘英才'
             },
             {
-                text: '法律声明',
+                text: '法律声明'
             },
             {
-                text: '服务协议',
+                text: '服务协议'
             },
             {
-                text: '联系我们',
+                text: '联系我们'
             }
         ]
     },
@@ -131,17 +131,17 @@ let footerNavList = [
         title: '网站导航',
         list: [
             {
-                text: '网站地图',
+                text: '网站地图'
             },
             {
-                text: '在线反馈',
+                text: '在线反馈'
             },
             {
-                text: '帮助中心',
-            },
+                text: '帮助中心'
+            }
         ]
-    },
-]
+    }
+];
 
 let footerInfoList = [
     {
@@ -171,6 +171,6 @@ let footerInfoList = [
     {
         title: '收藏导航',
         shu: ''
-    },
-]
-export { navList, cateList, footerNavList, footerInfoList }
+    }
+];
+export { navList, cateList, footerNavList, footerInfoList };

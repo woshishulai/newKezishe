@@ -5,5 +5,5 @@ const rules = {
     code: [],
     newCode: [],
     remember: []
-}
-export { rules }
+};
+export { rules };

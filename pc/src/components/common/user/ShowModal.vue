@@ -11,47 +11,57 @@ const props = defineProps({
     statusList: {
         type: Array,
         default: null
-    },
-})
+    }
+});
 const params = reactive({
     titleCate: ref(props.titleList && props.titleList.length > 0 ? props.titleList[0].cate : null),
-    statusCate: ref(props.statusList && props.statusList.length > 0 ? props.statusList[0].cate : null)
-})
+    statusCate: ref(
+        props.statusList && props.statusList.length > 0 ? props.statusList[0].cate : null
+    )
+});
 watchEffect(() => {
-    params.statusCate = props.statusList ? props.statusList[0].cate : null
+    params.statusCate = props.statusList ? props.statusList[0].cate : null;
 });
 const changeTitleCate = (item) => {
-    params.titleCate = item.cate
-}
+    params.titleCate = item.cate;
+};
 const changeStatusCate = (item) => {
-    params.statusCate = item.cate
-}
+    params.statusCate = item.cate;
+};
 defineExpose({
     params
-})
+});
 </script>
 
 <template>
     <div class="show-modal">
         <slot name="active1"></slot>
         <div class="title-cate" v-if="props.titleList">
-            <p class="cate-item" @click="changeTitleCate(item)" :class="item.cate == params.titleCate ? 'active' : ''"
-                v-for="item in titleList" :key="item.cate">
+            <p
+                class="cate-item"
+                @click="changeTitleCate(item)"
+                :class="item.cate == params.titleCate ? 'active' : ''"
+                v-for="item in titleList"
+                :key="item.cate"
+            >
                 <span>{{ item.cate }}</span>
                 <span v-if="item.num">({{ item.num }})</span>
             </p>
         </div>
         <slot name="active2"></slot>
         <div class="status-cate" v-if="props.statusList">
-            <p v-for="item in statusList" :key="item.cate" @click="changeStatusCate(item)"
-                :class="item.cate == params.statusCate ? 'active' : ''">
+            <p
+                v-for="item in statusList"
+                :key="item.cate"
+                @click="changeStatusCate(item)"
+                :class="item.cate == params.statusCate ? 'active' : ''"
+            >
                 <span>{{ item.cate }}</span>
                 <span>{{ item.num }}</span>
             </p>
         </div>
         <slot name="active3"></slot>
         <slot name="active4"></slot>
-
     </div>
 </template>
 

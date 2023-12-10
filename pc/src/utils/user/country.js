@@ -241,4 +241,4 @@ const countryList = [
     { value: '中国', label: '中国', id: 'CHN' }
 ];
 
-export { countryList }
+export { countryList };

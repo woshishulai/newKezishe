@@ -4,9 +4,9 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
-const current = ref(1)
+const props = defineProps({});
+onMounted(() => {});
+const current = ref(1);
 </script>
 
 <template>

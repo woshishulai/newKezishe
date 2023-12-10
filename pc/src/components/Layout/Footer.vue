@@ -1,5 +1,5 @@
 <script setup>
-import { cateList, footerNavList, footerInfoList } from "../data";
+import { cateList, footerNavList, footerInfoList } from '../data';
 </script>
 
 <template>
@@ -68,7 +68,7 @@ import { cateList, footerNavList, footerInfoList } from "../data";
                     color: #962215;
                     height: 56px;
                     width: 56px;
-                    background: url("@/assets/img/footer/duobianxing.jpg");
+                    background: url('@/assets/img/footer/duobianxing.jpg');
                     background-size: 100% 100%;
                 }
 

@@ -1,19 +1,19 @@
 <script setup>
-import Logo from "@/components/common/Logo.vue"
-import FooterLink from "@/components/common/FooterLink.vue"
+import Logo from '@/components/common/Logo.vue';
+import FooterLink from '@/components/common/FooterLink.vue';
 import { ref, computed, reactive, onMounted, provide } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
-import GetCode from "./item/GetCode.vue";
-import NewPasswrod from "./item/NewPasswrod.vue";
-import Success from "./item/Success.vue";
+import GetCode from './item/GetCode.vue';
+import NewPasswrod from './item/NewPasswrod.vue';
+import Success from './item/Success.vue';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
-const setups = ref(0)
+const props = defineProps({});
+onMounted(() => {});
+const setups = ref(0);
 const nextClick = (index) => {
-    index == undefined || index == null ? setups.value++ : setups.value = index
+    index == undefined || index == null ? setups.value++ : (setups.value = index);
 };
 provide('nextClick', nextClick);
 </script>

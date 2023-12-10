@@ -4,14 +4,12 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
+const props = defineProps({});
+onMounted(() => {});
 </script>
 
 <template>
-    <div class="记录">
-        汇款记录
-    </div>
+    <div class="记录"> 汇款记录 </div>
 </template>
 
 <style scoped lang="less">

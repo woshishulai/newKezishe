@@ -1,46 +1,46 @@
-import { ref } from "vue"
+import { ref } from 'vue';
 
 const options1 = ref([
     {
         value: 'cate1',
-        label: '所有分类',
+        label: '所有分类'
     },
     {
         value: 'lucy',
-        label: 'Lucy',
+        label: 'Lucy'
     },
     {
         value: 'yiminghe',
-        label: 'Yiminghe',
-    },
+        label: 'Yiminghe'
+    }
 ]);
 const options2 = ref([
     {
         value: 'cate1',
-        label: '所有合同状态',
+        label: '所有合同状态'
     },
     {
         value: 'lucy',
-        label: 'Lucy',
+        label: 'Lucy'
     },
     {
         value: 'yiminghe',
-        label: 'Yiminghe',
-    },
+        label: 'Yiminghe'
+    }
 ]);
 const options3 = ref([
     {
         value: 'cate1',
-        label: '所有时间',
+        label: '所有时间'
     },
     {
         value: 'lucy',
-        label: 'Lucy',
+        label: 'Lucy'
     },
     {
         value: 'yiminghe',
-        label: 'Yiminghe',
-    },
+        label: 'Yiminghe'
+    }
 ]);
 
 const JingMaiStatusList = [
@@ -83,122 +83,122 @@ const JingMaiStatusList = [
     {
         cate: '已退回',
         num: '335'
-    },
-]
+    }
+];
 const JingMaiColumns = [
     {
-        title: "商品编号",
-        dataIndex: "goodscode",
-        key: "goodscode",
+        title: '商品编号',
+        dataIndex: 'goodscode',
+        key: 'goodscode',
         align: 'center'
     },
     {
-        title: "类型",
-        dataIndex: "goodscate",
-        key: "goodscate",
+        title: '类型',
+        dataIndex: 'goodscate',
+        key: 'goodscate',
         align: 'center'
     },
     {
-        title: "商品名称",
-        dataIndex: "goodsname",
-        key: "goodsname",
+        title: '商品名称',
+        dataIndex: 'goodsname',
+        key: 'goodsname',
         align: 'center'
     },
     {
-        title: "商家",
-        dataIndex: "order",
-        key: "order",
+        title: '商家',
+        dataIndex: 'order',
+        key: 'order',
         align: 'center'
     },
     {
-        title: "价格",
-        dataIndex: "price",
-        key: "price",
+        title: '价格',
+        dataIndex: 'price',
+        key: 'price',
         align: 'center'
     },
     {
-        title: "状态",
-        dataIndex: "sub",
-        key: "sub",
+        title: '状态',
+        dataIndex: 'sub',
+        key: 'sub',
         align: 'center'
     },
     {
-        title: "结标时间",
-        dataIndex: "time",
-        key: "time",
+        title: '结标时间',
+        dataIndex: 'time',
+        key: 'time',
         align: 'center'
-    },
+    }
 ];
 const JingMaiDataSource = [
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '待结算'
     },
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '结算中'
     },
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
 
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '待结算'
     },
 
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
 
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '结算中'
     },
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '结算中'
     },
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
 
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '待结算'
     },
 
     {
-        goodscode: "630527010",
+        goodscode: '630527010',
         goodscate: '竞买',
 
-        goodsname: "好东西很不错",
-        order: "壳子社",
+        goodsname: '好东西很不错',
+        order: '壳子社',
         time: '2023.10.12',
         price: '3,600.00元',
         sub: '待结算'
-    },
+    }
 ];
 
 const ShippingStatusList = [
@@ -213,49 +213,49 @@ const ShippingStatusList = [
     {
         cate: '结算',
         num: '13'
-    },
-]
+    }
+];
 const ShippingColumns = [
     {
-        title: "商品编号",
-        dataIndex: "goodscode",
-        key: "goodscode",
+        title: '商品编号',
+        dataIndex: 'goodscode',
+        key: 'goodscode',
         align: 'center'
     },
     {
-        title: "商品名称",
-        dataIndex: "goodsname",
-        key: "goodsname",
+        title: '商品名称',
+        dataIndex: 'goodsname',
+        key: 'goodsname',
         align: 'center'
     },
     {
-        title: "合同编号",
-        dataIndex: "order",
-        key: "order",
+        title: '合同编号',
+        dataIndex: 'order',
+        key: 'order',
         align: 'center'
     },
     {
-        title: "单价",
-        dataIndex: "price",
-        key: "price",
+        title: '单价',
+        dataIndex: 'price',
+        key: 'price',
         align: 'center'
     },
     {
-        title: "委托数量",
-        dataIndex: "sub",
-        key: "sub",
+        title: '委托数量',
+        dataIndex: 'sub',
+        key: 'sub',
         align: 'center'
     },
     {
-        title: "已售数量",
-        dataIndex: "num",
-        key: "num",
+        title: '已售数量',
+        dataIndex: 'num',
+        key: 'num',
         align: 'center'
     },
     {
-        title: "剩余库存",
-        dataIndex: "kucun",
-        key: "kucun",
+        title: '剩余库存',
+        dataIndex: 'kucun',
+        key: 'kucun',
         align: 'center'
     },
     {
@@ -275,124 +275,124 @@ const ShippingColumns = [
         key: 'time',
         dataIndex: 'time',
         align: 'center'
-    },
+    }
 ];
 const ShippingDataSource = [
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         sub: '20',
         num: '10',
         kucun: '10',
         cate: '虚拟',
         status: '在售',
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         sub: '20',
         num: '10',
         kucun: '10',
         cate: '虚拟',
         status: '在售',
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         sub: '20',
         num: '10',
         kucun: '10',
         cate: '虚拟',
         status: '在售',
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         sub: '20',
         num: '10',
         kucun: '10',
         cate: '虚拟',
         status: '在售',
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         sub: '20',
         num: '10',
         kucun: '10',
         cate: '虚拟',
         status: '在售',
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         sub: '20',
         num: '10',
         kucun: '10',
         cate: '虚拟',
         status: '在售',
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         sub: '20',
         num: '10',
         kucun: '10',
         cate: '虚拟',
         status: '在售',
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         sub: '20',
         num: '10',
         kucun: '10',
         cate: '虚拟',
         status: '在售',
-        time: '2023.10.12',
-    },
-]
+        time: '2023.10.12'
+    }
+];
 
 const ShippingColumnsJieSuan = [
     {
-        title: "商品编号",
-        dataIndex: "goodscode",
-        key: "goodscode",
+        title: '商品编号',
+        dataIndex: 'goodscode',
+        key: 'goodscode',
         align: 'center'
     },
     {
-        title: "商品名称",
-        dataIndex: "goodsname",
-        key: "goodsname",
+        title: '商品名称',
+        dataIndex: 'goodsname',
+        key: 'goodsname',
         align: 'center'
     },
     {
-        title: "合同编号",
-        dataIndex: "order",
-        key: "order",
+        title: '合同编号',
+        dataIndex: 'order',
+        key: 'order',
         align: 'center'
     },
     {
@@ -402,27 +402,27 @@ const ShippingColumnsJieSuan = [
         align: 'center'
     },
     {
-        title: "成交价格",
-        dataIndex: "price",
-        key: "price",
+        title: '成交价格',
+        dataIndex: 'price',
+        key: 'price',
         align: 'center'
     },
     {
-        title: "成交时间",
-        dataIndex: "num",
-        key: "num",
+        title: '成交时间',
+        dataIndex: 'num',
+        key: 'num',
         align: 'center'
     },
     {
-        title: "成交数量",
-        dataIndex: "sub",
-        key: "sub",
+        title: '成交数量',
+        dataIndex: 'sub',
+        key: 'sub',
         align: 'center'
     },
     {
-        title: "结算状态",
-        dataIndex: "jiesuanzhuangtai",
-        key: "jiesuanzhuangtai",
+        title: '结算状态',
+        dataIndex: 'jiesuanzhuangtai',
+        key: 'jiesuanzhuangtai',
         align: 'center'
     },
     {
@@ -430,98 +430,98 @@ const ShippingColumnsJieSuan = [
         key: 'time',
         dataIndex: 'time',
         align: 'center'
-    },
+    }
 ];
 const ShippingDataSourceJieSuan = [
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         weituoshijian: '2014-13-12',
         num: '20923-12-3',
         sub: '10',
         jiesuanzhuangtai: { title: '已结算', num: '4444' },
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         weituoshijian: '2014-13-12',
         num: '20923-12-3',
         sub: '10',
         jiesuanzhuangtai: { title: '已结算', num: '4444' },
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         weituoshijian: '2014-13-12',
         num: '20923-12-3',
         sub: '10',
         jiesuanzhuangtai: { title: '已结算', num: '4444' },
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         weituoshijian: '2014-13-12',
         num: '20923-12-3',
         sub: '10',
         jiesuanzhuangtai: { title: '已结算', num: '4444' },
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         weituoshijian: '2014-13-12',
         num: '20923-12-3',
         sub: '10',
         jiesuanzhuangtai: { title: '已结算', num: '4444' },
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         weituoshijian: '2014-13-12',
         num: '20923-12-3',
         sub: '10',
         jiesuanzhuangtai: { title: '已结算', num: '4444' },
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         weituoshijian: '2014-13-12',
         num: '20923-12-3',
         sub: '10',
         jiesuanzhuangtai: { title: '已结算', num: '4444' },
-        time: '2023.10.12',
+        time: '2023.10.12'
     },
     {
-        goodscode: "630527010",
-        goodsname: "好东西很不错",
-        order: "3729273",
+        goodscode: '630527010',
+        goodsname: '好东西很不错',
+        order: '3729273',
         price: '3,600.00元',
         weituoshijian: '2014-13-12',
         num: '20923-12-3',
         sub: '10',
         jiesuanzhuangtai: { title: '已结算', num: '4444' },
-        time: '2023.10.12',
-    },
-]
+        time: '2023.10.12'
+    }
+];
 
 const HeTongColumns = [
     {
@@ -547,8 +547,8 @@ const HeTongColumns = [
         key: 'status',
         dataIndex: 'status',
         align: 'center'
-    },
-]
+    }
+];
 const HeTongDataSource = [
     {
         hetongbianhao: '99203829217',
@@ -585,9 +585,21 @@ const HeTongDataSource = [
         dengluriqi: '2023.09.01',
         nums: '23',
         status: '已执行'
-    },
-]
+    }
+];
 
-
-
-export { options1, options2, options3, JingMaiStatusList, JingMaiColumns, JingMaiDataSource, ShippingStatusList, ShippingColumns, ShippingDataSource, ShippingColumnsJieSuan, ShippingDataSourceJieSuan, HeTongColumns, HeTongDataSource }
+export {
+    options1,
+    options2,
+    options3,
+    JingMaiStatusList,
+    JingMaiColumns,
+    JingMaiDataSource,
+    ShippingStatusList,
+    ShippingColumns,
+    ShippingDataSource,
+    ShippingColumnsJieSuan,
+    ShippingDataSourceJieSuan,
+    HeTongColumns,
+    HeTongDataSource
+};

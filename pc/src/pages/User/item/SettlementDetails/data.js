@@ -1,13 +1,12 @@
-import { ref } from "vue";
+import { ref } from 'vue';
 const list = [
     {
-        cate: '竞买',
-
+        cate: '竞买'
     },
     {
-        cate: '购物',
+        cate: '购物'
     }
-]
+];
 const tableList = [
     {
         cate: '结算单号'
@@ -27,21 +26,21 @@ const tableList = [
     },
     {
         cate: '状态'
-    },
-]
+    }
+];
 const options1 = ref([
     {
         value: 'cate1',
-        label: '所有分类',
+        label: '所有分类'
     },
     {
         value: 'lucy',
-        label: 'Lucy',
+        label: 'Lucy'
     },
     {
         value: 'yiminghe',
-        label: 'Yiminghe',
-    },
+        label: 'Yiminghe'
+    }
 ]);
 const setColumns = [
     {
@@ -90,9 +89,9 @@ const setColumns = [
         title: '查看',
         key: 'details',
         dataIndex: 'details',
-        align: 'center',
+        align: 'center'
     }
-]
+];
 const dataSource = [
     {
         contractCode: '1047144',
@@ -113,8 +112,8 @@ const dataSource = [
         time: '2023-09-07 12:12:33',
         status: '已完成',
         details: '查看详情'
-    },
-]
+    }
+];
 const gouWuTitleColumns = [
     {
         title: '结算单号',
@@ -145,36 +144,36 @@ const gouWuTitleColumns = [
         key: 'jieSuanShiJian',
         dataIndex: 'jieSuanShiJian',
         align: 'center'
-    },
-]
+    }
+];
 const gouWuDataSource = [
     {
         goodsCode: '4803',
         chengJiaoNum: 1,
-        chengJiaoQian: 444.00,
-        jieSuanZongE: 5453.00,
+        chengJiaoQian: 444.0,
+        jieSuanZongE: 5453.0,
         jieSuanShiJian: '2023-10-9 23:33:11'
     },
     {
         goodsCode: '4803',
         chengJiaoNum: 1,
-        chengJiaoQian: 444.00,
-        jieSuanZongE: 5453.00,
+        chengJiaoQian: 444.0,
+        jieSuanZongE: 5453.0,
         jieSuanShiJian: '2023-10-9 23:33:11'
     },
     {
         goodsCode: '4803',
         chengJiaoNum: 1,
-        chengJiaoQian: 444.00,
-        jieSuanZongE: 5453.00,
+        chengJiaoQian: 444.0,
+        jieSuanZongE: 5453.0,
         jieSuanShiJian: '2023-10-9 23:33:11'
     },
     {
         goodsCode: '4803',
         chengJiaoNum: 1,
-        chengJiaoQian: 444.00,
-        jieSuanZongE: 5453.00,
+        chengJiaoQian: 444.0,
+        jieSuanZongE: 5453.0,
         jieSuanShiJian: '2023-10-9 23:33:11'
-    },
-]
-export { options1, list, tableList, setColumns, dataSource, gouWuTitleColumns, gouWuDataSource }
+    }
+];
+export { options1, list, tableList, setColumns, dataSource, gouWuTitleColumns, gouWuDataSource };

@@ -12,9 +12,8 @@
 //     // return storedUserInfo.length === 0 ? [] : storedUserInfo;
 // };
 
-
 // export const useUserInfo = defineStore('userInfos', () => {
-//     //定义state的数据 
+//     //定义state的数据
 //     const userInfos = ref(getStoredUserInfo())
 //     console.log(userInfos);
 //     //action
@@ -42,23 +41,24 @@
 //         changeUserInfo
 //     }
 // })
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 const getStoreUserInfo = () => {
     const storeUserInfo = JSON.parse(localStorage.getItem('userInfo'));
-    return storeUserInfo === null || storeUserInfo === undefined ? {} : storeUserInfo
+    return storeUserInfo === null || storeUserInfo === undefined ? {} : storeUserInfo;
 };
-export const useUserInfo = defineStore('userInfos',
+export const useUserInfo = defineStore(
+    'userInfos',
     () => {
-        const userInfo = ref(getStoreUserInfo())
+        const userInfo = ref(getStoreUserInfo());
         const changeUserInfo = async (params) => {
-            userInfo.value = Object.assign({}, userInfo.value, params)
+            userInfo.value = Object.assign({}, userInfo.value, params);
             console.log(userInfo.value);
-        }
+        };
         return {
             userInfo,
-            changeUserInfo,
-        }
+            changeUserInfo
+        };
     },
     {
         persist: {

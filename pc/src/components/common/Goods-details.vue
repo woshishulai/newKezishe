@@ -4,14 +4,12 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
+const props = defineProps({});
 onMounted(() => {});
 </script>
 
 <template>
-  <div class="goods-details">
-   
-  </div>
+    <div class="goods-details"> </div>
 </template>
 
 <style lang="less">

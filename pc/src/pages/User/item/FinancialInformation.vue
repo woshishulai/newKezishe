@@ -1,7 +1,7 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { getImageUrl } from "@/utils";
+import { ref, computed, reactive, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
@@ -9,7 +9,7 @@ onMounted(() => {});
 </script>
 
 <template>
-  <div class="financial-information">财务信息</div>
+    <div class="financial-information">财务信息</div>
 </template>
 
 <style scoped lang="less">

@@ -1,47 +1,47 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { getImageUrl } from "@/utils";
-import UserMenu from "@/components/common/UserMenu.vue"
+import { ref, computed, reactive, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { getImageUrl } from '@/utils';
+import UserMenu from '@/components/common/UserMenu.vue';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
-onMounted(() => { });
+onMounted(() => {});
 </script>
 
 <template>
-  <Header></Header>
-  <div class="wrap">
-    <div class="con-main-wrap">
-      <BreadCrumbs></BreadCrumbs>
-      <div class="cen-wrap">
-        <UserMenu></UserMenu>
-        <div class="user-item">
-          <RouterView></RouterView>
+    <Header></Header>
+    <div class="wrap">
+        <div class="con-main-wrap">
+            <BreadCrumbs></BreadCrumbs>
+            <div class="cen-wrap">
+                <UserMenu></UserMenu>
+                <div class="user-item">
+                    <RouterView></RouterView>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <Footer></Footer>
+    <Footer></Footer>
 </template>
 
 <style scoped lang="less">
 /* 在这里添加你的 Less 样式 */
 .wrap {
-  background: #eef3f8;
+    background: #eef3f8;
 
-  .con-main-wrap {
-    .cen-wrap {
-      .flex-row;
-      gap: 30px;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding-bottom: 40px;
+    .con-main-wrap {
+        .cen-wrap {
+            .flex-row;
+            gap: 30px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding-bottom: 40px;
 
-      .user-item {
-        flex: 1;
-      }
+            .user-item {
+                flex: 1;
+            }
+        }
     }
-  }
 }
 </style>

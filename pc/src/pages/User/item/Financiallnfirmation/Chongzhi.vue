@@ -4,41 +4,40 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-const showModals = ref(null)
-const params = ref()
+const props = defineProps({});
+const showModals = ref(null);
+const params = ref();
 onMounted(() => {
-    params.value = showModals.value?.params
+    params.value = showModals.value?.params;
     console.log(params.value?.titleCate);
 });
-watchEffect(() => {
-})
+watchEffect(() => {});
 const formState = reactive({
     name: '',
     delivery: false,
     type: [],
     resource: '1',
-    desc: '',
+    desc: ''
 });
 const onSubmit = () => {
     console.log('submit!', toRaw(formState));
 };
 const labelCol = {
     style: {
-        width: '150px',
-    },
+        width: '150px'
+    }
 };
 const wrapperCol = {
-    span: 14,
+    span: 14
 };
 const list = [
     {
-        cate: '网上充值',
+        cate: '网上充值'
     },
     {
         cate: '线下汇款'
-    },
-]
+    }
+];
 const list2 = [
     {
         img: 'user/caiwu/icon1.png',
@@ -51,8 +50,8 @@ const list2 = [
     {
         img: 'user/caiwu/icon3.png',
         text: '汇款告知记录'
-    },
-]
+    }
+];
 </script>
 
 <template>
@@ -67,7 +66,8 @@ const list2 = [
                 <div>
                     <p class="label">涌币</p>
                     <p>0(赠送0)</p>
-                </div> <img :src="getImageUrl('user/caiwu/list1.png')" alt="">
+                </div>
+                <img :src="getImageUrl('user/caiwu/list1.png')" alt="" />
             </div>
         </div>
         <div class="right-info">
@@ -75,13 +75,20 @@ const list2 = [
                 <template v-slot:active2 v-if="params?.titleCate == list[0].cate">
                     <a-form :model="formState" :label-col="labelCol">
                         <a-form-item>
-                            <a-input style="width: 300px;" v-model:value="formState.name" placeholder="金额 (RMB)" />
+                            <a-input
+                                style="width: 300px"
+                                v-model:value="formState.name"
+                                placeholder="金额 (RMB)"
+                            />
                         </a-form-item>
                         <a-form-item>
-                            <a-textarea style="height: 100px;width: 400px;" v-model:value="formState.desc"
-                                placeholder="备注" />
+                            <a-textarea
+                                style="height: 100px; width: 400px"
+                                v-model:value="formState.desc"
+                                placeholder="备注"
+                            />
                         </a-form-item>
-                        <p style="margin-bottom: 10px;">选择支付方式</p>
+                        <p style="margin-bottom: 10px">选择支付方式</p>
                         <a-form-item>
                             <a-radio-group v-model:value="formState.resource">
                                 <a-radio value="1">微信</a-radio>
@@ -95,8 +102,8 @@ const list2 = [
                 </template>
                 <template v-slot:active2 v-else>
                     <div class="img-list">
-                        <div class="img-item" v-for="(item,index) in list2" :key="index">
-                            <img :src="getImageUrl(item.img)" alt="icon">
+                        <div class="img-item" v-for="(item, index) in list2" :key="index">
+                            <img :src="getImageUrl(item.img)" alt="icon" />
                             <p>{{ item.text }}</p>
                         </div>
                     </div>

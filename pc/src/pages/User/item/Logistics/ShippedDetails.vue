@@ -4,8 +4,8 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
+const props = defineProps({});
+onMounted(() => {});
 const liucheng = [
     {
         img: 'user/logistics/list1.png',
@@ -26,8 +26,8 @@ const liucheng = [
         img: 'user/logistics/list4.png',
         title: '已收货',
         time: '2023-10-07'
-    },
-]
+    }
+];
 const fahuoList = [
     {
         title: '发货项数：',
@@ -48,8 +48,8 @@ const fahuoList = [
     {
         title: '备注：',
         label: ''
-    },
-]
+    }
+];
 const wuliuList = [
     {
         title: '物流形式：',
@@ -70,8 +70,8 @@ const wuliuList = [
     {
         title: '承运单号：',
         label: 'SF1659120534004'
-    },
-]
+    }
+];
 const bushouList = [
     {
         title: '物流费：',
@@ -88,8 +88,8 @@ const bushouList = [
     {
         title: '自淘费用：',
         label: '0元'
-    },
-]
+    }
+];
 const columns = [
     {
         title: '商品编号',
@@ -125,8 +125,8 @@ const columns = [
         title: '时间',
         key: 'time',
         dataIndex: 'time'
-    },
-]
+    }
+];
 const dataSource = [
     {
         goodsCode: '480943458',
@@ -154,8 +154,8 @@ const dataSource = [
         num: 1,
         have: '有',
         time: ''
-    },
-]
+    }
+];
 </script>
 
 <template>
@@ -169,21 +169,19 @@ const dataSource = [
                 <div class="liucheng-item" v-for="(item, index) in liucheng" :key="index">
                     <div class="card-info">
                         <div class="left-img">
-                            <img :src="getImageUrl(item.img)" alt="流程图片">
+                            <img :src="getImageUrl(item.img)" alt="流程图片" />
                         </div>
                         <div class="right-text">
                             <p>{{ item.title }}</p>
                             <p>{{ item.time }}</p>
                         </div>
                     </div>
-                    <img class="nav" :src="getImageUrl('user/logistics/nav.png')" alt="">
+                    <img class="nav" :src="getImageUrl('user/logistics/nav.png')" alt="" />
                 </div>
             </div>
         </div>
         <div class="card-box shipping">
-            <div class="title">
-                发货信息
-            </div>
+            <div class="title"> 发货信息 </div>
             <div class="text-list">
                 <p class="text-item" v-for="(item, index) in fahuoList" :key="index">
                     <span>{{ item.title }}</span>

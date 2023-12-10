@@ -4,8 +4,8 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
+const props = defineProps({});
+onMounted(() => {});
 const titleTopList = [
     {
         cate: '结算单号',
@@ -22,8 +22,8 @@ const titleTopList = [
     {
         cate: '结算单状态',
         num: '已完成'
-    },
-]
+    }
+];
 const titleTopDatList = [
     {
         cate: '合计结算金额',
@@ -36,8 +36,8 @@ const titleTopDatList = [
     {
         cate: '本单获取的积分',
         num: '144'
-    },
-]
+    }
+];
 const columns = [
     {
         title: '分配方式',
@@ -64,7 +64,7 @@ const columns = [
         key: 'remark',
         dataIndex: 'remark'
     }
-]
+];
 const dataSource = [
     {
         cate: '银联',
@@ -73,7 +73,7 @@ const dataSource = [
         status: '已完成',
         remark: ''
     }
-]
+];
 const detailsColumns = [
     {
         title: '藏品编号',
@@ -129,49 +129,49 @@ const detailsColumns = [
         title: '结余',
         key: 'jieYu',
         dataIndex: 'jieYu'
-    },
-]
+    }
+];
 const detailsDataSource = [
     {
         goodsCode: 38453450983,
         infoGoodsCode: 430953234,
         name: '纪特票新四套(部分票带边，色标)',
-        jieBiaoJia: 170.00,
+        jieBiaoJia: 170.0,
         fuWuFei: 3.49,
-        zhiZuoFei: 12.00,
-        yongBiJieSheng: 0.00,
-        fuLiBaoJieSheng: 0.00,
-        baoXianFei: 1.70,
-        baoGuanFei: 0.00,
-        jieYu: 152.90
+        zhiZuoFei: 12.0,
+        yongBiJieSheng: 0.0,
+        fuLiBaoJieSheng: 0.0,
+        baoXianFei: 1.7,
+        baoGuanFei: 0.0,
+        jieYu: 152.9
     },
     {
         goodsCode: 38453450983,
         infoGoodsCode: 430953234,
         name: '纪特票新四套(部分票带边，色标)',
-        jieBiaoJia: 170.00,
+        jieBiaoJia: 170.0,
         fuWuFei: 3.49,
-        zhiZuoFei: 12.00,
-        yongBiJieSheng: 0.00,
-        fuLiBaoJieSheng: 0.00,
-        baoXianFei: 1.70,
-        baoGuanFei: 0.00,
-        jieYu: 152.90
+        zhiZuoFei: 12.0,
+        yongBiJieSheng: 0.0,
+        fuLiBaoJieSheng: 0.0,
+        baoXianFei: 1.7,
+        baoGuanFei: 0.0,
+        jieYu: 152.9
     },
     {
         goodsCode: 38453450983,
         infoGoodsCode: 430953234,
         name: '纪特票新四套(部分票带边，色标)',
-        jieBiaoJia: 170.00,
+        jieBiaoJia: 170.0,
         fuWuFei: 3.49,
-        zhiZuoFei: 12.00,
-        yongBiJieSheng: 0.00,
-        fuLiBaoJieSheng: 0.00,
-        baoXianFei: 1.70,
-        baoGuanFei: 0.00,
-        jieYu: 152.90
-    },
-]
+        zhiZuoFei: 12.0,
+        yongBiJieSheng: 0.0,
+        fuLiBaoJieSheng: 0.0,
+        baoXianFei: 1.7,
+        baoGuanFei: 0.0,
+        jieYu: 152.9
+    }
+];
 const detailsList = [
     {
         cate: '结标金额(+)',
@@ -206,16 +206,14 @@ const detailsList = [
         cate: '福利包抵扣制作费(+)',
         data: '0.00',
         active: true
-    },
-]
+    }
+];
 </script>
 
 <template>
     <div class="jiesuan-details">
         <div class="card-box">
-            <div class="title">
-                结算明细
-            </div>
+            <div class="title"> 结算明细 </div>
             <div class="table-top">
                 <div class="title-info">
                     <p v-for="item in titleTopList" :key="item.cate">
@@ -234,40 +232,45 @@ const detailsList = [
             </div>
         </div>
         <div class="show-item">
-            <div class="title">
-                结算款分配
-            </div>
+            <div class="title"> 结算款分配 </div>
             <a-table :pagination="false" :columns="columns" :dataSource="dataSource"></a-table>
         </div>
         <div class="show-item">
-            <div class="title">
-                藏品清单
-            </div>
-            <a-table :pagination="false" :columns="detailsColumns" :dataSource="detailsDataSource"></a-table>
+            <div class="title"> 藏品清单 </div>
+            <a-table
+                :pagination="false"
+                :columns="detailsColumns"
+                :dataSource="detailsDataSource"
+            ></a-table>
             <div class="details">
                 <div class="title-wrap">
-                    <p><span>项数 :</span> <span>{{ 4 }}项</span></p>
-                    <p><span>结余小技 :</span> <span class="active">￥{{ '7, 117.20' }}</span></p>
+                    <p
+                        ><span>项数 :</span> <span>{{ 4 }}项</span></p
+                    >
+                    <p
+                        ><span>结余小技 :</span> <span class="active">￥{{ '7, 117.20' }}</span></p
+                    >
                 </div>
                 <div class="data-wrap">
-                    <p class="data-item" v-for="item in detailsList" :key="item.cate" :class="item.active ? 'active' : ''">
+                    <p
+                        class="data-item"
+                        v-for="item in detailsList"
+                        :key="item.cate"
+                        :class="item.active ? 'active' : ''"
+                    >
                         <span>{{ item.cate }}</span>
                         <span>{{ item.data }}</span>
                     </p>
                 </div>
             </div>
-            <div class="zong">
-                结余小技 ￥ 7,117.20
-            </div>
+            <div class="zong"> 结余小技 ￥ 7,117.20 </div>
         </div>
     </div>
 </template>
 
 <style scoped lang="less">
 .jiesuan-details {
-
     .table-top {
-
         .title-info {
             .flex-row;
             justify-content: flex-start;

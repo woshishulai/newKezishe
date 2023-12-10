@@ -1,18 +1,18 @@
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue';
-import { useRouter, } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { getImageUrl } from '@/utils';
-import { infoList, infoDataSource, infoColumns } from "../data"
+import { infoList, infoDataSource, infoColumns } from '../data';
 import { useUserInfo } from '@/store/store';
-const user = useUserInfo()
-const router = useRouter()
+const user = useUserInfo();
+const router = useRouter();
 </script>
 
 <template>
     <div class="user-info">
         <div class="header-account">
             <div class="top-info">
-                <img :src="getImageUrl('jingmai/list/list2.png')" alt="">
+                <img :src="getImageUrl('jingmai/list/list2.png')" alt="" />
                 <div class="element-info">
                     <div class="element-top">
                         <h5>{{ '王世杰' }}</h5>
@@ -31,9 +31,14 @@ const router = useRouter()
                 </div>
             </div>
             <div class="user-balance">
-                <div class="balance-item" :style="{ backgroundImage: `url(${getImageUrl(item.img)})` }"
-                    v-for="item in infoList" :key="item.img">
-                    <p class="title">{{ item.title }}
+                <div
+                    class="balance-item"
+                    :style="{ backgroundImage: `url(${getImageUrl(item.img)})` }"
+                    v-for="item in infoList"
+                    :key="item.img"
+                >
+                    <p class="title"
+                        >{{ item.title }}
                         <span v-if="item.icon">{{ item.icon }}</span>
                     </p>
                     <p class="number">
@@ -41,35 +46,58 @@ const router = useRouter()
                         <span>{{ item.danwei }}</span>
                     </p>
                     <div class="btns">
-                        <button class="btn1" @click="router.push(item.router)">{{ item.btn1 }}</button>
-                        <button class="btn2" @click="router.push(item.router2)" v-if="item.btn2">{{ item.btn2 }}</button>
+                        <button class="btn1" @click="router.push(item.router)">{{
+                            item.btn1
+                        }}</button>
+                        <button class="btn2" @click="router.push(item.router2)" v-if="item.btn2">{{
+                            item.btn2
+                        }}</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-box">
-            <div class="title"><span>我的订单</span>
+            <div class="title"
+                ><span>我的订单</span>
                 <span class="move" @click="router.push('/user/quick-sell')">查看更多</span>
             </div>
             <div class="get-goods">
-                <span>竞买中 ： <span>{{ 1 }}</span></span>
-                <span>已得标 ： <span class="active">{{ 3 }}</span></span>
-                <span>未得标 ： <span class="active">{{ 1 }}</span></span>
-                <span>未支付 ： <span>{{ 0 }}</span></span>
-                <span>不支付 ： <span>{{ 0 }}</span></span>
-                <span>未发货 ： <span>{{ 0 }}</span></span>
-                <span>已发货 ： <span>{{ 0 }}</span></span>
+                <span
+                    >竞买中 ： <span>{{ 1 }}</span></span
+                >
+                <span
+                    >已得标 ： <span class="active">{{ 3 }}</span></span
+                >
+                <span
+                    >未得标 ： <span class="active">{{ 1 }}</span></span
+                >
+                <span
+                    >未支付 ： <span>{{ 0 }}</span></span
+                >
+                <span
+                    >不支付 ： <span>{{ 0 }}</span></span
+                >
+                <span
+                    >未发货 ： <span>{{ 0 }}</span></span
+                >
+                <span
+                    >已发货 ： <span>{{ 0 }}</span></span
+                >
             </div>
         </div>
         <div class="card-box">
-            <div class="title"><span>我的委托</span>
+            <div class="title"
+                ><span>我的委托</span>
                 <span class="move" @click="router.push('/user/my-entrustment/')">查看更多</span>
             </div>
             <a-table :pagination="false" :dataSource="infoDataSource" :columns="infoColumns">
                 <template #status="{ record }">
                     <span>
-                        <span :class="record.status == 0 || record.status == '已成交' ? '' : 'active'"> {{ record.status
-                        }}</span>
+                        <span
+                            :class="record.status == 0 || record.status == '已成交' ? '' : 'active'"
+                        >
+                            {{ record.status }}</span
+                        >
                     </span>
                 </template>
                 <template #operate="{ record }">
@@ -84,7 +112,6 @@ const router = useRouter()
 
 <style scoped lang="less">
 .user-info {
-
     .header-account {
         background-color: #fff;
         padding: 40px 30px 26px;
@@ -101,7 +128,6 @@ const router = useRouter()
                 height: 100px;
                 border-radius: 50%;
             }
-
 
             .element-info {
                 .flex-col;

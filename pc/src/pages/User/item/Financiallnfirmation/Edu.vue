@@ -4,11 +4,11 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({})
-onMounted(() => { });
+const props = defineProps({});
+onMounted(() => {});
 const list = [
     {
-        cate: '余额转额度',
+        cate: '余额转额度'
     },
     {
         cate: '额度转余额'
@@ -16,10 +16,10 @@ const list = [
     {
         cate: '额度充值'
     }
-]
-const query = ref('余额转额度')
-const query1 = ref('额度转余额')
-const query2 = ref('额度充值')
+];
+const query = ref('余额转额度');
+const query1 = ref('额度转余额');
+const query2 = ref('额度充值');
 </script>
 
 <template>
@@ -33,19 +33,24 @@ const query2 = ref('额度充值')
                         <p>竞卖额度</p>
                         <p>¥500.000</p>
                         <p>¥500.000可用</p>
-                    </div> <img :src="getImageUrl('user/caiwu/list2.png')" alt="">
+                    </div>
+                    <img :src="getImageUrl('user/caiwu/list2.png')" alt="" />
                 </div>
             </div>
             <div class="right-info">
                 <div class="title">
-                    <p class="cate-item" :class="item.cate == query ? 'active' : ''" v-for="item in list" :key="item.cate">
+                    <p
+                        class="cate-item"
+                        :class="item.cate == query ? 'active' : ''"
+                        v-for="item in list"
+                        :key="item.cate"
+                    >
                         <span>{{ item.cate }}</span>
                     </p>
                 </div>
                 <div class="element">
-
                     <div>
-                        <span>调整额度：</span> <input type="text" placeholder="金额（RMB）">
+                        <span>调整额度：</span> <input type="text" placeholder="金额（RMB）" />
                     </div>
                     <p>453.423-646.618</p>
                     <p>竞卖额度用于竞买藏品，余额：额度=1:1000</p>
@@ -62,19 +67,24 @@ const query2 = ref('额度充值')
                         <p>竞卖额度</p>
                         <p>¥500.000</p>
                         <p>¥500.000可用</p>
-                    </div> <img :src="getImageUrl('user/caiwu/list2.png')" alt="">
+                    </div>
+                    <img :src="getImageUrl('user/caiwu/list2.png')" alt="" />
                 </div>
             </div>
             <div class="right-info">
                 <div class="title">
-                    <p class="cate-item" :class="item.cate == query1 ? 'active' : ''" v-for="item in list" :key="item.cate">
+                    <p
+                        class="cate-item"
+                        :class="item.cate == query1 ? 'active' : ''"
+                        v-for="item in list"
+                        :key="item.cate"
+                    >
                         <span>{{ item.cate }}</span>
                     </p>
                 </div>
                 <div class="element">
-
                     <div>
-                        <span>调整额度：</span> <input type="text" placeholder="金额（RMB）">
+                        <span>调整额度：</span> <input type="text" placeholder="金额（RMB）" />
                     </div>
                     <p>竞买额度为153423，额度：余额=50:1</p>
                     <div class="btn">调整</div>
@@ -90,19 +100,25 @@ const query2 = ref('额度充值')
                         <p>竞卖额度</p>
                         <p>¥500.000</p>
                         <p>¥500.000可用</p>
-                    </div> <img :src="getImageUrl('user/caiwu/list2.png')" alt="">
+                    </div>
+                    <img :src="getImageUrl('user/caiwu/list2.png')" alt="" />
                 </div>
             </div>
             <div class="right-info">
                 <div class="title">
-                    <p class="cate-item" :class="item.cate == query2 ? 'active' : ''" v-for="item in list" :key="item.cate">
+                    <p
+                        class="cate-item"
+                        :class="item.cate == query2 ? 'active' : ''"
+                        v-for="item in list"
+                        :key="item.cate"
+                    >
                         <span>{{ item.cate }}</span>
                     </p>
                 </div>
                 <div class="element">
                     <p>直接输入目标额度，系统将按照比例100：1自动续算人民币</p>
                     <div>
-                        <span>调整额度：</span> <input type="text" placeholder="金额（RMB）">
+                        <span>调整额度：</span> <input type="text" placeholder="金额（RMB）" />
                     </div>
                     <h5>选择支付方式</h5>
                     <div class="check">
@@ -128,8 +144,6 @@ const query2 = ref('额度充值')
         align-items: flex-start;
         justify-content: flex-start;
         background-color: #fff;
-
-
     }
 
     .left-user-info {

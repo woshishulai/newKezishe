@@ -16,7 +16,6 @@ const infoList = [
         num: '453,423',
         btn1: '调整竞买额度',
         router: '/user/financial-information/edu'
-
     },
     {
         img: 'user/info/list3.png',
@@ -25,8 +24,8 @@ const infoList = [
         danwei: '张',
         btn1: '立即使用',
         router: '/user/financial-information/youhuiquan'
-    },
-]
+    }
+];
 
 const infoDataSource = [
     {
@@ -84,8 +83,8 @@ const infoDataSource = [
         time: '2023-09-01',
         status: '执行中',
         operate: '查看详情'
-    },
-]
+    }
+];
 const infoColumns = [
     {
         title: '',
@@ -125,102 +124,105 @@ const infoColumns = [
         width: '300px',
         //slots中的customRender绑定插槽名称
         //生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格行/列合并,可参考 demo 表格行/列合并
-        slots: { customRender: 'status' },
+        slots: { customRender: 'status' }
     },
     {
         title: '操作',
         dataIndex: 'operate',
         key: 'operate',
         align: 'center',
-        slots: { customRender: 'operate' },
+        slots: { customRender: 'operate' }
+    }
+];
+
+const statusList = [
+    {
+        value: '北京市',
+        label: '北京市',
+        children: [
+            {
+                value: '昌平区',
+                label: '昌平区'
+            },
+            {
+                value: '海淀区',
+                label: '海淀区'
+            }
+        ]
     },
-
-]
-
-const statusList = [{
-    "value": "北京市",
-    "label": "北京市",
-    "children": [
-        {
-            "value": "昌平区",
-            "label": "昌平区",
-        },
-        {
-            "value": "海淀区",
-            "label": "海淀区",
-        }]
-},
-{
-    "value": "山西省",
-    "label": "山西省",
-    "children": [
-        {
-            "value": "太原市",
-            "label": "太原市",
-        }, {
-            "value": "临汾市",
-            "label": "临汾市",
-        }]
-},
-]
+    {
+        value: '山西省',
+        label: '山西省',
+        children: [
+            {
+                value: '太原市',
+                label: '太原市'
+            },
+            {
+                value: '临汾市',
+                label: '临汾市'
+            }
+        ]
+    }
+];
 const shippingDataSource = [
     {
-        key: "1",
-        name: "王子涵",
-        bank: "中国北京，西城区",
-        code: "黄寺大街24号19号明湖大厦",
+        key: '1',
+        name: '王子涵',
+        bank: '中国北京，西城区',
+        code: '黄寺大街24号19号明湖大厦',
         ee: '100120',
         rr: '13799226494',
         tt: '设为默认'
     },
     {
-        key: "2",
-        name: "王子涵",
-        bank: "中国北京，西城区",
-        code: "黄寺大街24号19号明湖大厦",
+        key: '2',
+        name: '王子涵',
+        bank: '中国北京，西城区',
+        code: '黄寺大街24号19号明湖大厦',
         ee: '100120',
         rr: '13799226494',
         tt: '设为默认'
-    },
+    }
 ];
 
 const shippingColumns = [
     {
-        title: "收货人",
-        dataIndex: "name",
-        key: "name",
+        title: '收货人',
+        dataIndex: 'name',
+        key: 'name',
         align: 'center'
     },
     {
-        title: "所在地区",
-        dataIndex: "bank",
-        key: "bank",
+        title: '所在地区',
+        dataIndex: 'bank',
+        key: 'bank',
         align: 'center'
     },
     {
-        title: "详细地址",
-        dataIndex: "code",
-        key: "code",
+        title: '详细地址',
+        dataIndex: 'code',
+        key: 'code',
+        align: 'center'
+    },
+    {
+        title: '邮编电话',
+        dataIndex: 'ee',
+        key: 'ee',
+        align: 'center'
+    },
+    {
+        title: '电话/手机',
+        dataIndex: 'rr',
+        key: 'rr',
+        align: 'center'
+    },
+    {
+        title: '操作',
+        dataIndex: 'tt',
+        key: 'tt',
         align: 'center',
-    },
-    {
-        title: "邮编电话",
-        dataIndex: "ee",
-        key: "ee",
-        align: 'center'
-    },
-    {
-        title: "电话/手机",
-        dataIndex: "rr",
-        key: "rr",
-        align: 'center'
-    },
-    {
-        title: "操作",
-        dataIndex: "tt",
-        key: "tt",
-        align: 'center',
-        slots: { customRender: 'tt' },
-    },
+        slots: { customRender: 'tt' }
+    }
 ];
-export { infoList, infoDataSource, infoColumns, statusList, shippingDataSource, shippingColumns }
+export { infoList, infoDataSource, infoColumns, statusList, shippingDataSource, shippingColumns };

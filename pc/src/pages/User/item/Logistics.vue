@@ -1,15 +1,15 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { getImageUrl } from "@/utils";
+import { ref, computed, reactive, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
-onMounted(() => { });
+onMounted(() => {});
 </script>
 
 <template>
-  <div class="logistics">物流</div>
+    <div class="logistics">物流</div>
 </template>
 
 <style scoped lang="less">
