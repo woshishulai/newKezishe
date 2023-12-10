@@ -1,46 +1,44 @@
 <script setup>
-import { useRouter, useRoute } from "vue-router";
-import { reactive, ref, toRaw } from 'vue';
+import { useRouter, useRoute, } from "vue-router";
+import { reactive, ref, onMounted } from 'vue';
+import { getUserInfoApi } from "@/request/api"
+import { useUserInfo } from "@/store/store";
+import dayjs from 'dayjs';
+const user = useUserInfo()
 const formRef = ref();
-const labelCol = {
-  span: 5,
-};
-const wrapperCol = {
-  span: 19,
-};
-const formState = reactive({
-  name: '',
-  gender: '男',
-  date1: undefined,
-  region: undefined,
-});
-const formState1 = reactive({
-  phone: '',
-  gender: '男',
-  date1: undefined,
-  region: undefined,
-});
-const formState2 = reactive({
-  phone: '',
-  gender: '男',
-  date1: undefined,
-  region: undefined,
-});
-const onSubmit = () => {
-  formRef.value
-    .validate()
-    .then(() => {
-      console.log('values', formState, toRaw(formState));
-    })
-    .catch(error => {
-      console.log('error', error);
-    });
-};
-const onFinish = values => {
-  console.log('Success:', values);
-};
+const formState = ref(
+  {
+    RealName: '',
+    Gender: '1',
+    Birthday: '',
+    Region: '',
+    fileList: ''
+  }
+)
+onMounted(async () => {
+  try {
+    let res = await getUserInfoApi();
+    if (res.Data?.Birthday) {
+      // res.Data.Birthday = dayjs(res.Data.Birthday, dateFormat)
+      res.Data.Birthday = dayjs(res.Data.Birthday, "YYYY-MM-DD")
+    }
+    user.changeUserInfo(res.Data)
+    // formState.value = Object.assign({}, user.userInfo);
+  } catch (error) {
+    console.error('Error fetching user info:', error);
+  }
+})
+const onFinish = async () => {
+  console.log(formState.value.Birthday);
+  console.log(formState.value.Birthday.$y);
+  console.log(formState.value.Birthday.$M + 1);
+  console.log(formState.value.Birthday.$D);
+  const formattedDate = `${formState.value.Birthday.$y}-${(formState.value.Birthday.$M + 1).toString().padStart(2, '0')}-${formState.value.Birthday.$D.toString().padStart(2, '0')}`;
+
+}
 const onFinishFailed = errorInfo => {
   console.log('Failed:', errorInfo);
+  console.log(formState.value);
 };
 </script>
 
@@ -60,21 +58,21 @@ const onFinishFailed = errorInfo => {
       </div>
       <div class="form-wrap">
         <a-form labelAlign="left" ref="formRef" @finish="onFinish" @finishFailed="onFinishFailed" :model="formState"
-          :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+          :rules="rules" :label-col="{ span: 5 }" :wrapper-col="{ span: 19 }">
           <a-form-item label="姓名" name="name">
-            <a-input v-model:value="formState.name" />
+            <a-input v-model:value="formState.RealName" />
           </a-form-item>
           <a-form-item label="性别" name="gender">
-            <a-radio-group v-model:value="formState.gender">
-              <a-radio value="男">男</a-radio>
-              <a-radio value="女">女</a-radio>
+            <a-radio-group v-model:value="formState.Gender">
+              <a-radio value="1">男</a-radio>
+              <a-radio value="0">女</a-radio>
             </a-radio-group>
           </a-form-item>
           <a-form-item label="出生年月" name="date1">
-            <a-date-picker placeholder="" v-model:value="formState.date1" type="date" style="width: 100%" />
+            <a-date-picker v-model:value="formState.Birthday" style="width: 100%" />
           </a-form-item>
           <a-form-item label="证件类型" name="region" class="card-cate">
-            <a-select v-model:value="formState.region" placeholder="">
+            <a-select v-model:value="formState.Region" placeholder="">
               <a-select-option value="cardId">身份证</a-select-option>
               <a-select-option value="driverLicense">驾驶证</a-select-option>
             </a-select>
@@ -95,7 +93,7 @@ const onFinishFailed = errorInfo => {
         </a-form>
       </div>
     </div>
-    <div class="card-box">
+    <!-- <div class="card-box">
       <div class="title">联系信息</div>
       <div class="form-wrap">
         <a-form labelAlign="left" ref="formRef" @finish="onFinish" @finishFailed="onFinishFailed" :model="formState"
@@ -134,7 +132,7 @@ const onFinishFailed = errorInfo => {
         </div>
       </div>
 
-    </div>
+    </div> -->
   </div>
 </template>
 

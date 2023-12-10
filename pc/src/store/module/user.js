@@ -48,58 +48,21 @@ const getStoreUserInfo = () => {
     const storeUserInfo = JSON.parse(localStorage.getItem('userInfo'));
     return storeUserInfo === null || storeUserInfo === undefined ? {} : storeUserInfo
 };
-// const getStoreUserNameList = () => {
-//     const NameList = JSON.parse(localStorage.getItem('userNameList'))
-//     return NameList === null || NameList === undefined ? [] : NameList
-// }
-// const getStoreUserPhoneList = () => {
-//     const NameList = JSON.parse(localStorage.getItem('userPhoneList'))
-//     return NameList === null || NameList === undefined ? [] : NameList
-// }
-export const useUserInfo = defineStore('userInfos', () => {
-    const userInfo = ref(getStoreUserInfo())
-    // const userNameList = ref(getStoreUserNameList())
-    // const userPhoneList = ref(getStoreUserPhoneList())
-    const changeUserInfo = async (params) => {
-        userInfo.value = params
-        // localStorage.setItem('userInfo', params)
-        // userInfo.value = Object.assign({}, userInfo.value, params)
-        // localStorage.setItem('userInfo', JSON.stringify(userInfo.value));
+export const useUserInfo = defineStore('userInfos',
+    () => {
+        const userInfo = ref(getStoreUserInfo())
+        const changeUserInfo = async (params) => {
+            userInfo.value = Object.assign({}, userInfo.value, params)
+            console.log(userInfo.value);
+        }
+        return {
+            userInfo,
+            changeUserInfo,
+        }
+    },
+    {
+        persist: {
+            enabled: true // true 表示开启持久化保存
+        }
     }
-    // const addNameList = async (params) => {
-    //     // userNameList.value = Object.assign([], userNameList.value, params)
-    //     userNameList.value.push(params)
-    //     console.log(userNameList);
-    //     localStorage.setItem('userNameList', JSON.stringify(userNameList.value))
-    // }
-    // const removeNameList = async (item) => {
-    //     const index = userNameList.value.indexOf(item);
-    //     if (index !== -1) {
-    //         userNameList.value.splice(index, 1);
-    //         localStorage.setItem('userNameList', JSON.stringify(userNameList.value));
-    //     }
-    // }
-    // const addPhoneList = async (params) => {
-    //     // userNameList.value = Object.assign([], userNameList.value, params)
-    //     userPhoneList.value.push(params)
-    //     console.log(userPhoneList);
-    //     localStorage.setItem('userPhoneList', JSON.stringify(userPhoneList.value))
-    // }
-    // const removePhoneList = async (item) => {
-    //     const index = userPhoneList.value.indexOf(item);
-    //     if (index !== -1) {
-    //         userPhoneList.value.splice(index, 1);
-    //         localStorage.setItem('userPhoneList', JSON.stringify(userPhoneList.value));
-    //     }
-    // }
-    return {
-        userInfo,
-        // userNameList,
-        // userPhoneList,
-        changeUserInfo,
-        // addNameList,
-        // removeNameList,
-        // addPhoneList,
-        // removePhoneList
-    }
-})
+);

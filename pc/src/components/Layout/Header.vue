@@ -31,8 +31,9 @@ const num = 0;
                 <div class="user-info">
                     <a-select :virtual="false" :bordered="false" ref="select" v-model:value="selectValue"
                         style="width: 110px" @change="handleChange">
-                        <!-- <a-select-option @click="router.push('/user/userinfo')" :value=item>{{
-}}</a-select-option> -->
+                        <a-select-option @click="router.push('/user/userinfo')">{{
+                            user.userInfo.RealName
+                        }}</a-select-option>
                         <a-select-option @click="router.push('/login')" value='退出'>退出</a-select-option>
                     </a-select>
                     <a-divider type="vertical" style="background-color: #a2887d;" />

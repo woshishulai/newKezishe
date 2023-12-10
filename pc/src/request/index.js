@@ -10,11 +10,11 @@ const Loading = useLoading()
 instance.interceptors.request.use(config => {
   const user = useUserInfo();
   Loading.changeSpinning(true);
-  let token = user.userInfo?.ApiToken;
+  let token = user.userInfo?.ApiToken || 235245;
   if (token && config.headers) {
     config.headers = config.headers || {};
-    config.headers["Authorization"] = token;
-    // config.headers.Authorization = token;
+    // config.headers["Authorization"] = 'ApiToken' + token;
+    config.headers.ApiToken = token;
   }
   console.log('请求带数据', config);
   return config;
@@ -26,7 +26,8 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(res => {
   Loading.changeSpinning(false)
   console.log('返回的数据', res);
-  res.data.Tag == 1 ? message['success'](res.data.Message) : message['error'](res.data.Message)
+  //个人信息返回缺少tag
+  res.data.Tag == 1 ? message['success'](res.data.Message) : message['error']('本次请求异常') || message['error'](res.data.Message)
   return res.data
 }, resError => {
   Loading.changeSpinning(false)
