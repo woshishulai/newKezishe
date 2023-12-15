@@ -64,6 +64,7 @@ const userRoutes = [
                     name: '账号管理',
                     icon: UserSwitchOutlined
                 },
+                component: () => import('@/pages/User/item/AccountManagement/index.vue'),
                 children: [
                     {
                         path: '',
@@ -234,8 +235,8 @@ const userRoutes = [
 ];
 const routes = [...baseRoutes, ...addRoutes, ...userRoutes];
 const router = createRouter({
-    // history: createWebHistory(),
-    history: createWebHashHistory(),
+    history: createWebHistory(),
+    // history: createWebHashHistory(),
     routes,
     // 路由滚动行为定制
     scrollBehavior() {

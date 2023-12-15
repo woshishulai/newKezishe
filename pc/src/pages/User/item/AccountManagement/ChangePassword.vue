@@ -5,7 +5,7 @@ import { getImageUrl } from '@/utils';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
-onMounted(() => {});
+onMounted(() => { });
 const formState = reactive({
     username: '',
     bankNmae: ''
@@ -18,16 +18,8 @@ const formState = reactive({
             <div class="title">修改密码</div>
             <div class="form-wrap">
                 <div class="change-login-password">
-                    <a-form
-                        labelAlign="left"
-                        :model="formState"
-                        name="basic"
-                        :label-col="{ span: 7 }"
-                        :wrapper-col="{ span: 15 }"
-                        autocomplete="off"
-                        @finish="onFinish"
-                        @finishFailed="onFinishFailed"
-                    >
+                    <a-form labelAlign="left" :model="formState" name="basic" :label-col="{ span: 7 }"
+                        :wrapper-col="{ span: 15 }" autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
                         <h5>登录密码</h5>
                         <a-form-item label="原始密码" name="username">
                             <a-input v-model:value="formState.username" />
@@ -45,16 +37,8 @@ const formState = reactive({
                     </a-form>
                 </div>
                 <div class="change-shipping-password">
-                    <a-form
-                        labelAlign="left"
-                        :model="formState"
-                        name="basic"
-                        :label-col="{ span: 7 }"
-                        :wrapper-col="{ span: 15 }"
-                        autocomplete="off"
-                        @finish="onFinish"
-                        @finishFailed="onFinishFailed"
-                    >
+                    <a-form labelAlign="left" :model="formState" name="basic" :label-col="{ span: 7 }"
+                        :wrapper-col="{ span: 15 }" autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
                         <h5>支付密码</h5>
                         <a-form-item label="原支付密码" name="username">
                             <a-input v-model:value="formState.username" />
@@ -100,7 +84,6 @@ const formState = reactive({
         }
     }
 
-    .form-wrap {
-    }
+    .form-wrap {}
 }
 </style>

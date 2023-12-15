@@ -14,7 +14,7 @@ instance.interceptors.request.use(
     (config) => {
         const user = useUserInfo();
         Loading.changeSpinning(true);
-        let token = user.userInfo?.ApiToken || 235245;
+        let token = user.userInfo?.ApiToken;
         if (token && config.headers) {
             config.headers = config.headers || {};
             // config.headers["Authorization"] = 'ApiToken' + token;
@@ -35,7 +35,7 @@ instance.interceptors.response.use(
         //个人信息返回缺少tag
         res.data.Tag == 1
             ? message['success'](res.data.Message)
-            : message['error']('本次请求异常') || message['error'](res.data.Message);
+            : message['error'](res.data.Message);
         return res.data;
     },
     (resError) => {
