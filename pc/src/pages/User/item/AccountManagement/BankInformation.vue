@@ -9,7 +9,10 @@ import { statusList } from '../../data';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
-onMounted(() => { });
+onMounted(async () => {
+    let res = await getUserAddressApi();
+    console.log(res);
+});
 const showConfirm = () => {
     Modal.confirm({
         title: '确定删除此地址吗?',
@@ -119,8 +122,16 @@ const resetForm = () => {
         <div class="card-box">
             <div class="title">新增银行账号</div>
             <div class="form-wrap">
-                <a-form labelAlign="left" :model="formState" name="basic" :label-col="{ span: 2 }"
-                    :wrapper-col="{ span: 7 }" autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
+                <a-form
+                    labelAlign="left"
+                    :model="formState"
+                    name="basic"
+                    :label-col="{ span: 2 }"
+                    :wrapper-col="{ span: 7 }"
+                    autocomplete="off"
+                    @finish="onFinish"
+                    @finishFailed="onFinishFailed"
+                >
                     <a-form-item label="姓名" name="username">
                         <a-input v-model:value="formState.username" />
                     </a-form-item>

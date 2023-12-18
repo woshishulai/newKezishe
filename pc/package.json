@@ -4,7 +4,7 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "dev": "vite --open --debug",
+        "dev": "vite --open",
         "build": "vite build",
         "preview": "vite preview",
         "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./"
@@ -12,7 +12,6 @@
     "dependencies": {
         "ant-design-vue": "4.x",
         "axios": "^1.6.2",
-        "dayjs": "^1.11.10",
         "less": "^4.2.0",
         "pinia": "^2.1.7",
         "pinia-persistedstate-plugin": "^0.1.0",

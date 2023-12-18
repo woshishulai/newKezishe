@@ -48,7 +48,7 @@ const handleFinish = async () => {
         @finishFailed="handleFinishFailed"
         :rules="accountRules"
     >
-        <a-form-item name="username">
+        <a-form-item has-feedback name="username">
             <a-popover v-model:open="visible" title="账号" placement="left" trigger="click">
                 <template #content>
                     <div class="show-name-list">
@@ -74,7 +74,7 @@ const handleFinish = async () => {
                 </a-input>
             </a-popover>
         </a-form-item>
-        <a-form-item name="password">
+        <a-form-item has-feedback name="password">
             <a-input-password
                 autocomplete="off"
                 id="login-password"
@@ -90,7 +90,7 @@ const handleFinish = async () => {
                 </template>
             </a-input-password>
         </a-form-item>
-        <a-form-item name="code">
+        <a-form-item has-feedback name="code">
             <a-input
                 v-model:value.trim="formState.code"
                 placeholder="验证码"

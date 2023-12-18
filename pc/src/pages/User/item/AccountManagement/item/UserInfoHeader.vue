@@ -13,12 +13,11 @@ onMounted(async () => {
     try {
         let res = await getUserDetailsApi();
         details.value = res.Data;
+        let verifyPhone = details.value.userProfileInfos[1].IsFillIn;
+        user.changeUserInfo({ verifyPhone: verifyPhone });
     } catch (error) {
         console.error('Error fetching user info:', error);
     }
-});
-const url = computed((params) => {
-    return params === 1 ? 'user/info/right.jpg' : 'user/info/error.jpg';
 });
 </script>
 
@@ -34,8 +33,16 @@ const url = computed((params) => {
             <div class="info-item" v-for="(item, index) in details.userProfileInfos" :key="index">
                 <p>{{ item.Profile }}</p>
                 <p>
-                    <img v-if="item.IsFillIn" :src="getImageUrl('user/info/right.jpg')" alt="" />
-                    <img v-else :src="getImageUrl('user/info/error.jpg')" alt="" />
+                    <img
+                        :src="
+                            getImageUrl(
+                                item.IsFillIn === '1'
+                                    ? 'user/info/right.jpg'
+                                    : 'user/info/error.jpg'
+                            )
+                        "
+                        alt=""
+                    />
                     <span :class="item.IsAuth != 0 ? 'active' : ''" v-if="item.ProfileNo <= 3">{{
                         item.IsAuth === 0 ? '未认证' : '已认证'
                     }}</span>

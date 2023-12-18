@@ -3,43 +3,85 @@ import { useRouter, useRoute } from 'vue-router';
 import { reactive, ref, onMounted } from 'vue';
 import { getUserInfoApi } from '@/request/api';
 import { useUserInfo } from '@/store/store';
+import { changeUserInfo, changeUserCallInfo } from '@/request/api';
+import { userInfoRules, changeUserInfoCallRules } from './rules';
+import { handleFinishFailed } from '@/utils/form/rules.js';
+import { message } from 'ant-design-vue';
 import Upload from './item/Upload.vue';
-import dayjs from 'dayjs';
 const user = useUserInfo();
+const countdown = ref(0);
 const formRef = ref();
 const formState = ref({
     RealName: '',
     Gender: '0',
     Birthday: '',
-    Birthday1: '',
     IdType: '',
     IdNumbers: '',
     fileList: ''
 });
+const formState1 = ref({
+    Mobile: '',
+    code: '',
+    email: '',
+    emailCode: '',
+    TelPhone: ''
+});
+const info = (status, msg) => message[status](msg);
+const getPhone = () => {
+    const phoneRegex = /^1[3456789]\d{9}$/;
+    const phoneNumber = formState1.value.Mobile;
+    const isPhoneValid = phoneRegex.test(phoneNumber);
+    if (!isPhoneValid) {
+        info('error', '请输入正确的手机号');
+    }
+    return isPhoneValid;
+};
+const getCode = () => {
+    const isPhoneValid = getPhone();
+    if (isPhoneValid) {
+        countdown.value = 60;
+        info('success', '验证码发送成功请输入验证码');
+        const interval = setInterval(() => {
+            countdown.value > 0 ? countdown.value-- : clearInterval(interval);
+        }, 1000);
+    }
+};
 onMounted(async () => {
     try {
         let res = await getUserInfoApi();
-        console.log(res);
         user.changeUserInfo(res.Data);
         formState.value = Object.assign({}, user.userInfo);
-        // formState.value.Region = formState.value.Region + '';
-        console.log(formState.value);
+        formState1.value = Object.assign({}, user.userInfo);
     } catch (error) {
         console.error('Error fetching user info:', error);
     }
 });
-const onFinish = async () => {
-    console.log(formState.value.Birthday);
-    console.log(formState.value.Birthday.$y);
-    console.log(formState.value.Birthday.$M + 1);
-    console.log(formState.value.Birthday.$D);
-    const formattedDate = `${formState.value.Birthday.$y}-${(formState.value.Birthday.$M + 1)
-        .toString()
-        .padStart(2, '0')}-${formState.value.Birthday.$D.toString().padStart(2, '0')}`;
+const handleFinish = async () => {
+    let params = {
+        Id: user.userInfo.UserId,
+        RealName: formState.value.RealName,
+        Gender: formState.value.Gender,
+        Birthday: formState.value.Birthday,
+        IdType: formState.value.IdType,
+        IdNumbers: formState.value.IdNumbers,
+        IdImage: ''
+    };
+    try {
+        let res = await changeUserInfo(params);
+        console.log(res);
+    } catch (error) {
+        console.error('Error updating user info:', error);
+    }
 };
-const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-    console.log(formState.value);
+const onFinish = async () => {
+    let params = {
+        Id: user.userInfo.UserId,
+        Mobile: formState1.value.Mobile,
+        Email: formState1.value.email,
+        TelPhone: formState1.value.TelPhone
+    };
+    let res = await changeUserCallInfo(params);
+    console.log(res);
 };
 </script>
 
@@ -59,13 +101,16 @@ const onFinishFailed = (errorInfo) => {
                 <a-form
                     labelAlign="left"
                     ref="formRef"
-                    @finish="onFinish"
-                    @finishFailed="onFinishFailed"
+                    :rules="userInfoRules"
+                    @finish="handleFinish"
+                    @finishFailed="handleFinishFailed"
                     :model="formState"
                     :label-col="{ span: 5 }"
                     :wrapper-col="{ span: 19 }"
+                    :hide-required-mark="true"
+                    autocomplete="off"
                 >
-                    <a-form-item label="姓名" name="name">
+                    <a-form-item label="姓名" has-feedback name="RealName">
                         <a-input v-model:value.trim="formState.RealName" />
                     </a-form-item>
                     <a-form-item label="性别" name="gender">
@@ -76,11 +121,12 @@ const onFinishFailed = (errorInfo) => {
                     </a-form-item>
                     <a-form-item label="出生年月" name="date1">
                         <a-date-picker
-                            v-model:value.trim="formState.Birthday1"
+                            value-format="YYYY-MM-DD"
+                            v-model:value="formState.Birthday"
                             style="width: 100%"
                         />
                     </a-form-item>
-                    <a-form-item label="证件类型" name="region" class="card-cate">
+                    <a-form-item label="证件类型" has-feedback name="region" class="card-cate">
                         <a-select v-model:value.trim="formState.IdType" placeholder="">
                             <a-select-option value="1">身份证</a-select-option>
                             <a-select-option value="2">护照</a-select-option>
@@ -88,7 +134,7 @@ const onFinishFailed = (errorInfo) => {
                             <a-select-option value="4">其他</a-select-option>
                         </a-select>
                     </a-form-item>
-                    <a-form-item label="证件号码" name="idNumbers">
+                    <a-form-item label="证件号码" name="IdNumbers">
                         <a-input v-model:value.trim="formState.IdNumbers" />
                     </a-form-item>
                     <a-form-item label="证件照片" class="upload-wrap">
@@ -100,46 +146,81 @@ const onFinishFailed = (errorInfo) => {
                 </a-form>
             </div>
         </div>
+        <div class="card-box">
+            <div class="title">联系信息</div>
+            <div class="form-wrap">
+                <a-form
+                    labelAlign="left"
+                    ref="formRef"
+                    @finish="onFinish"
+                    @finishFailed="handleFinishFailed"
+                    :rules="changeUserInfoCallRules"
+                    :model="formState1"
+                    :label-col="{ span: 5 }"
+                    :wrapper-col="{ span: 19 }"
+                    autocomplete="off"
+                    :hide-required-mark="true"
+                >
+                    <a-form-item hide-required-mark="false" label="手机" name="Mobile">
+                        <div class="flex">
+                            <a-input type="number" v-model:value="formState1.Mobile" />
+                            <a-button
+                                v-if="user.userInfo.verifyPhone !== '1'"
+                                @click="getCode"
+                                :disabled="countdown > 0"
+                            >
+                                <span v-if="countdown === 0">获取验证码</span>
+                                <span v-else>{{ countdown }}</span></a-button
+                            >
+                        </div>
+                    </a-form-item>
+                    <a-form-item
+                        v-if="user.userInfo.verifyPhone !== '1'"
+                        hide-required-mark="false"
+                        label="验证码"
+                        name="code"
+                    >
+                        <div class="flex">
+                            <a-input type="number" v-model:value="formState1.code" />
+                        </div>
+                    </a-form-item>
+                    <a-form-item label="邮箱" name="email">
+                        <div class="flex">
+                            <a-input type="number" v-model:value="formState1.email" />
+                            <a-button>获取验证码</a-button>
+                        </div>
+                    </a-form-item>
+                    <a-form-item hide-required-mark="false" label="邮箱验证码" name="emailCode">
+                        <a-input type="number" v-model:value="formState1.emailCode" />
+                    </a-form-item>
+                    <a-form-item label="电话" name="TelPhone">
+                        <a-input type="number" v-model:value="formState1.TelPhone" />
+                    </a-form-item>
+                    <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
+                        <a-button html-type="submit" type="primary">保存基本信息</a-button>
+                    </a-form-item>
+                </a-form>
+            </div>
+        </div>
         <!-- <div class="card-box">
-      <div class="title">联系信息</div>
-      <div class="form-wrap">
-        <a-form labelAlign="left" ref="formRef" @finish="onFinish" @finishFailed="onFinishFailed" :model="formState"
-          :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
-          <a-form-item label="手机" name="name">
-            <a-input type="number" v-model:value="formState1.phone" />
-          </a-form-item>
-          <a-form-item label="邮箱" name="name">
-            <a-input type="number" v-model:value="formState1.phone" />
-          </a-form-item>
-          <a-form-item label="电话" name="name">
-            <a-input type="number" v-model:value="formState1.phone" />
-          </a-form-item>
-          <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
-            <a-button html-type="submit" type="primary">保存基本信息</a-button>
-          </a-form-item>
-        </a-form>
-      </div>
-    </div>
-    <div class="card-box">
-      <div class="title">收藏信息</div>
-      <div class="cate-list">
-        <div class="cate-info">
-          <span>设置收藏类别:</span>
-          <a-select v-model:value="formState.region" style="width: 356px;" placeholder="">
-            <a-select-option value="cardId">身份证</a-select-option>
-            <a-select-option value="driverLicense">驾驶证</a-select-option>
-          </a-select>
-        </div>
-        <div class="add-like">
-          <a-input v-model:value="value" placeholder="" />
-          <a-button>添加</a-button>
-        </div>
-        <div class="like-info">
-          <span>邮票钱币 &nbsp;X</span>
-        </div>
-      </div>
-
-    </div> -->
+            <div class="title">收藏信息</div>
+            <div class="cate-list">
+                <div class="cate-info">
+                    <span>设置收藏类别:</span>
+                    <a-select v-model:value="formState.region" style="width: 356px" placeholder="">
+                        <a-select-option value="cardId">身份证</a-select-option>
+                        <a-select-option value="driverLicense">驾驶证</a-select-option>
+                    </a-select>
+                </div>
+                <div class="add-like">
+                    <a-input v-model:value="value" placeholder="" />
+                    <a-button>添加</a-button>
+                </div>
+                <div class="like-info">
+                    <span>邮票钱币 &nbsp;X</span>
+                </div>
+            </div>
+        </div> -->
     </div>
 </template>
 
@@ -201,6 +282,10 @@ const onFinishFailed = (errorInfo) => {
                     cursor: pointer;
                 }
             }
+        }
+        .flex {
+            .flex-row;
+            gap: 10px;
         }
     }
 }

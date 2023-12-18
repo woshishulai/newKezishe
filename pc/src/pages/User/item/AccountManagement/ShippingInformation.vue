@@ -1,14 +1,18 @@
 <script setup>
-import { ref, computed, reactive, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import { getImageUrl } from '@/utils';
-import { createVNode } from 'vue';
-import { Modal } from 'ant-design-vue';
-import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { shippingDataSource, shippingColumns } from '../../data';
+import { ref, reactive, onMounted } from 'vue';
+import { getUserAddressApi, removeUserAddressApi } from '@/request/api';
+import { shippingColumns } from '../../data';
 import { countryList } from '@/utils/user/country';
 import { data } from '@/utils/user/data';
 import { handleFinishFailed } from '@/utils/form/rules.js';
+import changeTableList from './item/changeTableList.vue';
+const params = reactive({
+    open: false, //是否打开弹窗
+    title: '', //标题
+    id: '', //数组的某一项
+    meth: ''
+});
+const address = ref([]);
 const formState = reactive({
     username: '',
     region: '中国',
@@ -19,6 +23,41 @@ const formState = reactive({
     resource: '',
     desc: ''
 });
+onMounted(async () => {
+    let res = await getUserAddressApi();
+    address.value = res.Data;
+    console.log(res);
+});
+const openModel = (biaoti, id, meth) => {
+    params.open = true;
+    params.title = biaoti;
+    params.id = id;
+    params.meth = meth;
+    // const index = address.value.findIndex((item) => item.Id === id);
+    // address.value.splice(index, 1);
+    // console.log(index);
+    // console.log(address, id);
+};
+const closeModel = () => {
+    console.log('触发了');
+    params.open = false;
+    params.title = '';
+    params.id = '';
+};
+const postAPi = async () => {
+    let query = params.meth;
+    console.log(query);
+    if (query === 'remove') {
+        let res = await removeUserAddressApi(params.id);
+        console.log(res);
+    } else if (query === 'change') {
+        // let res = await removeUserAddressApi(params.id);
+        console.log('修改');
+    } else {
+        // let res = await removeUserAddressApi(params.id);
+        console.log('增加');
+    }
+};
 const statusList = (country) => {
     const defaultCountry = country || 'CHN';
     console.log(defaultCountry);
@@ -51,13 +90,7 @@ const statusList = (country) => {
     console.log(formState.statusList);
     return getStatusList(defaultCountry);
 };
-const result = statusList();
-const router = useRouter();
-const route = useRoute();
-const props = defineProps({});
-onMounted(() => {});
 const handleChange = (value, option) => {
-    console.log(value, option.id);
     statusList(option.id);
     formState.region = value;
     formState.date1 = '';
@@ -65,39 +98,43 @@ const handleChange = (value, option) => {
 const handleFinish = () => {
     console.log(formState);
 };
-const showConfirm = () => {
-    Modal.confirm({
-        title: '确定删除此地址吗?',
-        icon: createVNode(ExclamationCircleOutlined),
-        onOk() {
-            console.log('确定');
-        },
-        onCancel() {
-            console.log('取消');
-        },
-        class: 'test'
-    });
-};
 </script>
 
 <template>
     <div class="bank-information">
         <div class="card-box">
-            <a-button @click="statusList('CHL')"> 测试 </a-button>
             <div class="title">快递信息</div>
-            <a-table
-                :pagination="false"
-                :columns="shippingColumns"
-                :data-source="shippingDataSource"
-            >
-                <template #tt="{ record }">
-                    <div class="status">
-                        <span>修改</span>
-                        <span @click="showConfirm">删除</span>
-                        <span class="active" :class="record.status ? 'active' : ''">{{
-                            record.status ? '默认账号' : '设为默认'
-                        }}</span>
-                    </div>
+            <a-table :pagination="false" :columns="shippingColumns" :data-source="address">
+                <template #bodyCell="{ column, record }">
+                    <template v-if="column.key === 'Address'">
+                        <div class="address">
+                            <span> {{ record.State + record.Sheng }}</span>
+                            <span>&nbsp;&nbsp;</span>
+                            <span> {{ record.Shi }}</span>
+                        </div>
+                    </template>
+                    <template v-if="column.key === 'AddressDetails'">
+                        <div class="address-details">
+                            <span> {{ record.Address }}</span>
+                        </div>
+                    </template>
+                    <template v-if="column.key === 'Tel'">
+                        <div class="tel">
+                            <span v-if="record.Tel"> {{ record.Tel }}</span>
+                            <span v-else> {{ record.Phone }}</span>
+                        </div>
+                    </template>
+                    <template v-if="column.key === 'status'">
+                        <div class="status">
+                            <span @click="openModel('修改地址', record.Id)">修改</span>
+                            <span @click="openModel('确定删除该地址吗', record.Id, 'remove')"
+                                >删除</span
+                            >
+                            <span class="active" :class="record.status ? 'active' : ''"
+                                >{{ record.Default ? '默认账号' : '设为默认' }}
+                            </span>
+                        </div>
+                    </template>
                 </template>
             </a-table>
         </div>
@@ -150,6 +187,11 @@ const showConfirm = () => {
                 </a-form>
             </div>
         </div>
+        <changeTableList
+            @closeModel="closeModel"
+            @postApi="postAPi"
+            :params="params"
+        ></changeTableList>
     </div>
 </template>
 
@@ -173,7 +215,6 @@ const showConfirm = () => {
             }
         }
     }
-
     .form-wrap {
         padding: 40px 30px 20px 40px;
     }

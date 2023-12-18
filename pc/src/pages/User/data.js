@@ -189,40 +189,39 @@ const shippingDataSource = [
 const shippingColumns = [
     {
         title: '收货人',
-        dataIndex: 'name',
-        key: 'name',
+        dataIndex: 'NickName',
+        key: 'NickName',
         align: 'center'
     },
     {
         title: '所在地区',
-        dataIndex: 'bank',
-        key: 'bank',
+        dataIndex: 'Address',
+        key: 'Address',
         align: 'center'
     },
     {
         title: '详细地址',
-        dataIndex: 'code',
-        key: 'code',
+        dataIndex: 'AddressDetails',
+        key: 'AddressDetails',
         align: 'center'
     },
     {
-        title: '邮编电话',
-        dataIndex: 'ee',
-        key: 'ee',
+        title: '邮编',
+        dataIndex: 'Postal',
+        key: 'Postal',
         align: 'center'
     },
     {
         title: '电话/手机',
-        dataIndex: 'rr',
-        key: 'rr',
+        dataIndex: 'Tel',
+        key: 'Tel',
         align: 'center'
     },
     {
-        title: '操作',
-        dataIndex: 'tt',
-        key: 'tt',
-        align: 'center',
-        slots: { customRender: 'tt' }
+        title: '',
+        dataIndex: 'status',
+        key: 'status',
+        align: 'center'
     }
 ];
 export { infoList, infoDataSource, infoColumns, statusList, shippingDataSource, shippingColumns };
