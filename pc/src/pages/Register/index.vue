@@ -39,7 +39,7 @@ const rules = {
         },
         {
             pattern: /^[a-zA-Z0-9]+$/,
-            message: '账号密码暂不支持中文',
+            message: '账号密码暂不支持中文或空格',
             trigger: 'change'
         },
         {
@@ -56,7 +56,7 @@ const rules = {
         },
         {
             pattern: /^[a-zA-Z0-9]+$/,
-            message: '账号密码暂不支持中文',
+            message: '账号密码暂不支持中文或空格',
             trigger: 'change'
         },
         {
@@ -67,7 +67,7 @@ const rules = {
         },
         {
             pattern: /^[a-zA-Z0-9]+$/,
-            message: '账号密码暂不支持中文',
+            message: '账号密码暂不支持中文或空格',
             trigger: 'change'
         }
     ],
@@ -80,7 +80,7 @@ const rules = {
         },
         {
             pattern: /^[a-zA-Z0-9]+$/,
-            message: '暂不支持中文',
+            message: '暂不支持中文或空格',
             trigger: 'change'
         },
         {
@@ -114,7 +114,7 @@ const rules = {
         },
         {
             pattern: /^[a-zA-Z0-9]+$/,
-            message: '账号密码暂不支持中文',
+            message: '账号密码暂不支持中文或空格',
             trigger: 'change'
         }
     ],

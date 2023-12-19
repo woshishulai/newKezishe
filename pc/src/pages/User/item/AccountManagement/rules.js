@@ -1,4 +1,4 @@
-const userInfoRules = {
+export const userInfoRules = {
     RealName: [
         {
             required: true,
@@ -20,12 +20,12 @@ const userInfoRules = {
         },
         {
             pattern: /^[a-zA-Z0-9]+$/,
-            message: '证件号码暂不支持中文',
+            message: '证件号码暂不支持中文或空格',
             trigger: 'change'
         }
     ]
 };
-const changeUserInfoCallRules = {
+export const changeUserInfoCallRules = {
     Mobile: [
         {
             required: true,
@@ -91,4 +91,3 @@ const changeUserInfoCallRules = {
         }
     ]
 };
-export { userInfoRules, changeUserInfoCallRules };

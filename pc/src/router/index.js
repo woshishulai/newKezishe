@@ -236,7 +236,7 @@ const userRoutes = [
 const routes = [...baseRoutes, ...addRoutes, ...userRoutes];
 const router = createRouter({
     history: createWebHistory(),
-    // history: createWebHashHistory(),
+    history: createWebHashHistory(),
     routes,
     // 路由滚动行为定制
     scrollBehavior() {

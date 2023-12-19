@@ -43,8 +43,8 @@ onMounted(async () => {
                         "
                         alt=""
                     />
-                    <span :class="item.IsAuth != 0 ? 'active' : ''" v-if="item.ProfileNo <= 3">{{
-                        item.IsAuth === 0 ? '未认证' : '已认证'
+                    <span v-if="item.ProfileNo <= 3" :class="item.IsAuth != 0 ? 'active' : ''">{{
+                        item.IsAuth !== 0 ? '未认证' : '已认证'
                     }}</span>
                 </p>
             </div>

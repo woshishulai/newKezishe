@@ -51,3 +51,13 @@ export const defaultUserBankInfo = async (data) =>
 
 //添加银行卡
 export const addUserBankInfo = async (data) => instance.post(`Member/UserCard/Create`, data);
+
+//获取密码
+export const getPassWord = async () => instance.get('/Member/User/DefaultPwdStatus');
+
+//修改登录密码
+export const changeLoginPassWord = async (data) =>
+    instance.post(`Member/User/ChangePassword`, data);
+
+//修改支付密码
+export const changePayPassWord = async (data) => instance.post(`Member/User/ChangePayword`, data);
