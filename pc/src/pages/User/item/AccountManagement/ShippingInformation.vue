@@ -4,7 +4,8 @@ import {
     getUserAddressApi,
     removeUserAddressApi,
     changeUserAddressInfo,
-    defaultUserAddressInfo
+    defaultUserAddressInfo,
+    addUserAddressInfo
 } from '@/request/api';
 import { shippingColumns } from '../../data';
 import { countryList } from '@/utils/user/country';
@@ -36,14 +37,15 @@ const address = ref([]);
 const formState = reactive({
     username: '',
     region: '中国',
-    statusList: [],
-    date1: undefined,
-    delivery: false,
-    type: [],
-    resource: '',
-    desc: ''
+    statusList: [], //省市数据
+    date1: undefined, //选择的省市
+    text: '', //详细地址
+    bankNmae: '', //邮编
+    tel: '', //电话
+    phone: ''
 });
 onMounted(async () => {
+    statusList();
     let res = await getUserAddressApi();
     address.value = res.Data;
 });
@@ -124,8 +126,26 @@ const handleChange = (value, option) => {
     formState.region = value;
     formState.date1 = '';
 };
-const handleFinish = () => {
+const handleFinish = async () => {
     console.log(formState);
+    let params = {
+        NickName: formState.username, //昵称
+        State: formState.region,
+        Sheng: formState.date1[0],
+        Shi: formState.date1[1],
+        Address: formState.text,
+        Postal: formState.bankNmae,
+        Tel: formState.tel,
+        Phone: formState.phone,
+        Default: '0'
+    };
+    try {
+        let res = await addUserAddressInfo(params);
+        location.reload();
+        console.log(res);
+    } catch (error) {
+        console.log(error);
+    }
 };
 </script>
 
@@ -180,16 +200,23 @@ const handleFinish = () => {
                     labelAlign="left"
                     :model="formState"
                     name="basicsss"
-                    :label-col="{ span: 2 }"
-                    :wrapper-col="{ span: 7 }"
+                    :label-col="{ span: 3 }"
+                    :wrapper-col="{ span: 10 }"
                     autocomplete="off"
                     @finish="handleFinish"
                     @finishFailed="handleFinishFailed"
                 >
-                    <a-form-item label="姓名" name="username">
+                    <a-form-item
+                        :rules="[{ required: true, message: '姓名不能为空' }]"
+                        label="姓名"
+                        name="username"
+                    >
                         <a-input v-model:value.trim="formState.username" />
                     </a-form-item>
-                    <a-form-item label="所在地区">
+                    <a-form-item
+                        :rules="[{ required: true, message: '国家不能为空' }]"
+                        label="所在地区"
+                    >
                         <a-select
                             v-model:value="formState.region"
                             show-search
@@ -197,26 +224,55 @@ const handleFinish = () => {
                             @change="handleChange"
                         ></a-select>
                     </a-form-item>
-                    <a-form-item label="省市地址" name="username">
+                    <a-form-item
+                        :rules="[{ required: true, message: '省市不能为空' }]"
+                        label="省市地址"
+                        name="username"
+                    >
                         <a-cascader
                             expand-trigger="hover"
                             v-model:value="formState.date1"
                             :options="formState.statusList"
                         />
                     </a-form-item>
-                    <a-form-item label="详细地址" name="username">
+                    <a-form-item
+                        :rules="[{ required: true, message: '详细地址不能为空' }]"
+                        label="详细地址"
+                        name="username"
+                    >
                         <a-textarea
                             v-model:value="formState.text"
                             :auto-size="{ minRows: 2, maxRows: 5 }"
                         />
                     </a-form-item>
-                    <a-form-item label="邮编电话" name="bankNmae">
+                    <a-form-item
+                        :rules="[
+                            { required: true, message: '邮编不能为空' },
+                            { pattern: /^[0-9]{6}$/, message: '邮编格式不正确' }
+                        ]"
+                        label="邮编"
+                        name="bankNmae"
+                    >
                         <a-input type="number" v-model:value="formState.bankNmae" />
                     </a-form-item>
-                    <a-form-item label="电话/手机" name="username">
-                        <a-input type="number" v-model:value="formState.username" />
+                    <a-form-item
+                        :rules="[
+                            { required: true, message: '收货手机号不能为空' },
+                            { pattern: /^[0-9]{11}$/, message: '手机号格式不正确' }
+                        ]"
+                        label="'收货手机号"
+                        name="tel"
+                    >
+                        <a-input type="number" v-model:value="formState.tel" />
                     </a-form-item>
-                    <a-form-item :wrapper-col="{ offset: 2, span: 7 }">
+                    <a-form-item
+                        :rules="[{ required: true, message: '联系电话不能为空' }]"
+                        label="联系电话"
+                        name="phone"
+                    >
+                        <a-input type="number" v-model:value="formState.phone" />
+                    </a-form-item>
+                    <a-form-item :wrapper-col="{ offset: 3, span: 10 }">
                         <a-button type="primary" html-type="submit">保存</a-button>
                     </a-form-item>
                 </a-form>

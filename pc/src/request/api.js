@@ -30,6 +30,10 @@ const changeUserAddressInfo = async (data) => instance.put('/Member/Address/Upda
 
 //默认个人地址
 const defaultUserAddressInfo = async (data) => instance.put('/Member/Address/Update', data);
+
+//获取oss签名
+const addUserAddressInfo = async (data) => instance.post(`/Member/Address/Create`, data);
+
 export {
     submitLoginApi,
     getUserInfoApi,
@@ -40,5 +44,6 @@ export {
     getUserAddressApi,
     removeUserAddressApi,
     changeUserAddressInfo,
-    defaultUserAddressInfo
+    defaultUserAddressInfo,
+    addUserAddressInfo
 };

@@ -80,7 +80,10 @@ const changeHandleOk = () => {
             >
                 <a-input v-model:value.trim="formState.shi" />
             </a-form-item>
-            <a-form-item :label="props.changeParams.labels.five" name="address">
+            <a-form-item
+                :rules="[{ required: true, message: '不能为空' }]"
+                :label="props.changeParams.labels.five"
+            >
                 <a-textarea
                     v-model:value="formState.text"
                     :auto-size="{ minRows: 2, maxRows: 5 }"

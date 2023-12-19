@@ -7,7 +7,8 @@ import piniaPersist from 'pinia-plugin-persist';
 const pinia = createPinia();
 pinia.use(piniaPersist);
 const app = createApp(App);
-
+app.config.devtools = true;
+app.config.performance = true;
 app.use(pinia);
 app.use(router);
 app.mount('#app');
