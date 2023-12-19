@@ -233,7 +233,7 @@
 }
 
 // //弹出对话框到按钮
-.ant-modal-confirm .ant-modal-confirm-btns{
+.ant-modal-confirm .ant-modal-confirm-btns {
     .flex-row;
     justify-content: flex-end;
     padding: 20px 0;
@@ -316,4 +316,25 @@
 // // 已选中的分页 鼠标经过里面的A
 .ant-pagination .ant-pagination-item-active:hover a {
     color: #fff;
+}
+
+//弹出窗口 model
+.ant-modal-content {
+    .ant-modal-header {
+        text-align: center;
+        .ant-modal-title {
+            font-size: 20px;
+            margin: 10px 0 30px;
+        }
+    }
+    .ant-modal-body {
+        min-height: 100px;
+    }
+    .ant-modal-footer {
+        display: flex;
+
+        button {
+            flex: 1;
+        }
+    }
 }

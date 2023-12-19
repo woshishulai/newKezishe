@@ -25,6 +25,11 @@ const getUserAddressApi = async () => instance.get('/Member/Address/GetList');
 const removeUserAddressApi = async (params) =>
     instance.delete(`/Member/Address/Delete?Id=${params}`);
 
+//修改个人地址
+const changeUserAddressInfo = async (data) => instance.put('/Member/Address/Update', data);
+
+//默认个人地址
+const defaultUserAddressInfo = async (data) => instance.put('/Member/Address/Update', data);
 export {
     submitLoginApi,
     getUserInfoApi,
@@ -33,5 +38,7 @@ export {
     changeUserInfo,
     changeUserCallInfo,
     getUserAddressApi,
-    removeUserAddressApi
+    removeUserAddressApi,
+    changeUserAddressInfo,
+    defaultUserAddressInfo
 };

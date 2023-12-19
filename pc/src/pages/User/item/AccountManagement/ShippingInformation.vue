@@ -1,16 +1,36 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
-import { getUserAddressApi, removeUserAddressApi } from '@/request/api';
+import {
+    getUserAddressApi,
+    removeUserAddressApi,
+    changeUserAddressInfo,
+    defaultUserAddressInfo
+} from '@/request/api';
 import { shippingColumns } from '../../data';
 import { countryList } from '@/utils/user/country';
 import { data } from '@/utils/user/data';
 import { handleFinishFailed } from '@/utils/form/rules.js';
-import changeTableList from './item/changeTableList.vue';
+import removeTableList from './item/removeTableList.vue';
 const params = reactive({
     open: false, //是否打开弹窗
     title: '', //标题
+    id: '' //数组的某一项
+});
+const changeParams = reactive({
+    open: false, //是否打开弹窗
+    title: '', //标题
     id: '', //数组的某一项
-    meth: ''
+    default: '',
+    labels: {
+        one: '姓名',
+        two: '国家',
+        there: '省',
+        four: '市',
+        five: '详细地址',
+        six: '邮政编码',
+        senven: '收货电话',
+        enigh: '联系电话'
+    }
 });
 const address = ref([]);
 const formState = reactive({
@@ -26,37 +46,48 @@ const formState = reactive({
 onMounted(async () => {
     let res = await getUserAddressApi();
     address.value = res.Data;
-    console.log(res);
 });
-const openModel = (biaoti, id, meth) => {
+const openModel = (biaoti, id) => {
     params.open = true;
     params.title = biaoti;
     params.id = id;
-    params.meth = meth;
-    // const index = address.value.findIndex((item) => item.Id === id);
-    // address.value.splice(index, 1);
-    // console.log(index);
-    // console.log(address, id);
+};
+const openChangeParamsModel = (biaoti, id, Default) => {
+    console.log(biaoti, id, Default);
+    changeParams.open = true;
+    changeParams.title = biaoti;
+    changeParams.id = id;
+    changeParams.default = Default;
 };
 const closeModel = () => {
-    console.log('触发了');
     params.open = false;
     params.title = '';
     params.id = '';
+    changeParams.open = false;
+    changeParams.title = '';
+    changeParams.id = '';
 };
 const postAPi = async () => {
-    let query = params.meth;
-    console.log(query);
-    if (query === 'remove') {
-        let res = await removeUserAddressApi(params.id);
-        console.log(res);
-    } else if (query === 'change') {
-        // let res = await removeUserAddressApi(params.id);
-        console.log('修改');
-    } else {
-        // let res = await removeUserAddressApi(params.id);
-        console.log('增加');
-    }
+    let res = await removeUserAddressApi(params.id);
+    const index = address.value.findIndex((item) => item.Id === params.id);
+    address.value.splice(index, 1);
+    closeModel();
+};
+const changeApi = async (query) => {
+    let params = {
+        Id: changeParams.id,
+        NickName: query.username,
+        State: query.country,
+        Sheng: query.status,
+        Shi: query.shi,
+        Address: query.text,
+        Postal: query.postal,
+        Tel: query.tel,
+        Phone: query.phone,
+        Default: changeParams.default
+    };
+    let res = await changeUserAddressInfo(params);
+    console.log(res);
 };
 const statusList = (country) => {
     const defaultCountry = country || 'CHN';
@@ -85,9 +116,7 @@ const statusList = (country) => {
             };
         });
     };
-    console.log('我是最终的结果', getStatusList(defaultCountry));
     formState.statusList = getStatusList(defaultCountry);
-    console.log(formState.statusList);
     return getStatusList(defaultCountry);
 };
 const handleChange = (value, option) => {
@@ -126,11 +155,17 @@ const handleFinish = () => {
                     </template>
                     <template v-if="column.key === 'status'">
                         <div class="status">
-                            <span @click="openModel('修改地址', record.Id)">修改</span>
-                            <span @click="openModel('确定删除该地址吗', record.Id, 'remove')"
-                                >删除</span
+                            <span
+                                @click="
+                                    openChangeParamsModel('修改地址', record.Id, record.Default)
+                                "
+                                >修改</span
                             >
-                            <span class="active" :class="record.status ? 'active' : ''"
+                            <span @click="openModel('确定删除该地址吗', record.Id)">删除</span>
+                            <span
+                                @click="defaultUserAddressInfo(record.Id)"
+                                class="active"
+                                :class="record.status ? 'active' : ''"
                                 >{{ record.Default ? '默认账号' : '设为默认' }}
                             </span>
                         </div>
@@ -144,7 +179,7 @@ const handleFinish = () => {
                 <a-form
                     labelAlign="left"
                     :model="formState"
-                    name="basic"
+                    name="basicsss"
                     :label-col="{ span: 2 }"
                     :wrapper-col="{ span: 7 }"
                     autocomplete="off"
@@ -187,11 +222,13 @@ const handleFinish = () => {
                 </a-form>
             </div>
         </div>
-        <changeTableList
+        <removeTableList
             @closeModel="closeModel"
             @postApi="postAPi"
             :params="params"
-        ></changeTableList>
+            :changeParams="changeParams"
+            @changeApi="changeApi"
+        ></removeTableList>
     </div>
 </template>
 
