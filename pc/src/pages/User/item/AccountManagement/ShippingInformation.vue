@@ -7,11 +7,12 @@ import {
     defaultUserAddressInfo,
     addUserAddressInfo
 } from '@/request/api';
+import RemoveTableList from './item/RemoveTableList.vue';
 import { shippingColumns } from '../../data';
 import { countryList } from '@/utils/user/country';
 import { data } from '@/utils/user/data';
 import { handleFinishFailed } from '@/utils/form/rules.js';
-import removeTableList from './item/removeTableList.vue';
+import { message } from 'ant-design-vue';
 const params = reactive({
     open: false, //是否打开弹窗
     title: '', //标题
@@ -35,14 +36,14 @@ const changeParams = reactive({
 });
 const address = ref([]);
 const formState = reactive({
-    username: '',
+    username: 'eeeeee',
     region: '中国',
     statusList: [], //省市数据
     date1: undefined, //选择的省市
-    text: '', //详细地址
-    bankNmae: '', //邮编
-    tel: '', //电话
-    phone: ''
+    text: 'eeee', //详细地址
+    bankNmae: '333333', //邮编
+    tel: '17633732594', //电话
+    phone: '17633732594'
 });
 onMounted(async () => {
     statusList();
@@ -55,7 +56,6 @@ const openModel = (biaoti, id) => {
     params.id = id;
 };
 const openChangeParamsModel = (biaoti, id, Default) => {
-    console.log(biaoti, id, Default);
     changeParams.open = true;
     changeParams.title = biaoti;
     changeParams.id = id;
@@ -89,14 +89,19 @@ const changeApi = async (query) => {
         Default: changeParams.default
     };
     let res = await changeUserAddressInfo(params);
-    console.log(res);
+};
+const changeDefault = async (id) => {
+    let res = await defaultUserAddressInfo(id);
+    if (res.Tag === 1) {
+        const item = address.value.find((item) => item.Id === id);
+        address.value.forEach((addressItem) => (addressItem.Default = 0));
+        item.Default = 1;
+    }
 };
 const statusList = (country) => {
     const defaultCountry = country || 'CHN';
-    console.log(defaultCountry);
     const getStatusList = (countryCode) => {
         const provinces = data[countryCode];
-        console.log(provinces, '我是获取的国家对应的省的数据');
 
         if (!provinces) {
             console.error(`Invalid country code: ${countryCode}`);
@@ -127,7 +132,10 @@ const handleChange = (value, option) => {
     formState.date1 = '';
 };
 const handleFinish = async () => {
-    console.log(formState);
+    if (!formState.date1) {
+        message['error']('省市地区不能为空');
+        return;
+    }
     let params = {
         NickName: formState.username, //昵称
         State: formState.region,
@@ -183,9 +191,8 @@ const handleFinish = async () => {
                             >
                             <span @click="openModel('确定删除该地址吗', record.Id)">删除</span>
                             <span
-                                @click="defaultUserAddressInfo(record.Id)"
-                                class="active"
-                                :class="record.status ? 'active' : ''"
+                                @click="changeDefault(record.Id)"
+                                :class="record.Default ? 'active' : ''"
                                 >{{ record.Default ? '默认账号' : '设为默认' }}
                             </span>
                         </div>
@@ -278,13 +285,13 @@ const handleFinish = async () => {
                 </a-form>
             </div>
         </div>
-        <removeTableList
+        <RemoveTableList
             @closeModel="closeModel"
             @postApi="postAPi"
             :params="params"
             :changeParams="changeParams"
             @changeApi="changeApi"
-        ></removeTableList>
+        ></RemoveTableList>
     </div>
 </template>
 

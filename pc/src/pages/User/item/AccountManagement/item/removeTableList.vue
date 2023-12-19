@@ -24,7 +24,7 @@ const handleOk = () => {
 };
 
 const changeHandleOk = () => {
-    emits('changeApi');
+    emits('changeApi', formState);
 };
 </script>
 <template>
