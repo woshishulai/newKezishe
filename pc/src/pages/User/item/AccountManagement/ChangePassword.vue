@@ -84,7 +84,7 @@ const onFinish = async () => {
                 NewPassword: formState.newLoginPassword
             };
             let res = await changeLoginPassWord(params);
-            if (res.Total) {
+            if ((res.Total = 1)) {
                 Object.keys(formState).forEach((key) => {
                     formState[key] = '';
                 });

@@ -76,6 +76,14 @@ const userRoutes = [
                         }
                     },
                     {
+                        path: 'nick-name',
+                        component: () => import('@/pages/User/item/AccountManagement/NickName.vue'),
+                        meta: {
+                            name: '个人昵称',
+                            icon: CaretRightOutlined
+                        }
+                    },
+                    {
                         path: 'bank-information',
                         component: () =>
                             import('@/pages/User/item/AccountManagement/BankInformation.vue'),

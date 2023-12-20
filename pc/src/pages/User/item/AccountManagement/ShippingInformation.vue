@@ -149,7 +149,11 @@ const handleFinish = async () => {
     };
     try {
         let res = await addUserAddressInfo(params);
-        location.reload();
+        if (res.Tag === 1) {
+            Object.keys(formState).forEach((key) => {
+                formState[key] = '';
+            });
+        }
         console.log(res);
     } catch (error) {
         console.log(error);

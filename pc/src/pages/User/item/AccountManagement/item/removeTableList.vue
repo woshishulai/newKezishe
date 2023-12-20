@@ -69,6 +69,7 @@ const changeHandleOk = () => {
             <a-form-item
                 :rules="[{ required: true, message: '不能为空' }]"
                 :label="props.changeParams.labels.there"
+                v-if="props.changeParams.labels.there"
                 name="status"
             >
                 <a-input v-model:value.trim="formState.status" />
@@ -76,6 +77,7 @@ const changeHandleOk = () => {
             <a-form-item
                 :rules="[{ required: true, message: '不能为空' }]"
                 :label="props.changeParams.labels.four"
+                v-if="props.changeParams.labels.four"
                 name="shi"
             >
                 <a-input v-model:value.trim="formState.shi" />
@@ -83,6 +85,7 @@ const changeHandleOk = () => {
             <a-form-item
                 :rules="[{ required: true, message: '不能为空' }]"
                 :label="props.changeParams.labels.five"
+                v-if="props.changeParams.labels.five"
             >
                 <a-textarea
                     v-model:value="formState.text"
@@ -92,6 +95,7 @@ const changeHandleOk = () => {
             <a-form-item
                 :rules="[{ required: true, message: '不能为空' }]"
                 :label="props.changeParams.labels.six"
+                v-if="props.changeParams.labels.six"
                 name="postal"
             >
                 <a-input v-model:value.trim="formState.postal" />
@@ -99,6 +103,7 @@ const changeHandleOk = () => {
             <a-form-item
                 :rules="[{ required: true, message: '不能为空' }]"
                 :label="props.changeParams.labels.senven"
+                v-if="props.changeParams.labels.senven"
                 name="tel"
             >
                 <a-input v-model:value.trim="formState.tel" />
@@ -106,6 +111,7 @@ const changeHandleOk = () => {
             <a-form-item
                 :rules="[{ required: true, message: '不能为空' }]"
                 :label="props.changeParams.labels.enigh"
+                v-if="props.changeParams.labels.enigh"
                 name="phone"
             >
                 <a-input v-model:value.trim="formState.phone" />

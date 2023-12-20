@@ -135,7 +135,10 @@ const onFinish = async () => {
                         </a-select>
                     </a-form-item>
                     <a-form-item label="证件号码" name="IdNumbers">
-                        <a-input v-model:value.trim="formState.IdNumbers" />
+                        <a-input
+                            :class="user.userTranslate.userProfileInfos[0].IsAuth ? 'active' : ''"
+                            v-model:value.trim="formState.IdNumbers"
+                        />
                     </a-form-item>
                     <a-form-item label="证件照片" class="upload-wrap">
                         <Upload></Upload>
@@ -165,7 +168,7 @@ const onFinish = async () => {
                         <div class="flex">
                             <a-input type="number" v-model:value="formState1.Mobile" />
                             <a-button
-                                v-if="user.userInfo.verifyPhone !== '1'"
+                                v-if="user.userTranslate.verifyPhone !== '1'"
                                 @click="getCode"
                                 :disabled="countdown > 0"
                             >
@@ -175,7 +178,7 @@ const onFinish = async () => {
                         </div>
                     </a-form-item>
                     <a-form-item
-                        v-if="user.userInfo.verifyPhone !== '1'"
+                        v-if="user.changeUserTranslate.verifyPhone !== '1'"
                         hide-required-mark="false"
                         label="验证码"
                         name="code"
@@ -186,7 +189,13 @@ const onFinish = async () => {
                     </a-form-item>
                     <a-form-item label="邮箱" name="email">
                         <div class="flex">
-                            <a-input type="number" v-model:value="formState1.email" />
+                            <a-input
+                                :class="
+                                    user.userTranslate.userProfileInfos[2].IsAuth ? 'active' : ''
+                                "
+                                type="number"
+                                v-model:value="formState1.email"
+                            />
                             <a-button>获取验证码</a-button>
                         </div>
                     </a-form-item>

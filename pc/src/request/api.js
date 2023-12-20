@@ -61,3 +61,20 @@ export const changeLoginPassWord = async (data) =>
 
 //修改支付密码
 export const changePayPassWord = async (data) => instance.post(`Member/User/ChangePayword`, data);
+
+//昵称列表
+export const getUserNikeNameApi = async () => instance.get('/Member/UserNick/GetList');
+
+//删除昵称
+export const removeNickNameApi = async (query) =>
+    instance.delete(`/Member/UserNick/Delete?Id=${query}`);
+
+//修改昵称
+export const changeUserNickName = async (data) => instance.put('/Member/UserNick/Update', data);
+
+//添加昵称
+export const addUserNickName = async (data) => instance.post(`Member/UserNick/Create`, data);
+
+//设置默认
+export const defaultUserNickName = async (data) =>
+    instance.post(`Member/UserNick/SetDefault?Id=${data}`);

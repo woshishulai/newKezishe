@@ -15,14 +15,18 @@ const router = useRouter();
                 <img :src="getImageUrl('jingmai/list/list2.png')" alt="" />
                 <div class="element-info">
                     <div class="element-top">
-                        <h5>{{ '王世杰' }}</h5>
-                        <p>客户编号: {{ user.userInfo.password }}</p>
+                        <h5>{{ user.userInfo.RealName }}</h5>
+                        <p>客户编号: {{ user.userInfo.UserId }}</p>
                     </div>
                     <p>{{ '五钻三星' }}</p>
                     <div class="code">
                         <p>账户安全等级</p>
                         <div class="progress">
-                            <a-progress strokeColor="#e33d31" :percent="70" size="small" />
+                            <a-progress
+                                strokeColor="#e33d31"
+                                :percent="user.userTranslate.ProfilePercent"
+                                size="small"
+                            />
                         </div>
                         <p class="nav-details" @click="router.push('/user/account-management')">
                             完善资料

@@ -8,13 +8,11 @@ const user = useUserInfo();
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
-const details = ref('');
 onMounted(async () => {
     try {
         let res = await getUserDetailsApi();
-        details.value = res.Data;
-        let verifyPhone = details.value.userProfileInfos[1].IsFillIn;
-        user.changeUserInfo({ verifyPhone: verifyPhone });
+        let verifyPhone = res.Data.userProfileInfos[1].IsFillIn;
+        user.changeUserTranslate({ verifyPhone: verifyPhone });
     } catch (error) {
         console.error('Error fetching user info:', error);
     }
@@ -26,11 +24,15 @@ onMounted(async () => {
         <div class="title">
             <h5>账户资料完整度</h5>
             <h5
-                >您的资料完成度为 <span>{{ details.ProfilePercent }}%</span></h5
+                >您的资料完成度为 <span>{{ user.userTranslate.ProfilePercent }}%</span></h5
             >
         </div>
         <div class="info-list">
-            <div class="info-item" v-for="(item, index) in details.userProfileInfos" :key="index">
+            <div
+                class="info-item"
+                v-for="(item, index) in user.userTranslate.userProfileInfos"
+                :key="index"
+            >
                 <p>{{ item.Profile }}</p>
                 <p>
                     <img
@@ -92,6 +94,10 @@ onMounted(async () => {
                 }
             }
         }
+    }
+    .actie {
+        border-color: #9a0000;
+        display: none;
     }
 }
 </style>

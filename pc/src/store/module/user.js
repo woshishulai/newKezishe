@@ -51,13 +51,20 @@ export const useUserInfo = defineStore(
     'userInfos',
     () => {
         const userInfo = ref(getStoreUserInfo());
+        const userTranslate = ref({});
         const changeUserInfo = async (params) => {
             userInfo.value = Object.assign({}, userInfo.value, params);
             console.log(userInfo.value);
         };
+        const changeUserTranslate = async (params) => {
+            userTranslate.value = Object.assign({}, userTranslate.value, params);
+            console.log(userTranslate.value);
+        };
         return {
             userInfo,
-            changeUserInfo
+            userTranslate,
+            changeUserInfo,
+            changeUserTranslate
         };
     },
     {
