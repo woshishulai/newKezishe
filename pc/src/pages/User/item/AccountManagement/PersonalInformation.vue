@@ -26,6 +26,15 @@ const formState1 = ref({
     emailCode: '',
     TelPhone: ''
 });
+onMounted(async () => {
+    try {
+        let res = await getUserInfoApi();
+        user.changeUserInfo(res.Data);
+        formState.value = Object.assign({}, user.userInfo);
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+    }
+});
 const info = (status, msg) => message[status](msg);
 const getPhone = () => {
     const phoneRegex = /^1[3456789]\d{9}$/;
@@ -46,16 +55,6 @@ const getCode = () => {
         }, 1000);
     }
 };
-onMounted(async () => {
-    try {
-        let res = await getUserInfoApi();
-        user.changeUserInfo(res.Data);
-        formState.value = Object.assign({}, user.userInfo);
-        formState1.value = Object.assign({}, user.userInfo);
-    } catch (error) {
-        console.error('Error fetching user info:', error);
-    }
-});
 const handleFinish = async () => {
     let params = {
         Id: user.userInfo.UserId,
@@ -91,8 +90,8 @@ const onFinish = async () => {
             <div class="title">个人信息</div>
             <div class="user-id">
                 <li>客户编号: {{ user.userInfo.UserId }}</li>
-                <li>账户: {{ user.userInfo.UserStatus == 1 ? '正常' : '禁用' }}</li>
-                <li>注册: {{ user.userInfo.RegTime }}</li>
+                <li>账户: {{ user.userInfo?.UserStatus == 1 ? '正常' : '禁用' }}</li>
+                <li>注册: {{ user.userInfo?.RegTime }}</li>
             </div>
         </div>
         <div class="card-box">
@@ -136,7 +135,7 @@ const onFinish = async () => {
                     </a-form-item>
                     <a-form-item label="证件号码" name="IdNumbers">
                         <a-input
-                            :class="user.userTranslate.userProfileInfos[0].IsAuth ? 'active' : ''"
+                            :class="user.userTranslate.userProfileInfos?.[0].IsAuth ? 'active' : ''"
                             v-model:value.trim="formState.IdNumbers"
                         />
                     </a-form-item>
@@ -191,7 +190,7 @@ const onFinish = async () => {
                         <div class="flex">
                             <a-input
                                 :class="
-                                    user.userTranslate.userProfileInfos[2].IsAuth ? 'active' : ''
+                                    user.userTranslate.userProfileInfos?.[2].IsAuth ? 'active' : ''
                                 "
                                 type="number"
                                 v-model:value="formState1.email"

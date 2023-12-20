@@ -12,6 +12,7 @@ onMounted(async () => {
     try {
         let res = await getUserDetailsApi();
         let verifyPhone = res.Data.userProfileInfos[1].IsFillIn;
+        user.changeUserTranslate(res.Data);
         user.changeUserTranslate({ verifyPhone: verifyPhone });
     } catch (error) {
         console.error('Error fetching user info:', error);

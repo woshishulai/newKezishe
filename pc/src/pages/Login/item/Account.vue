@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { handleFinishFailed } from '@/utils/form/rules.js';
 import { UserOutlined, LockOutlined, CheckCircleOutlined, CloseOutlined } from '@/utils/icon/icon';
-import { submitLoginApi, getUserInfoApi } from '@/request/api';
+import { submitLoginApi } from '@/request/api';
 import { accountRules } from './rules';
 import { useUserInfo } from '@/store/store';
 const user = useUserInfo();
@@ -86,7 +86,9 @@ const handleFinish = async () => {
                 </template>
                 <template #addonAfter>
                     <!-- <a-button type="primary" @click="router.push('/reset-password')">忘记密码?</a-button> -->
-                    <a-button type="primary" @click="getUserInfoApi()">忘记密码?</a-button>
+                    <a-button type="primary" @click="router.push('/reset-password')"
+                        >忘记密码?</a-button
+                    >
                 </template>
             </a-input-password>
         </a-form-item>
