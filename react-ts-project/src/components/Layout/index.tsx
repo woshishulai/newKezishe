@@ -1,15 +1,21 @@
-import LayoutHeader from "./LayoutHeader";
-import LayoutFooter from "./LayoutFooter";
-import BaseHeader from "./BaseHeader";
-import BaseFooter from "./BaseFooter";
-import { ReactNode } from "react";
-import { useLocation } from 'react-router-dom'
-import { ConfigProvider } from "antd";
+import LayoutHeader from './LayoutHeader';
+import LayoutFooter from './LayoutFooter';
+import BaseHeader from './BaseHeader';
+import BaseFooter from './BaseFooter';
+import { ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
 function Layout({ children }: { children: ReactNode }) {
-    const location = useLocation()
-    const currentPath = location.pathname
-    const Header = currentPath == '/login' || currentPath == '/register' || currentPath == 'reset-password' ? BaseHeader : LayoutHeader
-    const Footer = currentPath == '/login' || currentPath == '/register' || currentPath == 'reset-password' ? BaseFooter : LayoutFooter
+    const location = useLocation();
+    const currentPath = location.pathname;
+    const Header =
+        currentPath == '/login' || currentPath == '/register' || currentPath == 'reset-password'
+            ? BaseHeader
+            : LayoutHeader;
+    const Footer =
+        currentPath == '/login' || currentPath == '/register' || currentPath == 'reset-password'
+            ? BaseFooter
+            : LayoutFooter;
     return (
         <div className="app-wrap">
             <ConfigProvider
@@ -34,7 +40,7 @@ function Layout({ children }: { children: ReactNode }) {
                         //控制组件项在禁用状态下的激活背景颜色。
                         // controlItemBgActiveHover: '#9a0000',
                         // //控制组件项在鼠标悬浮时的背景颜色。
-                        controlItemBgHover: '#a61f1b',
+                        controlItemBgHover: '#a61f1b'
                         // colorFillContentHover: '#9a0000'，
                         // colorTextLightSolid: '#fff',
                         // colorInfoActive: 'green'
@@ -53,14 +59,14 @@ function Layout({ children }: { children: ReactNode }) {
                         // colorTextPlaceholder: '#007306',
                         // colorInfoTextHover: '#007306'
                         // colorPrimaryText: '#007306'
-                    },
+                    }
                 }}
             >
                 <Header></Header>
                 <main>{children}</main>
                 <Footer></Footer>
             </ConfigProvider>
-        </div >
+        </div>
     );
 }
 export default Layout;

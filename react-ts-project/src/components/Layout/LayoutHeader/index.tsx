@@ -1,13 +1,17 @@
-import style from "./index.module.less"
+import style from './index.module.less';
 import { Select, Button, Space, Divider } from 'antd';
-import { useState } from "react";
-import HeaderInput from "./item/HeaderInput";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import HeaderInput from './item/HeaderInput';
 export function HeaderUserWrap() {
-    const [isShowWelcome] = useState(false)
+    const navigate = useNavigate();
+    const [isShowWelcome] = useState(false);
+    const goLogin = () => {
+        navigate('/login?title=123');
+    };
     const handleChange = (value: string) => {
         console.log(`selected ${value}`);
     };
-
 
     return (
         <div className="header-user">
@@ -16,7 +20,7 @@ export function HeaderUserWrap() {
                     <h5>您好，欢迎来到壳子社</h5>
                     {!isShowWelcome ? (
                         <>
-                            <Button>登陆</Button>
+                            <Button onClick={goLogin}>登陆</Button>
                             <Button>注册</Button>
                         </>
                     ) : null}
@@ -33,7 +37,7 @@ export function HeaderUserWrap() {
                             { value: 'jack', label: 'Jack' },
                             { value: 'lucy', label: 'Lucy' },
                             { value: 'Yiminghe', label: 'yiminghe' },
-                            { value: 'disabled', label: 'Disabled', disabled: true },
+                            { value: 'disabled', label: 'Disabled', disabled: true }
                         ]}
                     />
                     <h5>购物车 {0} 件</h5>
@@ -41,10 +45,9 @@ export function HeaderUserWrap() {
                 </Space>
             </div>
         </div>
-    )
+    );
 }
 function LayoutHeader() {
-
     return (
         <div className={style.header}>
             <div className="con-main-wrap">
