@@ -10,6 +10,7 @@
         "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./"
     },
     "dependencies": {
+        "ali-oss": "^6.19.0",
         "ant-design-vue": "4.x",
         "axios": "^1.6.2",
         "less": "^4.2.0",

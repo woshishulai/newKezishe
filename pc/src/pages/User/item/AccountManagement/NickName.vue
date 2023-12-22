@@ -47,9 +47,11 @@ const openModel = (biaoti, id) => {
 };
 const postAPi = async () => {
     let res = await removeNickNameApi(params.id);
-    const index = address.value.findIndex((item) => item.Id === params.id);
-    nikeNameList.value.splice(index, 1);
-    closeModel();
+    if (res.Tag == 1) {
+        const index = nikeNameList.value.findIndex((item) => item.Id === params.id);
+        nikeNameList.value.splice(index, 1);
+        closeModel();
+    }
 };
 const closeModel = () => {
     params.open = false;

@@ -1,20 +1,16 @@
 <script setup>
 import { ref, watch, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-
 const route = useRoute();
 const router = useRouter();
 const nameList = ref(route.matched.map((routeRecord) => routeRecord.meta.name));
+// watch(
+//     () => route.matched.map((routeRecord) => routeRecord.meta.name),
+//     (newNames) => {
+//         nameList.value = newNames;
+//     }
+// );
 
-// 使用 watch 监听路由变化，更新面包屑
-watch(
-    () => route.matched.map((routeRecord) => routeRecord.meta.name),
-    (newNames) => {
-        nameList.value = newNames;
-    }
-);
-
-// 处理面包屑点击事件
 const handleBreadcrumbClick = (index) => {
     const routeTo = route.matched[index];
     if (routeTo && routeTo.path) {
@@ -26,7 +22,6 @@ const handleBreadcrumbClick = (index) => {
 <template>
     <div class="bread-crumbs">
         <p>您当前的位置:</p>
-        <p @click="router.push('/')">首页 <span class="nav">></span></p>
         <p
             v-for="(item, index) in nameList"
             :key="item"
@@ -40,10 +35,13 @@ const handleBreadcrumbClick = (index) => {
 
 <style lang="less">
 .bread-crumbs {
-    padding: 30px 0 30px 20px;
     .flex-row;
     justify-content: flex-start;
     gap: 20px;
+    padding: 30px 0 30px 0;
+    width: 1400px;
+    font-size: 16px;
+    margin: 0 auto;
 
     p {
         .flex-row;
@@ -58,6 +56,4 @@ const handleBreadcrumbClick = (index) => {
         }
     }
 }
-
-/* 在这里添加你的 Less 样式 */
 </style>

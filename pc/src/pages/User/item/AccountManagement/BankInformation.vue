@@ -102,9 +102,11 @@ const closeModel = () => {
 const postAPi = async () => {
     let res = await removeUserBankApi(params.id);
     console.log(res);
-    const index = address.value.findIndex((item) => item.Id === params.id);
-    address.value.splice(index, 1);
-    closeModel();
+    if (res.Tag == 1) {
+        const index = tableDataList.value.findIndex((item) => item.Id === params.id);
+        tableDataList.value.splice(index, 1);
+        closeModel();
+    }
 };
 const changeApi = async (query) => {
     let params = {

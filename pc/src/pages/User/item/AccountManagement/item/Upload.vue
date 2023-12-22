@@ -10,22 +10,14 @@ const route = useRoute();
 const props = defineProps({});
 let imageUrl = ref('');
 onMounted(() => {});
-const uploadImage = async (data) => {
-    try {
-        const response = await axios.post('https://kezishe.oss-cn-beijing.aliyuncs.com/', data, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-        return response.data; // or handle response as needed
-    } catch (error) {
-        console.error(error);
-        throw error; // rethrow the error for higher-level error handling
-    }
-};
 
 const chooseImageUrl = async (e) => {
-    console.log(e);
+    const MAX_FILE_SIZE = 2 * 1024 * 1024;
+    const file = e.target.files[0];
+    if (file.size > MAX_FILE_SIZE) {
+        console.error('File size exceeds the maximum limit.');
+        return;
+    }
     const reader = new FileReader();
     reader.readAsDataURL(e?.target.files[0]);
     reader.onload = function () {
@@ -33,23 +25,27 @@ const chooseImageUrl = async (e) => {
     };
     let params = {
         fileModule: 3,
-        fileName: e?.target.files[0].name
+        fileName: e.target.files[0].name
     };
     let res = await getOssALiBaBaApi(params);
-    console.log(res.Data);
     let { accessid, policy, signature, key } = res.Data;
-    let datas = {
-        OSSAccessKeyId: accessid,
-        policy,
-        signature,
-        Key: key,
-        success_action_status: '200',
-        // file: imageUrl.value
-        file: e.target.value
-    };
-
-    let data = await uploadImage(datas);
-    console.log(data);
+    const formData = new FormData();
+    formData.append('OSSAccessKeyId', accessid);
+    formData.append('policy', policy);
+    formData.append('signature', signature);
+    formData.append('key', key);
+    formData.append('success_action_status', '200');
+    formData.append('file', file);
+    try {
+        const response = await axios.post('https://kezishe.oss-cn-beijing.aliyuncs.com', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        console.log('File uploaded successfully:', response.data);
+    } catch (error) {
+        console.error('Error uploading file:', error);
+    }
 };
 </script>
 
@@ -64,7 +60,7 @@ const chooseImageUrl = async (e) => {
             </div>
         </div>
     </div>
-    <p class="message" :class="imageUrl ? 'active' : ''">点击加号可重新上传证件图片</p>
+    <p class="message" :class="imageUrl ? 'active' : ''">点击右侧加号可重新上传证件图片</p>
 </template>
 
 <style scoped lang="less">

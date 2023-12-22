@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute();
+</script>
 
 <template>
     <Header></Header>

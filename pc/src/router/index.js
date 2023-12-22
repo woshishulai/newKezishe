@@ -39,6 +39,122 @@ const addRoutes = [
             {
                 path: '',
                 component: () => import('@/pages/Home/index.vue')
+            },
+            {
+                path: '/jingmai/:params',
+                meta: {
+                    name: '竞买'
+                },
+                component: () => import('@/pages/JingMai/index.vue')
+            },
+            {
+                path: '/jingmai/:params/:id',
+                meta: {
+                    name: '竞买详情'
+                },
+                component: () => import('@/pages/JingMai/Details.vue')
+            },
+            {
+                path: '/weituo',
+                redirect: '/weituo/entrust',
+                meta: {
+                    name: '委托专栏'
+                },
+                component: () => import('@/pages/Weituo/WeiTuo.vue'),
+                children: [
+                    {
+                        path: 'entrust',
+                        meta: {
+                            name: '委托'
+                        },
+                        component: () => import('@/pages/Weituo/item/Entrust.vue')
+                    },
+                    {
+                        path: 'advantages-and-terms-of-entrustment',
+                        meta: {
+                            name: '委托优势与条款'
+                        },
+                        component: () =>
+                            import('@/pages/Weituo/item/AdvantagesAndTermsOfEntrustment.vue')
+                    },
+                    {
+                        path: 'online-commission',
+                        meta: {
+                            name: '线上委托'
+                        },
+                        component: () => import('@/pages/Weituo/item/OnlineCommission.vue')
+                    },
+                    {
+                        path: 'delegation-process',
+                        meta: {
+                            name: '委托流程'
+                        },
+                        component: () => import('@/pages/Weituo/item/DelegationProcess.vue')
+                    },
+                    {
+                        path: 'charges',
+                        meta: {
+                            name: '收费标准'
+                        },
+                        component: () => import('@/pages/Weituo/item/Charges.vue')
+                    },
+                    {
+                        path: 'delegate-feedback',
+                        meta: {
+                            name: '委托回馈'
+                        },
+                        component: () => import('@/pages/Weituo/item/EelegateFeedback.vue')
+                    },
+                    {
+                        path: 'billing-cycle',
+                        meta: {
+                            name: '结算周期'
+                        },
+                        component: () => import('@/pages/Weituo/item/BillingCycle.vue')
+                    },
+                    {
+                        path: 'business-team-information',
+                        meta: {
+                            name: '业务团队信息'
+                        },
+                        component: () => import('@/pages/Weituo/item/BusinessTeamInformation.vue')
+                    },
+                    {
+                        path: 'beware-of-scams',
+                        meta: {
+                            name: '谨防欺诈'
+                        },
+                        component: () => import('@/pages/Weituo/item/BewareOfScams.vue')
+                    }
+                ]
+            },
+            {
+                path: '/zhongyou',
+                meta: {
+                    name: '中邮商城'
+                },
+                component: () => import('@/pages/Zhongyou/index.vue')
+            },
+            {
+                path: '/chengjiao',
+                meta: {
+                    name: '成交'
+                },
+                component: () => import('@/pages/Chengjiao/index.vue')
+            },
+            {
+                path: '/shougou',
+                meta: {
+                    name: '收购'
+                },
+                component: () => import('@/pages/Shougou/index.vue')
+            },
+            {
+                path: '/pingji',
+                meta: {
+                    name: '中邮评级'
+                },
+                component: () => import('@/pages/PingJi/index.vue')
             }
         ]
     }

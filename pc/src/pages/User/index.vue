@@ -15,7 +15,7 @@ onMounted(() => {});
         <div class="con-main-wrap">
             <BreadCrumbs></BreadCrumbs>
             <div class="cen-wrap">
-                <UserMenu></UserMenu>
+                <UserMenu paths="/user"></UserMenu>
                 <div class="user-item">
                     <RouterView></RouterView>
                 </div>
