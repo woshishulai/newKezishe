@@ -1,11 +1,17 @@
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { getImageUrl } from '@/utils';
-const router = useRouter();
+import { getMenuListAPi } from '@/request/weituo/index';
 const route = useRoute();
-const props = defineProps({});
-onMounted(() => {});
+onMounted(async () => {
+    let params = {
+        id: route.query.id,
+        coltype: 'single'
+    };
+    let res = await getMenuListAPi(params);
+    document.title = res.Data.seoData.seoTitle;
+    console.log(res);
+});
 </script>
 
 <template>

@@ -7,10 +7,14 @@ import { message } from 'ant-design-vue';
 import axios from 'axios';
 const router = useRouter();
 const route = useRoute();
-const props = defineProps({});
+const props = defineProps({
+    fileModule: {
+        type: Number,
+        default: 3
+    }
+});
 let imageUrl = ref('');
 onMounted(() => {});
-
 const chooseImageUrl = async (e) => {
     const MAX_FILE_SIZE = 2 * 1024 * 1024;
     const file = e.target.files[0];
@@ -24,7 +28,7 @@ const chooseImageUrl = async (e) => {
         imageUrl.value = reader.result;
     };
     let params = {
-        fileModule: 3,
+        fileModule: props.fileModule,
         fileName: e.target.files[0].name
     };
     let res = await getOssALiBaBaApi(params);
@@ -51,7 +55,13 @@ const chooseImageUrl = async (e) => {
 
 <template>
     <div class="upload-wrap">
-        <img class="preview" :class="imageUrl ? 'active' : ''" :src="imageUrl" alt="" />
+        <img
+            class="preview"
+            v-if="props.fileModule == 3"
+            :class="imageUrl ? 'active' : ''"
+            :src="imageUrl"
+            alt=""
+        />
         <div class="upload">
             <input class="ipt" @change="chooseImageUrl" type="file" />
             <div class="upload-btn">
@@ -60,7 +70,10 @@ const chooseImageUrl = async (e) => {
             </div>
         </div>
     </div>
-    <p class="message" :class="imageUrl ? 'active' : ''">点击右侧加号可重新上传证件图片</p>
+    <p class="message" v-if="props.fileModule == 3" :class="imageUrl ? 'active' : ''"
+        >点击右侧加号可重新上传证件图片</p
+    >
+    <p class="message" :class="props.fileModule == 4 ? 'active' : ''">点击加号可重新上传文档</p>
 </template>
 
 <style scoped lang="less">

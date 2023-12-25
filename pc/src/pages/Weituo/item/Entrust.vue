@@ -1,12 +1,16 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getMenuListApi } from '@/request/weituo/index.js';
+import { getMenuListAPi } from '@/request/weituo/index';
 const route = useRoute();
 console.log(route.query.id);
 onMounted(async () => {
-    let res = await getMenuListApi(route.query.id);
-    console.log(res);
+    let params = {
+        id: route.query.id,
+        coltype: 'list'
+    };
+    let res = await getMenuListAPi(params);
+    document.title = res.Data.seoData.seoTitle;
 });
 </script>
 

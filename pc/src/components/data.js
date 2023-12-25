@@ -7,7 +7,7 @@ let navList = [
     {
         shu: '|',
         title: '竞买',
-        router: '/jingmai/竞买'
+        router: '/jingmai/xxxx'
     },
     {
         shu: '|',

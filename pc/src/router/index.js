@@ -99,7 +99,7 @@ const addRoutes = [
                         component: () => import('@/pages/Weituo/item/Charges.vue')
                     },
                     {
-                        path: 'delegate-feedback',
+                        path: 'elegate-feedback',
                         meta: {
                             name: '委托回馈'
                         },

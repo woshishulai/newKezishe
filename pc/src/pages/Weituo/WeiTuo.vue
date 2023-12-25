@@ -19,13 +19,8 @@ watchEffect(() => {
     newPath.value = route.path.replace('/weituo/', '');
 });
 const showItem = (item, index) => {
-    console.log(item, index);
-    if (index === undefined) {
-        router.push(`/weituo?id=${tableList.value.Id}`);
-    } else {
-        console.log(tableList.value.Children[index].Id);
-        router.push(`/weituo/${item}?id=${tableList.value.Children[index].Id}`);
-    }
+    console.log(tableList.value.Children[index].Id);
+    router.push(`/weituo/${item}?id=${tableList.value.Children[index].Id}`);
 };
 </script>
 
@@ -34,7 +29,7 @@ const showItem = (item, index) => {
         <BreadCrumbs></BreadCrumbs>
         <div class="con-main-wrap">
             <div class="menu-left">
-                <div class="title" @click="showItem()">
+                <div class="title">
                     <span class="white"></span>
                     <div class="cen-wrap">
                         <span>委托</span>
@@ -62,10 +57,11 @@ const showItem = (item, index) => {
 
 <style scoped lang="less">
 .wrap {
+    padding-bottom: 80px;
     background: url('@/assets/img/weituo/bg.png');
     .con-main-wrap {
         .flex-row;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 15px;
         .menu-left {
             cursor: pointer;
@@ -123,7 +119,16 @@ const showItem = (item, index) => {
         }
         .right-wrap {
             flex: 1;
-            background-color: #fff;
+            min-height: 1000px;
+            :deep(.title) {
+                text-align: center;
+                padding: 26px 120px;
+                font-size: 20px;
+                border-bottom: 1px solid #ebebeb;
+            }
+            :deep(.cen-box) {
+                padding: 40px 40px 80px;
+            }
         }
     }
 }
