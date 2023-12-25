@@ -12,7 +12,7 @@ onMounted(async () => {
 const router = useRouter();
 const route = useRoute();
 const navList = router.currentRoute._rawValue.matched[1].children;
-const index = navList.findIndex((item) => item.path == 'entrust');
+const index = navList.findIndex((item) => item.path == 'details');
 navList.splice(index, 1);
 const newPath = ref('');
 watchEffect(() => {

@@ -56,21 +56,21 @@ const addRoutes = [
             },
             {
                 path: '/weituo',
-                redirect: '/weituo/entrust',
+                redirect: '/weituo/online-commission',
                 meta: {
                     name: '委托专栏'
                 },
                 component: () => import('@/pages/Weituo/WeiTuo.vue'),
                 children: [
                     {
-                        path: 'entrust',
+                        path: 'details',
                         meta: {
                             name: '委托'
                         },
-                        component: () => import('@/pages/Weituo/item/Entrust.vue')
+                        component: () => import('@/pages/Weituo/item/Details.vue')
                     },
                     {
-                        path: 'advantages-and-terms-of-entrustment',
+                        path: 'advantages',
                         meta: {
                             name: '委托优势与条款'
                         },

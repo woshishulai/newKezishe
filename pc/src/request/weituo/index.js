@@ -10,3 +10,5 @@ export const getMenuListAPi = (query) =>
 // 上传线上委托
 
 export const submitWeituoAPi = (data) => instance.post('/Web/Entrust/Apply', data);
+
+export const getExpertAPi = (query) => instance.get('/Web/Entrust/ArticleData?Aid=' + query);

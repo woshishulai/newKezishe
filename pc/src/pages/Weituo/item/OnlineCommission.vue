@@ -67,6 +67,9 @@ const list = [
     }
 ];
 onMounted(async () => {
+    if (!route.query.id) {
+        return;
+    }
     let params = {
         id: route.query.id,
         coltype: 'single'
@@ -129,6 +132,31 @@ const onFinish = async (values) => {
                             alt=""
                         />
                     </div>
+                </div>
+            </div>
+            <div class="liu-cheng">
+                <div class="xian1"></div>
+                <div class="zero"> 1 </div>
+                <div class="xian"></div>
+                <div class="zero"> 2 </div>
+                <div class="xian"></div>
+                <div class="zero"> 3 </div>
+                <div class="xian"></div>
+                <div class="zero"> 4 </div>
+                <div class="xian"></div>
+                <div class="zero"> 5 </div>
+                <div class="xian"></div>
+                <div class="zero"> 6 </div>
+                <div class="xian"></div>
+                <div class="zero"> 7 </div>
+                <div class="xian"></div>
+                <div class="zero"> 8 </div>
+                <div class="xian1"></div>
+            </div>
+            <div class="label-list">
+                <div class="label-item" v-for="(item, index) in list" :key="index">
+                    <p>{{ item.p1 }}</p>
+                    <p>{{ item.p2 }}</p>
                 </div>
             </div>
         </div>
@@ -246,6 +274,40 @@ const onFinish = async (values) => {
                         top: 50%;
                         transform: translateY(-50%);
                     }
+                }
+            }
+        }
+        .liu-cheng {
+            margin: 10px 0;
+            .flex-row;
+            .xian1 {
+                width: 30px;
+                height: 5px;
+                background-color: #9a0000;
+            }
+            .xian {
+                width: 113px;
+                height: 5px;
+                background-color: #9a0000;
+            }
+            .zero {
+                .flex-row;
+                color: #fff;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: #9a0000;
+            }
+        }
+        .label-list {
+            .flex-row;
+            gap: 50px;
+            margin-top: 20px;
+            .label-item {
+                flex: 1%;
+                text-align: center;
+                p {
+                    height: 20px;
                 }
             }
         }
