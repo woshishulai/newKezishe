@@ -140,7 +140,31 @@ const addRoutes = [
                 meta: {
                     name: '成交'
                 },
-                component: () => import('@/pages/Chengjiao/index.vue')
+                component: () => import('@/pages/Chengjiao/index.vue'),
+                children: [
+                    {
+                        path: '',
+                        meta: {
+                            name: '成交'
+                        },
+                        component: () => import('@/pages/Chengjiao/home/ChengJiao.vue')
+                    },
+                    {
+                        path: 'transaction-session',
+                        meta: {
+                            name: '成交专场'
+                        },
+                        component: () =>
+                            import('@/pages/Chengjiao/zhuanchang/TransactionSession.vue')
+                    },
+                    {
+                        path: 'details',
+                        meta: {
+                            name: '成交详情'
+                        },
+                        component: () => import('@/pages/Chengjiao/details/Details.vue')
+                    }
+                ]
             },
             {
                 path: '/shougou',
@@ -383,6 +407,7 @@ router.beforeEach((to, from, next) => {
         Object.keys(user.userInfo).length === 0 &&
         to.path !== '/login' &&
         to.path !== '/register' &&
+        to.path !== '/' &&
         to.path !== '/reset-password'
     ) {
         next('/login');

@@ -163,8 +163,8 @@ const onChange = (current) => {
 .home-banner {
     .show-banner {
         padding: 36px 0;
-        .flex-row;
-        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
         gap: 26px;
 
         .dynamic-wrap {
@@ -236,7 +236,7 @@ const onChange = (current) => {
 
         .swiper-wrap {
             flex: 1;
-            width: 950px;
+            min-width: 950px;
 
             .swiper-img {
                 height: 457px;

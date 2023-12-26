@@ -1,6 +1,7 @@
-<script setup></script>
-
 <template>
-    <div> 成交 </div>
+    <div class="con-main-wrap">
+        <BreadCrumbs></BreadCrumbs>
+        <RouterView></RouterView>
+    </div>
 </template>
 <style lang="less"></style>

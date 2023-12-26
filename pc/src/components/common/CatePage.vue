@@ -18,5 +18,8 @@ const current = ref(1);
 .cate-page {
     .flex-row;
     padding: 20px 0;
+    :deep(.ant-pagination .ant-pagination-options-quick-jumper input) {
+        width: 120px;
+    }
 }
 </style>

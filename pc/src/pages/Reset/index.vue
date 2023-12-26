@@ -79,7 +79,7 @@ provide('nextClick', nextClick);
                         width: 40px;
                         height: 40px;
                         border-radius: 50%;
-                        background-color: #ccc;
+                        background-color: #e4e4e4;
                         color: #fff;
                         font-size: 18px;
                         font-weight: 700;
