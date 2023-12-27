@@ -145,7 +145,7 @@ const addRoutes = [
                     {
                         path: '',
                         meta: {
-                            name: '成交'
+                            name: '成交专栏'
                         },
                         component: () => import('@/pages/Chengjiao/home/ChengJiao.vue')
                     },
@@ -171,7 +171,23 @@ const addRoutes = [
                 meta: {
                     name: '收购'
                 },
-                component: () => import('@/pages/Shougou/index.vue')
+                component: () => import('@/pages/Shougou/index.vue'),
+                children: [
+                    {
+                        path: '',
+                        meta: {
+                            name: '收购资讯'
+                        },
+                        component: () => import('@/pages/Shougou/ShouGou.vue')
+                    },
+                    {
+                        path: 'details',
+                        meta: {
+                            name: '收购详情'
+                        },
+                        component: () => import('@/pages/Shougou/Details.vue')
+                    }
+                ]
             },
             {
                 path: '/pingji',

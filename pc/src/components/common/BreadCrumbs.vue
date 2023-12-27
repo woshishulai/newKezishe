@@ -4,12 +4,12 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 const nameList = ref(route.matched.map((routeRecord) => routeRecord.meta.name));
-// watch(
-//     () => route.matched.map((routeRecord) => routeRecord.meta.name),
-//     (newNames) => {
-//         nameList.value = newNames;
-//     }
-// );
+watch(
+    () => route.matched.map((routeRecord) => routeRecord.meta.name),
+    (newNames) => {
+        nameList.value = newNames;
+    }
+);
 
 const handleBreadcrumbClick = (index) => {
     const routeTo = route.matched[index];
