@@ -15,12 +15,11 @@ const state = reactive({
     value4: ['竞买', '一口价', '周周转'],
     value5: '',
     value6: '',
-    value7: ['Apple'],
-    value8: [],
-    value9: [],
-    value10: [],
-    value11: [],
-    value12: []
+    value7: '全部',
+    value8: '0',
+    value9: '多列大圈',
+    value10: '',
+    value11: '0'
 });
 const cateList = [
     {
@@ -102,6 +101,89 @@ const cate3List = [
         label: '热门的'
     }
 ];
+const cate4List = [
+    {
+        value: '全部',
+        label: '全部'
+    },
+    {
+        value: '1小时',
+        label: '1小时'
+    },
+    {
+        value: '6小时',
+        label: '6小时'
+    },
+    {
+        value: '当天',
+        label: '当天'
+    }
+];
+const cate5List = [
+    { value: '0', label: '0-不限' },
+    { value: '1', label: '0-100' },
+    { value: '2', label: '1-1000' },
+    { value: '3', label: '1000-10000' },
+    { value: '4', label: '10000-100000' }
+];
+const cate6List = [
+    {
+        value: '多列大圈',
+        label: '多列大圈'
+    },
+    {
+        value: '单列小圈',
+        label: '单列小圈'
+    }
+];
+const cate7List = [
+    {
+        value: 'PMG',
+        label: 'PMG'
+    },
+    {
+        value: 'PSG',
+        label: 'PSG'
+    },
+    {
+        value: 'PCGS',
+        label: 'PCGS'
+    },
+    {
+        value: 'ASG',
+        label: 'ASG'
+    },
+    {
+        value: '中郎',
+        label: '中郎'
+    },
+    {
+        value: '源泰',
+        label: '源泰'
+    },
+    {
+        value: '信泰',
+        label: '信泰'
+    }
+];
+const cate8List = [
+    {
+        value: '0',
+        label: '0-不限'
+    },
+    {
+        value: '1',
+        label: '1-30'
+    },
+    {
+        value: '2',
+        label: '30-60'
+    },
+    {
+        value: '3',
+        label: '60-100'
+    }
+];
 </script>
 
 <template>
@@ -150,31 +232,41 @@ const cate3List = [
                     <a-button type="primary">搜索</a-button>
                 </div>
             </a-collapse-panel>
-            <a-collapse-panel key="7" header="结标">
+            <a-collapse-panel key="6" header="结标">
                 <a-radio-group
                     v-model:value="state.value7"
                     name="zhinengxuanyige"
-                    :options="cate3List"
+                    :options="cate4List"
                 />
             </a-collapse-panel>
-            <!-- <a-collapse-panel key="4" header="品级">
+            <a-collapse-panel key="7" header="价格">
                 <a-select
-                    v-model:value="state.value2"
+                    v-model:value="state.value8"
                     style="width: 100%"
-                    :options="cate2List"
+                    :options="cate5List"
                 ></a-select>
-            </a-collapse-panel> -->
-            <!-- <a-collapse-panel key="5" header="排序">
-                <a-checkbox-group
-                    v-model:value="state.value3"
-                    name="checkboxgsssroup"
-                    :options="cate3List"
+            </a-collapse-panel>
+            <a-collapse-panel key="8" header="显示">
+                <a-radio-group
+                    v-model:value="state.value9"
+                    name="zhinlmlmkmfmmfengxuanyige"
+                    :options="cate6List"
                 />
-            </a-collapse-panel> -->
-            <!-- <a-collapse-panel key="4" header="价格" /> -->
-            <!-- <a-collapse-panel key="4" header="显示" /> -->
-            <!-- <a-collapse-panel key="4" header="评级公司" /> -->
-            <!-- <a-collapse-panel key="4" header="分数" /> -->
+            </a-collapse-panel>
+            <a-collapse-panel key="9" header="评级公司">
+                <a-radio-group
+                    v-model:value="state.value10"
+                    name="zhinlmlmkmfmmfedllssgxuanyige"
+                    :options="cate7List"
+                />
+            </a-collapse-panel>
+            <a-collapse-panel key="7" header="分数">
+                <a-select
+                    v-model:value="state.value11"
+                    style="width: 100%"
+                    :options="cate8List"
+                ></a-select>
+            </a-collapse-panel>
         </a-collapse>
     </div>
 </template>

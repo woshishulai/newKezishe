@@ -5,6 +5,7 @@ import { getImageUrl } from '@/utils';
 import Swiper from '@/pages/Chengjiao/details/Swiper.vue';
 import Fixed from '@/pages/Chengjiao/details/Fixed.vue';
 import Item from '@/pages/Chengjiao/details/Item.vue';
+import FooterSwiper from '@/pages/Chengjiao/details/FooterSwiper.vue';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({
@@ -110,8 +111,8 @@ const value = ref(2055);
             </div>
         </div>
     </div>
-    <Item></Item>
-    <RightNav></RightNav>
+    <Item v-if="query.addPrice"></Item>
+    <FooterSwiper></FooterSwiper>
     <Fixed></Fixed>
 </template>
 

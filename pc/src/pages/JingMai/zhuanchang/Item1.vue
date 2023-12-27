@@ -4,6 +4,7 @@ import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 import Title from '../item/Title.vue';
 import LeftMenu from '../item/LeftMenu.vue';
+import RightList from '../item/RightList.vue';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
@@ -15,6 +16,7 @@ onMounted(() => {});
         <Title></Title>
         <div class="con-wrap">
             <LeftMenu></LeftMenu>
+            <RightList></RightList>
         </div>
     </div>
 </template>

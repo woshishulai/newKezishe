@@ -36,8 +36,10 @@ const handleFinish = async () => {
         Uuid: uuid.value
     };
     let res = await submitLoginApi(params);
-    user.changeUserInfo(res.Data);
-    router.push('/');
+    if (res.Tag == 1) {
+        user.changeUserInfo(res.Data);
+        router.push('/');
+    }
 };
 </script>
 
