@@ -30,6 +30,12 @@ const list = [
         title: '这是个不错的枕头',
         rmb: '299',
         time: '2023-10-23 10:23:20'
+    },
+    {
+        img: 'home/goods/goods4.jpg',
+        title: '这是个不错的枕头',
+        rmb: '299',
+        time: '2023-10-23 10:23:20'
     }
 ];
 </script>
@@ -59,9 +65,11 @@ const list = [
                         <p class="item-title">{{ item.title }}</p>
                         <p class="jiage">
                             <span class="rmb"> ￥ {{ item.rmb }}</span>
-                            <span class="now">竞买中</span>
                         </p>
-                        <p class="time">{{ item.time }}</p>
+                        <div class="jiage">
+                            <p class="time">{{ item.time }}</p>
+                            ({{ '69' }}个人气)
+                        </div>
                     </div>
                 </div>
                 <div class="goods-list">
@@ -70,9 +78,11 @@ const list = [
                         <p class="item-title">{{ item.title }}</p>
                         <p class="jiage">
                             <span class="rmb"> ￥ {{ item.rmb }}</span>
-                            <span class="now">竞买中</span>
                         </p>
-                        <p class="time">{{ item.time }}</p>
+                        <div class="jiage">
+                            <p class="time">{{ item.time }}</p>
+                            ({{ '69' }}个人气)
+                        </div>
                     </div>
                 </div>
             </a-carousel>
@@ -82,6 +92,7 @@ const list = [
 
 <style scoped lang="less">
 .chengjiao-item {
+    padding-bottom: 100px;
     .liucheng {
         margin: 30px 0;
     }
@@ -121,6 +132,7 @@ const list = [
         padding: 20px 0;
         border-top: 1px solid #e4e4e4;
         text-align: center;
+        font-size: 20px;
     }
     :deep(.ant-carousel .slick-list .slick-slide > div > div) {
         display: flex !important;
@@ -138,8 +150,9 @@ const list = [
             .flex-col;
             gap: 15px;
             align-items: flex-start;
-            background: #fff;
+            background: #f8f8f8;
             padding: 12px;
+            cursor: pointer;
 
             img {
                 width: 100%;

@@ -3,6 +3,7 @@ import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
 import Swiper from './Swiper.vue';
+import Fixed from './Fixed.vue';
 import Item from './Item.vue';
 const router = useRouter();
 const route = useRoute();
@@ -84,6 +85,8 @@ onMounted(() => {});
         </div>
     </div>
     <Item></Item>
+    <RightNav></RightNav>
+    <Fixed></Fixed>
 </template>
 
 <style scoped lang="less">
