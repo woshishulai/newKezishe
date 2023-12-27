@@ -9,9 +9,9 @@ onMounted(() => {});
 </script>
 
 <template>
-    <div class="goods-details"> </div>
+    <div class="wrap"> 藏品展示 </div>
 </template>
 
-<style lang="less">
+<style scoped lang="less">
 /* 在这里添加你的 Less 样式 */
 </style>

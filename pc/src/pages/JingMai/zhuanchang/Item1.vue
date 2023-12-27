@@ -1,9 +1,9 @@
 <script setup>
-import BreadCrumbs from '@/components/common/BreadCrumbs.vue';
-import GoodsDetails from '@/components/common/Goods-details.vue';
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
+import Title from '../item/Title.vue';
+import LeftMenu from '../item/LeftMenu.vue';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
@@ -12,13 +12,21 @@ onMounted(() => {});
 
 <template>
     <div class="wrap">
-        <div class="con-main-wrap">
-            <BreadCrumbs></BreadCrumbs>
-            <Goods-details></Goods-details>
+        <Title></Title>
+        <div class="con-wrap">
+            <LeftMenu></LeftMenu>
         </div>
     </div>
 </template>
 
-<style lang="less">
-/* 在这里添加你的 Less 样式 */
+<style scoped lang="less">
+.wrap {
+    padding-bottom: 40px;
+    .con-wrap {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        margin-top: 20px;
+    }
+}
 </style>

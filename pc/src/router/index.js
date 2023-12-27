@@ -41,18 +41,55 @@ const addRoutes = [
                 component: () => import('@/pages/Home/index.vue')
             },
             {
-                path: '/jingmai/:params',
+                path: '/jingmai',
                 meta: {
                     name: '竞买'
                 },
-                component: () => import('@/pages/JingMai/index.vue')
-            },
-            {
-                path: '/jingmai/:params/:id',
-                meta: {
-                    name: '竞买详情'
-                },
-                component: () => import('@/pages/JingMai/Details.vue')
+                component: () => import('@/pages/JingMai/index.vue'),
+                children: [
+                    {
+                        path: '',
+                        meta: {
+                            name: '专场'
+                        },
+                        component: () => import('@/pages/JingMai/zhuanchang/index.vue')
+                    },
+                    {
+                        path: 'show-goods',
+                        meta: {
+                            name: '藏品展示'
+                        },
+                        component: () => import('@/pages/JingMai/zhuanchang/Item1.vue')
+                    },
+                    {
+                        path: 'goods-details',
+                        meta: {
+                            name: '藏品详情'
+                        },
+                        component: () => import('@/pages/JingMai/zhuanchang/Item2.vue')
+                    },
+                    {
+                        path: 'stamp',
+                        meta: {
+                            name: '邮票'
+                        },
+                        component: () => import('@/pages/JingMai/youpiao/index.vue')
+                    },
+                    {
+                        path: 'show-stamp-goods',
+                        meta: {
+                            name: '藏品展示'
+                        },
+                        component: () => import('@/pages/JingMai/youpiao/Item1.vue')
+                    },
+                    {
+                        path: 'stamp-goods-details',
+                        meta: {
+                            name: '藏品详情'
+                        },
+                        component: () => import('@/pages/JingMai/youpiao/Item2.vue')
+                    }
+                ]
             },
             {
                 path: '/weituo',

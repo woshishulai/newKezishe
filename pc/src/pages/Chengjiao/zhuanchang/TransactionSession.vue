@@ -187,29 +187,6 @@ watchEffect(() => {
     gap: 15px;
     .left-wrap {
         width: 260px;
-        :deep(.ant-collapse) {
-            border: none;
-            background-color: #fff;
-            .ant-collapse-item {
-                margin-bottom: 30px;
-                border: none;
-                .ant-collapse-header {
-                    background-color: #e8e8e8;
-                    .ant-collapse-header-text {
-                        font-weight: 600;
-                    }
-                }
-                .ant-collapse-content-box {
-                    padding-top: 30px;
-                    padding-bottom: 30px;
-                }
-                .ant-checkbox-group {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 15px;
-                }
-            }
-        }
     }
     .right-wrap {
         flex: 1;

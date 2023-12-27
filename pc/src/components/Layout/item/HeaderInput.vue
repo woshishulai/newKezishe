@@ -46,6 +46,7 @@ const cateInfo = (index) => {
             v-model:value="inputValue"
             placeholder="请输入藏品名称和编号"
             :loading="showLoading"
+            id="toubusousuo"
             enter-button="搜索"
             size="large"
             @search="onSearch"

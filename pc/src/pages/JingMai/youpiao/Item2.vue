@@ -2,18 +2,16 @@
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
-import ComDetails from '@/components/common/ComDetails.vue';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
 onMounted(() => {});
-const query = {
-    addPrice: true
-};
 </script>
 
 <template>
-    <ComDetails :query="query"></ComDetails>
+    <div class="wrap"> 我是详情 </div>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+/* 在这里添加你的 Less 样式 */
+</style>
