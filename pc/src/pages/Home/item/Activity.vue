@@ -1,5 +1,7 @@
 <script setup>
 import { getImageUrl } from '@/utils';
+import { useRouter, useRoute } from 'vue-router';
+const router = useRouter();
 const list = [
     {
         img: 'home/activity/list1.jpg'
@@ -28,7 +30,7 @@ const list = [
             <img :src="getImageUrl('home/activity/red-right-jiantou.png')" alt="活动" />
             <img :src="getImageUrl('home/activity/activity-right.png')" alt="活动" />
         </div>
-        <div class="img-list">
+        <div class="img-list" @click="router.push('/jingmai')">
             <div class="top-img">
                 <img
                     v-for="item in list.slice(0, 2)"
@@ -64,6 +66,7 @@ const list = [
         flex-wrap: wrap;
         gap: 40px;
         padding: 60px 0 47px;
+        cursor: pointer;
 
         .top-img {
             .flex-row;

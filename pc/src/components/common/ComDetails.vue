@@ -6,8 +6,6 @@ import Swiper from '@/pages/Chengjiao/details/Swiper.vue';
 import Fixed from '@/pages/Chengjiao/details/Fixed.vue';
 import Item from '@/pages/Chengjiao/details/Item.vue';
 import FooterSwiper from '@/pages/Chengjiao/details/FooterSwiper.vue';
-const router = useRouter();
-const route = useRoute();
 const props = defineProps({
     query: {
         type: Object,
@@ -16,8 +14,148 @@ const props = defineProps({
         }
     }
 });
+const columns = [
+    {
+        title: '昵称',
+        dataIndex: 'name',
+        key: 'name',
+        align: 'center'
+    },
+    {
+        title: '出价',
+        dataIndex: 'price',
+        key: 'price',
+        align: 'center'
+    },
+    {
+        title: '时间',
+        dataIndex: 'time',
+        key: 'time',
+        align: 'center'
+    },
+    {
+        title: '地区',
+        dataIndex: 'address',
+        key: 'address',
+        align: 'center'
+    }
+];
+const data = [
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    },
+    {
+        name: '张三',
+        price: '150',
+        time: '2023-10-44 09:10:22',
+        address: '河南'
+    }
+];
 onMounted(() => {});
 const value = ref(2055);
+const modal1Visible = ref(false);
+const setModal1Visible = (open) => {
+    modal1Visible.value = open;
+};
 </script>
 
 <template>
@@ -105,9 +243,24 @@ const value = ref(2055);
             <div class="record">
                 <div class="title-price">
                     出价记录(45)
-                    <span class="more"> 更多 </span>
+                    <span class="more" @click="modal1Visible = true"> 更多 </span>
                 </div>
                 <Swiper></Swiper>
+                <a-modal
+                    :footer="null"
+                    v-model:open="modal1Visible"
+                    title="出价记录"
+                    class="com-details-modal"
+                    style="top: 0; right: 0px; position: absolute; width: 700px; padding: 20px 0"
+                    @ok="setModal1Visible(false)"
+                >
+                    <a-table
+                        :scroll="{ x: 700, y: 600 }"
+                        :pagination="false"
+                        :dataSource="data"
+                        :columns="columns"
+                    />
+                </a-modal>
             </div>
         </div>
     </div>

@@ -106,7 +106,12 @@ const onChange = (current) => {
                                 <span>更多</span>
                             </div>
                             <div class="text-list">
-                                <p class="text-item" v-for="item in textList" :key="item.label">
+                                <p
+                                    class="text-item"
+                                    @click="$router.push('/shougou')"
+                                    v-for="item in textList"
+                                    :key="item.label"
+                                >
                                     {{ item.label }}
                                 </p>
                             </div>
@@ -144,7 +149,7 @@ const onChange = (current) => {
                         <img :src="getImageUrl('home/jiantou-right.png')" alt="" />
                     </div>
                 </div>
-                <div class="submit-wrap">
+                <div class="submit-wrap" @click="$router.push('/weituo')">
                     <img :src="getImageUrl('home/icon3.png')" alt="" />
                     <p>立即委托</p>
                 </div>

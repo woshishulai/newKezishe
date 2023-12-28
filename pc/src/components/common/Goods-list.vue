@@ -1,5 +1,7 @@
 <script setup>
 import { getImageUrl } from '@/utils/index';
+import { useRouter, useRoute } from 'vue-router';
+const router = useRouter();
 defineProps({
     title: String,
     list: Array
@@ -13,7 +15,12 @@ defineProps({
             <span></span>
         </div>
         <div class="goods-list">
-            <div class="goods-item" v-for="item in list" :key="item.id">
+            <div
+                class="goods-item"
+                v-for="item in list"
+                :key="item.id"
+                @click="router.push('/jingmai/goods-details')"
+            >
                 <img :src="getImageUrl(item.img)" alt="" />
                 <p class="item-title">{{ item.title }}</p>
                 <p class="jiage">
@@ -62,6 +69,7 @@ defineProps({
             align-items: flex-start;
             background: #fff;
             padding: 12px;
+            cursor: pointer;
 
             img {
                 width: 100%;

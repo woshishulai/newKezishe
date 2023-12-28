@@ -29,7 +29,6 @@ onMounted(() => {});
 
 <style scoped lang="less">
 .chengjiao-item {
-    padding-bottom: 100px;
     .liucheng {
         margin: 30px 0;
     }
