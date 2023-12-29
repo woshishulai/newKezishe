@@ -16,7 +16,7 @@ const setActive = (index) => {
 <template>
     <div class="right-nav">
         <div
-            v-for="index in 5"
+            v-for="(item, index) in menuItems"
             :key="index"
             :class="{ active: actives === index - 1 }"
             class="share-item"

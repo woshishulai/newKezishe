@@ -1,12 +1,6 @@
-<script setup>
-
-</script>
-
 <template>
-    <div>
-        中邮
+    <div class="con-main-wrap">
+        <BreadCrumbs></BreadCrumbs>
+        <RouterView></RouterView>
     </div>
 </template>
-<style lang="less">
-
-</style>

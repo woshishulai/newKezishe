@@ -170,7 +170,30 @@ const addRoutes = [
                 meta: {
                     name: '中邮商城'
                 },
-                component: () => import('@/pages/Zhongyou/index.vue')
+                component: () => import('@/pages/Zhongyou/index.vue'),
+                children: [
+                    {
+                        path: '',
+                        meta: {
+                            name: '商城首页'
+                        },
+                        component: () => import('@/pages/Zhongyou/Home/index.vue')
+                    },
+                    {
+                        path: 'details',
+                        meta: {
+                            name: '商品详情 '
+                        },
+                        component: () => import('@/pages/Zhongyou/Details/index.vue')
+                    },
+                    {
+                        path: 'list',
+                        meta: {
+                            name: '商城列表页'
+                        },
+                        component: () => import('@/pages/Zhongyou/List/index.vue')
+                    }
+                ]
             },
             {
                 path: '/chengjiao',
@@ -232,6 +255,10 @@ const addRoutes = [
                     name: '中邮评级'
                 },
                 component: () => import('@/pages/PingJi/index.vue')
+            },
+            {
+                path: '/cart',
+                component: () => import('@/pages/Cart/index.vue')
             }
         ]
     }
