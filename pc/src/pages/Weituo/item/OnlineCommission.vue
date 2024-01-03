@@ -192,7 +192,7 @@ const onFinish = async (values) => {
                         name="phone"
                         :rules="[{ required: true, message: '请输入您的手机号码' }]"
                     >
-                        <a-input type="number" v-model:value.trim="formState.phone" />
+                        <a-input v-model:value.trim="formState.phone" />
                     </a-form-item>
                     <a-form-item name="introduction" label="内容">
                         <a-textarea v-model:value="formState.introduction" />

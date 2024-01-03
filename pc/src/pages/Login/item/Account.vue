@@ -95,12 +95,7 @@ const handleFinish = async () => {
             </a-input-password>
         </a-form-item>
         <a-form-item has-feedback name="code">
-            <a-input
-                v-model:value.trim="formState.code"
-                placeholder="验证码"
-                type="number"
-                id="login-code"
-            >
+            <a-input v-model:value.trim="formState.code" placeholder="验证码" id="login-code">
                 <template #prefix>
                     <CheckCircleOutlined style="color: rgba(154, 0, 0, 1)" />
                 </template>

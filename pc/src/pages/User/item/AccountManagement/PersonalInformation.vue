@@ -10,6 +10,7 @@ import { message } from 'ant-design-vue';
 import Upload from './item/Upload.vue';
 const user = useUserInfo();
 const countdown = ref(0);
+const emailCountDown = ref(0);
 const formRef = ref();
 const formState = ref({
     RealName: '',
@@ -68,10 +69,10 @@ const getEmailPhone = () => {
 const getEmailCode = () => {
     const isEmailValid = getEmailPhone();
     if (isEmailValid) {
-        countdown.value = 60;
+        emailCountDown.value = 60;
         info('success', '验证码发送成功，请输入验证码');
         const interval = setInterval(() => {
-            countdown.value > 0 ? countdown.value-- : clearInterval(interval);
+            emailCountDown.value > 0 ? emailCountDown.value-- : clearInterval(interval);
         }, 1000);
     }
 };
@@ -186,7 +187,7 @@ const onFinish = async () => {
                 >
                     <a-form-item hide-required-mark="false" label="手机" name="Mobile">
                         <div class="flex">
-                            <a-input type="number" v-model:value="formState1.Mobile" />
+                            <a-input v-model:value="formState1.Mobile" />
                             <a-button
                                 v-if="user.userTranslate.verifyPhone !== '1'"
                                 @click="getCode"
@@ -204,7 +205,7 @@ const onFinish = async () => {
                         name="code"
                     >
                         <div class="flex">
-                            <a-input type="number" v-model:value.trim="formState1.code" />
+                            <a-input v-model:value.trim="formState1.code" />
                         </div>
                     </a-form-item>
                     <a-form-item label="邮箱" name="email">
@@ -215,17 +216,17 @@ const onFinish = async () => {
                                 "
                                 v-model:value.trim="formState1.email"
                             />
-                            <a-button @click="getEmailCode" :disabled="countdown > 0">
-                                <span v-if="countdown === 0">获取验证码</span>
-                                <span v-else>{{ countdown }}</span></a-button
+                            <a-button @click="getEmailCode" :disabled="emailCountDown > 0">
+                                <span v-if="emailCountDown === 0">获取验证码</span>
+                                <span v-else>{{ emailCountDown }}</span></a-button
                             >
                         </div>
                     </a-form-item>
                     <a-form-item hide-required-mark="false" label="邮箱验证码" name="emailCode">
-                        <a-input type="number" v-model:value.trim="formState1.emailCode" />
+                        <a-input v-model:value.trim="formState1.emailCode" />
                     </a-form-item>
                     <a-form-item label="电话" name="TelPhone">
-                        <a-input type="number" v-model:value.trim="formState1.TelPhone" />
+                        <a-input v-model:value.trim="formState1.TelPhone" />
                     </a-form-item>
                     <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
                         <a-button html-type="submit" type="primary">保存基本信息</a-button>

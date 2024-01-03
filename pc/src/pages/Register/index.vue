@@ -199,7 +199,7 @@ const onFinishFailed = (errors) => {
                         </a-input>
                     </a-form-item>
                     <a-form-item label="验证码" name="newCode">
-                        <a-input type="number" v-model:value.trim="formState.newCode">
+                        <a-input v-model:value.trim="formState.newCode">
                             <template #suffix>
                                 <!-- 后端返回的验证码 -->
                                 <span class="get-password">

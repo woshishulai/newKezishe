@@ -1,17 +1,31 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import { navList } from '../data';
 import { useUserInfo } from '@/store/store';
+import { getUserNikeNameApi } from '@/request/api';
 import HeaderInput from './item/HeaderInput.vue';
 const router = useRouter();
+const selector = ref('退出');
+const nikeNameList = ref([]);
 const user = useUserInfo();
-const selectValue = ref('请登录');
-selectValue.value = user.userInfo.RealName || '请登录';
-const handleChange = (value) => {
-    console.log(`selected ${value}`, selectValue.value);
+onMounted(async () => {
+    let res = await getUserNikeNameApi();
+    nikeNameList.value = res.Data;
+    let query = nikeNameList.value.find((item) => item.Default == 1);
+    selector.value = user.userNickName.NickName;
+    user.changeUserNickName(query);
+});
+watchEffect(async () => {
+    selector.value = user.userNickName.NickName;
+});
+const handleChange = () => {};
+const removeUserInfo = () => {
+    user.removeUserInfo();
+    user.removeUserTranslate();
+    user.removeUserNickName();
+    router.push('/login');
 };
-const num = 0;
 </script>
 
 <template>
@@ -33,20 +47,22 @@ const num = 0;
                         :virtual="false"
                         :bordered="false"
                         ref="select"
-                        v-model:value="selectValue"
+                        v-model:value="selector"
                         style="width: 110px"
                         @change="handleChange"
                     >
-                        <a-select-option @click="router.push('/user/userinfo')">{{
-                            user.userInfo.RealName || '请登录'
-                        }}</a-select-option>
-                        <a-select-option @click="router.push('/login')" value="退出"
-                            >退出</a-select-option
+                        <a-select-option
+                            v-for="(item, index) in nikeNameList"
+                            :key="item.NickName"
+                            :value="item.NickName"
+                            @click="router.push('/user')"
+                            >{{ item.NickName }}</a-select-option
                         >
+                        <a-select-option @click="removeUserInfo" value="退出">退出</a-select-option>
                     </a-select>
                     <a-divider type="vertical" style="background-color: #a2887d" />
                     <li>
-                        购物车 <span class="active"> {{ num }}</span> 件
+                        购物车 <span class="active"> {{ 0 }}</span> 件
                     </li>
                     <a-divider type="vertical" style="background-color: #a2887d" />
                     <li>免费咨询热线: 4000-888-0888</li>

@@ -10,6 +10,8 @@ import {
 import RemoveTableList from './item/RemoveTableList.vue';
 import { handleFinishFailed } from '@/utils/form/rules.js';
 import { message } from 'ant-design-vue';
+import { useUserInfo } from '@/store/store';
+const user = useUserInfo();
 const shippingColumns = [
     {
         title: '昵称',
@@ -114,10 +116,14 @@ const handleFinish = async () => {
         console.log(error);
     }
 };
-const changeDefault = async (id) => {
-    let res = await defaultUserNickName(id);
+const changeDefault = async (query) => {
+    if (query.Default) {
+        return;
+    }
+    let res = await defaultUserNickName(query.Id);
     if (res.Tag === 1) {
-        const item = nikeNameList.value.find((item) => item.Id === id);
+        user.changeUserNickName(query);
+        const item = nikeNameList.value.find((item) => item.Id === query.Id);
         nikeNameList.value.forEach((addressItem) => (addressItem.Default = 0));
         item.Default = 1;
     }
@@ -140,7 +146,7 @@ const changeDefault = async (id) => {
                             >
                             <span @click="openModel('确定删除该昵称吗', record.Id)">删除</span>
                             <span
-                                @click="changeDefault(record.Id)"
+                                @click="changeDefault(record)"
                                 :class="record.Default ? 'active' : ''"
                                 >{{ record.Default ? '默认账号' : '设为默认' }}
                             </span>

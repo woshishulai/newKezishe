@@ -52,11 +52,10 @@ const handleFinishFailed = (errors) => {
         @finishFailed="handleFinishFailed"
     >
         <a-form-item name="phone">
-            <a-input v-model:value="formState.phone" type="number" placeholder="请输入手机号码">
-            </a-input>
+            <a-input v-model:value="formState.phone" placeholder="请输入手机号码"> </a-input>
         </a-form-item>
         <a-form-item name="phoneCode">
-            <a-input v-model:value="formState.phoneCode" type="number" placeholder="验证码">
+            <a-input v-model:value="formState.phoneCode" placeholder="验证码">
                 <template #addonAfter>
                     <div class="btn-code">
                         <button @click="getCode" :disabled="countdown > 0">

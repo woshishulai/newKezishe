@@ -74,11 +74,7 @@ const handleFinish = (values) => {
                             </div>
                         </div>
                     </template>
-                    <a-input
-                        v-model:value="formState.phone"
-                        type="number"
-                        placeholder="请输入手机号码"
-                    >
+                    <a-input v-model:value="formState.phone" placeholder="请输入手机号码">
                         <template #prefix>
                             <UserOutlined style="color: rgba(5, 5, 4, 1.25)" />
                         </template>
@@ -86,11 +82,7 @@ const handleFinish = (values) => {
                 </a-popover>
             </a-form-item>
             <a-form-item name="phoneCode">
-                <a-input
-                    type="number"
-                    v-model:value.trim="formState.phoneCode"
-                    placeholder="验证码"
-                >
+                <a-input v-model:value.trim="formState.phoneCode" placeholder="验证码">
                     <template #prefix>
                         <LockOutlined style="color: rgba(0, 0, 0, 1.25)" />
                     </template>
@@ -103,7 +95,7 @@ const handleFinish = (values) => {
                 </a-input>
             </a-form-item>
             <a-form-item name="code">
-                <a-input type="number" v-model:value="formState.code" placeholder="验证码">
+                <a-input v-model:value="formState.code" placeholder="验证码">
                     <template #prefix>
                         <CheckCircleOutlined style="color: rgba(0, 0, 0, 1.25)" />
                     </template>

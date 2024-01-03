@@ -292,7 +292,7 @@ const handleFinish = async () => {
                         label="银行卡号"
                         name="phone"
                     >
-                        <a-input type="number" v-model:value="formState.phone" />
+                        <a-input v-model:value="formState.phone" />
                     </a-form-item>
 
                     <a-form-item label="备注信息">

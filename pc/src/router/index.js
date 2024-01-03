@@ -472,6 +472,22 @@ const userRoutes = [
                             name: '竞买额度',
                             icon: CaretRightOutlined
                         }
+                    },
+                    {
+                        path: 'refund',
+                        component: () => import('@/pages/User/item/Financiallnfirmation/Edu.vue'),
+                        meta: {
+                            name: '退款',
+                            icon: CaretRightOutlined
+                        }
+                    },
+                    {
+                        path: 'financial-details',
+                        component: () => import('@/pages/User/item/Financiallnfirmation/Edu.vue'),
+                        meta: {
+                            name: '财务明细',
+                            icon: CaretRightOutlined
+                        }
                     }
                 ]
             }
@@ -504,7 +520,6 @@ router.beforeEach((to, from, next) => {
         Object.keys(user.userInfo).length === 0 &&
         to.path !== '/login' &&
         to.path !== '/register' &&
-        to.path !== '/' &&
         to.path !== '/reset-password'
     ) {
         next('/login');

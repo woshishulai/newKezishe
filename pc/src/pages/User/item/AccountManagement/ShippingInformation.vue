@@ -264,7 +264,7 @@ const handleFinish = async () => {
                         label="邮编"
                         name="bankNmae"
                     >
-                        <a-input type="number" v-model:value="formState.bankNmae" />
+                        <a-input v-model:value="formState.bankNmae" />
                     </a-form-item>
                     <a-form-item
                         :rules="[
@@ -274,14 +274,14 @@ const handleFinish = async () => {
                         label="'收货手机号"
                         name="tel"
                     >
-                        <a-input type="number" v-model:value="formState.tel" />
+                        <a-input v-model:value="formState.tel" />
                     </a-form-item>
                     <a-form-item
                         :rules="[{ required: true, message: '联系电话不能为空' }]"
                         label="联系电话"
                         name="phone"
                     >
-                        <a-input type="number" v-model:value="formState.phone" />
+                        <a-input v-model:value="formState.phone" />
                     </a-form-item>
                     <a-form-item :wrapper-col="{ offset: 3, span: 10 }">
                         <a-button type="primary" html-type="submit">保存</a-button>
