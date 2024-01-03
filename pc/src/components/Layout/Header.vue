@@ -6,10 +6,10 @@ import { useUserInfo } from '@/store/store';
 import HeaderInput from './item/HeaderInput.vue';
 const router = useRouter();
 const user = useUserInfo();
-const selectValue = ref('我的账号');
-selectValue.value = user.userInfo ? user.userInfo.RealName : '我的账号';
+const selectValue = ref('请登录');
+selectValue.value = user.userInfo.RealName || '请登录';
 const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    console.log(`selected ${value}`, selectValue.value);
 };
 const num = 0;
 </script>
@@ -38,7 +38,7 @@ const num = 0;
                         @change="handleChange"
                     >
                         <a-select-option @click="router.push('/user/userinfo')">{{
-                            user.userInfo.RealName
+                            user.userInfo.RealName || '请登录'
                         }}</a-select-option>
                         <a-select-option @click="router.push('/login')" value="退出"
                             >退出</a-select-option

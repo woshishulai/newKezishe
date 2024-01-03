@@ -65,4 +65,9 @@ const Loading = useLoading();
     </div>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.app {
+    max-width: 2200px;
+    margin: 0 auto;
+}
+</style>

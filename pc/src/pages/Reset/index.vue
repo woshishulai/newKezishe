@@ -105,5 +105,11 @@ provide('nextClick', nextClick);
             }
         }
     }
+    :deep(.ant-input) {
+        background-color: #f4f4f4;
+    }
+    :deep(.ant-input-affix-wrapper) {
+        background-color: #f4f4f4;
+    }
 }
 </style>

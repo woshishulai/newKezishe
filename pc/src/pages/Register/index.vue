@@ -229,7 +229,6 @@ const onFinishFailed = (errors) => {
     background-size: 100% 100%;
     .flex-col;
     height: 100vh;
-    justify-content: flex-start;
     gap: 10px;
     padding: 30px 0;
 
@@ -265,6 +264,12 @@ const onFinishFailed = (errors) => {
                 cursor: pointer;
             }
         }
+    }
+    :deep(.ant-input) {
+        background-color: #f4f4f4;
+    }
+    :deep(.ant-input-affix-wrapper) {
+        background-color: #f4f4f4;
     }
 }
 </style>

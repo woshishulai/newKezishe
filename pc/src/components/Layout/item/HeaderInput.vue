@@ -101,6 +101,7 @@ const cateInfo = (index) => {
 
         .ant-input {
             height: 52px;
+            border-radius: 4px 0 0 4px;
         }
 
         .ant-btn.ant-btn-lg {
