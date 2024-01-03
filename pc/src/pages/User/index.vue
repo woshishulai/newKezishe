@@ -32,10 +32,9 @@ onMounted(() => {});
 
     .con-main-wrap {
         .cen-wrap {
-            .flex-row;
+            display: flex;
+            flex-direction: row;
             gap: 30px;
-            align-items: flex-start;
-            justify-content: flex-start;
             padding-bottom: 40px;
 
             .user-item {

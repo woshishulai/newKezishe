@@ -20,6 +20,8 @@ const current = ref(1);
     padding: 20px 0;
     :deep(.ant-pagination .ant-pagination-options-quick-jumper input) {
         width: 120px;
+        text-align: center;
+        background-color: #fff;
     }
 }
 </style>

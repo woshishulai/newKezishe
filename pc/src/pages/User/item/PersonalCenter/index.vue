@@ -9,9 +9,7 @@ onMounted(() => {});
 </script>
 
 <template>
-    <div class="my-bidding"> 我的竞买 </div>
+    <RouterView></RouterView>
 </template>
 
-<style scoped lang="less">
-/* 在这里添加你的 Less 样式 */
-</style>
+<style scoped lang="less"></style>

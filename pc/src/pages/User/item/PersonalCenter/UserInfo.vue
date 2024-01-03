@@ -2,10 +2,24 @@
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { getImageUrl } from '@/utils';
-import { infoList, infoDataSource, infoColumns } from '../data';
+import { infoList, infoDataSource, infoColumns } from '../../data';
 import { useUserInfo } from '@/store/store';
+import { getUserDetailsApi } from '@/request/api';
 const user = useUserInfo();
 const router = useRouter();
+onMounted(async () => {
+    try {
+        let res = await getUserDetailsApi();
+        let verifyPhone = res.Data.userProfileInfos[1].IsFillIn;
+        user.changeUserTranslate(res.Data);
+        user.changeUserTranslate({ verifyPhone: verifyPhone });
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+    }
+});
+const showGrand = () => {
+    router.push('/user/userinfo/show-grand');
+};
 </script>
 
 <template>
@@ -18,7 +32,7 @@ const router = useRouter();
                         <h5>{{ user.userInfo.RealName }}</h5>
                         <p>客户编号: {{ user.userInfo.UserId }}</p>
                     </div>
-                    <p>{{ '五钻三星' }}</p>
+                    <p class="show-grade" @click="showGrand">{{ '五钻三星' }}</p>
                     <div class="code">
                         <p>账户安全等级</p>
                         <div class="progress">
@@ -152,6 +166,9 @@ const router = useRouter();
                 p {
                     color: #94979a;
                     font-size: 18px;
+                    &.show-grade {
+                        cursor: pointer;
+                    }
                 }
 
                 .code {

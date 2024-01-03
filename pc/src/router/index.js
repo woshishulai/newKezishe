@@ -266,6 +266,7 @@ const addRoutes = [
 const userRoutes = [
     {
         path: '/user',
+        redirect: '/user/userinfo',
         meta: {
             name: '用户'
         },
@@ -273,10 +274,26 @@ const userRoutes = [
         children: [
             {
                 path: 'userinfo',
-                component: () => import('@/pages/User/item/UserInfo.vue'),
+                component: () => import('@/pages/User/item/PersonalCenter/index.vue'),
                 meta: {
                     name: '个人中心'
-                }
+                },
+                children: [
+                    {
+                        path: '',
+                        meta: {
+                            name: '个人中心首页'
+                        },
+                        component: () => import('@/pages/User/item/PersonalCenter/UserInfo.vue')
+                    },
+                    {
+                        path: 'show-grand',
+                        meta: {
+                            name: '会员等级'
+                        },
+                        component: () => import('@/pages/User/item/PersonalCenter/ShowGrand.vue')
+                    }
+                ]
             },
             {
                 path: 'account-management',

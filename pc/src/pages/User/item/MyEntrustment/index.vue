@@ -5,7 +5,11 @@ import { getImageUrl } from '@/utils';
 import CatePage from '@/components/common/CatePage.vue';
 import { SearchOutlined } from '@ant-design/icons-vue';
 import {
-    options1,
+    timeStartOptions,
+    timeEndOptions,
+    sellingPriceList,
+    statusLists,
+    jingMaiList,
     JingMaiStatusList,
     JingMaiColumns,
     JingMaiDataSource,
@@ -15,9 +19,21 @@ import {
     ShippingColumnsJieSuan,
     ShippingDataSourceJieSuan
 } from './data';
+import { getUserCollectionListApi } from '@/request/api';
 const router = useRouter();
 const route = useRoute();
 const props = defineProps({});
+const loading = ref(false);
+const query = reactive({
+    cid: '-1',
+    start: '-1',
+    end: '-1',
+    brand: '-1',
+    kw: '',
+    status: '1',
+    pageSize: '10',
+    pageIndex: '1'
+});
 const list = [
     {
         cate: '竞买'
@@ -68,14 +84,17 @@ const start = () => {
         state.selectedRowKeys = [];
     }, 1000);
 };
-const loading = ref(false);
-const value = ref('');
-const value1 = ref('cate1');
 const handleChange = (value) => {
     console.log(`selected ${value}`);
 };
-const getGoodsList = () => {
+const getGoodsList = async () => {
+    console.log(query);
     loading.value = true;
+    try {
+        let res = await getUserCollectionListApi(query);
+        loading.value = false;
+        console.log(res);
+    } catch (error) {}
 };
 </script>
 
@@ -87,31 +106,37 @@ const getGoodsList = () => {
                 <template v-slot:active3>
                     <div class="search-cate" v-if="params.titleCate == '竞买'">
                         <a-select
-                            ref="select"
                             class="item"
-                            placeholder="所有时间"
-                            v-model:value="value1"
-                            :options="options1"
+                            placeholder="所有分类"
+                            v-model:value="query.cid"
+                            :options="jingMaiList"
                             @change="handleChange"
                         ></a-select>
                         <a-select
-                            ref="select"
                             class="item"
-                            placeholder="全部状态"
-                            v-model:value="value1"
-                            :options="options1"
+                            placeholder="全部委托时间"
+                            style="width: 300px"
+                            v-model:value="query.start"
+                            :options="timeStartOptions"
                             @change="handleChange"
                         ></a-select>
                         <a-select
-                            ref="select"
                             class="item"
-                            placeholder="全部平台"
-                            v-model:value="value1"
-                            :options="options1"
+                            placeholder="全部结标时间"
+                            v-model:value="query.end"
+                            :options="timeEndOptions"
+                            @change="handleChange"
+                        ></a-select>
+                        <a-select
+                            class="item"
+                            placeholder="全部类型"
+                            v-model:value="query.brand"
+                            :options="sellingPriceList"
                             @change="handleChange"
                         ></a-select>
                         <a-input
-                            v-model:value="value"
+                            name="shulai"
+                            v-model:value="query.kw"
                             class="item-input"
                             placeholder="名称和藏品"
                         />
@@ -125,15 +150,14 @@ const getGoodsList = () => {
                     </div>
                     <div class="search-cate" v-else>
                         <a-select
-                            ref="select"
                             placeholder="全部属性"
-                            v-model:value="value1"
+                            v-model:value="query.status"
                             style="width: 220px"
-                            :options="options1"
+                            :options="statusLists"
                             @change="handleChange"
                         ></a-select>
                         <a-input
-                            v-model:value="value"
+                            v-model:value="query.kw"
                             style="width: 316px"
                             placeholder="名称/藏品/合同号"
                         />
@@ -178,6 +202,16 @@ const getGoodsList = () => {
 
 <style scoped lang="less">
 .my-entrustment {
+    :deep(.ant-table-wrapper .ant-table-thead > tr > th) {
+        background-color: #eef3f8;
+    }
+    :deep(.ant-select-selector) {
+        padding: 0 20px;
+    }
+    :deep(.ant-btn) {
+        .flex-row;
+        background-color: #566777;
+    }
     .table-item-gooods-info {
         .flex-row;
         gap: 10px;

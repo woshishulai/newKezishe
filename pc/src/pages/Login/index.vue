@@ -31,7 +31,6 @@ const showLoginApi = () => {
 
 <template>
     <div class="wrap">
-        <!-- <button @click="showLoginApi">测试</button> -->
         <Logo></Logo>
         <div class="cen-wrap">
             <div class="con-main-wrap">

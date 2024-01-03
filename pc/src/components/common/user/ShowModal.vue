@@ -116,7 +116,7 @@ defineExpose({
     :deep(.search-cate) {
         .flex-row;
         justify-content: flex-start;
-        gap: 20px;
+        gap: 10px;
         padding: 20px 10px;
 
         .item {

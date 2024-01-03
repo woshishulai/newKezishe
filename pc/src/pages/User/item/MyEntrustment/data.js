@@ -2,30 +2,66 @@ import { ref } from 'vue';
 
 const options1 = ref([
     {
-        value: 'cate1',
-        label: '所有分类'
+        value: '-1',
+        label: '全部'
     },
     {
-        value: 'lucy',
-        label: 'Lucy'
+        value: '1',
+        label: '待处理'
     },
     {
-        value: 'yiminghe',
-        label: 'Yiminghe'
+        value: '2',
+        label: '已受理'
+    },
+    {
+        value: '3',
+        label: '整理中'
+    },
+    {
+        value: '4',
+        label: '制图中'
+    },
+    {
+        value: '5',
+        label: '审核中'
+    },
+    {
+        value: '6',
+        label: '核查中'
+    },
+    {
+        value: '7',
+        label: '执行中'
+    },
+    {
+        value: '8',
+        label: '已执行'
     }
 ]);
 const options2 = ref([
     {
-        value: 'cate1',
-        label: '所有合同状态'
+        value: '0',
+        label: '不限'
     },
     {
-        value: 'lucy',
-        label: 'Lucy'
+        value: '1',
+        label: '1日内'
     },
     {
-        value: 'yiminghe',
-        label: 'Yiminghe'
+        value: '2',
+        label: '2日内'
+    },
+    {
+        value: '3',
+        label: '一月内'
+    },
+    {
+        value: '4一月外',
+        label: ''
+    },
+    {
+        value: '',
+        label: ''
     }
 ]);
 const options3 = ref([
@@ -42,7 +78,120 @@ const options3 = ref([
         label: 'Yiminghe'
     }
 ]);
-
+const jingMaiList = [
+    {
+        value: '-1',
+        label: '全部'
+    }
+];
+const timeStartOptions = [
+    {
+        value: '-1',
+        label: '全部委托时间'
+    },
+    {
+        value: '1',
+        label: '一周内'
+    },
+    {
+        value: '2',
+        label: '一月内'
+    },
+    {
+        value: '3',
+        label: '3月内'
+    },
+    {
+        value: '4',
+        label: '三月外'
+    }
+];
+const timeEndOptions = [
+    {
+        value: '-1',
+        label: '全部结标时间'
+    },
+    {
+        value: '1',
+        label: '一周内'
+    },
+    {
+        value: '2',
+        label: '一月内'
+    },
+    {
+        value: '3',
+        label: '3月内'
+    },
+    {
+        value: '4',
+        label: '三月外'
+    }
+];
+const sellingPriceList = [
+    {
+        value: '-1',
+        label: '全部类型'
+    },
+    {
+        value: '1',
+        label: '竞买'
+    },
+    {
+        value: '2',
+        label: '一口价'
+    }
+];
+const statusLists = [
+    {
+        value: '-1',
+        label: '全部'
+    },
+    {
+        value: '3',
+        label: '已成交'
+    },
+    {
+        value: '0',
+        label: '待预展'
+    },
+    {
+        value: '1',
+        label: '预展中'
+    },
+    {
+        value: '2',
+        label: '竞买中'
+    },
+    {
+        value: '3',
+        label: '已成交'
+    },
+    {
+        value: '7',
+        label: '未成交'
+    },
+    {
+        value: '8',
+        label: '已下架'
+    },
+    {
+        value: '9',
+        label: '已退回'
+    },
+    {
+        value: '4',
+        label: '待结算'
+    },
+    {
+        value: '5',
+        label: '结算中'
+    },
+    {
+        value: '6',
+        label: '已结算'
+    }
+];
 const JingMaiStatusList = [
     {
         cate: '已成交',
@@ -592,6 +741,11 @@ export {
     options1,
     options2,
     options3,
+    jingMaiList,
+    timeStartOptions,
+    timeEndOptions,
+    sellingPriceList,
+    statusLists,
     JingMaiStatusList,
     JingMaiColumns,
     JingMaiDataSource,

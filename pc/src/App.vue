@@ -17,7 +17,7 @@ const Loading = useLoading();
                     //primary属性为的背景色
                     colorPrimary: '#9a0000',
                     //默认的统一颜色
-                    colorBgContainer: '#f4f4f4',
+                    // colorBgContainer: '#f4f4f4',
                     //默认边框色
                     // colorBorder: '#9a0000',
                     //默认圆角
@@ -29,7 +29,7 @@ const Loading = useLoading();
                     //输入框提示文本
                     colorTextPlaceholder: '#000',
                     //组件高度 比如输入框 按钮等
-                    controlHeight: '52',
+                    controlHeight: 52,
                     //输入框提示文本
                     colorTextPlaceholder: '#000',
                     //被选中的

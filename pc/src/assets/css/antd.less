@@ -62,6 +62,9 @@
     &.active {
         border-color: #9a0000;
     }
+    &:focus {
+        box-shadow: 0 0 0 2px #9a0000;
+    }
 }
 // // .ant-input-affix-wrapper>input.ant-input {
 // //     background: transparent;
@@ -293,7 +296,11 @@
 // .ant-select-selection-placeholder {
 //     padding-top: 6px;
 // }
-
+//下拉框滚动条
+.rc-virtual-list-scrollbar-thumb {
+    background-color: #9a0000 !important;
+    height: 52px !important;
+}
 // //勾选框
 .ant-checkbox + span {
     line-height: 26px;

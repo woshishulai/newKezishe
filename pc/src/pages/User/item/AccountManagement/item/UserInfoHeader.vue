@@ -2,22 +2,8 @@
 import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { getImageUrl } from '@/utils';
-import { getUserDetailsApi } from '@/request/api';
 import { useUserInfo } from '@/store/store';
 const user = useUserInfo();
-const router = useRouter();
-const route = useRoute();
-const props = defineProps({});
-onMounted(async () => {
-    try {
-        let res = await getUserDetailsApi();
-        let verifyPhone = res.Data.userProfileInfos[1].IsFillIn;
-        user.changeUserTranslate(res.Data);
-        user.changeUserTranslate({ verifyPhone: verifyPhone });
-    } catch (error) {
-        console.error('Error fetching user info:', error);
-    }
-});
 </script>
 
 <template>

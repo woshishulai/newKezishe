@@ -31,11 +31,8 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (res) => {
         Loading.changeSpinning(false);
-        console.log('返回的数据', res);
         //个人信息返回缺少tag
-        res.data.Tag == 1
-            ? message['success'](res.data.Message)
-            : message['error'](res.data.Message);
+        res.data.Tag == 1 ? console.log('返回的数据', res) : message['error'](res.data.Message);
         return res.data;
     },
     (resError) => {
