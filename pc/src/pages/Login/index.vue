@@ -80,7 +80,6 @@ const showLoginApi = () => {
             width: 1300px;
 
             .login-from {
-                height: 500px;
                 padding: 20px 0;
                 width: 420px;
                 background: #fff;
