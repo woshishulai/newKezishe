@@ -1,0 +1,1 @@
+import{i as t}from"./index-1zYz0Z2q.js";const e=()=>t.get("/Web/Entrust/Category"),s=e=>t.get("/Web/Entrust/ColumnContInfo?id="+e.id+"&coltype="+e.coltype),o=e=>t.post("/Web/Entrust/Apply",e),a=e=>t.get("/Web/Entrust/ArticleData?Aid="+e);export{a,s as b,e as g,o as s};

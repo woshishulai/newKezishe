@@ -1,0 +1,1 @@
+import{l as s,V as a,W as e,b as o,o as r,p as t}from"./vendor-nLmjWMLT.js";import{_ as p}from"./index-Dg1jL7gn.js";const n=p({__name:"index",props:{},setup:p=>(s(),a(),e((()=>{})),(s,a)=>{const e=o("RouterView");return r(),t(e)})},[["__scopeId","data-v-935b5e84"]]);export{n as default};

@@ -401,7 +401,7 @@ const userRoutes = [
             {
                 path: 'quick-sell',
                 meta: {
-                    name: '一键转卖专栏',
+                    name: '一键转卖',
                     icon: DesktopOutlined
                 },
                 component: () => import('@/pages/User/item/QuickSell/index.vue'),
@@ -409,7 +409,7 @@ const userRoutes = [
                     {
                         path: '',
                         meta: {
-                            name: '一键转卖',
+                            name: '一键转卖详情',
                             icon: DesktopOutlined
                         },
                         component: () => import('@/pages/User/item/QuickSell/QuickSell.vue')

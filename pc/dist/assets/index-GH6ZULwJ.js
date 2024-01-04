@@ -1,0 +1,1 @@
+import{_ as r}from"./BreadCrumbs-eXi-qhqj.js";import{_ as s}from"./index-Dg1jL7gn.js";import{b as o,o as a,c as e,e as n}from"./vendor-nLmjWMLT.js";const t={class:"con-main-wrap"};const i=s({},[["render",function(s,i){const m=r,c=o("RouterView");return a(),e("div",t,[n(m),n(c)])}]]);export{i as default};

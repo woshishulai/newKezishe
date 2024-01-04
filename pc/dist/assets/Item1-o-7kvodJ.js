@@ -1,0 +1,1 @@
+import{l as s,V as a,W as o,o as d,c as e}from"./vendor-nLmjWMLT.js";import{_ as p}from"./index-Dg1jL7gn.js";const r={class:"wrap"},t=p({__name:"Item1",props:{},setup:p=>(s(),a(),o((()=>{})),(s,a)=>(d(),e("div",r," 藏品展示 ")))},[["__scopeId","data-v-b5dd1969"]]);export{t as default};

@@ -1,0 +1,1 @@
+import{l as s,V as a,W as e,b as o,o as r,p as t}from"./vendor-nLmjWMLT.js";const n={__name:"index",props:{},setup:n=>(s(),a(),e((()=>{})),(s,a)=>{const e=o("RouterView");return r(),t(e)})};export{n as default};
