@@ -22,6 +22,7 @@ watchEffect(() => {
 });
 const changeTitleCate = (item) => {
     params.titleCate = item.cate;
+    console.log(item);
 };
 const changeStatusCate = (item) => {
     params.statusCate = item.cate;
@@ -79,7 +80,7 @@ defineExpose({
             flex: 1;
             text-align: center;
             max-width: 200px;
-
+            font-size: 16px;
             cursor: pointer;
             font-weight: 600;
 
@@ -117,7 +118,7 @@ defineExpose({
         .flex-row;
         justify-content: flex-start;
         gap: 10px;
-        padding: 20px 10px;
+        padding: 20px 0;
 
         .item {
             flex: 1;
@@ -131,11 +132,12 @@ defineExpose({
     :deep(.ant-select-selector) {
         border-radius: 6px;
     }
-
     :deep(.ant-btn) {
         border-radius: 6px;
         width: 120px;
-
+        .flex-row;
+        background-color: #566777;
+        color: #fff;
         .anticon svg {
             color: #fff;
             font-size: 18px;

@@ -144,6 +144,10 @@ const changeGuanZhu = (item) => {
 //     console.log(data[index].key, data);
 //   }
 // }
+const showDetails = () => {
+    router.push('/user/quick-sell/details');
+    // router.push('/user/quick-sell/contract-details');
+};
 </script>
 
 <template>
@@ -200,7 +204,7 @@ const changeGuanZhu = (item) => {
                                 </div>
                             </template>
                             <template v-if="column.key === 'caozuo'">
-                                <div class="btns"> 查看详情 </div>
+                                <div class="btns" @click="showDetails(record)"> 查看详情 </div>
                             </template>
                         </template>
                     </a-table>
@@ -240,6 +244,7 @@ const changeGuanZhu = (item) => {
 /* 在这里添加你的 Less 样式 */
 .my-following {
     .card-box {
+        padding: 0 20px 30px;
         .table-item-gooods-info {
             img {
                 width: 50px;
@@ -260,7 +265,7 @@ const changeGuanZhu = (item) => {
         }
 
         .add-array {
-            padding: 20px 0;
+            padding: 0px 16px 20px;
             .flex-row;
             gap: 30px;
             justify-content: flex-start;

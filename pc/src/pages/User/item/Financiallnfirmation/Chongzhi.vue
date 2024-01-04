@@ -125,26 +125,24 @@ const list2 = [
     background-color: #fff;
 
     .left-user-info {
-        width: 334px;
+        min-width: 334px;
         border-radius: 12px;
         background-color: #f7f7f7;
-        padding: 40px 10px 40px 40px;
+        padding: 40px 20px 20px 40px;
         .flex-col;
         gap: 10px;
         align-items: flex-start;
-
+        font-size: 16px;
         .title {
-            font-size: 24px;
+            font-size: 18px;
         }
 
         .num {
             color: #9a0000;
-            font-size: 40px;
-            font-weight: 700;
-            margin-bottom: 30px;
-
+            font-size: 30px;
+            margin: 10px 0 20px;
             span {
-                font-size: 20px;
+                font-size: 16px;
             }
         }
 
@@ -157,6 +155,7 @@ const list2 = [
         }
 
         .bi {
+            margin-top: 30px;
             width: 100%;
             .flex-row;
             align-items: flex-start;

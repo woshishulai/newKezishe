@@ -208,10 +208,6 @@ const getGoodsList = async () => {
     :deep(.ant-select-selector) {
         padding: 0 20px;
     }
-    :deep(.ant-btn) {
-        .flex-row;
-        background-color: #566777;
-    }
     .table-item-gooods-info {
         .flex-row;
         gap: 10px;

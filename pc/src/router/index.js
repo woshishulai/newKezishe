@@ -400,11 +400,37 @@ const userRoutes = [
             },
             {
                 path: 'quick-sell',
-                component: () => import('@/pages/User/item/QuickSell.vue'),
                 meta: {
-                    name: '一键转卖',
+                    name: '一键转卖专栏',
                     icon: DesktopOutlined
-                }
+                },
+                component: () => import('@/pages/User/item/QuickSell/index.vue'),
+                children: [
+                    {
+                        path: '',
+                        meta: {
+                            name: '一键转卖',
+                            icon: DesktopOutlined
+                        },
+                        component: () => import('@/pages/User/item/QuickSell/QuickSell.vue')
+                    },
+                    {
+                        path: 'details',
+                        meta: {
+                            name: '查看详情',
+                            icon: DesktopOutlined
+                        },
+                        component: () => import('@/pages/User/item/QuickSell/QuickSellDetails.vue')
+                    },
+                    {
+                        path: 'contract-details',
+                        meta: {
+                            name: '合同明细',
+                            icon: DesktopOutlined
+                        },
+                        component: () => import('@/pages/User/item/QuickSell/ContractDetails.vue')
+                    }
+                ]
             },
             {
                 path: 'logistics',
@@ -475,7 +501,8 @@ const userRoutes = [
                     },
                     {
                         path: 'refund',
-                        component: () => import('@/pages/User/item/Financiallnfirmation/Edu.vue'),
+                        component: () =>
+                            import('@/pages/User/item/Financiallnfirmation/TuiKuan.vue'),
                         meta: {
                             name: '退款',
                             icon: CaretRightOutlined
@@ -483,7 +510,7 @@ const userRoutes = [
                     },
                     {
                         path: 'financial-details',
-                        component: () => import('@/pages/User/item/Financiallnfirmation/Edu.vue'),
+                        component: () => import('@/pages/User/item/Financiallnfirmation/Caiwu.vue'),
                         meta: {
                             name: '财务明细',
                             icon: CaretRightOutlined

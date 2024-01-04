@@ -150,7 +150,7 @@ const query2 = ref('额度充值');
         border-radius: 12px;
         background-color: #f7f7f7;
         padding: 40px;
-        width: 434px;
+        min-width: 434px;
         .flex-col;
         gap: 10px;
         align-items: flex-start;
@@ -161,12 +161,10 @@ const query2 = ref('额度充值');
 
         .num {
             color: #9a0000;
-            font-size: 40px;
-            font-weight: 700;
-            margin-bottom: 30px;
-
+            font-size: 30px;
+            margin: 10px 0 20px;
             span {
-                font-size: 20px;
+                font-size: 16px;
             }
         }
 
